@@ -53,7 +53,7 @@
 	</ww:if>		
 	<div id=help_right>
 	<p align=right><input type="button" value="修改当前帮助信息" onclick="window.location.href='searchHelpUpdate.action?classId=<ww:property value="classId"/>';">	<br><br></p>
-		<h5>腾源HRM 》<span id="father_menu"></span>》</h5>
+		<h5>HRM 》<span id="father_menu"></span>》</h5>
 		<h1 id="son_menu">我的资料：</h1><br>
 		<p class="info"><strong>概述：</strong><span id="briefBody"></span></p>
 			<ww:if test="!helpList.isEmpty()">

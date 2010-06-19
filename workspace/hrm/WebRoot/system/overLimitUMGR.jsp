@@ -8,7 +8,7 @@
 		<tr>
 			<td id="bodyId" valign="middle" align="center">
 			    <img src="../resource/images/error1.gif" />
-			     经理自助用户人数超过限制，请联系腾源公司客户服务，电话13581875415。
+			     经理自助用户人数超过限制，请联系公司客户服务，电话13581875415。
 			    <a href="#" onclick="back();" class="listViewTdLinkS1">返回上一页！</a>
 			    <a href="../homepage/index.action" class="listViewTdLinkS1">返回首页！</a>
 			</td>
