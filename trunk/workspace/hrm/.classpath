@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="configure"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/FCKeditor-2.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
@@ -88,5 +87,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-2.0.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/strucs2plus.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
