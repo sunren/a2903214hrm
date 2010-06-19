@@ -22,7 +22,7 @@ public class ConfigOthers extends BaseAction {
 
     public String showConfigOthers() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "noauth";
         }
         Map dbMap = this.dbConfigManager.getProperties();

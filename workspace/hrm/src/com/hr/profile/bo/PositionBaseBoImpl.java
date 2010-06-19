@@ -151,7 +151,7 @@ public class PositionBaseBoImpl implements IPositionBaseBo {
 
     public void saveOrupdatePb(PositionBase pb, String operatorNo) {
         String msgNewLog = "创建({0})职位，编制为({1})人！";
-        String msgMaxEmpLog = "原编刄1�7({0})人，新编刄1�7({1})人�1�7�1�7";
+        String msgMaxEmpLog = "原编制({0})人，新编制({1})人。";
         PositionBaseHist pbHist = null;
         PositionBaseHist latestPbHist = null;
         boolean isNew = false;
@@ -211,7 +211,7 @@ public class PositionBaseBoImpl implements IPositionBaseBo {
                                                                                id, null,
                                                                                new boolean[0]);
         if ((targetPb == null) || (targetPb.getPbStatus().intValue() == 1)) {
-            return "状�1�7�错误，请刷新页面后重试＄1�7";
+            return "状态错误，请刷新页面后重试";
         }
 
         String info = this.helper.operateEnablePB(targetPb);
@@ -223,7 +223,7 @@ public class PositionBaseBoImpl implements IPositionBaseBo {
                                                                                id, null,
                                                                                new boolean[0]);
         if ((targetPb == null) || (targetPb.getPbStatus().intValue() == 0)) {
-            return "状�1�7�错误，请刷新页面后重试＄1�7";
+            return "状态错误，请刷新页面后重试";
         }
 
         String info = this.helper.operateDisablePB(targetPb);

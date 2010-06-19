@@ -333,7 +333,7 @@ public class ReportParametersHandler {
         else if ("notContains".equalsIgnoreCase(condition))
             result = " not like ? ";
         else {
-            System.out.println("找不到匹配的过滤噄1�7");
+            System.out.println("找不到匹配的过滤器");
         }
         return result;
     }

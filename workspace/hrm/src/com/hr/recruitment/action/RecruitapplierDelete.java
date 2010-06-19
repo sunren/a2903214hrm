@@ -14,7 +14,7 @@ public class RecruitapplierDelete extends BaseAction {
         Recruitapplier tempRa = recruitapplierBo.loadApplier(this.applierId, null);
         if (recruitapplierBo.deleteApplier(this.applierId).size() < 1) {
             FileOperate.deleteFile("sys.recruitment.applier.path", tempRa.getRecaAttachmentName());
-            addSuccessInfo("删除应聘耄1�7" + tempRa.getRecaName() + "成功〄1�7");
+            addSuccessInfo("删除应聘者" + tempRa.getRecaName() + "成功。");
             tempRa = null;
             return "success";
         }
@@ -30,11 +30,11 @@ public class RecruitapplierDelete extends BaseAction {
         if (recruitapplierBo.deleteApplier(id).size() < 1) {
             FileOperate.deleteFile("sys.recruitment.applier.path", tempRa.getRecaAttachmentName());
             tempRa = null;
-            return "删除应聘耄1�7(" + recaName + ")成功〄1�7";
+            return "删除应聘者(" + recaName + ")成功。";
         }
 
         tempRa = null;
-        return "删除应聘耄1�7(" + recaName + ")失败〄1�7";
+        return "删除应聘者(" + recaName + ")失败。";
     }
 
     public String getApplierId() {
@@ -45,8 +45,3 @@ public class RecruitapplierDelete extends BaseAction {
         this.applierId = applierId;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.recruitment.action.RecruitapplierDelete JD-Core Version: 0.5.4
- */

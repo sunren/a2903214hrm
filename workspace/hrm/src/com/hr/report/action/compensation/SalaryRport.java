@@ -38,7 +38,7 @@ public class SalaryRport extends BaseAction {
         Empsalarydatadef dataDef = (Empsalarydatadef) salaryReportBo
                 .loadObject(Empsalarydatadef.class, this.itemId, null);
         if (dataDef == null) {
-            addErrorInfo("不存在的帐套项目＄1�7");
+            addErrorInfo("不存在的帐套项目！");
             return "input";
         }
 
@@ -67,8 +67,8 @@ public class SalaryRport extends BaseAction {
 
     private String getCurrentYearAndMonth() {
         Calendar c = Calendar.getInstance();
-        String result = String.valueOf(c.get(1)) + "幄1�7";
-        result = result + String.valueOf(c.get(2) + 1) + "朄1�7";
+        String result = String.valueOf(c.get(1)) + "年";
+        result = result + String.valueOf(c.get(2) + 1) + "月";
         return result;
     }
 
@@ -104,8 +104,3 @@ public class SalaryRport extends BaseAction {
         this.reportFileLocation = reportFileLocation;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.report.action.compensation.SalaryRport JD-Core Version: 0.5.4
- */

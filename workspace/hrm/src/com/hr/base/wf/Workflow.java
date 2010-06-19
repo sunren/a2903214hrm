@@ -70,7 +70,7 @@ public class Workflow {
         this.flowType = "leaverequest";
 
         this.docNo = lr.getLrNo();
-        this.docDesc = "请假卄1�7";
+        this.docDesc = "请假单";
         this.applier = lr.getLrEmpNo();
         this.creator = lr.getLrCreateBy();
         this.amount = lr.getLrTotalDays();
@@ -92,7 +92,7 @@ public class Workflow {
         this.flowType = "overtimerequest";
 
         this.docNo = or.getOrNo();
-        this.docDesc = "加班卄1�7";
+        this.docDesc = "加班单";
         this.applier = or.getOrEmpNo();
         this.creator = or.getOrCreateBy();
         this.amount = or.getOrTotalHours();
@@ -210,7 +210,7 @@ public class Workflow {
 
             if (orgBean == null) {
                 msgMap.clear();
-                msgAdd(msgMap, wf.getDocNo(), "编号为{0}的1�7" + wf.getDocDesc() + "操作失败，请刷新后重试！");
+                msgAdd(msgMap, wf.getDocNo(), "编号为{0}的" + wf.getDocDesc() + "操作失败，请刷新后重试！");
                 return false;
             }
 
@@ -252,7 +252,7 @@ public class Workflow {
                 wf.getSendList().addAll(emailNotify(wf, templateMap, hrEmails));
         } else {
             msgMap.clear();
-            msgAdd(msgMap, wf.getDocNo(), "编号为{0}的1�7" + wf.getDocDesc() + "操作失败，请刷新后重试！");
+            msgAdd(msgMap, wf.getDocNo(), "编号为{0}的" + wf.getDocDesc() + "操作失败，请刷新后重试！");
             return false;
         }
         return true;
@@ -269,40 +269,42 @@ public class Workflow {
         return hrEmails;
     }
 
-    public static void msgMapAdd(Workflow wf, Map<String, StringBuffer> msgMap) {
-        String operate = wf.getOperate();
-        Integer docNo = wf.getDocNo();
-        String docDesc = wf.getDocDesc();
+    public static void msgMapAdd(Workflow wf, Map<String, StringBuffer> msgMap)
+    {
+      String operate = wf.getOperate();
+      Integer docNo = wf.getDocNo();
+      String docDesc = wf.getDocDesc();
 
-        if (operate.contains("hr-")) {
-            if (operate.equals("hr-approve"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "备案完毕〄1�7");
-            else if (operate.equals("hr-reject"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已被拒绝〄1�7");
-            else if (operate.equals("hr-confirm"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "调整完毕〄1�7");
-            else if (operate.equals("hr-cancel"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已被作废〄1�7");
-        } else if (operate.contains("gm-")) {
-            if (operate.contains("reject"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已被拒绝〄1�7");
-            else
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已报送HR审批〄1�7");
-        } else if (operate.contains("mgr-")) {
-            if (operate.contains("reject"))
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已被拒绝〄1�7");
-            else
-                msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "已报逄1�7" + wf.getNextApproverDesc()
-                        + "审批〄1�7");
-        } else if (operate.contains("create")) {
-            msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "创建成功，并报�1�7�1�7"
-                    + wf.getNextApproverDesc() + "审批〄1�7");
-        } else if (operate.contains("update")) {
-            msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "重新提交成功，并报�1�7�1�7"
-                    + wf.getNextApproverDesc() + "审批〄1�7");
-        } else
-            msgAdd(msgMap, docNo, "编号为{0}的1�7" + docDesc + "操作失败，请刷新后重试！");
+      if (operate.contains("hr-")) {
+        if (operate.equals("hr-approve"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "备案完毕。");
+        else if (operate.equals("hr-reject"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已被拒绝。");
+        else if (operate.equals("hr-confirm"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "调整完毕。");
+        else if (operate.equals("hr-cancel"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已被作废。");
+      }
+      else if (operate.contains("gm-")) {
+        if (operate.contains("reject"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已被拒绝。");
+        else msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已报送HR审批。");
+      }
+      else if (operate.contains("mgr-")) {
+        if (operate.contains("reject"))
+          msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已被拒绝。");
+        else msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "已报送" + wf.getNextApproverDesc() + "审批。");
+      }
+      else if (operate.contains("create")) {
+        msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "创建成功，并报送" + wf.getNextApproverDesc() + "审批。");
+      }
+      else if (operate.contains("update")) {
+        msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "重新提交成功，并报送" + wf.getNextApproverDesc() + "审批。");
+      }
+      else
+        msgAdd(msgMap, docNo, "编号为{0}的" + docDesc + "操作失败，请刷新后重试！");
     }
+
 
     private static Integer calcStatus(String operate, Integer[] level) {
         if (operate.contains("reject"))

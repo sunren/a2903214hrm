@@ -95,7 +95,7 @@ public class ReportBoImpl implements IReportBo {
                     listMap.put("|" + (startCalendar.get(2) + i) + "|"
                             + ((Department) dList.get(j)).getId(), new TableCell(startCalendar
                             .get(2)
-                            + i + 1 + " 朄1�7", ((Department) dList.get(j)).getDepartmentName()));
+                            + i + 1 + " 月", ((Department) dList.get(j)).getDepartmentName()));
             }
         } else if (group.equals("location")) {
             List lList = this.l_BO.FindAllLocation();
@@ -103,11 +103,11 @@ public class ReportBoImpl implements IReportBo {
                 for (int i = 0; i < month; ++i)
                     listMap.put("|" + (startCalendar.get(2) + i) + "|"
                             + ((Location) lList.get(j)).getId(), new TableCell(startCalendar.get(2)
-                            + i + 1 + " 朄1�7", ((Location) lList.get(j)).getLocationName()));
+                            + i + 1 + " 月", ((Location) lList.get(j)).getLocationName()));
         } else {
             for (int i = 0; i < month; ++i) {
                 listMap.put("|" + (startCalendar.get(2) + i), new TableCell(startCalendar.get(2)
-                        + i + 1 + " 朄1�7"));
+                        + i + 1 + " 月"));
             }
         }
         try {
@@ -209,7 +209,7 @@ public class ReportBoImpl implements IReportBo {
                     listMap.put("|" + (startCalendar.get(2) + i) + "|"
                             + ((Department) dList.get(j)).getId(), new TableCell(startCalendar
                             .get(2)
-                            + i + 1 + " 朄1�7", ((Department) dList.get(j)).getDepartmentName()));
+                            + i + 1 + " 月", ((Department) dList.get(j)).getDepartmentName()));
             }
         } else if (group.equals("location")) {
             List lList = this.l_BO.FindAllLocation();
@@ -217,11 +217,11 @@ public class ReportBoImpl implements IReportBo {
                 for (int i = 0; i < month; ++i)
                     listMap.put("|" + (startCalendar.get(2) + i) + "|"
                             + ((Location) lList.get(j)).getId(), new TableCell(startCalendar.get(2)
-                            + i + 1 + " 朄1�7", ((Location) lList.get(j)).getLocationName()));
+                            + i + 1 + " 月", ((Location) lList.get(j)).getLocationName()));
         } else {
             for (int i = 0; i < month; ++i) {
                 listMap.put("|" + (startCalendar.get(2) + i), new TableCell(startCalendar.get(2)
-                        + i + 1 + " 朄1�7"));
+                        + i + 1 + " 月"));
             }
         }
         try {
@@ -318,8 +318,3 @@ public class ReportBoImpl implements IReportBo {
         this.ot_DAO = ot_DAO;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.report.bo.ReportBoImpl JD-Core Version: 0.5.4
- */

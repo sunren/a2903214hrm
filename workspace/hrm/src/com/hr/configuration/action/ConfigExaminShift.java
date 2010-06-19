@@ -35,7 +35,7 @@ public class ConfigExaminShift extends BaseAction {
 
     public String showExaminShift() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "noauth";
         }
         Map dbMap = dbManager.getProperties();
@@ -100,7 +100,7 @@ public class ConfigExaminShift extends BaseAction {
 
     public String updateExaminShift() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "noauth";
         }
         Map dbMap = dbManager.getProperties();

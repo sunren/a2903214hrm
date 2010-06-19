@@ -160,13 +160,13 @@ public class BaseDownloadAction extends BaseAction {
         }
 
         if ((dbList == null) || (dbList.size() == 0)) {
-            addActionError("没有数据可以导出＄1�7");
+            addActionError("没有数据可以导出");
             return "success";
         }
 
         Iodef iodef = getIodefByName(ioName);
         if (iodef == null) {
-            addActionError("导出接口不存在，请检查�1�7�系组1�7->数据接口配置”！");
+            addActionError("导出接口不存在，请检查“系统->数据接口配置”！");
             return "success";
         }
 
@@ -174,7 +174,7 @@ public class BaseDownloadAction extends BaseAction {
             clearErrorsAndMessages();
             return "download";
         }
-        addActionError("数据导出失败＄1�7");
+        addActionError("数据导出失败");
         return "success";
     }
 

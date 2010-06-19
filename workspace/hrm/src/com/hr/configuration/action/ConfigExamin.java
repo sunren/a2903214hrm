@@ -115,7 +115,7 @@ public class ConfigExamin extends BaseAction {
         if (!((String) dbMap.get("sys.examin.leave.type")).equals(this.sys_examin_leave_type)) {
             this.dbConfigManager.setProperty("sys.examin.leave.type", this.sys_examin_leave_type);
         }
-        addSuccessInfo("考勤模块参数调整成功＄1�7");
+        addSuccessInfo("考勤模块参数调整成功");
         return "success";
     }
 

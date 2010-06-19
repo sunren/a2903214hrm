@@ -174,7 +174,7 @@ public class EmpExaminAction extends BaseAction {
             return new AllOvertimeSearchAction().cancelled(id, logMeg, session);
         }
 
-        return "错误＄1�7";
+        return "错误！";
     }
 
     /** @deprecated */
@@ -212,13 +212,13 @@ public class EmpExaminAction extends BaseAction {
         if (es_Bean != null) {
             if ((es_Bean.getEndDate() != null) && (es_Bean.getStartDate() != null)
                     && (es_Bean.getStartDate().getTime() > es_Bean.getEndDate().getTime())) {
-                addErrorInfo("弄1�7始时间应小于结束时间＄1�7");
+                addErrorInfo("开始时间应小于结束时间！");
             }
 
             if ((((es_Bean.getEndDate() != null) || (es_Bean.getStartDate() == null)))
                     && (((es_Bean.getEndDate() == null) || (es_Bean.getStartDate() != null))))
                 return;
-            addErrorInfo("必须同时填写弄1�7始和结束日期＄1�7");
+            addErrorInfo("必须同时填写开始和结束日期！");
         }
     }
 
@@ -250,7 +250,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public Leaverequest initLfBean(String operate, LeaveFormBean lf_Bean, String lrId) {
-        String msgIdError = "输入请假单参数有误，请刷新后重试＄1�7";
+        String msgIdError = "输入请假单参数有误，请刷新后重试！";
 
         Leaverequest lr = new Leaverequest();
         if (!operate.contains("create")) {
@@ -321,7 +321,7 @@ public class EmpExaminAction extends BaseAction {
 
             if (lr.getLrTotalDays() != null)
                 lf_Bean.setTotalTime(StringUtil.formatBDToS(lr.getLrTotalDays(), new String[0])
-                        + "处1�7");
+                        + "天");
         } else {
             if (lf_Bean.getBeginHour() == null) {
                 lf_Bean.setBeginHour(Integer.valueOf(DateUtil.getHour(lf_Bean.getBeginDate())));
@@ -360,13 +360,13 @@ public class EmpExaminAction extends BaseAction {
                 if (lr.getUseableDays() != null)
                     lf_Bean.setUseableTime(StringUtil.formatBDToS(lr.getUseableDays(),
                                                                   new String[0])
-                            + "处1�7");
+                            + "天");
                 if (lr.getUsedDays() != null)
                     lf_Bean.setUsedTime(StringUtil.formatBDToS(lr.getUsedDays(), new String[0])
-                            + "处1�7");
+                            + "天");
                 if (lr.getRemainDays() != null)
                     lf_Bean.setRemainTime(StringUtil.formatBDToS(lr.getRemainDays(), new String[0])
-                            + "处1�7");
+                            + "天");
             } else {
                 lf_Bean.setStartTime(DateUtil.formatDateByApm(lr.getLrStartDate(), new Integer[0]));
                 lf_Bean.setEndTime(DateUtil.formatDateByApm(lr.getLrEndDate(), new Integer[0]));
@@ -392,7 +392,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String wfObjOpSingle(String operate, LeaveFormBean lf_Bean, String lrUpdateId) {
-        String msgIEError = "浏览器参数异常，请刷新后重试＄1�7";
+        String msgIEError = "浏览器参数异常，请刷新后重试！";
 
         if (lf_Bean == null) {
             addErrorInfo(msgIEError);
@@ -428,11 +428,11 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String beforeInit(String operate, LeaveFormBean lf_Bean) {
-        String msgRejComment = "拒绝申请时，必须填写备注＄1�7";
-        String msgModComment = "修改后审批，必须填写备注＄1�7";
-        String msgCanComment = "申请作废时，必须填写备注＄1�7";
-        String msgSameYear = "请假弄1�7始日朄1�7({0})和结束日朄1�7({1})必须为同丄1�7年！";
-        String msgBeginTooBig = "请假弄1�7始日朄1�7({0})必须早于结束日期({1})＄1�7";
+        String msgRejComment = "拒绝申请时，必须填写备注！";
+        String msgModComment = "修改后审批，必须填写备注！";
+        String msgCanComment = "申请作废时，必须填写备注！";
+        String msgSameYear = "请假开始日期({0})和结束日期({1})必须为同一年！";
+        String msgBeginTooBig = "请假开始日期({0})必须早于结束日期({1})！";
         String msgOwnSubmit = "系统不允许他人代填请假申请！";
         String msgEarlyDays = "必须提前{0}天提出请假申请！";
 
@@ -494,7 +494,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public Leaverequest objInit(String operate, LeaveFormBean lf_Bean, String lrUpdateId) {
-        String msgIdError = "输入请假单参数有误，请刷新后重试＄1�7";
+        String msgIdError = "输入请假单参数有误，请刷新后重试！";
 
         Leaverequest lr = new Leaverequest();
 
@@ -547,8 +547,8 @@ public class EmpExaminAction extends BaseAction {
 
     public String afterInit(Leaverequest lr) {
         String msgNoAPM = "按天请假必须填写上下午！";
-        String msgNotCreator = "您不是编号为{0}的请假单的创建�1�7�！";
-        String msgNoReason = "{0}必须填写请假理由＄1�7";
+        String msgNotCreator = "您不是编号为{0}的请假单的创建者！";
+        String msgNoReason = "{0}必须填写请假理由！";
         String msgCommentDayC = "创建：{0}天的{1}";
         String msgCommentHourC = "创建：{0}小时的{1}";
         String msgCommentDayU = "改为：{0}天的{1}";
@@ -615,10 +615,10 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String wfObjOpBatch(String operate, LeaveFormBean lf_Bean, String[] lrUpdateId) {
-        String msgIEError = "浏览器参数异常，请刷新后重试＄1�7";
-        String msgNoComment = "拒绝申请时，必须填写备注＄1�7";
-        String msgIdError = "输入请假单参数有误，请刷新后重试＄1�7";
-        String msgNoData = "未�1�7�中任何有效请假单，请刷新后重试＄1�7";
+        String msgIEError = "浏览器参数异常，请刷新后重试！";
+        String msgNoComment = "拒绝申请时，必须填写备注！";
+        String msgIdError = "输入请假单参数有误，请刷新后重试！";
+        String msgNoData = "未选中任何有效请假单，请刷新后重试！";
 
         if (lf_Bean == null) {
             addErrorInfo(msgIEError);
@@ -654,7 +654,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public Overtimerequest initOfBean(String operate, OvertimeFormBean of_Bean, String orId) {
-        String msgIdError = "输入加班单参数有误，请刷新后重试＄1�7";
+        String msgIdError = "输入加班单参数有误，请刷新后重试！";
 
         Overtimerequest or = new Overtimerequest();
         IOvertimerequestBo or_BO = (IOvertimerequestBo) getBean("overtimerequestBO");
@@ -756,7 +756,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String wfObjOpSingle(String operate, OvertimeFormBean of_Bean, String orUpdateId) {
-        String msgIEError = "浏览器参数异常，请刷新后重试＄1�7";
+        String msgIEError = "浏览器参数异常，请刷新后重试！";
 
         if (of_Bean == null) {
             addErrorInfo(msgIEError);
@@ -792,14 +792,14 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String beforeInit(String operate, OvertimeFormBean of_Bean) {
-        String msgRejComment = "拒绝申请时，必须填写备注＄1�7";
-        String msgModComment = "修改后审批，必须填写备注＄1�7";
-        String msgCanComment = "申请作废时，必须填写备注＄1�7";
-        String msgBeginTooBig = "加班弄1�7始时闄1�7({0})必须早于结束时间({1})＄1�7";
-        String msgEndTooBig = "加班结束时间不能跨天＄1�7";
+        String msgRejComment = "拒绝申请时，必须填写备注！";
+        String msgModComment = "修改后审批，必须填写备注！";
+        String msgCanComment = "申请作废时，必须填写备注！";
+        String msgBeginTooBig = "加班开始时间({0})必须早于结束时间({1})！";
+        String msgEndTooBig = "加班结束时间不能跨天！";
         String msgOwnSubmit = "系统不允许他人代填加班申请！";
         String msgEarlyDays = "必须提前{0}天提出加班申请！";
-        String msgTiaoxiu = "请设置调休小时数＄1�7";
+        String msgTiaoxiu = "请设置调休小时数！";
 
         if (StringUtils.isEmpty(of_Bean.getOrAppComment())) {
             if (operate.contains("reject"))
@@ -862,7 +862,7 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public Overtimerequest objInit(String operate, OvertimeFormBean of_Bean, String orUpdateId) {
-        String msgIdError = "输入加班单参数有误，请刷新后重试＄1�7";
+        String msgIdError = "输入加班单参数有误，请刷新后重试！";
 
         Overtimerequest or = new Overtimerequest();
 
@@ -906,8 +906,8 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String afterInit(Overtimerequest or) {
-        String msgNotCreator = "您不是编号为{0}的加班单的创建�1�7�！";
-        String msgNoReason = "{0}必须填写加班理由＄1�7";
+        String msgNotCreator = "您不是编号为{0}的加班单的创建者！";
+        String msgNoReason = "{0}必须填写加班理由！";
         String msgSysError = "系统异常，请刷新后重试！";
         String msgCommentsC = "创建：{0}小时的{1}";
         String msgCommentsU = "改为：{0}小时的{1}";
@@ -961,10 +961,10 @@ public class EmpExaminAction extends BaseAction {
     }
 
     public String wfObjOpBatch(String operate, OvertimeFormBean of_Bean, String[] orUpdateId) {
-        String msgIEError = "浏览器参数异常，请刷新后重试＄1�7";
-        String msgIdError = "输入加班单参数有误，请刷新后重试＄1�7";
-        String msgNoComment = "拒绝申请时，必须填写备注＄1�7";
-        String msgNoData = "未�1�7�中任何有效加班单，请刷新后重试＄1�7";
+        String msgIEError = "浏览器参数异常，请刷新后重试！";
+        String msgIdError = "输入加班单参数有误，请刷新后重试！";
+        String msgNoComment = "拒绝申请时，必须填写备注！";
+        String msgNoData = "未选中任何有效加班单，请刷新后重试！";
 
         if (of_Bean == null) {
             addErrorInfo(msgIEError);
@@ -1011,8 +1011,8 @@ public class EmpExaminAction extends BaseAction {
     }
 
     protected boolean wfInit(String operate, String comment, Object[] objList) {
-        String msgStatusErr = "编号为{0}的{1}状�1�7�错误，请刷新后重试＄1�7";
-        String msgNoCharge = "您无权处理{0}的{1}＄1�7";
+        String msgStatusErr = "编号为{0}的{1}状态错误，请刷新后重试！";
+        String msgNoCharge = "您无权处理{0}的{1}！";
 
         if ((objList == null) || (objList.length == 0))
             return false;
@@ -1120,39 +1120,39 @@ public class EmpExaminAction extends BaseAction {
 
     public String DWRwfObjOpSingle(String operate, String comment, String employeeId, String objId,
             String securityNo, String flowType) {
-        String msgNoParam = "NOPARAM:{0}参数错误＄1�7";
-        String msgNoComment = "NOCOMMENT:拒绝{0}必须填写备注＄1�7";
+        String msgNoParam = "NOPARAM:{0}参数错误！";
+        String msgNoComment = "NOCOMMENT:拒绝{0}必须填写备注！";
         String msgSecNoErr = "SECNOERR:验证码错误！请检查是否已经执行过该操作！";
-        String msgStatusErr = "STATUSERR:{0}状�1�7�错误！请检查是否已经执行过该操作！";
-        String msgNoCharge = "NOAUTH:您无权处理{0}的{1}＄1�7";
+        String msgStatusErr = "STATUSERR:{0}状态错误！请检查是否已经执行过该操作！";
+        String msgNoCharge = "NOAUTH:您无权处理{0}的{1}！";
         String msgFail = "FAIL:{0}";
         String msgSUCC = "SUCC:{0}";
 
         if ((StringUtils.isEmpty(operate))
                 || ((!"approve".equals(operate)) && (!"reject".equals(operate)))) {
-            return StringUtil.message(msgNoParam, new Object[] { "操作砄1�7" });
+            return StringUtil.message(msgNoParam, new Object[] { "操作码" });
         }
 
         if (StringUtils.isEmpty(employeeId)) {
-            return StringUtil.message(msgNoParam, new Object[] { "操作耄1�7" });
+            return StringUtil.message(msgNoParam, new Object[] { "操作者" });
         }
 
         if ((StringUtils.isEmpty(objId)) || (StringUtils.isEmpty(securityNo))) {
-            return StringUtil.message(msgNoParam, new Object[] { "请假卄1�7" });
+            return StringUtil.message(msgNoParam, new Object[] { "请假单" });
         }
 
         if ((StringUtils.isEmpty(objId)) || (StringUtils.isEmpty(securityNo))) {
-            return StringUtil.message(msgNoParam, new Object[] { "验证砄1�7" });
+            return StringUtil.message(msgNoParam, new Object[] { "验证码" });
         }
 
         if (("reject".equals(operate)) && (StringUtils.isEmpty(comment))) {
-            return StringUtil.message(msgNoComment, new Object[] { "请假卄1�7" });
+            return StringUtil.message(msgNoComment, new Object[] { "请假单" });
         }
 
         IPositionBo posBo = (IPositionBo) SpringBeanFactory.getBean("positionBo");
         Employee currentEmp = posBo.getEmpWithPos(employeeId, new String[0]);
         if (currentEmp == null) {
-            return StringUtil.message(msgNoParam, new Object[] { "操作耄1�7" });
+            return StringUtil.message(msgNoParam, new Object[] { "操作者" });
         }
 
         Object obj = null;
@@ -1161,7 +1161,7 @@ public class EmpExaminAction extends BaseAction {
             ILeaverequestBO lr_BO = (ILeaverequestBO) getBean("leaverequestBO");
             Leaverequest lr = lr_BO.loadLeaverequest(objId);
             if (lr == null)
-                return StringUtil.message(msgNoParam, new Object[] { "请假卄1�7" });
+                return StringUtil.message(msgNoParam, new Object[] { "请假单" });
             if (!lr.getLrSecurityNo().equals(securityNo))
                 return StringUtil.message(msgSecNoErr, new Object[0]);
 
@@ -1172,12 +1172,12 @@ public class EmpExaminAction extends BaseAction {
             nextApprover = lr.getLrNextApprover();
 
             if (!Status.MGR_UPD_SET.contains(lr.getLrStatus()))
-                return StringUtil.message(msgStatusErr, new Object[] { "请假卄1�7" });
+                return StringUtil.message(msgStatusErr, new Object[] { "请假单" });
         } else if ("overtimerequest".equals(flowType)) {
             IOvertimerequestBo or_Bo = (IOvertimerequestBo) getBean("overtimerequestBO");
             Overtimerequest or = or_Bo.loadOvertimerequest(objId);
             if (or == null)
-                return StringUtil.message(msgNoParam, new Object[] { "加班卄1�7" });
+                return StringUtil.message(msgNoParam, new Object[] { "加班单" });
             if (!or.getOrSecurityNo().equals(securityNo))
                 return StringUtil.message(msgSecNoErr, new Object[0]);
 
@@ -1188,7 +1188,7 @@ public class EmpExaminAction extends BaseAction {
             nextApprover = or.getOrNextApprover();
 
             if (!Status.MGR_UPD_SET.contains(or.getOrStatus())) {
-                return StringUtil.message(msgStatusErr, new Object[] { "加班卄1�7" });
+                return StringUtil.message(msgStatusErr, new Object[] { "加班单" });
             }
         }
 
@@ -1313,8 +1313,3 @@ public class EmpExaminAction extends BaseAction {
         this.statusList = statusList;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.examin.action.EmpExaminAction JD-Core Version: 0.5.4
- */

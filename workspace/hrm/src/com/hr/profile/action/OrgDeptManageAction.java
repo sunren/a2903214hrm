@@ -65,8 +65,8 @@ public class OrgDeptManageAction extends BaseAction {
     SysConfigManager dbConfigManager;
 
     public OrgDeptManageAction() {
-        this.msgNoAuth = "没有权限＄1�7";
-        this.msgSaveSucc = "保存成功＄1�7";
+        this.msgNoAuth = "没有权限";
+        this.msgSaveSucc = "保存成功";
         this.msgDataStatuserror = "数据错误，请刷新页面后重试！";
 
         this.msgRenameNameNotChange = "名称未发生变化！";
@@ -76,14 +76,14 @@ public class OrgDeptManageAction extends BaseAction {
         this.msgDeptRepeatName = "当前节点下已经存在名称为{0}的节点！";
 
         this.msgMoveRootError = "不能移动根节点！";
-        this.msgMoveSameNodeError = "两节点为同一节点＄1�7";
+        this.msgMoveSameNodeError = "两节点为同一节点";
         this.msgMoveAlreadyError = "节点{0}已经在节点{1}下！";
         this.msgMoveToSubError = "父节点不能移动到其子级节点！";
 
         this.msgStartNoParent = "{0}无父节点，不能启用！";
-        this.msgStartParentStop = "{0}的父节点已停用，不能启用＄1�7";
+        this.msgStartParentStop = "{0}的父节点已停用，不能启用";
 
-        this.msgMergeToSubError = "不能将父部门合并到子部门＄1�7";
+        this.msgMergeToSubError = "不能将父部门合并到子部门";
 
         this.nodeList = null;
 
@@ -474,7 +474,7 @@ public class OrgDeptManageAction extends BaseAction {
             }
             this.nodeList.add(node);
         }
-        this.nodeList.add(new TreeNode("disabled", "停用的组织结构1�7", "0", 11));
+        this.nodeList.add(new TreeNode("disabled", "停用的组织结构", "0", 11));
 
         return this.nodeList;
     }
@@ -533,7 +533,7 @@ public class OrgDeptManageAction extends BaseAction {
             toPBMap.put(pb.getId(), pb.getPbName());
         }
 
-        pbOperateMap.put("0_1", "请�1�7�择");
+        pbOperateMap.put("0_1", "请选择");
         pbOperateMap.put("1", "拷贝");
         pbOperateMap.put("2", "并入");
     }

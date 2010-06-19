@@ -50,10 +50,10 @@ public class TemplateServiceFreeMarkerImpl implements TemplateService {
             textTemplate.process(model, textWriter);
             return textWriter.toString();
         } catch (IOException e) {
-            logger.warn("找不到模板文仄1�7" + templateName);
+            logger.warn("找不到模板文件" + templateName);
             e.printStackTrace();
         } catch (TemplateException e) {
-            logger.warn("参数传�1�7�错评1�7" + templateName);
+            logger.warn("参数传递错误" + templateName);
             e.printStackTrace();
         }
         return "";
@@ -92,7 +92,7 @@ public class TemplateServiceFreeMarkerImpl implements TemplateService {
                 logger.info("Copy template:" + standardTemplates[i].getName());
                 FileUtils.copyFileToDirectory(standardTemplates[i], custFolder);
             } catch (IOException e) {
-                logger.error("复制模板" + standardTemplates[i] + "时发生错评1�7" + e.getMessage());
+                logger.error("复制模板" + standardTemplates[i] + "时发生错误:" + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -103,7 +103,7 @@ public class TemplateServiceFreeMarkerImpl implements TemplateService {
         try {
             return FileUtils.readFileToString(file, "gbk");
         } catch (IOException e) {
-            logger.warn("读取模板文件" + templateFileName + "时发生错评1�7" + e.getMessage());
+            logger.warn("读取模板文件" + templateFileName + "时发生错误:" + e.getMessage());
             e.printStackTrace();
         }
         return "";
@@ -114,7 +114,7 @@ public class TemplateServiceFreeMarkerImpl implements TemplateService {
         try {
             FileUtils.writeStringToFile(file, content, "gbk");
         } catch (IOException e) {
-            String error = "写模板文仄1�7" + templateFileName + "时发生错评1�7" + e.getMessage();
+            String error = "写模板文件" + templateFileName + "时发生错误:" + e.getMessage();
             logger.warn(error);
             return error;
         }
@@ -137,8 +137,3 @@ public class TemplateServiceFreeMarkerImpl implements TemplateService {
         }
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.configuration.bo.TemplateServiceFreeMarkerImpl JD-Core Version: 0.5.4
- */

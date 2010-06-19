@@ -32,13 +32,13 @@ public class RecruitapplierUpdateRemark extends BaseAction implements Status {
         String statusText = "";
         switch (status.intValue()) {
         case 1:
-            statusText = "初�1�7��1�7�过";
+            statusText = "初选通过";
             break;
         case 21:
-            statusText = "黑名卄1�7";
+            statusText = "黑名单";
             break;
         case 11:
-            statusText = "待定候�1�7�人";
+            statusText = "待定候选人";
             break;
         case 13:
             statusText = "接受录取通知";
@@ -50,7 +50,7 @@ public class RecruitapplierUpdateRemark extends BaseAction implements Status {
             statusText = "已发录取通知";
             break;
         case 9:
-            statusText = "不合栄1�7";
+            statusText = "不合格";
         case 2:
         case 3:
         case 4:
@@ -69,11 +69,11 @@ public class RecruitapplierUpdateRemark extends BaseAction implements Status {
         try {
             ISysLogBO logBO = (ISysLogBO) SpringBeanFactory.getBean("logBO");
             logBO.addToSyslog("recruitapplier", getCurrentEmpNo(), tempApplier.getRecaCreateBy()
-                    .getId(), id, 0, "状�1�7�更改为" + statusText, comment);
+                    .getId(), id, 0, "状态更改为" + statusText, comment);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        addSuccessInfo("应聘耄1�7" + name + "更新备注成功〄1�7");
+        addSuccessInfo("应聘者" + name + "更新备注成功。");
         return "success";
     }
 
@@ -93,8 +93,3 @@ public class RecruitapplierUpdateRemark extends BaseAction implements Status {
         this.error = error;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.recruitment.action.RecruitapplierUpdateRemark JD-Core Version: 0.5.4
- */

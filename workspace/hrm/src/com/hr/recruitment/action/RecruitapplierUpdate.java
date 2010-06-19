@@ -47,7 +47,7 @@ public class RecruitapplierUpdate extends BaseAction implements Status {
             e.printStackTrace();
         }
         if (this.error.size() < 1) {
-            addSuccessInfo("更新应聘耄1�7" + this.applier.getRecaName() + "成功〄1�7");
+            addSuccessInfo("更新应聘者" + this.applier.getRecaName() + "成功");
             this.applier = null;
             return "success";
         }

@@ -90,11 +90,11 @@ public class CreateInfo extends BaseAction implements Constants {
             return false;
         }
         if ("fileTooLength".equals(callBack)) {
-            addFieldError("imgFile", "上传文件太大＄1�7");
+            addFieldError("imgFile", "上传文件太大");
             return false;
         }
         if ("property".equals(callBack)) {
-            addFieldError("imgFile", "上传文件路径配置错误＄1�7");
+            addFieldError("imgFile", "上传文件路径配置错误");
             return false;
         }
         if ("fileTooLength".equals(callBack))
@@ -149,11 +149,11 @@ public class CreateInfo extends BaseAction implements Constants {
             return false;
         }
         if ("fileTooLength".equals(callBack)) {
-            addFieldError("file", "上传文件太大＄1�7");
+            addFieldError("file", "上传文件太大");
             return false;
         }
         if ("property".equals(callBack)) {
-            addFieldError("file", "上传文件路径配置错误＄1�7");
+            addFieldError("file", "上传文件路径配置错误");
             return false;
         }
         if ("fileTooLength".equals(callBack))

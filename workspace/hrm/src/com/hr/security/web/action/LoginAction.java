@@ -73,7 +73,7 @@ public class LoginAction extends BaseAction {
         IClientBO clientBo = (IClientBO) SpringBeanFactory.getBean("clientBo");
         Client client = clientBo.loadOneClient(this.user.getClientNo());
         if (client == null) {
-            addActionError("不存在的客户编号＄1�7");
+            addActionError("不存在的客户编号");
             return "input";
         }
 
@@ -92,7 +92,7 @@ public class LoginAction extends BaseAction {
 
             String checkLoginLimit = clientBo.updateLoginLimit(client);
             if (checkLoginLimit.equals("overLimit")) {
-                addActionError("软件试用已到期，登录将进入DEMO版本，如果要继续使用扄1�7有功能请丄1�75hrm客服联系＄1�7");
+                addActionError("软件试用已到期，登录将进入DEMO版本，如果要继续使用所有功能请与客服联系");
                 return "error";
             }
         } else {
@@ -134,7 +134,7 @@ public class LoginAction extends BaseAction {
 
             String checkLoginLimit = clientBo.updateLoginLimit(client);
             if (checkLoginLimit.equals("overLimit")) {
-                addActionError("软件试用已到期，登录将进入DEMO版本，如果要继续使用扄1�7有功能请丄1�75hrm客服联系＄1�7");
+                addActionError("软件试用已到期，登录将进入DEMO版本，如果要继续使用所有功能请与客服联系");
                 return "error";
             }
         } else {
@@ -154,8 +154,8 @@ public class LoginAction extends BaseAction {
 
     private void updateLoggers() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        String info = "登录时间＄1�7" + df.format(new Date()) + "  用户名：" + this.user.getUiUsername()
-                + "  登录IP＄1�7" + this.user.getUiLastLoginIp();
+        String info = "登录时间：" + df.format(new Date()) + "  用户名：" + this.user.getUiUsername()
+                + "  登录IP：" + this.user.getUiLastLoginIp();
 
         LogBo logBo = (LogBo) SpringBeanFactory.getBean("logmanager");
         logBo.updateXML(FileOperate.getFileHomePath() + "login_log/login.xml", info + "\n");

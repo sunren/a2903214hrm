@@ -402,7 +402,7 @@ public class BasicConfigAction extends BaseAction {
                 }
                 return "有数据关联！";
             } catch (Exception e) {
-                return "系统异常＄1�7" + e.getMessage();
+                return "系统异常：" + e.getMessage();
             }
         }
         return "无权限操作！";

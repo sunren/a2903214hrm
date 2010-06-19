@@ -56,7 +56,7 @@ public class RegistUserAction extends BaseAction {
         if ((this.confirmPassword == null) || (this.confirmPassword.length() < 1)) {
             addFieldError("confirmPassword", "必填项！");
         } else if (!this.confirmPassword.equals(this.password)) {
-            addFieldError("confirmPassword", "两次密码输入不同＄1�7");
+            addFieldError("confirmPassword", "两次密码输入不同");
         }
 
         if ((this.employee.getEmpName() == null) || (this.employee.getEmpName().length() < 1)) {
@@ -98,7 +98,7 @@ public class RegistUserAction extends BaseAction {
             if ((Pattern.matches(pattern15, this.employee.getEmpIdentificationNo()))
                     || (Pattern.matches(pattern18, this.employee.getEmpIdentificationNo())))
                 return;
-            addFieldError("employee.empIdentificationNo", "格式错误＄1�7");
+            addFieldError("employee.empIdentificationNo", "格式错误");
         }
     }
 

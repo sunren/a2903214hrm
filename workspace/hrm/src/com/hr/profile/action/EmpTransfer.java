@@ -127,7 +127,7 @@ public class EmpTransfer extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有新增权限执行本操作＄1�7");
+            addErrorInfo("您没有新增权限执行本操作");
             return "success";
         }
         String[] fetch = { Position.PROP_POSITION_PB_ID };
@@ -158,7 +158,7 @@ public class EmpTransfer extends BaseDownloadAction {
             addActionError((String) result.get(0));
             return "success";
         }
-        addActionMessage("新增员工人员变动成功〄1�7");
+        addActionMessage("新增员工人员变动成功");
         return "success";
     }
 
@@ -188,7 +188,7 @@ public class EmpTransfer extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有修改权限执行本操作＄1�7");
+            addErrorInfo("您没有修改权限执行本操作");
             return "success";
         }
 
@@ -206,7 +206,7 @@ public class EmpTransfer extends BaseDownloadAction {
         IEmpTransferBo empTransferBo = (IEmpTransferBo) getBean("empTransferBo");
         empTransferBo.update(emptransfer, this.updateEtfId);
         clear();
-        addActionMessage("员工变动修改成功〄1�7");
+        addActionMessage("员工变动修改成功");
         return "success";
     }
 

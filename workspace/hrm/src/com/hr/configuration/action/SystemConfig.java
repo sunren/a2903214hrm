@@ -128,7 +128,7 @@ public class SystemConfig extends BaseAction {
         }
         resetParemeter();
         resetEmailModuleParameters();
-        addSuccessInfo("考勤模块参数调整成功＄1�7");
+        addSuccessInfo("考勤模块参数调整成功");
         return "success";
     }
 
@@ -147,7 +147,7 @@ public class SystemConfig extends BaseAction {
         }
         resetParemeter();
         resetEmailModuleParameters();
-        addSuccessInfo("薪资模块参数调整成功＄1�7");
+        addSuccessInfo("薪资模块参数调整成功");
         return "success";
     }
 
@@ -179,7 +179,7 @@ public class SystemConfig extends BaseAction {
             System.err.println("Visit  for updating  value error");
         }
 
-        addSuccessInfo("邮箱参数调整成功＄1�7");
+        addSuccessInfo("邮箱参数调整成功");
         return "success";
     }
 

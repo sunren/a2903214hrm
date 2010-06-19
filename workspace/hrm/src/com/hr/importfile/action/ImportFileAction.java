@@ -49,7 +49,7 @@ public class ImportFileAction extends BaseAction {
         }
 
         if (!hasMultipleAuth(iodef.getIoAuthority())) {
-            addErrorInfo("对不资1�7,您不具有操作权限!");
+            addErrorInfo("对不起,您不具有操作权限!");
             return "input";
         }
 
@@ -71,7 +71,7 @@ public class ImportFileAction extends BaseAction {
                 .getProperty("sys.importDir.length");
         if ((fileLengthLimit != null)
                 && (this.file.length() > Integer.parseInt(fileLengthLimit.trim()) * 1024))
-            return "文件过大，请将文件拆分后上传＄1�7";
+            return "文件过大，请将文件拆分后上传！";
 
         String filePath = FileOperate.getFileHomePath()
                 + PropertiesFileConfigManager.getInstance().getProperty("sys.importDir.path");
@@ -91,7 +91,7 @@ public class ImportFileAction extends BaseAction {
             FileCopyUtils.copy(this.file, newFile);
         } catch (IOException e) {
             e.printStackTrace();
-            return "保存文件出错，请重试＄1�7";
+            return "保存文件出错，请重试！";
         }
         return null;
     }
@@ -178,8 +178,3 @@ public class ImportFileAction extends BaseAction {
         this.year = year;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.importfile.action.ImportFileAction JD-Core Version: 0.5.4
- */

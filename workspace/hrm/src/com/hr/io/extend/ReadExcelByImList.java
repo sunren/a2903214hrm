@@ -47,7 +47,7 @@ public class ReadExcelByImList extends IReadFileByImList {
 
         if (this.hasTitle == 0) {
             if (colNum != this.imList.size()) {
-                this.ioMessages.addMessage(new IOMessageSingle("导入文件必须和�1�7�择的模板列数一臄1�7", Integer
+                this.ioMessages.addMessage(new IOMessageSingle("导入文件必须和选择的模板列数一致", Integer
                         .valueOf(-1), new Integer[0]));
                 return null;
             }
@@ -127,7 +127,7 @@ public class ReadExcelByImList extends IReadFileByImList {
                     }
                     if ((objTmp == null) && (imTmp.getImRequired().intValue() == 1))
                         this.ioMessages.addMessage(new IOMessageSingle(imTmp.getImFieldDesc()
-                                + "格式不正硄1�7", Integer.valueOf(-1), new Integer[] {
+                                + "格式不正确", Integer.valueOf(-1), new Integer[] {
                                 Integer.valueOf(i + 1), imTmp.getImSortId() }));
                     else {
                         colList.add(objTmp);
@@ -135,7 +135,7 @@ public class ReadExcelByImList extends IReadFileByImList {
 
                     if ((judgeError) && (stringToObject.getResultType() < 0)) {
                         this.ioMessages.addMessage(new IOMessageSingle(imTmp.getImFieldDesc()
-                                + "格式不正硄1�7", Integer.valueOf(-1), new Integer[] {
+                                + "格式不正确", Integer.valueOf(-1), new Integer[] {
                                 Integer.valueOf(i + 1), imTmp.getImSortId() }));
                     } else if ((judgeError) && (stringToObject.getResultType() > 0)) {
                         System.out.println("=====" + cell.getContents());

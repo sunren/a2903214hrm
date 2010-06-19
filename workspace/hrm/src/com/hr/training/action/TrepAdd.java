@@ -82,7 +82,7 @@ public class TrepAdd extends BaseAction {
                 && (trpTrcp.getTrcpEnrollEndDate().before(today))) {
             if (this.errorFlag == 0) {
                 this.errorFlag = 1;
-                addActionError("对不起，报名时间已过＄1�7");
+                addActionError("对不起，报名时间已过");
             } else {
                 this.errorFlag = 0;
                 clearErrorsAndMessages();

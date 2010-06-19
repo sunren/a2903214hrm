@@ -57,7 +57,7 @@ public class EditReportAction extends BaseAction {
         befroeExecute();
         List message = customizeReportBo.addReport(this.reportSets, this.report, this.params);
         if (message.isEmpty()) {
-            addSuccessInfo("新增定制报表成功＄1�7");
+            addSuccessInfo("新增定制报表成功");
             this.report = null;
             this.params = null;
             return "success";
@@ -75,7 +75,7 @@ public class EditReportAction extends BaseAction {
         befroeExecute();
         List message = customizeReportBo.updateReport(this.reportSets, this.report, this.params);
         if (message.isEmpty()) {
-            addSuccessInfo("更新定制报表成功＄1�7");
+            addSuccessInfo("更新定制报表成功");
             this.report = null;
             this.params = null;
             return "success";

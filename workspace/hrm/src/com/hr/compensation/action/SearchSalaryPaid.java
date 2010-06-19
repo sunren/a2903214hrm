@@ -126,7 +126,7 @@ public class SearchSalaryPaid extends CompAction {
     }
 
     public String initPaid() throws Exception {
-        String msgInitSucc = "重新初始化{0}年{1}月的薪资数据成功＄1�7";
+        String msgInitSucc = "重新初始化{0}年{1}月的薪资数据成功！";
 
         String yearmonth = this.year + this.month;
 
@@ -299,7 +299,7 @@ public class SearchSalaryPaid extends CompAction {
                 return downloadToExcel(exportResult, this.outputIoName, this.outmatchModelId,
                                        "empsalarypay", fieldAddList);
             } catch (Exception e) {
-                addActionError("数据导出失败＄1�7");
+                addActionError("数据导出失败！");
                 e.printStackTrace();
                 return "success";
             }
@@ -346,7 +346,7 @@ public class SearchSalaryPaid extends CompAction {
 
                 downFileName = this.year + "-" + this.month + "payslip.xls";
             } else {
-                addActionError("数据导出失败＄1�7");
+                addActionError("数据导出失败！");
                 return "success";
             }
 
@@ -359,7 +359,7 @@ public class SearchSalaryPaid extends CompAction {
             setServerFileName(filePath);
             clearErrorsAndMessages();
         } catch (Exception e) {
-            addActionError("数据导出失败＄1�7");
+            addActionError("数据导出失败！");
             e.printStackTrace();
             return "success";
         }
@@ -385,7 +385,7 @@ public class SearchSalaryPaid extends CompAction {
         String yearmonth = this.year + this.month;
         IEmpsalaryperiodBo salaryperiod = (IEmpsalaryperiodBo) getBean("empsalaryperiodBO");
         salaryperiod.updateConfirmSubmit(yearmonth, Integer.valueOf(1));
-        addSuccessInfo("提交成功〄1�7");
+        addSuccessInfo("提交成功！");
         return "success";
     }
 
@@ -430,8 +430,8 @@ public class SearchSalaryPaid extends CompAction {
 
     public String approve() throws Exception {
         String msgIllegal = "非法参数！当月薪资发放数据必须为已提交状态！";
-        String msgApprove = "薪资发放审核通过〄1�7";
-        String msgReject = "薪资发放已�1�7�1�7回重做�1�7�1�7";
+        String msgApprove = "薪资发放审核通过。";
+        String msgReject = "薪资发放已退回重做。";
         String yearmonth = this.year + this.month;
         IEmpsalaryperiodBo salaryperiod = (IEmpsalaryperiodBo) getBean("empsalaryperiodBO");
         if (this.status.intValue() == 2) {

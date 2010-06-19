@@ -72,15 +72,15 @@ public class ValidateUserAction extends BaseAction {
             return "registUser";
         }
         if (message.equals("hasLeave")) {
-            addActionError("您的状�1�7�是已离职，不能登录本系统！");
+            addActionError("您的状态是已离职，不能登录本系统！");
             return "error";
         }
         if (message.equals("hasStoped")) {
-            addActionError("您已经被停用，不能登录本系统＄1�7");
+            addActionError("您已经被停用，不能登录本系统");
             return "error";
         }
         if (message.equals("ipError")) {
-            addActionError("您未通过IP验证，不能登录本系统＄1�7");
+            addActionError("您未通过IP验证，不能登录本系统");
             return "error";
         }
         return "success";

@@ -43,23 +43,23 @@ public class OrgDeptOperateHelper {
     String msgPBExceed;
 
     public OrgDeptOperateHelper() {
-        this.msgDisablePB = "{0}被停用�1�7�1�7";
-        this.msgDisableDept = "{0}被停用�1�7�1�7";
-        this.msgEnablePB = "{0}被启用�1�7�1�7";
-        this.msgEnableDept = "{0}被启用�1�7�1�7";
-        this.msgRenameDept = "部门名称由{0}改为{1}〄1�7";
-        this.msgMoveDept = "部门{0}从{1}移动到{2}〄1�7";
+        this.msgDisablePB = "{0}被停用。";
+        this.msgDisableDept = "{0}被停用。";
+        this.msgEnablePB = "{0}被启用。";
+        this.msgEnableDept = "{0}被启用。";
+        this.msgRenameDept = "部门名称由{0}改为{1}。";
+        this.msgMoveDept = "部门{0}从{1}移动到{2}。";
         this.msgMovePB = "职位{0}从{1}移动到{2}";
-        this.msgMovePBDept = "职位{0}从部门{1}移动到部门{2}〄1�7";
+        this.msgMovePBDept = "职位{0}从部门{1}移动到部门{2}。";
         this.msgPBExistInEmpOrgHist = "{0}在员工组织结构历史中存在，不能删除！";
         this.msgDeptExistInEmpOrgHist = "{0}在员工组织结构历史中存在，不能删除！";
         this.msgDeptExistInDeptHist = "{0}在组织结构历史中为{1}的父节点，不能删除！";
-        this.msgDeptExistInPBHist = "{0}在职位{1}历史中存在，不能删除＄1�7";
-        this.msgPBIsUsed = "该部闄1�7(及下属部闄1�7)有{0}职位有人在职，不能停用！";
+        this.msgDeptExistInPBHist = "{0}在职位{1}历史中存在，不能删除！";
+        this.msgPBIsUsed = "该部门(及下属部门)有{0}职位有人在职，不能停用！";
         this.msgDeletePBIsUsed = "该部门有{0}职位有人在职，不能删除！";
-        this.msgDepIsUsed = "该部闄1�7(及下属部闄1�7)有{0}有人在职，不能停用！";
-        this.msgDeleteDepIsUsed = "该部闄1�7(及下属部闄1�7)有{0}部门有人在职，不能删除！";
-        this.msgPBExceed = "部门({0})下的({1})职位超编＄1�7";
+        this.msgDepIsUsed = "该部门(及下属部门)有{0}有人在职，不能停用！";
+        this.msgDeleteDepIsUsed = "该部门(及下属部门)有{0}部门有人在职，不能删除！";
+        this.msgPBExceed = "部门({0})下的({1})职位超编！";
     }
 
     public String operateDeleteDept(String deptId) {
@@ -484,8 +484,3 @@ public class OrgDeptOperateHelper {
         return true;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.bo.OrgDeptOperateHelper JD-Core Version: 0.5.4
- */

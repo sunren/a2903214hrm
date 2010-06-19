@@ -223,7 +223,7 @@ public class ExaminReportAction extends BaseAction {
             params.put("lrStatusShow", "包含");
         } else {
             params.put("lrStatus", new Integer(0));
-            params.put("lrStatusShow", "不包各1�7");
+            params.put("lrStatusShow", "不包含");
         }
         request.setAttribute("_params", params);
 
@@ -275,7 +275,7 @@ public class ExaminReportAction extends BaseAction {
             params.put("lrStatusShow", "包含");
         } else {
             params.put("lrStatus", new Integer(0));
-            params.put("lrStatusShow", "不包各1�7");
+            params.put("lrStatusShow", "不包含");
         }
 
         request.setAttribute("_params", params);
@@ -304,20 +304,15 @@ public class ExaminReportAction extends BaseAction {
         String attendmonthlyYear = getRequest().getParameter("attendmonthlyYear");
         String attendmonthlyMonths = getRequest().getParameter("attendmonthlyMonths");
         if (reportTypeSelect.equals("1"))
-            title = attendmonthlyYear + "幄1�7" + attendmonthlyMonths + "朄1�7"
-                    + "考勤报表（按部门＄1�7-请假（天＄1�7";
+            title = attendmonthlyYear + "年" + attendmonthlyMonths + "月" + "考勤报表（按部门）-请假（天）";
         else if (reportTypeSelect.equals("2"))
-            title = attendmonthlyYear + "幄1�7" + attendmonthlyMonths + "朄1�7"
-                    + "考勤报表（按部门＄1�7-加班（小时）";
+            title = attendmonthlyYear + "年" + attendmonthlyMonths + "月" + "考勤报表（按部门）-加班（小时）";
         else if (reportTypeSelect.equals("3"))
-            title = attendmonthlyYear + "幄1�7" + attendmonthlyMonths + "朄1�7"
-                    + "考勤报表（按部门＄1�7-迟到（次＄1�7";
+            title = attendmonthlyYear + "年" + attendmonthlyMonths + "月" + "考勤报表（按部门）-迟到（次）";
         else if (reportTypeSelect.equals("4"))
-            title = attendmonthlyYear + "幄1�7" + attendmonthlyMonths + "朄1�7"
-                    + "考勤报表（按部门＄1�7-早�1�7�1�7（次＄1�7";
+            title = attendmonthlyYear + "年" + attendmonthlyMonths + "月" + "考勤报表（按部门）-早退（次）";
         else if (reportTypeSelect.equals("5")) {
-            title = attendmonthlyYear + "幄1�7" + attendmonthlyMonths + "朄1�7"
-                    + "考勤报表（按部门＄1�7-旷工（天＄1�7";
+            title = attendmonthlyYear + "年" + attendmonthlyMonths + "月" + "考勤报表（按部门）-旷工（天）";
         }
         params.put("title", title);
 

@@ -33,7 +33,7 @@ public class CustomizeReportBoImpl implements CustomizeReportBo {
         try {
             this.reportDAO.saveObject(report);
         } catch (Exception ex) {
-            errors.add("保存新报表时发生异常＄1�7");
+            errors.add("保存新报表时发生异常");
             ex.printStackTrace();
         }
 
@@ -46,7 +46,7 @@ public class CustomizeReportBoImpl implements CustomizeReportBo {
             template.buildReport(reportFileName + ".rptdesign", report.getReportId());
         } catch (Exception ex) {
             ex.printStackTrace();
-            errors.add("生成报表文件时发生错误，操作失败＄1�7");
+            errors.add("生成报表文件时发生错误，操作失败");
             return errors;
         }
 

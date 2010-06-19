@@ -17,9 +17,12 @@ import com.hr.util.MyTools;
 import com.hr.util.PropertiesFileConfigManager;
 import com.opensymphony.xwork2.ActionContext;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
@@ -92,15 +95,15 @@ public class Index extends BaseAction implements Constants {
         }
         this.proclaimList = checkList(infoBo.getListbyClass(this.proclaimId, viewUser));
         this.newsList = checkList(infoBo.getListbyClass(this.newsId, viewUser));
-        IClientBO clientBo = (IClientBO) SpringBeanFactory.getBean("clientBo");
-        HttpSession sessionClient = ServletActionContext.getRequest().getSession();
-        String clientIds = sessionClient.getAttribute("clientNo").toString();
-        Client client = clientBo.loadOneClient(clientIds);
+//        IClientBO clientBo = (IClientBO) SpringBeanFactory.getBean("clientBo");
+//        HttpSession sessionClient = ServletActionContext.getRequest().getSession();
+//        String clientIds = sessionClient.getAttribute("clientNo").toString();
+//        Client client = clientBo.loadOneClient(clientIds);
 
-        if ((client.getClientStatus().intValue() == 7)
-                || (client.getClientStatus().intValue() == 0)) {
-            this.isDemo = "yes";
-        }
+//        if ((client.getClientStatus().intValue() == 7)
+//                || (client.getClientStatus().intValue() == 0)) {
+//            this.isDemo = "yes";
+//        }
         checkClientAuth();
 
         return "success";
@@ -266,7 +269,7 @@ public class Index extends BaseAction implements Constants {
         Client client = clientBo.loadOneClient(session.getAttribute("clientNo").toString());
 
         String limit = MyTools.vigenere(client.getClientLimit(), MyTools.getUpKey(client
-                .getClientId(), MyTools.STRING), MyTools.DECRYPT_MODE);
+                .getClientId(), MyTools.STRING), MyTools.DECRYPT_MODE);       
 
         String[] limitString = limit.split("#");
         String authStr = limitString[2];
@@ -281,12 +284,12 @@ public class Index extends BaseAction implements Constants {
         List list = authBo.findAuthByIdList(authList);
 
         Iterator iterator = list.iterator();
-        List moduleList = new ArrayList();
+        Set moduleList = new HashSet();
         while (iterator.hasNext()) {
             moduleList.add(((Authority) iterator.next()).getAuthorityModuleNo());
         }
 
-        this.count = 6;
+        this.count = moduleList.size();
 
         if (("no".equals(this.icon1)) && (!moduleList.contains("101"))) {
             this.icon1 = "none";

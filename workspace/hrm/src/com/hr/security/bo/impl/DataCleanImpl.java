@@ -338,9 +338,9 @@ public class DataCleanImpl implements DataCleanBo {
             if ("1".equals(wrap.getPropertyValue(searchState).toString())) {
                 baseClean.setState("草稿");
             } else if ("21".equals(wrap.getPropertyValue(searchState).toString())) {
-                baseClean.setState("已拒组1�7");
+                baseClean.setState("已拒绝");
             } else if ("22".equals(wrap.getPropertyValue(searchState).toString())) {
-                baseClean.setState("已作庄1�7");
+                baseClean.setState("已作废");
             }
             list.add(baseClean);
         }
@@ -372,8 +372,3 @@ public class DataCleanImpl implements DataCleanBo {
         this.dataCleanDao = dataCleanDao;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.security.bo.impl.DataCleanImpl JD-Core Version: 0.5.4
- */

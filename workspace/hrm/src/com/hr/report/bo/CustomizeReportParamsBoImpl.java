@@ -29,7 +29,7 @@ public class CustomizeReportParamsBoImpl implements CustomizeReportParamsBo {
             this.reportDAO.deleteObject(ReportParams.class, paramsId);
         } catch (Exception ex) {
             ex.printStackTrace();
-            errors.add("删除参数id丄1�7" + paramsId + "的报表参数记录失败！");
+            errors.add("删除参数id为" + paramsId + "的报表参数记录失败！");
         }
         return errors;
     }

@@ -166,7 +166,7 @@ public class AuthorityPosBoImpl implements AuthorityPosBo {
         try {
             this.authorityPosDao.deleteObject(AuthorityPos.class, apId);
         } catch (Exception e) {
-            msg.append("系统异常＄1�7" + e.getMessage());
+            msg.append("系统异常：" + e.getMessage());
         }
         return msg.toString();
     }

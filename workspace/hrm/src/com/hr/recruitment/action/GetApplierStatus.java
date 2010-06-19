@@ -19,13 +19,13 @@ public class GetApplierStatus extends BodyTagSupport implements Status {
             if (l_tagbody != null)
                 switch (Integer.valueOf(l_tagbody.getString().trim()).intValue()) {
                 case 1:
-                    ls_output = "初�1�7��1�7�过";
+                    ls_output = "初选通过";
                     break;
                 case 21:
-                    ls_output = "黑名卄1�7";
+                    ls_output = "黑名单";
                     break;
                 case 11:
-                    ls_output = "待定候�1�7�人";
+                    ls_output = "待定候选人";
                     break;
                 case 13:
                     ls_output = "接受录取通知";
@@ -37,7 +37,7 @@ public class GetApplierStatus extends BodyTagSupport implements Status {
                     ls_output = "已发录取通知";
                     break;
                 case 9:
-                    ls_output = "不合栄1�7";
+                    ls_output = "不合格";
                     break;
                 case 2:
                     ls_output = "笔试";
@@ -66,8 +66,3 @@ public class GetApplierStatus extends BodyTagSupport implements Status {
         return 6;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.recruitment.action.GetApplierStatus JD-Core Version: 0.5.4
- */

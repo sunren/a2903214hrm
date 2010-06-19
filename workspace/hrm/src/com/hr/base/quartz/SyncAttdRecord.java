@@ -23,11 +23,11 @@ public class SyncAttdRecord implements Job {
     static Logger logger = Logger.getLogger(LoginAction.class.getName());
 
     public void execute() throws JobExecutionException {
-        logger.info("弄1�7始同步�1�7�勤记录");
+        logger.info("开始同步考勤记录");
 
         syncOperate();
 
-        logger.info("同步考勤记录结束＄1�7");
+        logger.info("同步考勤记录结束");
     }
 
     public void execute(JobExecutionContext arg0) throws JobExecutionException {

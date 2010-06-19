@@ -53,7 +53,7 @@ public class UserCreateAction extends BaseAction {
 
         String[] roleIdString = this.roleIds.split(",");
         if (roleIdString.length > 45) {
-            addActionError("用户扄1�7关联的角色过多！");
+            addActionError("用户关联的角色过多！");
             return "input";
         }
 
@@ -120,9 +120,9 @@ public class UserCreateAction extends BaseAction {
         Emailtemplate template = templateBo.getEmailTemplateByNo("NewUser");
         emailsendBo.sendMail(mailsendList, template.getEtSendMode().intValue());
 
-        addSuccessInfo("添加" + number + "个用户�1�7�1�7");
+        addSuccessInfo("添加" + number + "个用户成功");
         if (unSuccessNumber > 0) {
-            addErrorInfo("添加" + unSuccessNumber + "个用户失贄1�7(用户权限为空或�1�7�权限长度超过限刄1�7)!");
+            addErrorInfo("添加" + unSuccessNumber + "个用户失败(用户权限为空或权限长度超过限制!");
         }
         return "success";
     }

@@ -297,9 +297,9 @@ public class PositionBoImpl implements IPositionBo {
     }
 
     public String delPosition(String posId) {
-        String msgPosNoExist = "({0})职位不存在，请刷新页面后重试＄1�7";
-        String msgEmpExist = "({0})职位有员工，不能删除＄1�7";
-        String msgPosIsResp = "({0})职位为负责职位，不能删除＄1�7";
+        String msgPosNoExist = "({0})职位不存在，请刷新页面后重试";
+        String msgEmpExist = "({0})职位有员工，不能删除";
+        String msgPosIsResp = "({0})职位为负责职位，不能删除";
 
         Position position = getPosById(posId, new String[] { Position.PROP_POSITION_PB_ID });
         if (position == null)
@@ -447,7 +447,7 @@ public class PositionBoImpl implements IPositionBo {
 
         List empList = empBo.searchEmpArray(ids);
         if (empList.size() == 0)
-            return "数据状�1�7�错误，请刷新页面后重试＄1�7";
+            return "数据状态错误，请刷新页面后重试";
 
         List posList = getPosListOfEmps(empList);
         for (int i = 0; i < posList.size(); ++i) {

@@ -48,7 +48,7 @@ public class WorkFlowApproverBo implements IWorkFlowApproverBo {
         dc.add(Restrictions.eq("workFlowApproverType", w.getWorkFlowApproverType()));
         List exist = this.workFlowApproverDAO.findByCriteria(dc);
         if (exist.size() > 0) {
-            return "该项目的审批流程已设置，不能重复设置＄1�7";
+            return "该项目的审批流程已设置，不能重复设置";
         }
         this.workFlowApproverDAO.saveObject(w);
         return null;
@@ -58,7 +58,7 @@ public class WorkFlowApproverBo implements IWorkFlowApproverBo {
         WorkFlowApprover dbWorkFlow = (WorkFlowApprover) this.workFlowApproverDAO
                 .loadObject(WorkFlowApprover.class, w.getId(), null, new boolean[0]);
         if (dbWorkFlow == null) {
-            return "您要更新的数据不存在或已经被删除，请重试＄1�7";
+            return "您要更新的数据不存在或已经被删除，请重试";
         }
         dbWorkFlow.setWorkFlowLimit(w.getWorkFlowLimit());
         dbWorkFlow.setWorkFlowApproverInd(w.getWorkFlowApproverInd());

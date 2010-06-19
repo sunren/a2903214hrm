@@ -42,14 +42,14 @@ public class DeleteRecord extends BaseAction {
             errors = empBo.deleteEmp(delEmp);
         } catch (Exception e) {
             e.printStackTrace();
-            addErrorInfo("删除员工基本资料失败＄1�7");
+            addErrorInfo("删除员工基本资料失败");
             return "success";
         }
 
         if ((errors != null) && (errors.size() > 0))
             addErrorInfo(errors);
         else {
-            addSuccessInfo(empName + "的基本资料已被删除�1�7�1�7");
+            addSuccessInfo(empName + "的基本资料已被删除");
         }
         return "success";
     }

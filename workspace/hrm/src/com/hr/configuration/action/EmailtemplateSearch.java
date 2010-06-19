@@ -46,7 +46,7 @@ public class EmailtemplateSearch extends BaseAction implements Constants {
                 .getBean("emailtemplateBO");
         String error = templateBo.updateEmailtemplate(this.template);
         if (error == null) {
-            addSuccessInfo("邮件模板" + getTemplate().getEtTitleNo() + "修改成功＄1�7");
+            addSuccessInfo("邮件模板" + getTemplate().getEtTitleNo() + "修改成功");
             return "success";
         }
         addActionError(error);

@@ -55,7 +55,7 @@ public class EmpselectorComp extends UIBean {
         List<Location> locationList = localbo.FindEnabledLocation();
 
         this.localSelect = "<select name='location' id='empSelector_location'>";
-        this.localSelect += "<option value=''>请�1�7�择</option>";
+        this.localSelect += "<option value=''>请选择</option>";
         if ((locationList != null) && (!locationList.isEmpty())) {
             for (Location loc : locationList) {
                 this.localSelect = (this.localSelect + "<option value='" + loc.getId() + "'>"

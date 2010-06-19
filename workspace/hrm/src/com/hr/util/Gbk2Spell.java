@@ -53,54 +53,54 @@ public class Gbk2Spell {
         String result = "";
         for (int i = 0; i < a.length(); ++i) {
             String current = a.substring(i, i + 1);
-            if (compare(current, "啄1�7") < 0) {
+            if (compare(current, "啊") < 0) {
                 result = result + current;
-            } else if ((compare(current, "啄1�7") >= 0) && (compare(current, "庄1�7") <= 0))
-                if (compare(current, "匄1�7") >= 0) {
+            } else if ((compare(current, "啊") >= 0) && (compare(current, "座") <= 0))
+                if (compare(current, "匝") >= 0) {
                     result = result + "z";
-                } else if (compare(current, "厄1�7") >= 0) {
+                } else if (compare(current, "压") >= 0) {
                     result = result + "y";
-                } else if (compare(current, "昄1�7") >= 0) {
+                } else if (compare(current, "昔") >= 0) {
                     result = result + "x";
-                } else if (compare(current, "挄1�7") >= 0) {
+                } else if (compare(current, "挖") >= 0) {
                     result = result + "w";
-                } else if (compare(current, "塄1�7") >= 0) {
+                } else if (compare(current, "塌") >= 0) {
                     result = result + "t";
-                } else if (compare(current, "撄1�7") >= 0) {
+                } else if (compare(current, "撒") >= 0) {
                     result = result + "s";
-                } else if (compare(current, "焄1�7") >= 0) {
+                } else if (compare(current, "然") >= 0) {
                     result = result + "r";
-                } else if (compare(current, "朄1�7") >= 0) {
+                } else if (compare(current, "期") >= 0) {
                     result = result + "q";
-                } else if (compare(current, "啄1�7") >= 0) {
+                } else if (compare(current, "啪") >= 0) {
                     result = result + "p";
-                } else if (compare(current, "哄1�7") >= 0) {
+                } else if (compare(current, "哦") >= 0) {
                     result = result + "o";
-                } else if (compare(current, "拄1�7") >= 0) {
+                } else if (compare(current, "拿") >= 0) {
                     result = result + "n";
-                } else if (compare(current, "妄1�7") >= 0) {
+                } else if (compare(current, "妈") >= 0) {
                     result = result + "m";
-                } else if (compare(current, "垄1�7") >= 0) {
+                } else if (compare(current, "垃") >= 0) {
                     result = result + "l";
-                } else if (compare(current, "善1�7") >= 0) {
+                } else if (compare(current, "喀") >= 0) {
                     result = result + "k";
-                } else if (compare(current, "凄1�7") > 0) {
+                } else if (compare(current, "击") > 0) {
                     result = result + "j";
-                } else if (compare(current, "哄1�7") >= 0) {
+                } else if (compare(current, "哈") >= 0) {
                     result = result + "h";
-                } else if (compare(current, "噄1�7") >= 0) {
+                } else if (compare(current, "噶") >= 0) {
                     result = result + "g";
-                } else if (compare(current, "叄1�7") >= 0) {
+                } else if (compare(current, "发") >= 0) {
                     result = result + "f";
-                } else if (compare(current, "蛄1�7") >= 0) {
+                } else if (compare(current, "蛾") >= 0) {
                     result = result + "e";
-                } else if (compare(current, "搄1�7") >= 0) {
+                } else if (compare(current, "搭") >= 0) {
                     result = result + "d";
-                } else if (compare(current, "擄1�7") >= 0) {
+                } else if (compare(current, "擦") >= 0) {
                     result = result + "c";
-                } else if (compare(current, "芄1�7") >= 0) {
+                } else if (compare(current, "芭") >= 0) {
                     result = result + "b";
-                } else if (compare(current, "啄1�7") >= 0)
+                } else if (compare(current, "啊") >= 0)
                     result = result + "a";
         }
         try {
@@ -124,8 +124,3 @@ public class Gbk2Spell {
         return sss;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.util.Gbk2Spell JD-Core Version: 0.5.4
- */

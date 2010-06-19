@@ -187,7 +187,7 @@ public class EmpEval extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有新增权限执行本操作＄1�7");
+            addErrorInfo("您没有新增权限执行本操作！");
             return "success";
         }
 
@@ -199,14 +199,14 @@ public class EmpEval extends BaseDownloadAction {
         }
         IEmpEvalBo empEvalBo = (IEmpEvalBo) getBean("empEvalBo");
 
-        if ((this.eeType.equals("试用朄1�7"))
+        if ((this.eeType.equals("试用期"))
                 && (empEvalBo.hasPprobationaryPeriodEvalRecord(this.employeeId))) {
-            addErrorInfo("试用期�1�7�评只允许添加一次！");
+            addErrorInfo("试用期考评只允许添加一次！");
             return "error";
         }
 
         this.eeType = this.eeType.trim();
-        if ((!this.eeType.equals("项目")) && (!this.eeType.equals("试用朄1�7"))) {
+        if ((!this.eeType.equals("项目")) && (!this.eeType.equals("试用期"))) {
             this.eeStartDate = sdateFrom[this.eeTypeDetail.intValue()];
             this.eeEndDate = sdateTo[this.eeTypeDetail.intValue()];
         }
@@ -228,7 +228,7 @@ public class EmpEval extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empeval.setEeAttachment(this.fileFileName);
@@ -251,7 +251,7 @@ public class EmpEval extends BaseDownloadAction {
         empeval.setEeLastChangeTime(new Date());
 
         empEvalBo.insert(empeval);
-        addActionMessage("新增考评信息成功〄1�7");
+        addActionMessage("新增考评信息成功。");
         return "success";
     }
 
@@ -286,7 +286,7 @@ public class EmpEval extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作！");
             return "error";
         }
 
@@ -307,7 +307,7 @@ public class EmpEval extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empeval.setEeAttachment(this.fileFileName);
@@ -324,7 +324,7 @@ public class EmpEval extends BaseDownloadAction {
 
         IEmpEvalBo empConstractBo = (IEmpEvalBo) getBean("empEvalBo");
         empConstractBo.update(empeval, this.updateEeId);
-        addActionMessage("更新考评信息成功〄1�7");
+        addActionMessage("更新考评信息成功。");
         this.eePbNo = null;
         this.eeRate = null;
         this.eeComments = null;
@@ -338,28 +338,28 @@ public class EmpEval extends BaseDownloadAction {
     public String attachDelete() throws Exception {
         if ((this.updateEeId == null) || (this.updateEeId.equals(""))
                 || (this.fileFileName == null) || ("".equals(this.fileFileName))) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
 
         IEmpEvalBo empConstractBo = (IEmpEvalBo) getBean("empEvalBo");
         Empeval ee = empConstractBo.getById(this.updateEeId);
         if (ee == null) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
 
         if (("SUB".equals(this.authorityCondition))
                 && (!checkAuth(ee.getEmployeeByEeEmpNo().getId()))) {
-            addActionError("您没有删除权限执行本操作＄1�7");
+            addActionError("您没有删除权限执行本操作！");
             return "error";
         }
 
         if (!empConstractBo.deleteAttach(this.updateEeId, this.fileFileName)) {
-            addActionError("附件删除失败＄1�7");
+            addActionError("附件删除失败！");
             return "error";
         }
-        addActionMessage("附件删除成功〄1�7");
+        addActionMessage("附件删除成功。");
         return "success";
     }
 
@@ -579,8 +579,3 @@ public class EmpEval extends BaseDownloadAction {
         this.eeDepartmentName = eeDepartmentName;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.action.EmpEval JD-Core Version: 0.5.4
- */

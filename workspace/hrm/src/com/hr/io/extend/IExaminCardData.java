@@ -25,14 +25,15 @@ public class IExaminCardData extends ICheckAndInsert {
     String msgNoCardTime;
     String msgCardTimeValid;
 
-    public IExaminCardData() {
-        this.msgNotExist = "编号为{0}的员工不存在";
-        this.msgCardNoNotExist = "考勤卡号为{0}的员工不存在";
-        this.msgNoBothNo = "未填写�1�7�勤卡号或员工工叄1�7";
-        this.msgNoCardTime = "必须至少填写丄1�7个刷卡数捄1�7";
-        this.msgCardTimeValid = "刷卡时间{0}格式不正硄1�7";
+    public IExaminCardData()
+    {
+      this.msgNotExist = "编号为{0}的员工不存在";
+      this.msgCardNoNotExist = "考勤卡号为{0}的员工不存在";
+      this.msgNoBothNo = "未填写考勤卡号或员工工号";
+      this.msgNoCardTime = "必须至少填写一个刷卡数据";
+      this.msgCardTimeValid = "刷卡时间{0}格式不正确";
     }
-
+    
     public int[] insertTransmit(List insertList, CommonParameters commonParas) {
         Employee user = commonParas.getCurrEmp();
         HashMap employeeMap = getEmployeeMap();

@@ -43,7 +43,7 @@ public class LrDataCheckImpl {
 
     public String getLrTimeInfo(Leaverequest lr) {
         String msgReturnDays = "您请了{0}天{1}，确定要提交本次请假吗？";
-        String msgReturnHours = "您请了{0}小时({1}处1�7){2}，确定要提交本次请假吗？";
+        String msgReturnHours = "您请了{0}小时({1}天){2}，确定要提交本次请假吗？";
 
         Employee emp = (Employee) this.attendBo.loadObject(Employee.class, lr.getLrEmpNo().getId(),
                                                            null, new boolean[0]);
@@ -89,8 +89,8 @@ public class LrDataCheckImpl {
     }
 
     public String validateLRDate(Leaverequest lr) {
-        String msgNoWorkDayIncl = "{0}请假未包含任何工作日＄1�7";
-        String msgNightShift = "存在隔夜班次，必须按小时请假＄1�7";
+        String msgNoWorkDayIncl = "{0}请假未包含任何工作日";
+        String msgNightShift = "存在隔夜班次，必须按小时请假";
         String msgShiftErr = "班次无法区分上下午，必须按小时请假！";
         String msgNoWorkDay = "{0}请假{1}日期不是工作日！";
         String msgNoShiftIncl = "{0}请假{1}时间不在您的班次中！";
@@ -126,7 +126,7 @@ public class LrDataCheckImpl {
 
             if (DateUtil.compareTwoDay(((Empshift) empShiftList.get(0)).getEmpshiftDate(), lr
                     .getLrStartDate()) != 0) {
-                return StringUtil.message(msgNoWorkDay, new Object[] { empShiftDesc, "弄1�7姄1�7" });
+                return StringUtil.message(msgNoWorkDay, new Object[] { empShiftDesc, "开始" });
             }
             if (DateUtil.compareTwoDay(((Empshift) empShiftList.get(empShiftList.size() - 1))
                     .getEmpshiftDate(), lr.getLrEndDate()) != 0) {
@@ -160,7 +160,7 @@ public class LrDataCheckImpl {
                     .intValue();
             if ((inShift == 0) || (inShift == 3)) {
                 return StringUtil
-                        .message(msgNoShiftIncl, new Object[] { empShiftDesc, "弄1�7姄1�7" });
+                        .message(msgNoShiftIncl, new Object[] { empShiftDesc, "开始" });
             }
             inShift = getEmpShiftBo().isInWorkShift(lr.getLrEndDate(), empShiftList).intValue();
             if ((inShift == 0) || (inShift == 1))
@@ -238,9 +238,9 @@ public class LrDataCheckImpl {
     }
 
     public String validateLRConflict(Leaverequest lr) {
-        String msgIDConflict = "与编号为{0}的请假单存在时间冲突＄1�7";
+        String msgIDConflict = "与编号为{0}的请假单存在时间冲突";
         String msgLTNotSetup = "{0}年的{1}额度未设置！";
-        String msgLTNotApply = "{0}年的{1}禁止申请＄1�7";
+        String msgLTNotApply = "{0}年的{1}禁止申请";
 
         int repeatID = hasDateRepeat(lr, lr.getLrStartDate(), lr.getLrEndDate(),
                                      Status.PROCESS_VALID);
@@ -286,8 +286,8 @@ public class LrDataCheckImpl {
     }
 
     public String checkOther(Leaverequest lr) {
-        String msgTooSmall = "{0}每次请假时间不能少于{1}{2}＄1�7";
-        String msgTooBig = "{0}每次请假时间不能大于{1}{2}＄1�7";
+        String msgTooSmall = "{0}每次请假时间不能少于{1}{2}！";
+        String msgTooBig = "{0}每次请假时间不能大于{1}{2}！";
 
         GregorianCalendar startCalendar = new GregorianCalendar();
         startCalendar.setTime(lr.getLrEndDate());
@@ -300,7 +300,7 @@ public class LrDataCheckImpl {
             minPermitDays = lt.getLtMinApplyDays().doubleValue();
             if ((minPermitDays > 0.0D) && (minPermitDays > lr.getLrTotalDays().doubleValue()))
                 return StringUtil.message(msgTooSmall, new Object[] { lt.getLtName(),
-                        Double.valueOf(minPermitDays), "处1�7" });
+                        Double.valueOf(minPermitDays), "天" });
         } else if (lt.getLtMinApplyHours() != null) {
             minPermitHours = lt.getLtMinApplyHours().doubleValue();
             if ((minPermitHours > 0.0D) && (minPermitHours > lr.getLrTotalHours().doubleValue())) {
@@ -315,7 +315,7 @@ public class LrDataCheckImpl {
             maxPermitDays = lt.getLtMaxApplyDays().doubleValue();
             if ((maxPermitDays > 0.0D) && (maxPermitDays < lr.getLrTotalDays().doubleValue()))
                 return StringUtil.message(msgTooBig, new Object[] { lt.getLtName(),
-                        Double.valueOf(maxPermitDays), "处1�7" });
+                        Double.valueOf(maxPermitDays), "天" });
         } else if (lt.getLtMaxApplyHours() != null) {
             maxPermitHours = lt.getLtMaxApplyHours().doubleValue();
             if ((maxPermitHours > 0.0D) && (maxPermitHours < lr.getLrTotalHours().doubleValue())) {
@@ -364,7 +364,7 @@ public class LrDataCheckImpl {
         Double releaseHours = getReleaseHours(tiaoXiuORList, null);
         if (allHours.doubleValue() > balFwdHours.doubleValue() + releaseHours.doubleValue()
                 - wastedHours.doubleValue())
-            return "已请调休假�1�7�时间超过可请上限，操作失败＄1�7";
+            return "已请调休假时间超过可请上限，操作失败";
 
         setUsageTime(lr, allHours.doubleValue(), balFwdHours.doubleValue(), releaseHours
                 .doubleValue(), wastedHours.doubleValue());
@@ -380,7 +380,7 @@ public class LrDataCheckImpl {
                     .getLrStartDate());
             if (allHours.doubleValue() > balFwdHours.doubleValue() + releaseHours.doubleValue()
                     - wastedHours.doubleValue())
-                return "已请调休假�1�7�时间超过可请上限，操作失败＄1�7";
+                return "已请调休假时间超过可请上限，操作失败";
         }
         return "SUCC";
     }
@@ -489,7 +489,7 @@ public class LrDataCheckImpl {
         Double releaseHours = getReleaseHours(lb, lt, endDate, lr.getHoursPerDay());
         if (allHours.doubleValue() > balFwdHours.doubleValue() + releaseHours.doubleValue()
                 - wastedHours.doubleValue())
-            return "已请年假总时间超过可请上限，操作失败＄1�7";
+            return "已请年假总时间超过可请上限，操作失败";
 
         setUsageTime(lr, allHours.doubleValue(), balFwdHours.doubleValue(), releaseHours
                 .doubleValue(), wastedHours.doubleValue());
@@ -504,7 +504,7 @@ public class LrDataCheckImpl {
                     .getLrStartDate(), lr.getHoursPerDay());
             if (allHours.doubleValue() > balFwdHours.doubleValue() + releaseHours.doubleValue()
                     - wastedHours.doubleValue())
-                return "已请年假总时间超过可请上限，操作失败＄1�7";
+                return "已请年假总时间超过可请上限，操作失败";
         }
         return "SUCC";
     }
@@ -586,7 +586,7 @@ public class LrDataCheckImpl {
         Date endDate = ((Leaverequest) sick02LRList.get(sick02LRList.size() - 1)).getLrStartDate();
         Double releaseHours = getReleaseHours(lb, lt, endDate, hourPerDay);
         if (allHours.doubleValue() > releaseHours.doubleValue())
-            return "已请带薪病假总时间超过可请上限，操作失败＄1�7";
+            return "已请带薪病假总时间超过可请上限，操作失败";
 
         setUsageTime(lr, allHours.doubleValue(), 0.0D, releaseHours.doubleValue(), 0.0D);
 
@@ -599,7 +599,7 @@ public class LrDataCheckImpl {
             releaseHours = getReleaseHours(lb, lt, ((Leaverequest) sick02LRList.get(i))
                     .getLrStartDate(), hourPerDay);
             if (allHours.doubleValue() > releaseHours.doubleValue())
-                return "已请带薪病假总时间超过可请上限，操作失败＄1�7";
+                return "已请带薪病假总时间超过可请上限，操作失败";
         }
         return "SUCC";
     }

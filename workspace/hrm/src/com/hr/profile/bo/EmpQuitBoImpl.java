@@ -134,7 +134,7 @@ public class EmpQuitBoImpl implements IEmpQuitBo, Status {
         if (Integer.parseInt(empQuit.getEqType()) == 1) {
             int direct = employeeBo.countDirectEmpNumbers(employee.getId(), new Integer(1));
             if (direct > 0) {
-                return employee.getEmpName() + "存在下属或下属员工中有活动员工，状�1�7�不能改为\"离职\"＄1�7";
+                return employee.getEmpName() + "存在下属或下属员工中有活动员工，状态不能改为\"离职\"";
             }
             employee.setEmpStatus(Integer.valueOf(0));
             employee.setEmpTerminateDate(new Date());

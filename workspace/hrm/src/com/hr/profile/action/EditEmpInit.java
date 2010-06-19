@@ -120,7 +120,7 @@ public class EditEmpInit extends BaseAction implements Constants {
             this.benefitTypes = getDrillDown("BenefitType", new String[0]);
 
             if (StringUtils.isNotEmpty(this.createFlag)) {
-                addSuccessInfo("员工" + this.emp.getEmpName() + "创建成功，您可以继续修改详细资料〄1�7");
+                addSuccessInfo("员工" + this.emp.getEmpName() + "创建成功，您可以继续修改详细资料");
             }
 
             return "success";
@@ -134,7 +134,7 @@ public class EditEmpInit extends BaseAction implements Constants {
         String result = "";
         if (joinYear.floatValue() >= 1.0F) {
             value = Integer.parseInt(joinYear.intValue() + "");
-            result = result + value + "幄1�7";
+            result = result + value + "个月";
         } else {
             joinYear = Float.valueOf(joinYear.floatValue() * 100.0F);
             value = Integer.parseInt(joinYear.intValue() + "");

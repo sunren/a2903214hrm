@@ -43,44 +43,45 @@ public class IEmptransfer extends ICheckAndInsert {
     String msgSupDeptError;
     private IEmpTransferBo empTransferBo;
 
-    public IEmptransfer() {
-        this.msgDbInsertError = "数据库插入失贄1�7";
+    public IEmptransfer()
+    {
+      this.msgDbInsertError = "数据库插入失败";
 
-        this.msgGreaterThan = "{0}大于{1}";
+      this.msgGreaterThan = "{0}大于{1}";
 
-        this.msgExist = "{0}已存圄1�7";
+      this.msgExist = "{0}已存在";
 
-        this.msgNoNull = "{0}不能为空";
+      this.msgNoNull = "{0}不能为空";
 
-        this.msgNotExist = "{0}不存圄1�7";
+      this.msgNotExist = "{0}不存在";
 
-        this.msgNotExistOrQuit = "{0}不存在或已经离职";
+      this.msgNotExistOrQuit = "{0}不存在或已经离职";
 
-        this.msgNotExistOrStop = "{0}不存在或已经被停甄1�7";
+      this.msgNotExistOrStop = "{0}不存在或已经被停用";
 
-        this.msgNumLimit = "导入员工数目超过限制";
+      this.msgNumLimit = "导入员工数目超过限制";
 
-        this.msgCanNotQuit = "该员工有下属员工，无法离聄1�7";
+      this.msgCanNotQuit = "该员工有下属员工，无法离职";
 
-        this.msgQuitNeedInfo = "离职人员必须填写离职相关信息";
+      this.msgQuitNeedInfo = "离职人员必须填写离职相关信息";
 
-        this.msgEmpCircle = "出现员工环，对应的员工编号为：{0}";
+      this.msgEmpCircle = "出现员工环，对应的员工编号为：{0}";
 
-        this.msgDbRepeat = "数据库数据出现重复，请先棄1�7查数据库：{0}";
+      this.msgDbRepeat = "数据库数据出现重复，请先检查数据库：{0}";
 
-        this.msgOldDeptLevelError = "变动前部门层级设置错误或有重复！";
+      this.msgOldDeptLevelError = "变动前部门层级设置错误或有重复！";
 
-        this.msgNewDeptLevelError = "变动后部门层级设置错误或有重复！";
+      this.msgNewDeptLevelError = "变动后部门层级设置错误或有重复！";
 
-        this.msgPBExceed = "职位超编！对应的员工编号为：{0}";
+      this.msgPBExceed = "职位超编！对应的员工编号为：{0}";
 
-        this.msgDeptNoRespPos = "数据错误，部门{0}无负责职位！";
+      this.msgDeptNoRespPos = "数据错误，部门{0}无负责职位！";
 
-        this.msgSupDeptError = "经理{0}不属于部门{1}";
+      this.msgSupDeptError = "经理{0}不属于部门{1}";
 
-        this.empTransferBo = ((IEmpTransferBo) SpringBeanFactory.getBean("empTransferBo"));
+      this.empTransferBo = ((IEmpTransferBo)SpringBeanFactory.getBean("empTransferBo"));
     }
-
+    
     public int[] insertTransmit(List insertList, CommonParameters commonParas) throws Exception {
         Employee currEmp = commonParas.getCurrEmp();
         int[] result = { 0, 0 };

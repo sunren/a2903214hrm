@@ -38,7 +38,7 @@ public class LeaveBalanceDWR {
                 .getBean("leavebalanceBO");
         Leavebalance old = leaveBalanceBo.getLeaveBalanceById(leaveBalance.getLbId());
         if (old == null) {
-            return "要更新的数据不存在或已经被删附1�7!";
+            return "要更新的数据不存在或已经被删除!";
         }
         old.setLbBalForwardDay(leaveBalance.getLbBalForwardDay());
         old.setLbBalForwardHour(leaveBalance.getLbBalForwardHour());

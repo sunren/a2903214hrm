@@ -27,40 +27,39 @@ public class UpdateSalaryConfigBatch extends CompAction {
     private static Logger logger = Logger.getLogger(UpdateSalaryConfigBatch.class);
     private static final long serialVersionUID = 1L;
 
-    public String updateConfigBatch(String empIds, String itemId, BigDecimal salaryValue) {
-        if ("error".equalsIgnoreCase(DWRUtil.checkAuth("updateSalaryConfig", "updateSalaryConfig")))
-            return StringUtil.message(this.msgNoAuth, new Object[] { "noauth" });
-        if ((StringUtils.isEmpty(empIds)) || (StringUtils.isEmpty(itemId)) || (salaryValue == null)) {
-            return StringUtil.message(this.msgNoParam, new Object[] { "noparam" });
-        }
+    public String updateConfigBatch(String empIds, String itemId, BigDecimal salaryValue)
+    {
+      if ("error".equalsIgnoreCase(DWRUtil.checkAuth("updateSalaryConfig", "updateSalaryConfig")))
+        return StringUtil.message(this.msgNoAuth, new Object[] { "noauth" });
+      if ((StringUtils.isEmpty(empIds)) || (StringUtils.isEmpty(itemId)) || (salaryValue == null)) {
+        return StringUtil.message(this.msgNoParam, new Object[] { "noparam" });
+      }
 
-        List configList = updateConfigBatch_DC(empIds.split(","));
-        if ((configList == null) || (configList.size() == 0)) {
-            return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配罄1�7" });
-        }
+      List configList = updateConfigBatch_DC(empIds.split(","));
+      if ((configList == null) || (configList.size() == 0)) {
+        return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配置" });
+      }
 
-        IEmpSalaryAcctitemsBo esaiBo = (IEmpSalaryAcctitemsBo) SpringBeanFactory
-                .getBean("empsalaryacctitemsBo");
-        if (!esaiBo.setAcctItemsConfig((Empsalaryconfig[]) configList
-                .toArray(new Empsalaryconfig[configList.size()]))) {
-            return StringUtil.message(this.msgNoData, new Object[] { "noacct", "帐套数据" });
-        }
+      IEmpSalaryAcctitemsBo esaiBo = (IEmpSalaryAcctitemsBo)SpringBeanFactory.getBean("empsalaryacctitemsBo");
+      if (!esaiBo.setAcctItemsConfig((Empsalaryconfig[])configList.toArray(new Empsalaryconfig[configList.size()]))) {
+        return StringUtil.message(this.msgNoData, new Object[] { "noacct", "帐套数据" });
+      }
 
-        setConfigValues(itemId, salaryValue, configList);
-        if ((configList == null) || (configList.size() == 0)) {
-            return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配罄1�7" });
-        }
+      setConfigValues(itemId, salaryValue, configList);
+      if ((configList == null) || (configList.size() == 0)) {
+        return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配置" });
+      }
 
-        ISalaryconfBo confBo = (ISalaryconfBo) getBean("salaryconfBo");
-        confBo.interpretConfig((Empsalaryconfig[]) configList
-                .toArray(new Empsalaryconfig[configList.size()]));
-        if ((configList == null) || (configList.size() == 0)) {
-            return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配罄1�7" });
-        }
+      ISalaryconfBo confBo = (ISalaryconfBo)getBean("salaryconfBo");
+      confBo.interpretConfig((Empsalaryconfig[])configList.toArray(new Empsalaryconfig[configList.size()]));
+      if ((configList == null) || (configList.size() == 0)) {
+        return StringUtil.message(this.msgNoData, new Object[] { "noconf", "可以修改的薪资配置" });
+      }
 
-        String str = confBo.batchUpdateConfig(getCurrentEmpNo(), configList);
-        return StringUtil.message(this.msgAdjConfSucc, new Object[] { "SUCC", str });
+      String str = confBo.batchUpdateConfig(getCurrentEmpNo(), configList);
+      return StringUtil.message(this.msgAdjConfSucc, new Object[] { "SUCC", str });
     }
+
 
     public String updatePayBatch(String empIds, String itemId, String salaryValue, String yearmonth) {
         if ("error".equalsIgnoreCase(DWRUtil.checkAuth("searchSalaryPaid", "execute")))
@@ -82,12 +81,12 @@ public class UpdateSalaryConfigBatch extends CompAction {
         try {
             bdValue = new BigDecimal(salaryValue);
         } catch (Exception e) {
-            return StringUtil.message(this.msgFormatErr, new Object[] { "format", "项目数�1�7�1�7" });
+            return StringUtil.message(this.msgFormatErr, new Object[] { "format", "项目数值" });
         }
 
         List payList = updatePayBatch_DC(yearmonth, empIdArr);
         if ((payList == null) || (payList.size() == 0)) {
-            return StringUtil.message(this.msgNoData, new Object[] { "nopay", "可以修改的薪资发攄1�7" });
+            return StringUtil.message(this.msgNoData, new Object[] { "nopay", "可以修改的薪资发放" });
         }
 
         setPayAdd(yearmonth, (Empsalarypay[]) payList.toArray(new Empsalarypay[payList.size()]));
@@ -97,7 +96,7 @@ public class UpdateSalaryConfigBatch extends CompAction {
         interpretPay(yearmonth, getCurrentEmpNo(), true, (Empsalarypay[]) payList
                 .toArray(new Empsalarypay[payList.size()]));
         if ((payList == null) || (payList.size() == 0)) {
-            return StringUtil.message(this.msgNoData, new Object[] { "nopay", "可以修改的薪资发攄1�7" });
+            return StringUtil.message(this.msgNoData, new Object[] { "nopay", "可以修改的薪资发放" });
         }
 
         ISalaryPaidBo salaryPaidBo = (ISalaryPaidBo) getBean("salaryPaidBo");

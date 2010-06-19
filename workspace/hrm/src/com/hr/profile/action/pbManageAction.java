@@ -352,7 +352,7 @@ public class pbManageAction extends BaseAction {
             return "职位不存在！";
         }
         if (pb.getPbInCharge().intValue() == 1) {
-            return "负责职位不能删除＄1�7";
+            return "负责职位不能删除";
         }
 
         String errorMsg = pbBo.delPb(id);

@@ -27,7 +27,7 @@ public class EmailConfirmAction extends GetUserSessionAction {
         this.param = fetchParametersFromRequest(req);
 
         if (!isLegal(this.param)) {
-            addActionError("请求参数错误＄1�7");
+            addActionError("请求参数错误");
             return "input";
         }
 
@@ -71,7 +71,7 @@ public class EmailConfirmAction extends GetUserSessionAction {
             ILeaverequestBO bo = (ILeaverequestBO) SpringBeanFactory.getBean("leaverequestBO");
             Leaverequest lr = bo.loadLeaverequest(this.param.getRecordId());
             if (lr == null) {
-                addActionError("您要审批的请假记录不存在或已经被删除＄1�7");
+                addActionError("您要审批的请假记录不存在或已经被删除");
                 return "input";
             }
 
@@ -91,7 +91,7 @@ public class EmailConfirmAction extends GetUserSessionAction {
 
             Overtimerequest or = or_Bo.loadOvertimerequest(this.param.getRecordId());
             if (or == null) {
-                addActionError("您要审批的加班记录不存在或已经被删除＄1�7");
+                addActionError("您要审批的加班记录不存在或已经被删除");
                 return "input";
             }
 

@@ -174,7 +174,7 @@ public class ContractManagement extends BaseDownloadAction {
 
     public String batchCreate() {
         if (StringUtils.isEmpty(this.ids)) {
-            addErrorInfo("错误的请求参数，请刷新页面后重试＄1�7");
+            addErrorInfo("错误的请求参数，请刷新页面后重试");
             return "success";
         }
 
@@ -208,10 +208,10 @@ public class ContractManagement extends BaseDownloadAction {
             empBo.updateEmp(emp, emp.getId());
         }
         if (errorStr.length() > 0) {
-            errorStr = errorStr.substring(0, errorStr.length() - 1) + "已经存在合同，创建合同不成功＄1�7";
+            errorStr = errorStr.substring(0, errorStr.length() - 1) + "已经存在合同，创建合同不成功";
             addErrorInfo(errorStr);
         } else {
-            addSuccessInfo("批量创建合同成功＄1�7");
+            addSuccessInfo("批量创建合同成功");
         }
         return "success";
     }
@@ -371,7 +371,7 @@ public class ContractManagement extends BaseDownloadAction {
 //      }
 //
 //      if ((old == null) || (StringUtils.isEmpty(old.getEctId()))) {
-//        errMsg = errMsg + emp.getEmpName() + "＄1�7";
+//        errMsg = errMsg + emp.getEmpName() + "、";
 //      }
 //
 //      if (old.getEtcExpire().intValue() == 1) {
@@ -449,15 +449,15 @@ public class ContractManagement extends BaseDownloadAction {
 //    }
 //    if (dateError.length() > 0) {
 //      dateError = dateError.substring(0, dateError.length() - 1);
-//      dateError = dateError + "存在新�1�7�合同时间冲突，";
+//      dateError = dateError + "存在新合同时间冲突，";
 //    }
 //    String rs = errMsg + error + dateError;
 //    if (rs.trim().length() > 0) {
-//      rs = rs + "续签合同不成功�1�7�1�7";
+//      rs = rs + "续签合同不成功";
 //      addErrorInfo(rs);
 //      return "success";
 //    }if (rs.trim().length() == 0) {
-//      addSuccessInfo("批量续签成功〄1�7");
+//      addSuccessInfo("批量续签成功");
 //      return "success";
 //    }
 //    return "success";
@@ -465,7 +465,7 @@ public class ContractManagement extends BaseDownloadAction {
 
     public String batchRepeal() {
         if ((StringUtils.isEmpty(this.ids)) || (StringUtils.isEmpty(this.ectIds))) {
-            addErrorInfo("错误的请求参数，请刷新页面后重试＄1�7");
+            addErrorInfo("错误的请求参数，请刷新页面后重试");
             return "success";
         }
 
@@ -502,7 +502,7 @@ public class ContractManagement extends BaseDownloadAction {
         if (error.length() > 0)
             addErrorInfo(error);
         else {
-            addSuccessInfo("批量解除合同成功＄1�7");
+            addSuccessInfo("批量解除合同成功");
         }
         return "success";
     }
@@ -526,23 +526,23 @@ public class ContractManagement extends BaseDownloadAction {
                 .getTime())
                 / 1000.0F / 3600.0F / 24.0F / 365.0F));
         if (emp.getJoinYear().floatValue() >= 10.0F) {
-            return "员工入职年限已超过十年，应签订无限期合同〄1�7";
+            return "员工入职年限已超过十年，应签订无限期合同";
         }
         if ((list != null) && (list.size() > 1)) {
-            return "员工已签订两份（以上）合同，应签订无限期合同〄1�7";
+            return "员工已签订两份（以上）合同，应签订无限期合同";
         }
         return "success";
     }
 
     public String deleteContract() {
         if (StringUtils.isEmpty(this.ectId)) {
-            addErrorInfo("非法的请求参数，请�1�7�择要删除的记录＄1�7");
+            addErrorInfo("非法的请求参数，请选择要删除的记录");
             return "success";
         }
         IEmpContractBo empContractBo = (IEmpContractBo) getBean("empContractBo");
         Empcontract ect = empContractBo.getById(this.ectId);
         if (ect == null) {
-            addErrorInfo("您要删除的记录已经被删除＄1�7");
+            addErrorInfo("您要删除的记录已经被删除");
             return "success";
         }
         String fileName = ect.getEctAttatchment();
@@ -588,7 +588,7 @@ public class ContractManagement extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法");
                     return "error";
                 }
                 this.searchContract.setEctAttatchment(this.fileFileName);
@@ -607,7 +607,7 @@ public class ContractManagement extends BaseDownloadAction {
         this.searchContract.setEctLastChangeTime(new Date());
         empContractBo.update(this.searchContract, emp.getContract().getEctId());
         clear();
-        addActionMessage("更新员工合同成功〄1�7");
+        addActionMessage("更新员工合同成功");
 
         return "success";
     }
@@ -615,15 +615,15 @@ public class ContractManagement extends BaseDownloadAction {
     public String attachDelete() throws Exception {
         if ((this.updateEctId == null) || (this.updateEctId.equals(""))
                 || (this.fileFileName == null) || ("".equals(this.fileFileName))) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
         IEmpContractBo empContractBo = (IEmpContractBo) getBean("empContractBo");
         if (!empContractBo.deleteAttach(this.updateEctId, this.fileFileName)) {
-            addActionError("附件删除失败＄1�7");
+            addActionError("附件删除失败");
             return "error";
         }
-        addActionMessage("附件删除成功〄1�7");
+        addActionMessage("附件删除成功");
         return "success";
     }
 
@@ -632,7 +632,7 @@ public class ContractManagement extends BaseDownloadAction {
         String result = "";
         if (joinYear.floatValue() >= 1.0F) {
             value = Integer.parseInt(joinYear.intValue() + "");
-            result = result + value + "幄1�7";
+            result = result + value + "个月";
         } else {
             joinYear = Float.valueOf(joinYear.floatValue() * 100.0F);
             value = Integer.parseInt(joinYear.intValue() + "");

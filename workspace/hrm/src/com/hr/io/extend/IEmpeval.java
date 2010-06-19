@@ -30,31 +30,31 @@ public class IEmpeval extends ICheckAndInsert {
     private IEmpEvalBo evaldBo;
 
     public IEmpeval() {
-        this.msgDbInsertError = "数据库插入失贄1�7";
+        this.msgDbInsertError = "数据库插入失败";
 
         this.msgGreaterThan = "{0}大于{1}";
 
-        this.msgExist = "{0}已存圄1�7";
+        this.msgExist = "{0}已存在";
 
         this.msgNoNull = "{0}不能为空";
 
-        this.msgNotExist = "{0}不存圄1�7";
+        this.msgNotExist = "{0}不存在";
 
-        this.msgNotValid = "{0}不正硄1�7";
+        this.msgNotValid = "{0}不正确";
 
         this.msgNotExistOrQuit = "{0}不存在或已经离职";
 
-        this.msgNotExistOrStop = "{0}不存在或已经被停甄1�7";
+        this.msgNotExistOrStop = "{0}不存在或已经被停用";
 
         this.msgNumLimit = "导入员工数目超过限制";
 
-        this.msgCanNotQuit = "该员工有下属员工，无法离聄1�7";
+        this.msgCanNotQuit = "该员工有下属员工，无法离职";
 
         this.msgQuitNeedInfo = "离职人员必须填写离职相关信息";
 
         this.msgEmpCircle = "出现员工环，对应的行数为：{0}";
 
-        this.msgEvalTestOnlyOne = "试用期�1�7�评只能有一条记彄1�7";
+        this.msgEvalTestOnlyOne = "试用期考评只能有一条记录";
 
         this.evaldBo = ((IEmpEvalBo) SpringBeanFactory.getBean("empEvalBo"));
     }
@@ -161,7 +161,7 @@ public class IEmpeval extends ICheckAndInsert {
                 result[1] += 1;
             }
 
-            if ((empeval.getEeType().compareTo("试用朄1�7") == 0)
+            if ((empeval.getEeType().compareTo("试用期") == 0)
                     && (this.evaldBo.getEmpevalInTest(empeval.getEmployeeByEeEmpNo()
                             .getEmpDistinctNo()) != null)) {
                 commonParas.addErrorMessage(this.msgEvalTestOnlyOne, Integer.valueOf(rowNum),

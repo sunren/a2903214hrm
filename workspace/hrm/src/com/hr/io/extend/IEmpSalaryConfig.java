@@ -41,17 +41,17 @@ public class IEmpSalaryConfig extends ICheckAndInsert {
 
     public IEmpSalaryConfig() {
         this.msgDbInsertError = "数据库插入失败！";
-        this.msgGreaterThan = "{0}大于{1}＄1�7";
+        this.msgGreaterThan = "{0}大于{1}！";
         this.msgExist = "{0}已存在！";
-        this.msgNoNull = "{0}不能为空＄1�7";
+        this.msgNoNull = "{0}不能为空！";
         this.msgNotExist = "{0}不存在！";
-        this.msgNotExistOrQuit = "{0}不存在或已经离职＄1�7";
+        this.msgNotExistOrQuit = "{0}不存在或已经离职！";
         this.msgNotExistOrStop = "{0}不存在或已经被停用！";
-        this.msgNumLimit = "导入员工数目超过限制＄1�7";
+        this.msgNumLimit = "导入员工数目超过限制！";
         this.msgCanNotQuit = "该员工有下属员工，无法离职！";
-        this.msgQuitNeedInfo = "离职人员必须填写离职相关信息＄1�7";
-        this.msgEmpCircle = "出现员工环，对应的行数为：{0}＄1�7";
-        this.msgDbRepeat = "数据库数据出现重复，导入失败＄1�7";
+        this.msgQuitNeedInfo = "离职人员必须填写离职相关信息！";
+        this.msgEmpCircle = "出现员工环，对应的行数为：{0}！";
+        this.msgDbRepeat = "数据库数据出现重复，导入失败！";
 
         this.salaryconfBo = ((ISalaryconfBo) SpringBeanFactory.getBean("salaryconfBo"));
     }

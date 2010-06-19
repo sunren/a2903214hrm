@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="configure"/>
-	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="src" path="tool"/>
+	<classpathentry exported="true" kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/FCKeditor-2.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ajaxtags-1.2-beta3.jar"/>
@@ -47,8 +48,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jenkov-prizetags-bin-3.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/js.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j.jar"/>
@@ -69,7 +68,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sac.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/scriptapi.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sitemesh.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-test.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring.jar"/>

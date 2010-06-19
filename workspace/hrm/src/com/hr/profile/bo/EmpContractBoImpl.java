@@ -77,8 +77,8 @@ public class EmpContractBoImpl implements IEmpContractBo, Status {
             Date newStartDate = empContract.getEctStartDate();
 
             if (!newStartDate.after(old.getEctStartDate())) {
-                error = old.getEmployee().getEmpName() + "亄1�7"
-                        + DateUtil.formatDate(old.getEctStartDate()) + "签署前一份合同，新合同起始日期必须晚于此日期＄1�7";
+                error = old.getEmployee().getEmpName() + "在"
+                        + DateUtil.formatDate(old.getEctStartDate()) + "签署前一份合同，新合同起始日期必须晚于此日期";
 
                 return error;
             }
@@ -111,8 +111,8 @@ public class EmpContractBoImpl implements IEmpContractBo, Status {
         String error = "";
         Empcontract old = getLastContract(ContractId, empContract.getEmployee().getId());
         if ((old != null) && (!old.getEctStartDate().before(empContract.getEctStartDate()))) {
-            error = oldContract.getEmployee().getEmpName() + "亄1�7"
-                    + DateUtil.formatDate(old.getEctStartDate()) + "签署前一份合同，新合同起始日期必须晚于此日期＄1�7";
+            error = oldContract.getEmployee().getEmpName() + "在"
+                    + DateUtil.formatDate(old.getEctStartDate()) + "签署前一份合同，新合同起始日期必须晚于此日期";
 
             return error;
         }

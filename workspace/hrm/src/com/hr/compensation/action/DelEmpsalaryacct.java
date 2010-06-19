@@ -21,12 +21,12 @@ public class DelEmpsalaryacct extends BaseAction {
     private String msgSucc;
 
     public DelEmpsalaryacct() {
-        this.msgNoData = "薪资帐套版本不存在，请刷新后重试＄1�7";
+        this.msgNoData = "薪资帐套版本不存在，请刷新后重试";
         this.msgHistVer = "{0}为历史版本，不允许删除！";
-        this.msgHasConfig = "{0}存在员工薪资配置数据，不允许删除＄1�7";
-        this.msgHasPaid = "{0}存在员工薪资发放数据，不允许删除＄1�7";
-        this.msgHasCompPlan = "{0}存在员工调薪记录，不允许删除＄1�7";
-        this.msgHasBenePlan = "{0}存在社保缴费历史，不允许删除＄1�7";
+        this.msgHasConfig = "{0}存在员工薪资配置数据，不允许删除";
+        this.msgHasPaid = "{0}存在员工薪资发放数据，不允许删除";
+        this.msgHasCompPlan = "{0}存在员工调薪记录，不允许删除";
+        this.msgHasBenePlan = "{0}存在社保缴费历史，不允许删除";
         this.msgSucc = "{0}已删除！";
     }
 

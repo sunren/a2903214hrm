@@ -397,8 +397,8 @@ public abstract class AbstractAttendmonthlyBo implements IAttendmonthlyBO, Statu
             }
         }
 
-        monthlyData.setAttmOtHolidayHours((BigDecimal) map.get("节假日加珄1�7"));
-        monthlyData.setAttmOtNormalHours((BigDecimal) map.get("普�1�7�加珄1�7"));
+        monthlyData.setAttmOtHolidayHours((BigDecimal) map.get("节假日加班"));
+        monthlyData.setAttmOtNormalHours((BigDecimal) map.get("普通加班"));
         monthlyData.setAttmOtWeekendHours((BigDecimal) map.get("周末加班"));
         AttendmonthlyFactory.initAttendMonthlyProperties(monthlyData);
         BigDecimal bd = new BigDecimal(0);

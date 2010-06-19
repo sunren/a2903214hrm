@@ -53,21 +53,21 @@ public class IEmployeeBasic extends ICheckAndInsert {
 
     public IEmployeeBasic() {
         this.msgDbInsertError = "数据库插入失败！";
-        this.msgGreaterThan = "{0}大于{1}＄1�7";
+        this.msgGreaterThan = "{0}大于{1}！";
         this.msgExist = "{0}已存在！";
-        this.msgNoNull = "{0}不能为空＄1�7";
+        this.msgNoNull = "{0}不能为空！";
         this.msgNotExist = "{0}不存在！";
-        this.msgNotExistOrQuit = "{0}不存在或已经离职＄1�7";
+        this.msgNotExistOrQuit = "{0}不存在或已经离职！";
         this.msgNotExistOrStop = "{0}不存在或已经被停用！";
-        this.msgEqual = "{0}与{1}必须相同＄1�7";
-        this.msgNumLimit = "导入员工数量超过限制＄1�7";
+        this.msgEqual = "{0}与{1}必须相同！";
+        this.msgNumLimit = "导入员工数量超过限制！";
         this.msgCanNotQuit = "该员工有下属员工，无法离职！";
-        this.msgQuitNeedInfo = "离职员工必须填写离职相关信息＄1�7";
-        this.msgEmpCircle = "出现经理环，对应的行数为：{0}＄1�7";
-        this.msgNoQuitTerminateDate = "在职员工不该填写{0}＄1�7";
-        this.msgNoQuitInfo = "在职员工不该填写离职信息＄1�7";
-        this.msgDeptLevelError = "部门层级设置错误或部门有重复＄1�7";
-        this.msgPBExceed = "职位超编＄1�7";
+        this.msgQuitNeedInfo = "离职员工必须填写离职相关信息！";
+        this.msgEmpCircle = "出现经理环，对应的行数为：{0}！";
+        this.msgNoQuitTerminateDate = "在职员工不该填写{0}！";
+        this.msgNoQuitInfo = "在职员工不该填写离职信息！";
+        this.msgDeptLevelError = "部门层级设置错误或部门有重复！";
+        this.msgPBExceed = "职位超编！";
         this.msgDeptNoRespPos = "数据错误，部门{0}无负责职位！";
         this.msgSupDeptError = "经理{0}不属于部门{1}";
     }

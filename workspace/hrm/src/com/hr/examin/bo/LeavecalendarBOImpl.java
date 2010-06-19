@@ -36,7 +36,7 @@ public class LeavecalendarBOImpl implements ILeavecalendarBO {
                 && (lc.getLcLocationNo().getId().length() > 0)
                 && (this.l_BO.loadLocation(lc.getLcLocationNo().getId()) == null)) {
             result = new ArrayList();
-            result.add("不存在的地址＄1�7");
+            result.add("不存在的地址");
             return result;
         }
 
@@ -55,7 +55,7 @@ public class LeavecalendarBOImpl implements ILeavecalendarBO {
         List result = null;
         if (loadLeavecalendar(lcId) == null) {
             result = new ArrayList();
-            result.add("数据不存在，或�1�7�已经删除！");
+            result.add("数据不存在，或已经删除！");
             return result;
         }
         try {
@@ -71,14 +71,14 @@ public class LeavecalendarBOImpl implements ILeavecalendarBO {
         List result = null;
         if (loadLeavecalendar(lc.getLcId()) == null) {
             result = new ArrayList();
-            result.add("数据不存在，或�1�7�已经删除！");
+            result.add("数据不存在，或已经删除！");
             return result;
         }
         if ((lc.getLcLocationNo() != null) && (lc.getLcLocationNo().getId() != null)
                 && (lc.getLcLocationNo().getId().length() > 0)
                 && (this.l_BO.loadLocation(lc.getLcLocationNo().getId()) == null)) {
             result = new ArrayList();
-            result.add("不存在的地址＄1�7");
+            result.add("不存在的地址");
             return result;
         }
         if (((result = checkBussiness(lc)) != null) && (result.size() > 0))
@@ -105,7 +105,7 @@ public class LeavecalendarBOImpl implements ILeavecalendarBO {
         if ((lc.getLcSign().intValue() == 1) && (lc_calendar.get(7) != 7)
                 && (lc_calendar.get(7) != 1)) {
             result = new ArrayList();
-            result.add("周一至周五默认是工作日，不能重复添加＄1�7");
+            result.add("周一至周五默认是工作日，不能重复添加");
             return result;
         }
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Leavecalendar.class);
@@ -120,25 +120,25 @@ public class LeavecalendarBOImpl implements ILeavecalendarBO {
                 if (lc.getLcLocationNo() == null) {
                     if (templc.getLcLocationNo() == null) {
                         result = new ArrayList();
-                        result.add("与全部地匄1�7 出现冲突＄1�7");
+                        result.add("与全部地区 出现冲突");
                         return result;
                     }
                     if (lc.getLcSign() == templc.getLcSign()) {
                         result = new ArrayList();
-                        result.add("种类与部分地匄1�7 出现冲突＄1�7");
+                        result.add("种类与部分地区 出现冲突");
                         return result;
                     }
                 } else {
                     if ((templc.getLcLocationNo() != null)
                             && (templc.getLcLocationNo().equals(lc.getLcLocationNo()))) {
                         result = new ArrayList();
-                        result.add("地区 出现冲突＄1�7");
+                        result.add("地区 出现冲突");
                         return result;
                     }
                     if ((templc.getLcLocationNo() == null)
                             && (templc.getLcSign() == lc.getLcSign())) {
                         result = new ArrayList();
-                        result.add("种类与全部地匄1�7 出现冲突＄1�7");
+                        result.add("种类与全部地区 出现冲突");
                         return result;
                     }
                 }

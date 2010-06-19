@@ -28,7 +28,7 @@ public class EmpTrainHisDWR extends BaseAction {
 
         if (("SUB".equals(this.authorityCondition))
                 && (!checkAuth(this.emphistorytrain.getEmployee().getId()))) {
-            addActionError("您没有增加权限执行本操作＄1�7");
+            addActionError("您没有增加权限执行本操作");
             return "error";
         }
 
@@ -49,7 +49,7 @@ public class EmpTrainHisDWR extends BaseAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法");
                     return "error";
                 }
                 this.emphistorytrain.setEhtAttatchment(this.fileFileName);
@@ -64,7 +64,7 @@ public class EmpTrainHisDWR extends BaseAction {
         this.emphistorytrain.setEhtLastChangeTime(new Date());
 
         this.empTrainHisBo.insert(this.emphistorytrain);
-        addSuccessInfo("新增培训经历成功＄1�7");
+        addSuccessInfo("新增培训经历成功");
         return "success";
     }
 
@@ -97,7 +97,7 @@ public class EmpTrainHisDWR extends BaseAction {
         Emphistorytrain empOldHT = (Emphistorytrain) list.get(0);
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(empOldHT.getEmployee().getId()))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作");
             return "error";
         }
 
@@ -117,7 +117,7 @@ public class EmpTrainHisDWR extends BaseAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法");
                     return "error";
                 }
                 empOldHT.setEhtAttatchment(this.fileFileName);
@@ -136,7 +136,7 @@ public class EmpTrainHisDWR extends BaseAction {
         this.emphistorytrain.setEhtLastChangeTime(new Date());
 
         this.empTrainHisBo.update(empOldHT);
-        addSuccessInfo("更新培训经历成功＄1�7");
+        addSuccessInfo("更新培训经历成功");
         return "success";
     }
 
@@ -146,21 +146,21 @@ public class EmpTrainHisDWR extends BaseAction {
         Emphistorytrain empOldHT = this.empTrainHisBo.load(this.ehtId, fetches);
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(empOldHT.getEmployee().getId()))) {
-            addActionError("您没有删除权限执行本操作＄1�7");
+            addActionError("您没有删除权限执行本操作");
             return "error";
         }
 
         if ((this.ehtId == null) || (this.ehtId.equals("")) || (this.fileFileName == null)
                 || ("".equals(this.fileFileName))) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
         this.empTrainHisBo = ((IEmpTrainHisBo) SpringBeanFactory.getBean("empTrainHisBo"));
         if (!this.empTrainHisBo.deleteAttach(this.ehtId, this.fileFileName)) {
-            addActionError("附件删除失败＄1�7");
+            addActionError("附件删除失败");
             return "error";
         }
-        addActionMessage("附件删除成功〄1�7");
+        addActionMessage("附件删除成功");
         return "success";
     }
 

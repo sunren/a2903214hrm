@@ -178,7 +178,7 @@ public class SearchEbpAction extends CompAction {
         String existYearMonth = "";
         for (int i = 0; i < yearMonthArr.length; ++i) {
             if (DateUtil.formatDateToS(cal.getTime(), "yyyyMM").equals(yearMonthArr[i])) {
-                cannotAddYearMonth = DateUtil.formatDateToS(cal.getTime(), "yyyy年MM朄1�7");
+                cannotAddYearMonth = DateUtil.formatDateToS(cal.getTime(), "yyyy年MM月");
             }
 
             for (Empbenefitplan plan : existebpList) {
@@ -186,7 +186,7 @@ public class SearchEbpAction extends CompAction {
                     existYearMonth = existYearMonth
                             + DateUtil.formatDateToS(DateUtil.parseDateByFormat(yearMonthArr[i],
                                                                                 "yyyyMM"),
-                                                     "yyyy年MM朄1�7") + ",";
+                                                     "yyyy年MM月") + ",";
                     break;
                 }
             }
@@ -194,12 +194,12 @@ public class SearchEbpAction extends CompAction {
 
         String info = "";
         if (cannotAddYearMonth.length() > 0) {
-            info = info + employee.getEmpName() + "该月份不能补缄1�7 " + cannotAddYearMonth + " 社保＄1�7";
+            info = info + employee.getEmpName() + "该月份不能补缴 " + cannotAddYearMonth + " 社保";
         }
         if (existYearMonth.indexOf(",") > -1) {
             existYearMonth = existYearMonth.substring(0, existYearMonth.length() - 1);
             info = info + "\n" + employee.getEmpName() + "该月份已经补缴过 " + existYearMonth
-                    + " 社保，不允许重复添加＄1�7";
+                    + " 社保，不允许重复添加";
         }
         if (info.length() > 0) {
             return info;
@@ -519,7 +519,7 @@ public class SearchEbpAction extends CompAction {
         IEmpBenefitPlanBo ebpBo = (IEmpBenefitPlanBo) getBean("empbenefitplanBo");
         Empbenefitplan ebp = ebpBo.searchEbpById(this.ebpId);
         if (ebp == null) {
-            addErrorInfo("删除失败！请刷新页面后重试�1�7�1�7");
+            addErrorInfo("删除失败！请刷新页面后重试");
             return "success";
         }
 
@@ -527,12 +527,12 @@ public class SearchEbpAction extends CompAction {
         String yearMontht = null;
         try {
             yearMontht = DateUtil.formatDateToS(DateUtil.parseDateByFormat(ebp
-                    .getEbpBelongYearmonth(), "yyyyMM"), "yyyy年MM朄1�7");
+                    .getEbpBelongYearmonth(), "yyyyMM"), "yyyy年MM月");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        addSuccessInfo("您已删除" + ebp.getEbpEmpno().getEmpName() + " 的1�7 " + yearMontht
-                + "社保补缴记录，改动将在重新初始化薪资后生效�1�7�1�7");
+        addSuccessInfo("您已删除" + ebp.getEbpEmpno().getEmpName() + " 的 " + yearMontht
+                + "社保补缴记录，改动将在重新初始化薪资后生效！");
         return "success";
     }
 
@@ -645,7 +645,7 @@ public class SearchEbpAction extends CompAction {
             }
         }
 
-        return "无状怄1�7";
+        return "无状态";
     }
 
     public String getEspStatus(String yearMonth) {

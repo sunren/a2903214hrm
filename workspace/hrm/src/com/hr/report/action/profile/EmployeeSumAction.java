@@ -35,15 +35,15 @@ public class EmployeeSumAction extends EmployeeReportAction {
         boolean flag = true;
         String mes = "";
         if (StringUtils.isEmpty(startDate)) {
-            mes = mes + "弄1�7始时间为空！";
+            mes = mes + "开始时间为空！";
         }
         if (StringUtils.isEmpty(startDate)) {
-            mes = mes + "结束时间为空＄1�7";
+            mes = mes + "结束时间为空";
         }
 
         if (DateUtil.parseDateByFormat(startDate, "yyyy-MM-dd")
                 .compareTo(DateUtil.parseDateByFormat(endDate, "yyyy-MM-dd")) > 0) {
-            mes = mes + "弄1�7始时间大于结束时间！";
+            mes = mes + "开始时间大于结束时间！";
         }
         if (!"".equals(mes)) {
             addActionError(mes);

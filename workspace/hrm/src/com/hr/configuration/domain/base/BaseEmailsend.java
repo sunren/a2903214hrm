@@ -165,13 +165,13 @@ public abstract class BaseEmailsend extends BaseDomain implements Serializable {
     public String getStatusString() {
         switch (this.esStatus.intValue()) {
         case 0:
-            return "未发逄1�7";
+            return "未发送";
         case 1:
-            return "已发逄1�7";
+            return "已发送";
         case 2:
-            return "发�1�7�失贄1�7";
+            return "发送失败";
         }
-        return "发�1�7�失贄1�7";
+        return "发送失败";
     }
 }
 

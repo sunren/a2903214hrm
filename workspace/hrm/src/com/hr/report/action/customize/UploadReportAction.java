@@ -21,7 +21,7 @@ public class UploadReportAction extends BaseAction {
             return "input";
         }
         System.out.println(this.reportFile.getName());
-        addSuccessInfo("新增定制报表成功＄1�7");
+        addSuccessInfo("新增定制报表成功");
         return "success";
     }
 

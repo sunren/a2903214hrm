@@ -33,7 +33,7 @@ public class RecruitapplierCreate extends BaseAction {
     public String execute() throws Exception {
         if ((this.applier.getRecaPlan() == null) || (this.applier.getRecaPlan().getId() == null)
                 || (this.applier.getRecaPlan().getId().trim().length() == 0)) {
-            addErrorInfo("招聘计划必填＄1�7");
+            addErrorInfo("招聘计划必填！");
             return "input";
         }
         IRecruitchannelBo recruitchannelBO = (IRecruitchannelBo) getBean("channelBo");
@@ -60,12 +60,12 @@ public class RecruitapplierCreate extends BaseAction {
         this.errors = applierBo.insertApplier(this.applier, getCurrentEmpNo());
         try {
             logBO.addToSyslog("recruitapplier", getCurrentEmpNo(), getCurrentEmpNo(), this.applier
-                    .getId().toString(), 0, "新增应聘耄1�7", this.applier.getRecaComment());
+                    .getId().toString(), 0, "新增应聘者", this.applier.getRecaComment());
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (this.errors.size() < 1) {
-            addSuccessInfo("应聘耄1�7" + this.applier.getRecaName() + "添加成功〄1�7");
+            addSuccessInfo("应聘者" + this.applier.getRecaName() + "添加成功。");
             this.applier = new Recruitapplier();
             if (this.planID == null) {
                 return "success";
@@ -170,8 +170,3 @@ public class RecruitapplierCreate extends BaseAction {
         this.page = page;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.recruitment.action.RecruitapplierCreate JD-Core Version: 0.5.4
- */

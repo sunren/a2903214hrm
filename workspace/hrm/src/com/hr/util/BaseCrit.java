@@ -31,19 +31,19 @@ public class BaseCrit {
 
     public static Criterion addC(String alias, String op, String[] argS) {
         if (op == "like")
-            return Restrictions.ilike(alias, "%" + argS[0].trim().replace("〄1�7", "") + "%");
+            return Restrictions.ilike(alias, "%" + argS[0].trim().replace("　", "") + "%");
         if (op == "eq")
-            return Restrictions.eq(alias, argS[0].trim().replace("〄1�7", ""));
+            return Restrictions.eq(alias, argS[0].trim().replace("　", ""));
         if (op == "ge")
-            return Restrictions.ge(alias, argS[0].trim().replace("〄1�7", ""));
+            return Restrictions.ge(alias, argS[0].trim().replace("　", ""));
         if (op == "gt")
-            return Restrictions.gt(alias, argS[0].trim().replace("〄1�7", ""));
+            return Restrictions.gt(alias, argS[0].trim().replace("　", ""));
         if (op == "le")
-            return Restrictions.le(alias, argS[0].trim().replace("〄1�7", ""));
+            return Restrictions.le(alias, argS[0].trim().replace("　", ""));
         if (op == "lt")
-            return Restrictions.lt(alias, argS[0].trim().replace("〄1�7", ""));
+            return Restrictions.lt(alias, argS[0].trim().replace("　", ""));
         if (op == "between")
-            return Restrictions.between(alias, argS[0].trim().replace("〄1�7", ""), argS[1]);
+            return Restrictions.between(alias, argS[0].trim().replace("　", ""), argS[1]);
         if (op == "in")
             return Restrictions.in(alias, argS);
         return null;
@@ -320,7 +320,7 @@ public class BaseCrit {
             alias = alias + ".";
         else
             alias = "";
-        dc.add(addEmpC(alias, argS.trim().replace("〄1�7", "")));
+        dc.add(addEmpC(alias, argS.trim().replace("　", "")));
     }
 
     public static Criterion addEmpC(String alias, String argS) {
@@ -338,7 +338,7 @@ public class BaseCrit {
             alias = alias + ".";
         else
             alias = "";
-        dc.add(addDeptEmpC(alias, argS.trim().replace("〄1�7", "")));
+        dc.add(addDeptEmpC(alias, argS.trim().replace("　", "")));
     }
 
     public static Criterion addDeptEmpC(String alias, String argS) {
@@ -404,7 +404,7 @@ public class BaseCrit {
             alias = alias + ".";
         else
             alias = "";
-        dc.add(addEmpEngC(alias, argS.trim().replace("〄1�7", "")));
+        dc.add(addEmpEngC(alias, argS.trim().replace("　", "")));
     }
 
     public static Criterion addEmpEngC(String alias, String argS) {

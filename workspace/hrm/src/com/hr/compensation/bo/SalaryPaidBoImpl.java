@@ -287,7 +287,7 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
 
             pay.encryEMPPaid(pay);
 
-            strBuf.append(pay.getEspEmpno().getEmpName()).append("〄1�7");
+            strBuf.append(pay.getEspEmpno().getEmpName()).append("、");
 
             Employee emp = pay.getEspEmpno();
             Empsalaryconfig config = emp.getConfig();
@@ -540,7 +540,7 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
         Class ownerClass = Empbenefitplan.class;
 
         BigDecimal ebpBD = null;
-        result[0][1] = "汇�1�7�1�7";
+        result[0][1] = "汇总";
         rowCount = 1;
         for (Empsalaryacctitems item : beneItems) {
             try {
@@ -675,8 +675,7 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
         }
 
         url.append(esp.getEspEmpno().getEmpName() + "，您好！<br>");
-        url.append(esp.getEspYearmonth().substring(0, 4) + "幄1�7"
-                + esp.getEspYearmonth().substring(4) + "月薪水发放信息，如下＄1�7br><br>");
+        url.append(esp.getEspYearmonth().substring(0, 4) + "年" + esp.getEspYearmonth().substring(4) + "月薪水发放信息，如下：<br><br>");
 
         url
                 .append("<table border='1' width='100%' solidcellpadding=0  cellspacing=0 style='font-size: 10pt'>");
@@ -789,7 +788,7 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
                         || (item.getEsaiEsdd().getEsddDataType().intValue() == 9)) {
                     continue;
                 }
-                errorFields.append("A").append(item.getEsaiDataSeq()).append("〄1�7");
+                errorFields.append("A").append(item.getEsaiDataSeq()).append("、");
             }
         }
 
@@ -896,7 +895,7 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
 
     private SalaryPaidConverge getTotalSarlayPaidConverge(List<SalaryPaidConverge> result) {
         SalaryPaidConverge totalSalaryPaidConverge = new SalaryPaidConverge();
-        totalSalaryPaidConverge.setEmpDepartment("扄1�7有部闄1�7");
+        totalSalaryPaidConverge.setEmpDepartment("所有部门");
         int empNumber = 0;
         int lastMonthEmpNumber = 0;
         int quitEmpNumber = 0;
@@ -940,8 +939,8 @@ public class SalaryPaidBoImpl implements ISalaryPaidBo, Status, Constants {
                 String url = calSalarypaidForURL(esp, itemsTable);
 
                 Emailsend email = new Emailsend();
-                email.setEsTitle(esp.getEspYearmonth().substring(0, 4) + "幄1�7"
-                        + esp.getEspYearmonth().substring(4) + "月薪资邮件发逄1�7");
+                email.setEsTitle(esp.getEspYearmonth().substring(0, 4) + "年"
+                        + esp.getEspYearmonth().substring(4) + "月薪资邮件发送");
                 email.setEsContent(url);
                 email.setEsFrom(fileConfigManager.getProperty("email.sys.sender"));
                 email.setEsTo(esp.getEspEmpno().getEmpEmail());

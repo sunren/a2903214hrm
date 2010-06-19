@@ -131,7 +131,7 @@ public class EmpQuit extends BaseDownloadAction {
 
     public String addQuit() throws Exception {
         if (StringUtils.isEmpty(this.employeeId)) {
-            addErrorInfo("请求的参数错误，请�1�7�择要离聄1�7/复职的员工！");
+            addErrorInfo("请求的参数错误，请选择要离职/复职的员工！");
             return "success";
         }
 
@@ -142,7 +142,7 @@ public class EmpQuit extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有修改权限执行本操作＄1�7");
+            addErrorInfo("您没有修改权限执行本操作");
             return "error";
         }
 
@@ -174,7 +174,7 @@ public class EmpQuit extends BaseDownloadAction {
         }
 
         setQRMap();
-        addActionMessage("新增员工离职信息成功〄1�7");
+        addActionMessage("新增员工离职信息成功");
         return "success";
     }
 
@@ -186,14 +186,14 @@ public class EmpQuit extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(etf.getEmployee().getId()))) {
-            addErrorInfo("您没有删除权限执行本操作＄1�7");
+            addErrorInfo("您没有删除权限执行本操作");
             return "error";
         }
 
         String error = empConstractBo.delete(this.updateEqId);
         if (StringUtils.isEmpty(error)) {
             addActionMessage("删除" + etf.getEmployee().getEmpName()
-                    + (("1".equals(etf.getEqType())) ? "复职" : "离职") + "信息成功〄1�7");
+                    + (("1".equals(etf.getEqType())) ? "复职" : "离职") + "信息成功");
         } else {
             addErrorInfo(error);
         }
@@ -211,7 +211,7 @@ public class EmpQuit extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有修改权限执行本操作＄1�7");
+            addErrorInfo("您没有修改权限执行本操作");
             return "success";
         }
 
@@ -231,7 +231,7 @@ public class EmpQuit extends BaseDownloadAction {
 
         empQuitBo.update(empquit, this.updateEqId);
         clear();
-        addActionMessage("更新员工离职信息成功〄1�7");
+        addActionMessage("更新员工离职信息成功");
 
         setQRMap();
         return "success";

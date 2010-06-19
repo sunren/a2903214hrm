@@ -57,7 +57,7 @@ public abstract class ICheckAndInsert {
         IWorkFlowBO workflowBo = (IWorkFlowBO) SpringBeanFactory.getBean("workFlowBO");
         for (Employee emp : empList) {
             if ("NOCHARGE".equals(workflowBo.checkEmpCharge(deptLocsInCharge, emp))) {
-                empStr = empStr + emp.getEmpName() + "〄1�7";
+                empStr = empStr + emp.getEmpName() +  "、";
             }
 
         }

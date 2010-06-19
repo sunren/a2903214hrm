@@ -286,9 +286,9 @@ public class Exportinfo implements Constants {
         stringList.add("职位");
         stringList.add("用工形式");
         stringList.add("工作地区");
-        stringList.add("员工状�1�7�1�7");
+        stringList.add("员工状态");
         stringList.add("银行帐号");
-        stringList.add("银行弄1�7户行");
+        stringList.add("银行开户行");
         stringList.add("成本中心");
         stringList.add("薪资级别");
         stringList.add("薪资帐套");
@@ -309,7 +309,7 @@ public class Exportinfo implements Constants {
         stringList.add("姓名");
         stringList.add("用工形式");
         stringList.add("经理姓名");
-        stringList.add("状�1�7�1�7");
+        stringList.add("状态");
         stringList.add("银行帐号");
         stringList.add("薪资级别");
 
@@ -331,11 +331,11 @@ public class Exportinfo implements Constants {
         stringList.add("加薪生效日期");
         stringList.add("本次加薪幅度");
         stringList.add("加薪备注");
-        stringList.add("加薪状�1�7�1�7");
-        stringList.add("调薪前薪资级刄1�7");
-        stringList.add("调薪后薪资级刄1�7");
-        stringList.add("调薪前薪资帐奄1�7");
-        stringList.add("调薪后薪资帐奄1�7");
+        stringList.add("加薪状况");
+        stringList.add("调薪前薪资级别");
+        stringList.add("调薪后薪资级别");
+        stringList.add("调薪前薪资帐户");
+        stringList.add("调薪后薪资帐户");
 
         IEmpSalaryAcctitemsBo esaitemsBo = (IEmpSalaryAcctitemsBo) SpringBeanFactory
                 .getBean("empsalaryacctitemsBo");

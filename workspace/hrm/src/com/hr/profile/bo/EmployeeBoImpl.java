@@ -196,27 +196,27 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
         if (!perat.equalsIgnoreCase("delete")) {
             if ((emp.getEmpBirthDate() != null)
                     && (emp.getEmpBirthDate().getTime() > new Date().getTime() - 86400000L)) {
-                errors.add("出生日期必须小于今天＄1�7");
+                errors.add("出生日期必须小于今天");
             }
             if ((emp.getEmpBirthDate() != null) && (emp.getEmpWorkDate() != null)
                     && (emp.getEmpBirthDate().compareTo(emp.getEmpWorkDate()) > 0)) {
-                errors.add("出生日期不能晚于参加工作日期＄1�7");
+                errors.add("出生日期不能晚于参加工作日期");
             }
             if ((emp.getEmpJoinDate() != null) && (emp.getEmpWorkDate() != null)
                     && (emp.getEmpJoinDate().compareTo(emp.getEmpWorkDate()) < 0)) {
-                errors.add("参加工作日期不能晚于入职日期＄1�7");
+                errors.add("参加工作日期不能晚于入职日期");
             }
             if ((emp.getEmpConfirmDate() != null) && (emp.getEmpJoinDate() != null)
                     && (emp.getEmpConfirmDate().compareTo(emp.getEmpJoinDate()) < 0)) {
-                errors.add("入职日期不能晚于转正日期＄1�7");
+                errors.add("入职日期不能晚于转正日期");
             }
             if ((emp.getEmpWorkPhone() != null) && (emp.getEmpWorkPhone().trim().length() > 0)
                     && (!GenericValidator.isPhone(emp.getEmpWorkPhone()))) {
-                errors.add("工作电话格式错误！只允许数字、\"-\"＄1�7");
+                errors.add("工作电话格式错误！只允许数字、\"-\"");
             }
             if ((emp.getEmpHomePhone() != null) && (emp.getEmpHomePhone().trim().length() > 0)
                     && (!GenericValidator.isPhone(emp.getEmpHomePhone()))) {
-                errors.add("家庭电话格式错误！只允许数字、\"-\"、\"_\"＄1�7");
+                errors.add("家庭电话格式错误！只允许数字、\"-\"、\"_\"");
             }
         }
 
@@ -226,7 +226,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
 
             List emps = this.employeeDAO.exeHqlList(hql);
             if ((emps != null) && (emps.size() > 0)) {
-                errors.add("员工编号" + emp.getEmpDistinctNo().trim() + "已经存在＄1�7");
+                errors.add("员工编号" + emp.getEmpDistinctNo().trim() + "已经存在");
             }
 
             if (StringUtils.isNotEmpty(emp.getEmpShiftNo())) {
@@ -235,7 +235,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
 
                 List list = this.employeeDAO.exeHqlList(sql);
                 if (!list.isEmpty()) {
-                    errors.add("考勤卡号" + emp.getEmpShiftNo().trim() + "已经存在＄1�7");
+                    errors.add("考勤卡号" + emp.getEmpShiftNo().trim() + "已经存在");
                 }
             }
             return errors;
@@ -245,7 +245,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
                     + "'";
             List emps = this.employeeDAO.exeHqlList(hql);
             if ((emps != null) && (emps.size() > 0)) {
-                errors.add("员工编号" + emp.getEmpDistinctNo().trim() + "已经存在＄1�7");
+                errors.add("员工编号" + emp.getEmpDistinctNo().trim() + "已经存在");
             }
 
             if (StringUtils.isNotEmpty(emp.getEmpShiftNo())) {
@@ -253,7 +253,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
                         + "'";
                 List list = this.employeeDAO.exeHqlList(sql);
                 if (!list.isEmpty()) {
-                    errors.add("考勤卡号" + emp.getEmpShiftNo().trim() + "已经存在＄1�7");
+                    errors.add("考勤卡号" + emp.getEmpShiftNo().trim() + "已经存在");
                 }
             }
             return errors;
@@ -266,21 +266,21 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
             detachedCriteria.add(Restrictions.eq("employee.id", emp.getId()));
             count = this.employeeDAO.findRowCountByCriteria(detachedCriteria);
             if (count > 0) {
-                errors.add(emp.getEmpName().trim() + "存在员工人事合同信息＄1�7");
+                errors.add(emp.getEmpName().trim() + "存在员工人事合同信息");
             }
 
             detachedCriteria = DetachedCriteria.forClass(Empsalaryadj.class);
             detachedCriteria.add(Restrictions.eq("esaEmpno.id", emp.getId()));
             count = this.employeeDAO.findRowCountByCriteria(detachedCriteria);
             if (count > 0) {
-                errors.add(emp.getEmpName().trim() + "存在调薪计划＄1�7");
+                errors.add(emp.getEmpName().trim() + "存在调薪计划");
             }
 
             detachedCriteria = DetachedCriteria.forClass(Empsalaryconfig.class);
             detachedCriteria.add(Restrictions.eq("id", emp.getId()));
             count = this.employeeDAO.findRowCountByCriteria(detachedCriteria);
             if (count > 0) {
-                errors.add(emp.getEmpName().trim() + "存在薪资信息＄1�7");
+                errors.add(emp.getEmpName().trim() + "存在薪资信息");
             }
 
             detachedCriteria = DetachedCriteria.forClass(Empsalarypay.class);
@@ -326,7 +326,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
             detachedCriteria.add(Restrictions.eq("attmEmpId.id", emp.getId()));
             count = this.employeeDAO.findRowCountByCriteria(detachedCriteria);
             if (count > 0) {
-                errors.add(emp.getEmpName().trim() + "有每月�1�7�勤数据＄1�7");
+                errors.add(emp.getEmpName().trim() + "有每月考勤数据");
             }
 
             detachedCriteria = DetachedCriteria.forClass(Tremployeeplan.class);
@@ -399,7 +399,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
 
         if ((pos.getPositionPbId().getPbInCharge().intValue() == 1)
                 && (pos.getPositionEmpNo() != null)) {
-            errors.add("负责职位不空缺，不能修改＄1�7");
+            errors.add("负责职位不空缺，不能修改");
             return errors;
         }
 
@@ -621,7 +621,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
             if (empInDB.getEmpStatus().intValue() == 1) {
                 if ((pos.getPositionPbId().getPbInCharge().intValue() == 1)
                         && (pos.getPositionEmpNo() != null)) {
-                    errors.add("负责职位不空缺，不能修改＄1�7");
+                    errors.add("负责职位不空缺，不能修改");
                     return errors;
                 }
 
@@ -1231,7 +1231,7 @@ public class EmployeeBoImpl implements IEmployeeBo, Constants {
 
         if (transfer.getEftTransferType().equals("4")) {
             if (employee.getEmpType().getId().equals("REG")) {
-                return "员工已经是正式员工，不能再次转正＄1�7";
+                return "员工已经是正式员工，不能再次转正";
             }
             trans.setEftOldEmpType(employee.getEmpType());
             trans.setEftNewEmpType(new Emptype("REG"));

@@ -44,7 +44,7 @@ public class VirtualHashTable {
         }
         if (listSize >= 0)
             listString = listString + "\"" + ((Container) this.list.get(listSize)).getValue()
-                    + "\" 或�1�7�1�7 \"" + ((Container) this.list.get(listSize + 1)).getValue()
+                    + "\" 或者 \"" + ((Container) this.list.get(listSize + 1)).getValue()
                     + "\".";
         else if (listSize == -1)
             listString = listString + "\"" + ((Container) this.list.get(listSize + 1)).getValue()

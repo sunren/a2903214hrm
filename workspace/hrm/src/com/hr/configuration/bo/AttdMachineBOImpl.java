@@ -47,7 +47,7 @@ public class AttdMachineBOImpl implements IAttdMachineBO {
         try {
             this.attdMachineDAO.deleteObject(AttdMachine.class, id);
         } catch (Exception e) {
-            msg.append("系统异常＄1�7" + e.getMessage());
+            msg.append("系统异常：" + e.getMessage());
         }
         return msg.toString();
     }

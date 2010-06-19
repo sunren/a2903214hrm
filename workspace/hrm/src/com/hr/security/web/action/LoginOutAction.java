@@ -62,8 +62,8 @@ public class LoginOutAction implements Action, Constants {
 
     private void writeLoggers(String userNo, String ip, String clientNo) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        String info = "登出时间＄1�7" + df.format(new Date()) + "  客户编号＄1�7" + clientNo + "  用户名："
-                + userNo + "  登出IP＄1�7" + ip;
+        String info = "登出时间：" + df.format(new Date()) + "  客户编号：" + clientNo + "  用户名："
+                + userNo + "  登出IP：" + ip;
         LogBo logBo = (LogBo) SpringBeanFactory.getBean("logmanager");
         logBo.updateXML(FileOperate.getFileHomePath() + "login_log/login.xml", info + "\n");
     }

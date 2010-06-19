@@ -131,7 +131,7 @@ public class RecruitplanBoImpl implements IRecruitplanBo, Constants, Status {
             this.dao.saveOrupdate(plan);
             return errors;
         } catch (Exception e) {
-            errors.add("更新招聘方案失败＄1�7");
+            errors.add("更新招聘方案失败");
         }
         return errors;
     }
@@ -265,10 +265,10 @@ public class RecruitplanBoImpl implements IRecruitplanBo, Constants, Status {
                 if (stconf != null)
                     return stconf.getStatusconfDesc();
             } catch (Exception e) {
-                return "无状怄1�7";
+                return "无状态";
             }
         }
-        return "无状怄1�7";
+        return "无状态";
     }
 
     public List getRecruitplanStatus() {
@@ -349,7 +349,7 @@ public class RecruitplanBoImpl implements IRecruitplanBo, Constants, Status {
                 return "ERROR:此招聘计划在数据库中不存在！";
             }
             if ((rp.getRecpStatus().intValue() != 21) && (rp.getRecpStatus().intValue() != 1))
-                return "ERROR:招聘计划状�1�7�不是草稿或已拒绝，无法提交";
+                return "ERROR:招聘计划状态不是草稿或已拒绝，无法提交";
         } catch (Exception e) {
             e.printStackTrace();
         }

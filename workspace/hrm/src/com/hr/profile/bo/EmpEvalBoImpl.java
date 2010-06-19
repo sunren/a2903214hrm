@@ -132,7 +132,7 @@ public class EmpEvalBoImpl implements IEmpEvalBo {
     public Empeval getEmpevalInTest(String empDistinctNo) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Empeval.class);
         detachedCriteria.add(Restrictions.eq(Empeval.PROP_EMPLOYEE_BY_EE_EMP_NO, empDistinctNo));
-        detachedCriteria.add(Restrictions.eq(Empeval.PROP_EE_TYPE, "试用朄1�7"));
+        detachedCriteria.add(Restrictions.eq(Empeval.PROP_EE_TYPE, "试用期"));
         List evalList = this.empEvalDao.findByCriteria(detachedCriteria);
         if (evalList.size() > 0) {
             return (Empeval) evalList.get(0);
@@ -143,7 +143,7 @@ public class EmpEvalBoImpl implements IEmpEvalBo {
     public boolean hasPprobationaryPeriodEvalRecord(String empId) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Empeval.class);
         detachedCriteria.add(Restrictions.eq("employeeByEeEmpNo.id", empId));
-        detachedCriteria.add(Restrictions.eq("eeType", "试用朄1�7"));
+        detachedCriteria.add(Restrictions.eq("eeType", "试用期"));
         return this.empEvalDao.findByCriteria(detachedCriteria).size() > 0;
     }
 

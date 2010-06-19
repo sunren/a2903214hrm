@@ -29,7 +29,7 @@ public class EmailSendForSalarypay extends BaseAction {
                 .getBean("empsalaryperiodBO");
         Empsalaryperiod period = salaryperiod.loadEspdStatus(year + strMonth);
         if ((period == null) || (period.getEspdStatus().intValue() != 2)) {
-            err.add(year + "幄1�7" + month + "月薪资未审核完毕，不能发送薪资邮件！");
+            err.add(year + "年" + month + "月薪资未审核完毕，不能发送薪资邮件！");
             return err;
         }
 
@@ -60,7 +60,7 @@ public class EmailSendForSalarypay extends BaseAction {
             List<Employee> employees = empBo.searchEmpArray(arr);
             String er = "";
             for (Employee e : employees) {
-                er = er + e.getEmpName() + "＄1�7";
+                er = er + e.getEmpName() + ",";
             }
             err.add(er.substring(0, er.length() - 1) + "当月无薪资数据！");
         }

@@ -111,7 +111,7 @@ public class SearchEmp extends ProfileAction {
         String result = "";
         if (joinYear.floatValue() >= 1.0F) {
             value = Integer.parseInt(joinYear.intValue() + "");
-            result = result + value + "幄1�7";
+            result = result + value + "个月";
         } else {
             joinYear = Float.valueOf(joinYear.floatValue() * 100.0F);
             value = Integer.parseInt(joinYear.intValue() + "");

@@ -77,12 +77,12 @@ public class MyOvertimeSearchAction extends EmpExaminAction {
                 || (or.getOrStatus().intValue() != 21)
                 || ((!getCurrentEmp().equals(or.getOrEmpNo())) && (!getCurrentEmp()
                         .equals(or.getOrCreateBy())))) {
-            return "您无权执行此操作＄1�7";
+            return "您无权执行此操作";
         }
         Employee currentEmployee = ((Userinfo) session.getAttribute("userinfo")).getEmployee();
         List errors = overtimerequestBo.deleteOvertimereuqest(orId, currentEmployee);
         if (errors.size() >= 1)
-            result = "删除加班申请失败＄1�7";
+            result = "删除加班申请失败";
         return result;
     }
 

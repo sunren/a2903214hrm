@@ -109,7 +109,7 @@ public class IodefList extends BaseAction {
     public String updateIodef(String ioId, List<OutmatchBasic> ombList, List<InmatchBasic> imbList)
             throws Exception {
         String msgNoauth = "您无权执行此操作，请重新登录后再试！";
-        String msgNoIodef = "找不到接口数据，请刷新后重试＄1�7";
+        String msgNoIodef = "找不到接口数据，请刷新后重试!";
 
         if ("error".equalsIgnoreCase(DWRUtil.checkAuth("iodef", "edit"))) {
             return msgNoauth;
@@ -362,7 +362,7 @@ public class IodefList extends BaseAction {
 
     private String updateInmatchBasicList(Iodef iodef, List<InmatchBasic> imbList) {
         String msgNoImb = "没有数据可以修改，请刷新后重试！";
-        String msgNoImbDb = "找不到导入接口数据，请刷新后重试＄1�7";
+        String msgNoImbDb = "找不到导入接口数据，请刷新后重试";
 
         if ((imbList == null) || (imbList.size() == 0))
             return msgNoImb;
@@ -434,14 +434,14 @@ public class IodefList extends BaseAction {
     }
 
     private String checkInmatch(InmatchBasic imb, InmatchBasic imbMap, StringToObject formatToObject) {
-        String msgFieldNoData = "名称为{0}的{1}字段不能为空＄1�7";
+        String msgFieldNoData = "名称为{0}的{1}字段不能为空！";
         String msgSort = "排序";
         String msgFieldName = "字段名称";
         String msgFieldDesc = "标题";
         String msgFieldError = "{0}的{1}字段不正确！";
         String msgDataType = "数据类型";
         String msgRequired = "是否必填";
-        String msgDetectError = "是否棄1�7查错评1�7";
+        String msgDetectError = "是否检查错误";
         String msgFormat = "数据格式";
         String msgSample = "例子";
 
@@ -497,7 +497,7 @@ public class IodefList extends BaseAction {
 
     private String updateOutmatchBasicList(Iodef iodef, List<OutmatchBasic> ombList) {
         String msgNoOmb = "没有数据可以修改，请刷新后重试！";
-        String msgNoOmbDb = "找不到导出接口数据，请刷新后重试＄1�7";
+        String msgNoOmbDb = "找不到导出接口数据，请刷新后重试";
 
         if ((ombList == null) || (ombList.size() == 0))
             return msgNoOmb;
@@ -561,7 +561,7 @@ public class IodefList extends BaseAction {
 
     private String checkOutmatch(OutmatchBasic omb, OutmatchBasic ombMap,
             StringToObject formatToObject) {
-        String msgFieldNoData = "名称为{0}的{1}字段不能为空＄1�7";
+        String msgFieldNoData = "名称为{0}的{1}字段不能为空";
         String msgSort = "排序";
         String msgFieldName = "字段名称";
         String msgFieldDesc = "标题";

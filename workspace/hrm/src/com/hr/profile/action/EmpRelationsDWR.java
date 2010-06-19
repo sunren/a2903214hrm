@@ -23,7 +23,7 @@ public class EmpRelationsDWR extends BaseAction {
 
         if (("SUB".equals(this.authorityCondition))
                 && (!checkAuth(this.emprelations.getEmployee().getId()))) {
-            addActionError("您没有增加权限执行本操作＄1�7");
+            addActionError("您没有增加权限执行本操作");
             return "error";
         }
 
@@ -36,7 +36,7 @@ public class EmpRelationsDWR extends BaseAction {
 
         this.empRelationsBo.insert(this.emprelations);
 
-        addActionMessage("社会关系增加成功〄1�7");
+        addActionMessage("社会关系增加成功");
         return "success";
     }
 
@@ -67,7 +67,7 @@ public class EmpRelationsDWR extends BaseAction {
 
         if (("SUB".equals(this.authorityCondition))
                 && (!checkAuth(empOldRelations.getEmployee().getId()))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作");
             return "error";
         }
 
@@ -82,7 +82,7 @@ public class EmpRelationsDWR extends BaseAction {
         empOldRelations.setErelLastChangeTime(new Date());
 
         this.empRelationsBo.update(empOldRelations);
-        addSuccessInfo("修改员工社会关系成功〄1�7");
+        addSuccessInfo("修改员工社会关系成功");
         return "success";
     }
 

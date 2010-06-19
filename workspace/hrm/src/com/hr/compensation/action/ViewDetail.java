@@ -29,7 +29,7 @@ public class ViewDetail extends BaseAction implements Status {
         ISalaryconfBo salaryBo = (ISalaryconfBo) getBean("salaryconfBo");
         this.empWithSalaryInfo = salaryBo.findConfigByEmpId(this.detailid);
         if (this.empWithSalaryInfo == null) {
-            addErrorInfo("对不起，您要查看的员工不存在＄1�7");
+            addErrorInfo("对不起，您要查看的员工不存在");
             return "error";
         }
         Empsalaryconfig salaryconfig = this.empWithSalaryInfo.getConfig();

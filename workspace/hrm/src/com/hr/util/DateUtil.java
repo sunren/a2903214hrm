@@ -262,14 +262,14 @@ public class DateUtil {
     }
 
     public static String getWeekDayName(String strDate) {
-        String[] mName = { "旄1�7", "丄1�7", "亄1�7", "丄1�7", "囄1�7", "亄1�7", "兄1�7" };
+        String[] mName = { "日", "一", "二", "三", "四", "五", "六" };
         int iWeek = getWeekDay(strDate);
         iWeek -= 1;
         return "星期" + mName[iWeek];
     }
 
     public static String getWeekDayName(Date date) {
-        String[] mName = { "旄1�7", "丄1�7", "亄1�7", "丄1�7", "囄1�7", "亄1�7", "兄1�7" };
+        String[] mName = { "日", "一", "二", "三", "四", "五", "六" };
         int iWeek = getWeekDay(date);
         iWeek -= 1;
         return "星期" + mName[iWeek];

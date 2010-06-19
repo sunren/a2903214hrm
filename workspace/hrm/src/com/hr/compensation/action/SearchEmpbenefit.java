@@ -274,7 +274,7 @@ public class SearchEmpbenefit extends CompAction {
         }
 
         if (this.emp.getBenefit() == null) {
-            addActionError("该员工不存在社保记录＄1�7");
+            addActionError("该员工不存在社保记录！");
             return "input";
         }
 
@@ -368,7 +368,7 @@ public class SearchEmpbenefit extends CompAction {
         if (StringUtils.isNotEmpty(error))
             addErrorInfo(error);
         else {
-            addSuccessInfo("删除" + empl.getEmpName() + "的社保记录成功�1�7�1�7");
+            addSuccessInfo("删除" + empl.getEmpName() + "的社保记录成功！");
         }
         return "success";
     }
@@ -380,7 +380,7 @@ public class SearchEmpbenefit extends CompAction {
             }
         }
 
-        return "无状怄1�7";
+        return "无状态";
     }
 
     /** @deprecated */

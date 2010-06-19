@@ -31,11 +31,11 @@ public class IEmpSalaryBenefit extends ICheckAndInsert {
 
     public IEmpSalaryBenefit() {
         this.msgDbInsertError = "数据库插入失败！";
-        this.msgNotExist = "编号为{0}的员工不存在＄1�7";
-        this.msgInited = "重复记录：编号为{0}的员工社保已经初始化＄1�7";
-        this.msgNotExistBeneType = "名称为{0}的社保种类不存在＄1�7";
-        this.msgDateValidFormat = "生效年月为空或格式不正确＄1�7";
-        this.msgNoAmount = "至少填写丄1�7项基数！";
+        this.msgNotExist = "编号为{0}的员工不存在！";
+        this.msgInited = "重复记录：编号为{0}的员工社保已经初始化！";
+        this.msgNotExistBeneType = "名称为{0}的社保种类不存在！";
+        this.msgDateValidFormat = "生效年月为空或格式不正确！";
+        this.msgNoAmount = "至少填写一项基数！";
     }
 
     public int[] insertTransmit(List insertList, CommonParameters commonParas) {

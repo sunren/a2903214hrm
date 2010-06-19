@@ -32,11 +32,11 @@ import org.springframework.util.ObjectUtils;
 
 public class CompAction extends BaseDownloadAction {
     private static final long serialVersionUID = 1L;
-    public String msgNoAuth = "{0}:您无权执行此操作，请重新登陆＄1�7";
+    public String msgNoAuth = "{0}:您无权执行此操作，请重新登陆！";
     public String msgNoParam = "{0}:输入参数错误，请刷新后重试！";
-    public String msgFormatErr = "{0}:{1}数据格式错误＄1�7";
-    public String msgOperErr = "{0}:{1}操作失败＄1�7";
-    public String msgOperSucc = "{0}:{1}操作成功＄1�7";
+    public String msgFormatErr = "{0}:{1}数据格式错误！";
+    public String msgOperErr = "{0}:{1}操作失败！";
+    public String msgOperSucc = "{0}:{1}操作成功！";
     public String msgNoData = "{0}:没有{1}数据，请刷新后重试！";
     public String msgSystemEx = "系统异常，请刷新后重试！";
     public String msgDataEx = "数据异常，请刷新后重试！";
@@ -44,43 +44,43 @@ public class CompAction extends BaseDownloadAction {
 
     public String msgNoConfig = "{0}:{1}薪资配置数据错误，请刷新后重试！";
     public String msgHasConfig = "{0}:{1}薪资配置数据已经存在，创建失败！";
-    public String msgCreateConfSucc = "{0}:创建{1}的薪资配置成功�1�7�1�7";
+    public String msgCreateConfSucc = "{0}:创建{1}的薪资配置成功。";
     public String msgCreateConfFail = "{0}:创建{1}的薪资配置失败！";
-    public String msgUpdConfSucc = "{0}:已调整{1}的薪资配置�1�7�1�7";
+    public String msgUpdConfSucc = "{0}:已调整{1}的薪资配置。";
     public String msgUpdConfFail = "{0}:调整{1}的薪资配置失败！";
-    public String msgDelConfSucc = "{0}:已删除{1}的薪资配置�1�7�1�7";
+    public String msgDelConfSucc = "{0}:已删除{1}的薪资配置。";
     public String msgDelConfFail = "{0}:{1}删除{2}的薪资配置失败！";
-    public String msgAdjConfSucc = "{0}:调整{1}的薪资配置成功�1�7�1�7";
+    public String msgAdjConfSucc = "{0}:调整{1}的薪资配置成功。";
 
     public String msgNoEmp = "{0}:员工错误，请刷新后重试！";
     public String msgNoPay = "{0}:薪资发放数据错误，请刷新后重试！";
-    public String msgAdjPaySucc = "{0}:调整{1}的薪资发放成功�1�7�1�7";
+    public String msgAdjPaySucc = "{0}:调整{1}的薪资发放成功。";
     public String msgFormulaIllegal = "您输入的公式{0}不合法：{1}";
-    public String msgFormulaLegal = "{0}:您输入的公式{1}合法〄1�7";
+    public String msgFormulaLegal = "{0}:您输入的公式{1}合法。";
 
     public String msgNoBenefit = "{0}:找不到员工社保记录，请重试！";
-    public String msghasBenefit = "{0}:员工社保记录已经存在，请重试＄1�7";
+    public String msghasBenefit = "{0}:员工社保记录已经存在，请重试！";
     public String msgNoBaseErr = "{0}:请至少填写一项基数！";
-    public String msgStartYMTooEarly = "新记录的起始年月必须晚于老记录的起始年月＄1�7";
-    public String msgCreateBeneSucc = "{0}:创建{1}的社保记录成功�1�7�1�7";
-    public String msgUpdBeneSucc = "{0}:修改{1}的社保记录成功�1�7�1�7";
-    public String msgAdjBeneSucc = "{0}:调整{1}的社保基数成功�1�7�1�7";
-    public String msgNoYmBenefitC = "{0}:不能补缴{1}社保，应正常缴纳＄1�7";
+    public String msgStartYMTooEarly = "新记录的起始年月必须晚于老记录的起始年月！";
+    public String msgCreateBeneSucc = "{0}:创建{1}的社保记录成功。";
+    public String msgUpdBeneSucc = "{0}:修改{1}的社保记录成功。";
+    public String msgAdjBeneSucc = "{0}:调整{1}的社保基数成功。";
+    public String msgNoYmBenefitC = "{0}:不能补缴{1}社保，应正常缴纳！";
     public String msgNoYmBenefitP = "{0}:本月已补过{1}社保，不能重复补缴！";
-    public String msgStatErrBeneC = "{0}:计薪周期{1}已提交或已封帐，不能补缴社保＄1�7";
+    public String msgStatErrBeneC = "{0}:计薪周期{1}已提交或已封帐，不能补缴社保！";
     public String msgStatErrBeneP = "{0}:计薪周期{1}尚未封帐，不能补缴社保！";
-    public String msgAddBeneSucc = "{0}:补缴社保成功，您必须重新初始化{1}的{2}薪资，改动才会生效�1�7�1�7";
+    public String msgAddBeneSucc = "{0}:补缴社保成功，您必须重新初始化{1}的{2}薪资，改动才会生效。";
 
     public String msgNoYm = "{0}:年月数据错误，请刷新后重试！";
 
-    public String msgPeriodInitErr = "计薪周期必须为初始化状�1�7�，才可以执行本操作＄1�7";
-    public String msgPeriodSubmitErr = "计薪周期必须为已提交状�1�7�，才可以执行本操作＄1�7";
-    public String msgPeriodAppErr = "计薪周期必须为已封帐状�1�7�，才可以执行本操作＄1�7";
-    public String msgPeriodErr = "计薪周期状�1�7�不正确，请刷新后重试！";
+    public String msgPeriodInitErr = "计薪周期必须为初始化状态，才可以执行本操作！";
+    public String msgPeriodSubmitErr = "计薪周期必须为已提交状态，才可以执行本操作！";
+    public String msgPeriodAppErr = "计薪周期必须为已封帐状态，才可以执行本操作！";
+    public String msgPeriodErr = "计薪周期状态不正确，请刷新后重试！";
 
     public String msgAcctUpdConf = "{0}:帐套版本已启用，系统将自动更新员工薪资配置，您确定要修改吗？";
     public String msgAcctUpdConfPay = "{0}:帐套版本已启用，系统将自动更新员工薪资配置，并调整薪资发放历史，您确定要修改吗？";
-    public String msgAcctUpdErr = "{0}:帐套版本有重大改变，薪资发放历史无法修正，请点击“另存�1�7�按钮，保存为新版本＄1�7";
+    public String msgAcctUpdErr = "{0}:帐套版本有重大改变，薪资发放历史无法修正，请点击“另存”按钮，保存为新版本！";
     protected List<Department> departs;
     protected List<Emptype> empTypeList;
     protected List<Statusconf> empStatus;
@@ -312,8 +312,8 @@ public class CompAction extends BaseDownloadAction {
 
     public String exportData(List exportDataList, String outputIoName, String outmatchModelId,
             String errorMsg) {
-        String msgNoData = "没有{0}数据可以导出＄1�7";
-        String msgError = "{0}数据导出失败＄1�7";
+        String msgNoData = "没有{0}数据可以导出！";
+        String msgError = "{0}数据导出失败！";
 
         if ((exportDataList == null) || (exportDataList.size() == 0)) {
             addActionErrorInfo(msgNoData, new Object[] { errorMsg });
@@ -373,7 +373,7 @@ public class CompAction extends BaseDownloadAction {
                 return statusconf.getStatusconfDesc();
             }
         }
-        return "无状怄1�7";
+        return "无状态";
     }
 
     public static boolean changePayItem(Empsalarypay pay, Empsalaryconfig config,
@@ -397,8 +397,3 @@ public class CompAction extends BaseDownloadAction {
         return newPayValue.compareTo((BigDecimal) escValue) != 0;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.compensation.action.CompAction JD-Core Version: 0.5.4
- */

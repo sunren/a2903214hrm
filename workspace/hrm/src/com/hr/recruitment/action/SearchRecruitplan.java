@@ -154,7 +154,7 @@ public class SearchRecruitplan extends BaseAction implements Status {
                 }
             }
         }
-        return "友情提示：所选招聘计划中的1�7" + sbSuccess.substring(0, sbSuccess.length() - 1) + "号招聘计划提交成劄1�7";
+        return "友情提示：所选招聘计划中的" + sbSuccess.substring(0, sbSuccess.length() - 1) + "号招聘计划提交成功";
     }
 
     public String getCurrentEmpNo(HttpSession session) {

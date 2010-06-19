@@ -26,7 +26,7 @@ public class CustomizeReportSetsBoImpl implements CustomizeReportSetsBo {
     public List deleteReportSets(String reportSetsId) {
         List errors = new ArrayList();
         if (StringUtils.isEmpty(reportSetsId)) {
-            errors.add("错误的请求参数！删除失败＄1�7");
+            errors.add("错误的请求参数！删除失败");
             return errors;
         }
         try {
@@ -41,7 +41,7 @@ public class CustomizeReportSetsBoImpl implements CustomizeReportSetsBo {
     public List deleteReportSetsByReportId(String reportId) {
         List errors = new ArrayList();
         if (StringUtils.isEmpty(reportId)) {
-            errors.add("错误的请求参数！删除失败＄1�7");
+            errors.add("错误的请求参数！删除失败");
             return errors;
         }
         String hql = "delete from ReportSets where reportDef='" + reportId + "'";
@@ -68,7 +68,7 @@ public class CustomizeReportSetsBoImpl implements CustomizeReportSetsBo {
     public List<String> updateReportSets(ReportSets reportSets) {
         List errors = new ArrayList();
         if ((reportSets == null) || (StringUtils.isEmpty(reportSets.getReportSetsId()))) {
-            errors.add("缺少必要的参数，保存失败＄1�7");
+            errors.add("缺少必要的参数，保存失败");
             return errors;
         }
         try {

@@ -31,7 +31,7 @@ public class DwrForAttend {
         String auth = DWRUtil.checkAuth("DwrForAttend", "getEmpAttendmonthly");
         Map rs = new HashMap();
         if ("error".equals(auth)) {
-            rs.put(ERROR, "无权操作＄1�7");
+            rs.put(ERROR, "无权操作");
             return rs;
         }
         IAttendmonthlyBO attendmothlyBO = getAttendmonthlyBO();
@@ -46,7 +46,7 @@ public class DwrForAttend {
             return NOAUTH;
         }
         if (StringUtils.isEmpty(empIdStr)) {
-            return "请�1�7�择要补卡的员工＄1�7";
+            return "请选择要补卡的员工";
         }
         Date attdDate = DateUtil.parseDateByFormat(attdDateStr, "yyyy-MM-dd");
         Date attdCardTime = DateUtil.parseDateByFormat(attdCardTimeStr, "yyyy-MM-dd HH:mm:ss");
@@ -62,13 +62,13 @@ public class DwrForAttend {
         Map rs = new HashMap();
         String auth = DWRUtil.checkAuth("DwrForAttend", "getAttendDailyMemory");
         if ("error".equals(auth)) {
-            rs.put(ERROR, "无权操作＄1�7");
+            rs.put(ERROR, "无权操作");
             return rs;
         }
         IEmployeeBo empBo = (IEmployeeBo) SpringBeanFactory.getBean("empBo");
         Employee emp = empBo.loadEmp(id, null);
         if (emp == null) {
-            rs.put(ERROR, "员工资料不存在！操作失败＄1�7");
+            rs.put(ERROR, "员工资料不存在！操作失败");
             return rs;
         }
 
@@ -105,7 +105,7 @@ public class DwrForAttend {
         Map rs = new HashMap();
         String auth = DWRUtil.checkAuth("DwrForAttend", "saveEmpAttendmonthly");
         if ("error".equals(auth)) {
-            rs.put(ERROR, "无权操作＄1�7");
+            rs.put(ERROR, "无权操作");
             return rs;
         }
         attendmonthly.setAttmEmpId(new Employee(empId));
