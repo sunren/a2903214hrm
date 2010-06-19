@@ -1,0 +1,26 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"xwork-validator-1.0.2.dtd">
+<validators>
+	<!-- 这里开始判断 -->
+	<field name="user.id">
+		<field-validator type="required">
+			<message>必填项</message>
+		</field-validator>
+	</field>
+	<field name="user.uiUsername">
+		<field-validator type="requiredstring">
+			<message>必填项</message>
+		</field-validator>
+	</field>
+	<field name="confirmPassword">
+		<field-validator type="requiredstring">
+			<message>必填项</message>
+		</field-validator>
+		<field-validator type="fieldexpression">
+			<param name="expression">uiPassword == confirmPassword</param>
+			<message>重复密码不一致</message>
+		</field-validator>
+	</field>
+	
+	<!-- 结束 -->
+</validators>

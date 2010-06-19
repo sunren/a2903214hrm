@@ -1,0 +1,35 @@
+####<script type="text/javascript" src="../resource/js/jscalendar/calendar.js"></script>
+#if($parameters.singleclick)
+<script type="text/javascript" src="../resource/js/jscalendar/calendar.js"></script>
+<script type="text/javascript" src="../resource/js/jscalendar/lang/zh.js"></script>
+<script type="text/javascript" src="../resource/js/jscalendar/calendar-setup.js"></script>
+#end
+<input type="text" 
+	name="${parameters.name}"  maxlength="25"
+#if ($parameters.readonly)         readonly="readonly"                                      #end
+#if ($parameters.id)               id="$!webwork.htmlEncode($parameters.id)"                #end
+#if ($parameters.nameValue)        value="$!webwork.htmlEncode($parameters.nameValue)"      #end
+#if ($parameters.size)        size="$!webwork.htmlEncode($parameters.size)"   #else   size="10"    #end
+#if ($parameters.cssClass)         class="$!webwork.htmlEncode($parameters.cssClass)"       #end
+#parse("/$parameters.templateDir/simple/scripting-events.vm")
+/>#if ($parameters.showstime)
+<a href="#" id="${parameters.id}_button"><img src="../resource/js/jscalendar/img.gif" onload="Calendar.setup({inputField:'${parameters.id}',ifFormat:'${parameters.format}',showsTime:'${parameters.showstime}',button:'${parameters.id}_button',step:1});" width="16" height="16" border="0" alt="Click Here to Pick up the date"></a>
+#else
+<a href="#" id="${parameters.id}_button"><img src="../resource/js/jscalendar/img.gif" onload="Calendar.setup({inputField:'${parameters.id}',ifFormat:'${parameters.format}',button:'${parameters.id}_button',step:1});" width="16" height="16" border="0" alt="Click Here to Pick up the date"></a>
+#end
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "${parameters.id}",
+#if ($parameters.format)
+        ifFormat       :    "${parameters.format}",
+#end
+#if ($parameters.showstime)
+        showsTime      :    "${parameters.showstime}",
+#end
+        button         :    "${parameters.id}_button",
+#if ($parameters.singleclick)
+        singleclick    :    ${parameters.singleclick},
+#end
+        step           :    1
+    });
+</script>

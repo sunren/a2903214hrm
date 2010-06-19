@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+(function($){$.effects.shake=function(_){return this.queue(function(){var L=$(this),C=["position","top","left"],E=$.effects.setMode(L,_.options.mode||"effect"),I=_.options.direction||"left",A=_.options.distance||20,F=_.options.times||3,B=_.duration||_.options.duration||140;$.effects.save(L,C);L.show();$.effects.createWrapper(L);var J=(I=="up"||I=="down")?"top":"left",K=(I=="up"||I=="left")?"pos":"neg",G={},M={},D={};G[J]=(K=="pos"?"-=":"+=")+A;M[J]=(K=="pos"?"+=":"-=")+A*2;D[J]=(K=="pos"?"-=":"+=")+A*2;L.animate(G,B,_.options.easing);for(var H=1;H<F;H++)L.animate(M,B,_.options.easing).animate(D,B,_.options.easing);L.animate(M,B,_.options.easing).animate(G,B/2,_.options.easing,function(){$.effects.restore(L,C);$.effects.removeWrapper(L);if(_.callback)_.callback.apply(this,arguments)});L.queue("fx",function(){L.dequeue()});L.dequeue()})}})(jQuery)

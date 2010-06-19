@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="InmatchModel"
+		table="inmatchmodel"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="immId"
+			type="string"
+			column="imm_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="immName"
+			column="imm_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="immDesc"
+			column="imm_desc"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="immInputType"
+			column="imm_input_type"
+			type="string"
+			not-null="true"
+			length="8"
+		/>
+		<property
+			name="immNoTitle"
+			column="imm_no_title"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="immImportMode"
+			column="imm_import_mode"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="immDefault"
+			column="imm_default"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="immCreateTime"
+			column="imm_create_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="immLastChangeTime"
+			column="imm_last_change_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="immLastChangeBy"
+			column="imm_last_change_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="immCreateBy"
+			column="imm_create_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<many-to-one
+			name="immIo"
+			column="imm_io_id"
+			class="Iodef"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+
+	</class>	
+</hibernate-mapping>

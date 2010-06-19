@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+<field name="leaveBalance.lbBalEndDate">
+	<field-validator type="required">
+		<message>必选项！</message>
+	</field-validator>
+	
+	<field-validator type="date">
+		<message>日期格式错误！</message>
+	</field-validator>
+</field>
+	
+<field name="leaveBalance.lbDaysOfYear">
+	<field-validator type="required">
+		<message>必填项！</message>
+	</field-validator>
+	<field-validator type="double">
+		   <message>必须为数字！</message>
+    </field-validator>
+</field>
+</validators>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+    <class name="Attendperiod" table="attendperiod">
+   		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/> 
+        <id 
+        	name="id" 
+        	type="string" 
+        	column="attp_id" 
+        >
+            <generator class="uuid.hex"/>
+        </id>
+ 
+		<property
+			name="attpYearmonth"
+			column="attp_yearmonth"
+			type="string"
+			not-null="true"
+			length="6"
+		/>
+		<property
+			name="attpYear"
+			column="attp_year"
+			type="string"
+			not-null="true"
+			length="4"
+		/>
+		<property
+			name="attpMonth"
+			column="attp_month"
+			type="string"
+			not-null="true"
+			length="2"
+		/>
+		<property
+			name="attpStatus"
+			column="attp_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Statusconf"
+		table="statusconf"
+	>
+		<meta attribute="sync-DAO">false</meta>
+        <cache usage="nonstrict-read-write"/>
+		<composite-id name="id" class="StatusconfPK">
+			<key-property
+				name="statusconfNo"
+				column="statusconf_no"
+				type="integer"
+			/>
+			<key-property
+				name="statusconfTablename"
+				column="statusconf_tablename"
+				type="string"
+			/>
+		</composite-id>
+
+		<property
+			name="statusconfDesc"
+			column="statusconf_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

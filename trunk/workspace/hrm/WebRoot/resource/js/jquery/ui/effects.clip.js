@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+(function($){$.effects.clip=function(_){return this.queue(function(){var F=$(this),E=["position","top","left","height","width"],G=$.effects.setMode(F,_.options.mode||"hide"),D=_.options.direction||"vertical";$.effects.save(F,E);F.show();var H=$.effects.createWrapper(F).css({overflow:"hidden"}),B=F[0].tagName=="IMG"?H:F,C={size:(D=="vertical")?"height":"width",position:(D=="vertical")?"top":"left"},A=(D=="vertical")?B.height():B.width();if(G=="show"){B.css(C.size,0);B.css(C.position,A/2)}var I={};I[C.size]=G=="show"?A:0;I[C.position]=G=="show"?0:A/2;B.animate(I,{queue:false,duration:_.duration,easing:_.options.easing,complete:function(){if(G=="hide")F.hide();$.effects.restore(F,E);$.effects.removeWrapper(F);if(_.callback)_.callback.apply(F[0],arguments);F.dequeue()}})})}})(jQuery)

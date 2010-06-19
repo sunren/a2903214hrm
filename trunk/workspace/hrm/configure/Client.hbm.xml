@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.security.domain">
+	<class name="Client" table="client">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="string" column="client_no">
+			<generator class="assigned"/>
+		</id>
+		<property name="clientId" column="client_id" type="string" not-null="false"
+			length="36"/>
+		<property name="clientName" column="client_name" type="string"
+			not-null="false" length="128"/>
+		
+		<property name="clientShortName" column="client_short_name" type="string"
+			not-null="false" length="32"/>
+		
+		<property name="clientAddress" column="client_address" type="string"
+			not-null="false" length="128"/>
+		
+		<property name="clientZip" column="client_zip" type="string"
+			not-null="false" length="8"/>
+		
+		<property name="clientPhone" column="client_phone" type="string"
+			not-null="false" length="32"/>
+		
+		<property name="clientFax" column="client_fax" type="string"
+			not-null="false" length="32"/>
+		
+		<property name="clientEmail" column="client_email" type="string"
+			not-null="false" length="64"/>
+		
+		<property name="clientContactName" column="client_contact_name"
+			type="string" not-null="false" length="32"/>
+		
+		<property name="clientActivateTime" column="client_activate_time"
+			type="timestamp" not-null="false"/>
+		
+		<property name="clientServiceMonths" column="client_service_months"
+			type="integer" not-null="false"/>
+		
+		<property name="clientServiceTimes" column="client_service_times"
+			type="integer" not-null="false"/>
+		
+		<property name="clientStatus" column="client_status" type="integer"
+			not-null="false"/>
+		
+		<property name="clientLimit" column="client_limit" type="string"
+			not-null="true" length="255"/>
+		
+		<property name="clientRemarks" column="client_remarks" type="string"
+			not-null="true" length="255"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.ltd.uk/dwr/dwr20.dtd">
+<dwr>
+<allow>
+<!--########################jiangtao，2007.10.24 将dwr的配置信息分模块。###############################-->
+
+
+ <!--**********************1.首页模块的dwr配置******************************-->	
+	 <!-- 公司信息设置 -->
+	<create creator="new" javascript="factory">
+		<param name="class"
+			value="com.hr.information.action.InfoAction" />
+		<!-- 部门 -->
+		<include method="addInformation" />
+		<include method="updateInformation" />
+		<include method="delInformation" />
+	</create>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+
+	
+ <!--**********************2.员工模块的dwr配置******************************--> 
+ 	<!-- ***********员工搜索 *************-->
+ 	<create creator="new" javascript="searchEmp">
+		<param name="class"
+			value="com.hr.profile.action.SearchEmp" />
+		<!-- 部门 -->
+		<include method="searchNoOrName" />
+	</create>
+	<create creator="new" javascript="DwrForSearchEmp">
+		<param name="class"
+			value="com.hr.base.action.DwrForSearchEmp" />
+		<!-- 部门 -->
+		<include method="searchEmp" />
+	</create>
+	<!-- ***********员工搜索 *************-->
+		<!-- ***********基本资料设置 *************-->
+		<create creator="new" javascript="my">
+			<param name="class"
+				value="com.hr.configuration.action.BasicConfigAction" />
+			<!-- 根据地区编号返回所有有此地区的所有福�利-->
+			<include method="refreshItem" />
+			<!-- 根据福利项目名称返回福利项目编号 -->
+			<include method="refresh" />
+			<!-- 根据员工id返回用工形式 -->
+			<include method="refreshEmptype" />
+			<!-- 维护四金设置 -->
+			<include method="addBenefit" />
+			<include method="delBenefit" />
+			<include method="updateBenefit" />
+			<!-- 维护福利种类设置 -->
+			<include method="addBenefittype" />
+			<include method="delBenefittype" />
+			<include method="updateBenefittype" />
+			<include method="saveBenefitTypeIdByBatch" />
+			<!-- 维护福利种类关联设置 -->
+			<include method="addBenefittypeitem" />
+			<include method="delBenefittypeitem" />
+			<include method="updateBenefittypeitem" />
+			<!-- 维护薪资级别设置 -->
+			<include method="addJobgrade" />
+			<include method="delJobgrade" />
+			<include method="updateJobgrade" />
+			<include method="saveJobGradeIdByBatch"/>
+			<!-- 维护用工形式设置 -->
+			<include method="addEmpType" />
+			<include method="delEmpType" />
+			<include method="updateEmpType" />
+			<include method="saveEmpTypeIdByBatch"/>
+			
+			<!--++++++休假和加班排序++++++-->
+			<include method="saveOvertimetypeByBatch"/>
+			<include method="saveLeavetypeByBatch"/>
+			<!--++++++++++++++++++++++++-->
+
+			<!-- 维护工作地点的设置 -->
+			<include method="addLocation" />
+			<include method="delLocation" />
+			<include method="updateLocation" />
+			<include method="updateLocationSwapSortedId" />
+			<include method="saveLocationSortIdByBatch" />
+			<!-- 维护公司的设置 -->
+			<include method="addBranch" />
+			<include method="delBranch" />
+			<include method="updateBranch" />
+			<include method="updateBranchSwapSortedId" />
+			<include method="saveBranchSortIdByBatch" />
+			<!-- 维护考勤机的设置 -->
+			<include method="addAttdMachine" />
+			<include method="delAttdMachine" />
+			<include method="updateAttdMachine" />
+			<include method="saveAttdMachineSortIdByAttdMachine" />
+			<!-- 维护部门的设置 -->
+			<include method="addDepartment" />
+			<include method="delDepartment" />
+			<include method="updateDepartment" />
+			<include method="saveDepartmentSortIdByBatch" />
+			
+			<include method="getEmpNameByIds"/>
+			<include method="delDepHeadsById"/>
+			<include method="updateDeptManager"/>
+			
+			<!-- 维护业务单元的设置 -->
+			<include method="addBusinessUnit" />
+			<include method="delBusinessUnit" />
+			<include method="updateBusinessUnit" />
+			<include method="findAlldept" />
+			<include method="saveBusinessUnitSortIdByBatch" />
+			<include method="getBusinessUnit"/>
+			
+			<include method="getEmpNamesById"/>
+		 	<!-- 维护员工状�态资料设置 -->
+			<include method="addStatus" />
+			<include method="delStatus" />
+			<include method="updateStatus" />
+			<!-- 维护基本工资计算周期资料设置 -->
+			<include method="addSalary" />
+			<include method="delSalary" />
+			<include method="updateSalary" />
+			<!-- 维护货币的设�置 -->
+			<include method="addCurrency" />
+			<include method="delCurrency" />
+			<include method="updateCurrency" />
+			<!-- 维护新闻种类的设�置 -->
+			<include method="addInfo" />
+			<include method="delInfo" />
+			<include method="updateInfo" />
+			<include method="saveInforclassIdByBatch" />
+			<!-- 维护加薪种类的设�置 -->
+			<include method="addEcptype" />
+			<include method="saveEcpTypeByBatch" />
+			<include method="delEcptype" />
+			<include method="updateEcptype" />
+			<!--请假种类维护-->
+			<include method="addLeaveType" />
+			<include method="delLeaveType" />
+			<include method="updateLeaveType" />
+			<include method="getLeaveTypeById"/>
+			<!--加班种类维护-->
+			<include method="addOvertimetype" />
+			<include method="delOvertimetype" />
+			<include method="updateOvertimetype" />
+			<!--维护合同种类 -->
+			<include method="addContractType"/>
+			<include method="deleteContractType"/>
+			<include method="updateContractType"/>
+			<include method="saveContractIdByBatch"/>		
+			<!-- 工作小组-->
+			<include method="addGroup"/>
+			<include method="delGroup"/>
+			<include method="updateGroup"/>
+			<include method="findAllbu"/>
+			<include method="saveGroupSortIdByBatch"/>
+			<include method="getGroupByBuId"/>
+			<!-- 职称-->	
+			<include method="addJobTitle"/>
+			<include method="delJobTitle"/>
+			<include method="updateJobTitle"/>
+			<include method="saveJobTitleSortIdByBatch"/>
+		</create>
+		<convert match="com.hr.configuration.domain.ContractType"
+			converter="bean">
+		</convert>
+		<!-- 组织结构负责人 -->
+		<create creator="new" javascript="org">
+			<param name="class"
+				value="com.hr.profile.action.OrgHeadsDWR" />
+			<include method="addOrgheads" />
+			<include method="updateOrgheads" />
+			<include method="delOrgheads" />
+		</create>
+		<convert match="com.hr.profile.domain.Orgheads"
+			converter="bean">
+			<param name="include" value="orgheadsId,orgheadsOrgNo,orgheadsEmpNo,orgheadsResponsibility" />
+		</convert>
+<!-- 新员工模块dwr配置 -->
+		<create creator="new" javascript="EmpJobHis">
+			<param name="class"
+				value="com.hr.profile.action.EmpJobHisDWR" />
+			<include method="jobHisAdd" />
+			<include method="jobHisDel" />
+			<include method="jobHisUpdate" />
+			<include method="loadJobHis" />
+		</create>
+		<create creator="new" javascript="EmpEduHis">
+			<param name="class"
+				value="com.hr.profile.action.EmpEduHisDWR" />
+			<include method="eduHisDel" />
+			<include method="loadEduHis" />
+		</create>
+		<create creator="new" javascript="EmpTrainHis">
+			<param name="class"
+				value="com.hr.profile.action.EmpTrainHisDWR" />
+			<include method="trainHisDel" />
+			<include method="loadTrainHis" />
+		</create>
+		<create creator="new" javascript="EmpRelations">
+			<param name="class"
+				value="com.hr.profile.action.EmpRelationsDWR" />
+			<include method="relationsDel" />
+			<include method="loadTrainHis" />
+		</create>
+		<create creator="new" javascript="EmpAddUpdate">
+			<param name="class"
+				value="com.hr.profile.action.EmpAdditional" />
+			<include method="updateAdditional" />
+			<include method="getWorkOrJoinYear" />
+		</create>
+		<!-- 新增员工 -->
+		<create creator="new" javascript="EditEmpInit">
+			<param name="class"
+				value="com.hr.profile.action.EditEmpInit" />
+			<include method="getAutoNo" />
+		</create>
+		<!-- 合同管理 -->
+		<create creator="new" javascript="ContractManagement">
+			<param name="class"
+				value="com.hr.profile.action.ContractManagement" />
+			<include method="batchCreate" />
+			<include method="batchRepeal" />
+			<include method="batchContinuous" />
+			<include method="deleteContract" />
+			<include method="checkOldEmployee" />
+		</create>
+		<convert match="com.hr.profile.domain.Empcontract"
+			converter="bean">
+			<param name="exclude" value="ectId,ectNo,ectAttatchment,contractType" />
+		</convert>
+		<create creator="new" javascript="EmpTransfer">
+			<param name="class"
+				value="com.hr.profile.action.EmpTransfer" />
+			<include method="deleteTransfer" />
+		</create>
+		<create creator="new" javascript="EmpReward">
+			<param name="class"
+				value="com.hr.profile.action.EmpReward" />
+			<include method="deleteReward" />
+		</create>
+		<create creator="new" javascript="EmpEval">
+			<param name="class"
+				value="com.hr.profile.action.EmpEval" />
+			<include method="deleteEval" />
+		</create>
+		
+		<create javascript="EmpAddConf" creator="new">
+			<param name="class" value="com.hr.profile.action.EmpAddConfDWR"/>
+			<include method="addEmpAddConf"/>
+			<include method="deleteEmpAddConf"/>
+			<include method="updateEmpAddConf"/>
+		</create>
+		
+		<create javascript="OrgManageAction" creator="new">
+			<param name="class" value="com.hr.profile.action.DWRForChooseOrgDiv"/>
+			<include method="getPositionTreeList"/>
+			<include method="changeSupPos"/>
+		</create>
+		<create javascript="DWROrgSelector" creator="new">
+			<param name="class" value="com.hr.base.action.DWROrgSelector"/>
+			<include method="getOrgTreeList"/>
+		</create>
+		<create javascript="OrgDeptManageAction" creator="new">
+			<param name="class" value="com.hr.profile.action.OrgDeptManageAction"/>
+			<include method="deptRename"/>
+			<include method="moveNode"/>
+			<include method="mergeNode"/>
+			<include method="getAllEnabledDept"/>
+			<include method="getAllPBofDept"/>
+			<include method="saveDeptRes"/>
+			<include method="deleteDeptRes"/>
+			<include method="saveDeptResSortBatch"/>
+			<include method="saveDeptPerfcr"/>
+			<include method="deleteDeptPerfcr"/>
+			<include method="saveDeptPerfcrSortBatch"/>
+			<include method="disableDept"/>
+			<include method="enableDept"/>
+			<include method="deleteDept"/>
+			<include method="saveDeptOrder"/>
+		</create>
+		<convert match="com.hr.profile.domain.Ouresponse" converter="bean">
+			<param name="include" value="id,ourName,ourDept,ourDesc,ourRate,ourPb,ourSortId,info"></param>
+		</convert>
+		<convert match="com.hr.profile.domain.PositionBase" converter="bean">
+		    <param name="include" value="id,pbName,pbInCharge,pbInChargeStr,pbSortId,pbMaxExceed,pbDesc,pbStatus,pbStatusStr,pbOperateMap,pbMoveToMap,pbDeptId"></param>
+		</convert>
+		<!-- 组织结构图中查看职位 -->
+		<create javascript="OrgMapAction" creator="new">
+			<param name="class" value="com.hr.profile.action.OrgMapAction"/>
+			<include method="getPbsByDept"/>
+		</create>
+		<!-- 职位管理 -->
+		<create javascript="pbManage" creator="new">
+			<param name="class" value="com.hr.profile.action.pbManageAction"/>
+			<include method="addPbResp"/>
+			<include method="updatePbResp"/>
+			<include method="delPbResp"/>
+			<include method="savePbRespOrder"/>
+			<include method="addPbPerfcr"/>
+			<include method="updatePbPerfcr"/>
+			<include method="delPbPerfcr"/>
+			<include method="savePbPerfcrOrder"/>
+			<include method="addPbQualify"/>
+			<include method="updatePbQualify"/>
+			<include method="delPbQualify"/>
+			<include method="savePbQualifyOrder"/>
+			
+			<include method="startPb"/>
+			<include method="disablePb"/>
+			<include method="checkPbName"/>
+			<include method="savePbOrder"/>
+			<include method="convertPbStatus"/>
+			<include method="delPb"/>
+		</create>
+		
+		<create javascript="positionManage" creator="new">
+			<param name="class" value="com.hr.profile.action.PositionManageAction"/>
+			<include method="getSelectSubList"/>
+			<include method="savePosition"/>
+			<include method="delPosition"/>
+			<include method="changePosSup"/>
+		</create>
+		
+		<convert match="com.hr.profile.domain.Ouqualify"
+			converter="bean">
+		</convert>
+		<convert match="com.hr.profile.domain.Ouresponse"
+			converter="bean">
+		</convert>
+		<convert match="com.hr.profile.domain.Ouperfcriteria"
+			converter="bean">
+		</convert>
+		<convert match="com.hr.profile.domain.Position"
+			converter="bean">
+			<param name="include" value="id,positionPbId"></param>
+		</convert>
+		<convert match="com.hr.profile.domain.Emphistoryjob"
+			converter="bean">
+			<param name="exclude" value="eheCreateBy,eheCreateDate,employee" />
+		</convert>
+		<convert match="com.hr.profile.domain.Emphistoryedu"
+			converter="bean">
+			<param name="exclude" value="eheCreateBy,eheCreateDate,employee" />
+		</convert>
+		<convert match="com.hr.profile.domain.Emphistorytrain"
+			converter="bean">
+			<param name="exclude" value="ehtCreateBy,ehtCreateDate,employee" />
+		</convert>
+		<convert match="com.hr.profile.domain.Emprelations"
+			converter="bean">
+			<param name="exclude" value="erelCreateBy,erelCreateDate,employee" />
+		</convert>
+		<convert match="com.hr.profile.domain.Empaddconf"
+			converter="bean">
+		</convert>
+		<convert match="com.hr.configuration.domain.Group" converter="bean"/>
+		<convert match="com.hr.configuration.domain.JobTitle" converter="bean"/>
+		
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	 
+	
+ 
+ <!--**********************3.薪资模块的dwr配置******************************-->	
+			<!-- 添加调薪� -->
+		<create creator="new" javascript="AddCompaplan">
+			<param name="class"
+				value="com.hr.compensation.action.DWRforSearchBatchCompaplan" />
+			<!--取新的薪资项目-->
+			<include method="getAcctItemsById" />
+			<!--取得薪资配置项目-->
+			<include method="getConfigItemsById" />
+			<!--取调薪计划的详细项目-->
+			<include method="getCompaItemsById" />
+			
+		</create>
+		 <!-- 薪资发放所用dwr方法 -->
+		<create creator="new" javascript="DWRforSalaryPaid">
+			<param name="class"
+				value="com.hr.compensation.action.DWRforSalaryPaid" />
+			<!--删除薪资发放-->
+			<include method="deleteSalaryPaid" />
+			<!--更新薪资发放数据-->
+			<include method="updatePayOne" />
+			<!--取薪资发放的详细项目-->
+			<include method="initCalcPay" />
+			<!--重新计算薪资发放数据，仅计算-->
+			<include method="reCalcPayOne" />
+			<!--取帐套名-->
+			<include method="getEsacNameByVersionId" />
+			<include method="getBeneItemsByPay" />
+		</create>
+		
+		<!-- 批量修改员工薪资 -->
+		<create creator="new" javascript="UpdateSalaryConfigBatch">
+			<param name="class"
+				value="com.hr.compensation.action.UpdateSalaryConfigBatch"/>
+			<include method="updateConfigBatch"/>
+			<include method="updatePayBatch"/>
+		</create>
+		<!-- 根据帐套项目种类选择项目定义 -->
+		<create creator="new" javascript="DWRforAcctItemDef">
+			<param name="class"
+				value="com.hr.compensation.action.DWRforAcctItemDef" />
+			<!--删除薪资发放-->
+			<include method="getItemsByType" />
+			<include method="getItemById" />
+			<include method="getAcctItemsById" />
+		</create>
+		<!-- 帐套项目定义 -->
+		<create creator="new" javascript="AcctItemDef">
+			<param name="class"
+				value="com.hr.compensation.action.AcctItemDef" />
+			<!--薪资项目定义（更新、插入、删除、保存排序、刷新）-->
+			<include method="update" />
+			<include method="insert" />
+			<include method="deleteDef" />
+			<include method="saveSort" />
+			<include method="refreshOMConfig" />
+		</create>
+		<!-- 账套更新时根据其与旧账套的区别给出提示信息；jet miao, 2009-04-17 -->
+		<create creator="new" javascript="UpdateEmpsalaryacct">
+			<param name="class" value="com.hr.compensation.action.UpdateEmpsalaryacct" />
+			<include method="pageGetDiff" />
+		</create>
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empsalarydatadef">
+		</convert>
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empsalaryadj">
+		</convert>
+		
+		<!-- 调用公式解析器，计算薪资的各项目 -->
+		<create creator="new" javascript="DWRforSalaryCalc">
+			<param name="class"
+				value="com.hr.compensation.action.DWRforSalaryCalc" />
+			<include method="calculateSalary" />
+		</create>
+		
+		<!-- 验证公式合法性 -->
+		<create creator="new" javascript="DWRforFormulaValidate">
+			<param name="class" value="com.hr.compensation.action.DWRforFormulaValidate" />
+			<include method="validateFormula" />
+		</create>
+		<!-- 社保基数调整 -->
+		<create creator="new" javascript="EmpBenefit">
+			<param name="class" value="com.hr.compensation.action.DWRforEmpBenefit" />
+			<include method="empBenefitAdd" />
+		</create>
+		<!-- 社保种类调整 -->
+		<create creator="new" javascript="bftType">
+			<param name="class" value="com.hr.compensation.action.BenefitTypeList" />
+			<include method="addBenefitType" />
+			<include method="delBenefitType" />
+			<include method="updateBenefitType" />
+			<include method="saveBenefitTypeSortIdByBatch" />
+		</create>
+		<!-- 社保补缴 -->
+		<create creator="new" javascript="SearchEbpAction">
+		    <param name="class" value="com.hr.compensation.action.SearchEbpAction" />
+		    <include method="checkAddData" />
+		    <include method="getEbpItemsById" />
+		    <include method="modifyEbp" />
+		    <include method="getEspStatus" />
+		    <include method="getEbpByEmpMonth" />
+		    <include method="getEbpByEmpMonths" />
+		</create>
+		<!-- 年平均工资计算 -->
+		<create creator="new" javascript="MySalaryPaid">
+			<param name="class" value="com.hr.compensation.action.MySalaryPaid" />
+			<include method="defaultComputePay" />
+			<include method="givenComputePay" />
+		</create>
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empsalaryconfig">
+			<param name="exclude"
+				value="escJobgrade,escLastEffDate,escLastIncrRate,escLastIncrRate1,escCreateBy,escCreateTime" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empsalaryacctitems">
+			<param name="include"
+				value="id,esaiDataSeq,esaiDataName,esaiEsdd,esaiDataIsCalc,,itemValue,itemConfigValue,itemChanged" />
+		</convert>
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empsalaryconf">
+			<param name="include"
+				value="id,escEmptype,escCurrency,escBsPeriod,escBasesalary,escAllowance,escFixbonus,escVaribonus,escOtherallow,escLocbenefit,employee
+				,moneybeforetax,moneyaftertax,pensioncom,medicalcom,unempcom,housecom,compinsurcom,otherscom,
+				pension,medical,unemp,house,compinsur,others,taxamt,butie,otherbutie,overtimemoney,travelmoney" />
+		</convert> -->
+		<convert converter="bean"
+			match="com.hr.profile.domain.Employee">
+			<param name="include"
+				value="id,empDistinctNo,empName,empDeptNo,empJobgrade,empBuNo,buNo,buName,empLocationNo,newStatus,changeReason,changeDate,changed,empShiftType,empAdditional1,empAdditional2,empAdditional3,empAdditional4,empAdditional5,empAdditional6,empAdditional7,empAdditional8,empAdditional9,empAdditional10,empAdditional11,empAdditional12,empAdditional13,empAdditional14,empAdditional15,empAdditional16" />
+		</convert>
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Department">
+			<param name="include" value="id,departmentName" />
+		</convert>
+		 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Location">
+			<param name="include" value="id" />
+		</convert>-->
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Jobgrade">
+			<param name="include"
+				value="id,jobGradeName,jobGradeMrp,jobGradeLevel,jobGradeNo" />
+		</convert>
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empcompaplan">
+			<param name="include"
+				value="ecpLastChangeDate,ecpCurrencyCur,ecpIncrrateCur,ecpOtherallowCur,ecpType,ecpBasesalaryCur,
+	  ecpComments,ecpCreateBy,ecpJobgradePro,ecpEffdatePro,ecpBsPeriodCur,ecpBenefitTypeCur,
+	ecpLastChangeBy,ecpAllowanceCur,ecpFixbonusPro,ecpNextApprover,ecpEmpno,ecpRefsalaryCur,
+	ecpBsPeriodPro,ecpEffdateCur,ecpStatus,ecpOtherallowPro,ecpRefsalaryPro,ecpAllowancePro,ecpIncrratePro,ecpBenefitTypePro,
+	ecpFixbonusCur,ecpCreateDate,ecpCurrencyPro,ecpBasesalaryPro,ecpJobgradeCur,ecpVaribonusCur,
+	ecpVaribonusPro,id" />
+		</convert>
+		 -->
+		<!-- end 添加调薪� -->
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Benefittypeitem">
+			<param name="include" value="id,btiLb,btiNo" />
+		</convert>
+		 -->
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Epcategory">
+			<param name="include"
+				value="id,epcategoryName,epcategoryDesc" />
+		</convert>
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Currency">
+			<param name="include" value="id,currencyName,currencyDesc" />
+		</convert>
+		 -->
+		 <!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Locbenefit">
+			<param name="include"
+				value="lbItemNo,lbLocationNo,lbRateCom ,lbRatetypeOwn,lbRateOwn , lbRatetypeCom , lbBsUplimit , id ,lbBsLowest" />
+		</convert>
+		-->
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Infoclass">
+			<param name="include"
+				value="id,infoclassStatus,infoclassName,infoclassSortId" />
+		</convert>
+		 <!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Bsperiod">
+			<param name="include" value="id,bsperiodName,bsperiodDesc" />
+		</convert>
+		-->
+		<convert converter="bean"
+			match="com.hr.information.domain.Information">
+			<param name="include"
+				value="id,infoTitle,infoBreif,infoContent,infoStatus" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Emptype">
+			<param name="include" value="id,emptypeName,emptypeDesc,emptypeStatus,emptypeSortId" />
+		</convert>
+
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Location">
+			<param name="include"
+				value="id,locationName,locationSortId,locationDesc,locationStatus,headNo" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Branch">
+			<param name="include"
+				value="id,branchName,branchSortId,branchDesc,branchStatus,headNo" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.AttdMachine">
+			<param name="include"
+				value="macId,macNo,macIP,macPort,macPassword,macType,macStatus,macDesc,macSortId" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Department">
+			<param name="include"
+				value="id,departmentName,departmentSortId,departmentDesc,departmentStatus,departmentHead,departmentOtherHeads,deptHeader" />
+		</convert>
+		<convert converter="bean" match="com.hr.profile.domain.base.TreeNode">
+			<param name="include" value="nodeId, nodeName, nodeParentId, nodeType,isEmpty,nodeStatus" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Statusconf">
+			<param name="include" value="id,statusconfDesc" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.StatusconfPK">
+			<param name="include"
+				value="statusconfNo,statusconfTablename" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Businessunit">
+			<param name="force" value="true" />
+			<param name="include"
+				value="id,businessunitName,businessunitSortId,businessunitDesc,headsNo,businessunitDeptNoId,businessunitStatus" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Ecptype">
+			<param name="include" value="id,ecptypeDesc,ecptypeName" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.compensation.domain.Empbenefit">
+			<param name="include" value="ebfId,ebfStartMonth,ebfEndMonth,ebfPensionAmount,ebfHousingAmount,ebfInsuranceAmount" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.BenefitType">
+			<param name="include" value="id,benefitTypeName,benefitTypeDescription,benefitTypeLocNo,benefitTypeSortId,ebfTypePensionUplimit,ebfTypePensionLowlimit,ebfTypeHousingUplimit,ebfTypeHousingLowlimit,ebfTypeOtherUplimit,ebfTypeOtherLowlimit,benefitTypePayType,ebfTypeMedicareUplimit,ebfTypeUnemploymentLowlimit,ebfTypeInjuryUplimit,ebfTypeUnemploymentUplimit,ebfTypeChildbirthUplimit,ebfTypeChildbirthLowlimit,ebfTypeInjuryLowlimit,ebfTypeMedicareLowlimit" />
+		</convert>
+		<!-- 
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Benefittype">
+			<param name="include"
+				value="btSortId,btName,id" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.Benefititem">
+			<param name="include" value="id,biName" />
+		</convert>
+		-->
+		<create javascript="emailSalary" creator="new">
+			<param name="class" value="com.hr.compensation.action.EmailSendForSalarypay"></param>
+			<include method="sendEmail" />
+		</create>
+		<convert  converter="bean" match="com.hr.compensation.domain.Empbenefitplan">
+		    <param name="include" 
+		        value="ebpId, ebpYearmonth, ebpBelongYearmonth, ebpPensionAmountb, ebpHousingAmountb, ebpInsuranceAmountb, showColumn15, showColumn16, ebpComments" />
+		</convert>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+ 
+	 
+ <!--**********************4.考勤模块的dwr配置******************************--> 
+		<convert converter="bean"
+			match="com.hr.examin.action.beans.LeaveFormBean">
+			<param name="include"
+				value="lr,startAPM,endAPM,Errors,hasError" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Leaverequest">
+			<param name="include"
+				value="lrId,lrNo,lrEmpDept,lrLtNo,lrEmpNo,lrReason,lrStartDate,lrStartApm,lrEndDate,lrEndApm,lrTotalHours,lrTotalDays,lrStatus,lrCreateTime,lrLastChangeTime,lrCreateBy,lrLastChangeBy,applyLRByDay,lrStatusMean" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Leavetype">
+			<param name="exclude" value="leaverequests"></param>
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Overtimerequest">
+			<param name="include"
+				value="orId,orNo,orOtNo,orEmpDept,orEmpNo,orReason,orStartDate,orEndDate,orTotalHours,orStatus,orCreateTime,orLastChangeTime,orCreateBy,orLastChangeBy,orStatusMean" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Overtimetype">
+			<param name="include"
+				value="otNo,otName,otDesc,otHourRate,otOverLimit" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Leavecalendar">
+			<param name="include"
+				value="lcId,lcDate,lcSign,lcLocationNo,lcDateDesc" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.action.beans.LeaveBalanceLR">
+			<param name="include"
+				value="lrId,lrStartDate,lrEndDate,lrTotalHours,lrStatus" />
+		</convert>
+		
+		<!-- Ajax Action -->
+		<!-- 个人考勤 -->
+		<create creator="new" scope="session" javascript="MYLR">
+			<param name="class"
+				value="com.hr.examin.action.MyLeaveSearchAction" />
+			<include method="delete" />
+		</create>
+		<create creator="new" scope="session" javascript="MYOT">
+			<param name="class"
+				value="com.hr.examin.action.MyOvertimeSearchAction" />
+			<include method="delete" />
+		</create>
+		<!-- EmpExaminAction 通用 -->
+		<create creator="new" scope="session"
+			javascript="EmpExaminAction">
+			<param name="class"
+				value="com.hr.examin.action.EmpExaminAction" />
+			<include method="getAPMDecription" />
+			<include method="getLRContext" />
+			<include method="getOTContext" />
+			<include method="approveOrReject" />
+			<include method="DWRwfObjOpSingle" />
+		</create>
+		<create javascript="DWRSystemConfigReader" creator="new">
+			<param name="class" value="com.hr.examin.action.DWRSystemConfigReader"></param>
+			<include method="readLeaveRequestRemindContent"/>
+		</create>
+		<!--  部门审批-->
+		<!--
+		<create creator="new" scope="session" javascript="DeptLR">
+			<param name="class"
+				value="com.hr.examin.action.DeptLeaveSearchAction" />
+			<include method="approve" />
+			<include method="reject" />
+		</create>
+		<create creator="new" scope="session" javascript="HRLR">
+			<param name="class"
+				value="com.hr.examin.action.HRLeaveSearchAction" />
+			<include method="approve" />
+			<include method="reject" />
+		</create>
+		<create creator="new" scope="session" javascript="DeptOT">
+			<param name="class"
+				value="com.hr.examin.action.DeptOvertimeSearchAction" />
+			<include method="approve" />
+			<include method="reject" />
+		</create>
+		<create creator="new" scope="session" javascript="HROT">
+			<param name="class"
+				value="com.hr.examin.action.HROvertimeSearchAction" />
+			<include method="approve" />
+			<include method="reject" />
+		</create>
+			-->
+		<!-- 员工考勤 -->
+	<!--
+		<create creator="new" scope="session" javascript="ALLLR">
+			<param name="class"
+				value="com.hr.examin.action.AllLeaveSearchAction" />
+			<include method="cancelled" />
+		</create>
+		<create creator="new" scope="session" javascript="ALLOT">
+			<param name="class"
+				value="com.hr.examin.action.AllOvertimeSearchAction" />
+			<include method="cancelled" />
+		</create>
+		-->
+		
+		<create creator="new" javascript="HROT">
+			<param name="class"
+				value="com.hr.examin.action.HROvertimeSearchAction" />
+			<include method="getTiaoxiuExpire" />
+		</create>
+		<create creator="new" scope="session" javascript="ALLLR">
+			<param name="class"
+				value="com.hr.examin.action.AllLeaveSearchAction" />
+			<include method="confirm" />
+		</create>
+		<create creator="new" scope="session" javascript="ALLOT">
+			<param name="class"
+				value="com.hr.examin.action.AllOvertimeSearchAction" />
+			<include method="confirm" />
+		</create>
+		<!-- 考勤管理 -->
+		<create creator="new" scope="session" javascript="LCMNG">
+			<param name="class"
+				value="com.hr.examin.action.LeavecalendarManageAction" />
+			<include method="insertLeavecalendar" />
+			<include method="delLeavecalendar" />
+			<include method="updateLeavecalendar" />
+			<include method="loadLeavecalendar" />
+			<include method="getTypeDescription" />
+			<include method="getLocationName" />
+		</create>
+		<create creator="new" scope="session" javascript="LBMNG">
+			<param name="class"
+				value="com.hr.examin.action.LeavebalanceBaseAction" />
+			<include method="getEmpLRList" />
+			<include method="getEmpLRList_tiaoxiu" />
+			<include method="getLBLRUsedDays" />
+			<include method="getLRStatusDecription" />
+			<include method="getLBLRCanUsedDays"/>
+			<include method="getLBLRUsedDays_tiaoxiu"/>
+		</create>
+		<create creator="new" scope="session" javascript="DwrForAttend">
+			<param name="class"
+				value="com.hr.examin.action.DwrForAttend" />
+			<include method="getEmpAttendmonthly" />
+			<include method="saveEmpAttendmonthly" />
+			<include method="getAttendDailyMemory"/>
+			<include method="addCardData"/>
+		</create>
+		<!-- 与考勤机同步数据 -->
+		<create creator="new" scope="session" javascript="DwrSyncAttdMachine">
+			<param name="class"
+				value="com.hr.examin.action.DwrSyncAttdMachine" />
+			<include method="syncToMachine"/>
+			<include method="syncToProject"/>
+			<include method="batchRead"/>
+			<include method="batchDelete"/>
+			<include method="updateEmp"/>
+		</create>
+		<!-- 排班 -->
+		<create creator="new" scope="session"
+			javascript="ExaminSchedule">
+			<param name="class"
+				value="com.hr.examin.action.ExaminScheduleAction" />
+			<include method="updateOneSchedule" />	
+			<include method="insertShift" />
+			<include method="delShift" />	
+			<include method="setDefault" />	
+			<include method="setStatus" />
+			<include method="getGlobalDefaultCount" />
+			<include method="batchUpdateSchedule" />	
+			<include method="getRelaString" />
+			<include method="getCommonShiftList" />
+		</create>	
+		<!-- 员工休假管理 -->
+		<create javascript="LeavebalanceCurrentYear" creator="new" scope="session">
+		    <param name="class" value="com.hr.examin.action.LeavebalanceCurrentYear"></param>
+		    <include method="getEmpLtInfo" />
+		</create>
+		<!-- 考勤审批设置 -->
+		<create creator="new" scope="session" javascript="AuthorityPosAction">
+			<param name="class"
+				value="com.hr.examin.action.AuthorityPosAction" />
+			<include method="addAuthPos"/>
+			<include method="updateAuthPos"/>
+			<include method="deleteAuthPos"/>
+		</create>
+		
+
+		<convert converter="bean"
+			match="com.hr.examin.domain.Attenddaily">
+			<param name="exclude"
+				value="attdEmpId,attdDutyDate,attdShift" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Attendmonthly">
+			<param name="exclude"
+				value="attmEmpId,attmBranch,attmDept,attmBu,attmGroup,attmJobtitle,attmLocation,attmSupNo,attmEmptype,attmPbNo" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.domain.Attendshift">
+			<param name="include" value="id,attsName,attsDesc,attsNightShift,attsColor,attsShortName,attsIsDefault,attsSortId,attsSession,attsWorkingHour,attsStatus,attsStricked,locIdString,deptIdString"/>
+		</convert>
+		<convert converter="bean"
+			match="com.hr.examin.support.AttendDailyMemory">
+			<param name="exclude"
+				value="empObj,shift" />
+		</convert>
+		<create javascript="LeaveBalanceDWR" creator="new">
+			<param name="class" value="com.hr.examin.action.LeaveBalanceDWR"></param>
+			<include method="getLeavebalanceById"/>
+			<include method="deleteLeaveBalanceById"/>
+			<include method="updateLeaveBalance"/>
+		</create>
+		<convert match="com.hr.examin.domain.Leavebalance" converter="bean">
+			<param name="exclude" value="lbEmpNo"></param>
+		</convert>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+ 
+	 
+ <!--**********************5.培训模块的dwr配置******************************-->	
+ 
+		<!--培训种类维护-->
+		<create creator="new" javascript="Trtype">
+			<param name="class"
+				value="com.hr.training.action.TrtConfigDWR" />
+			<include method="addTrType" />
+			<include method="delTrType" />
+			<include method="updateTrType" />
+		</create>
+		<convert match="com.hr.training.domain.base.BaseTrtype"
+			converter="bean">
+			<param name="include" value="trtNo,trtName,trtDesc" />
+		</convert>		
+		<!--培训部门审批-->
+		<create creator="new" javascript="TrepDeptApprove">
+			<param name="class"
+				value="com.hr.training.action.TrepDeptApprove" />
+			<include method="approve" />
+			<include method="reject" />
+			<include method="batchApprove" />
+		</create>
+		<!--培训HR备案-->
+		<create creator="new" javascript="TrepHrApprove">
+			<param name="class"
+				value="com.hr.training.action.TrepHrApprove" />
+			<include method="approve" />
+			<include method="reject" />
+			<include method="batchApprove" />
+		</create>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+		 
+		 
+ <!--**********************6.招聘模块的dwr配置******************************--> 
+ 		<!-- 招聘渠道列表设置-->
+		<create creator="new" javascript="RecruitchannelList">
+			<param name="class"
+				value="com.hr.recruitment.action.RecruitchannelList" />
+			<include method="addRecruitchannel" />
+			<include method="execute" />
+			<include method="delRecruitchannel" />
+			<include method="updateRecruitchannel" />
+		</create>
+
+		<convert converter="bean"
+			match="com.hr.recruitment.domain.base.BaseRecruitchannel">
+			<param name="include"
+				value="id,recchEmail,recchRespPerson,recchAddr,recchName,recchComments,recchAddrZip,recchPhone,recchCityNo" />
+		</convert>
+		<!--选择招聘计划-->
+		<create creator="new" javascript="RecruitapplierCreateInit">
+			<param name="class"
+				value="com.hr.recruitment.action.RecruitapplierCreateInit" />
+			<include method="chooseRecruitplanList" />
+		</create>
+		<convert match="com.hr.recruitment.domain.base.BaseRecruitplan"
+			converter="bean">
+			<param name="include"
+				value="recpCreateTime,recpStartDate,recpDegree,recpNumberActual,recpComments,recpJobDesc,recpWorkLocation,recpEndDate,recpLanguageSkill,recpJobTitle,recpNumberExpect,recpLastChangeTime,recpStatus,id,recpDepartmentNo,recpJobSkill" />
+		</convert>
+
+		<convert match="com.hr.configuration.domain.base.BaseDepartment"
+			converter="bean">
+			<param name="include"
+				value="departmentSortId,departmentName,departmentDesc,id" />
+		</convert>
+		<!--更新应聘者状态读取log-->
+		<create creator="new" javascript="ReadLog">
+			<param name="class"
+				value="com.hr.configuration.action.ReadLog" />
+			<include method="getLogs" />
+			<include method="getDept" />
+			<include method="getFather" />
+		</create>
+		<!--招聘模块招聘计划详细信息列表中的应聘者删除-->
+		<create creator="new" javascript="deleteapplier">
+			<param name="class"
+				value="com.hr.recruitment.action.RecruitapplierDelete" />
+			<include method="dwrDelte" />
+		</create>
+		<!--招聘计划部门审批-->
+		<create creator="new" javascript="ApproverRecruitplanDept">
+			<param name="class"
+				value="com.hr.recruitment.action.ApproverRecruitplanDept" />
+			<include method="reject" />
+			<include method="agreeOne" />
+			<include method="batchApprove" />
+		</create>
+		<!--招聘计划HR备案-->
+		<create creator="new" javascript="ApproverRecruitplanHR">
+			<param name="class"
+				value="com.hr.recruitment.action.ApproverRecruitplanHR" />
+			<include method="reject" />
+			<include method="agreeOne" />
+			<include method="batchApprove" />
+		</create>
+		<!--提交招聘计划-->
+		<create creator="new" javascript="SearchRecruitplan">
+			<param name="class"
+				value="com.hr.recruitment.action.SearchRecruitplan" />
+			<include method="submitPlan" />
+			<include method="batchSubmitPlan" />
+		</create>
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->		 
+
+ <!--**********************8.系统模块的dwr配置******************************--> 
+		<!-- 修改用户密码 -->
+		<create creator="new" scope = "session"  javascript="ModifyPassword">
+			<param name="class"
+				value="com.hr.security.web.action.ModifyUserPassword" />
+			<include method="updateUserPassword" />
+		</create>		
+		<convert converter="bean"
+			match="com.hr.security.domain.Userinfo">
+			<param name="include" value="id,uiPassword" />
+		</convert>
+		<!-- 修改用户角色 -->
+		<create creator="new" scope = "session"  javascript="SubmitUserRoles">
+			<param name="class"
+				value="com.hr.security.web.action.ModifyAllUserRole" />
+			<include method="updateUserRoles" />
+			<include method="doLimitUpdate" />
+		</create>
+		<convert converter="bean" match="com.hr.security.domain.Role">
+			<param name="include" value="id,roleName" />
+		</convert>
+		<!-- 修改用户状态 -->
+		<create creator="new" scope = "session" javascript="ChangeStatus">
+			<param name="class"
+				value="com.hr.security.web.action.ModifyUserStatus" />
+			<include method="updateUserStatus" />
+		</create>
+		<!-- 邮件模板设置 -->
+		<create creator="new" javascript="emailtemplate">
+			<param name="class"
+				value="com.hr.configuration.action.EmailtemplateAction" />
+			<include method="addTemplate" />
+			<include method="updateTemplate" />
+			<include method="delTemplate" />
+			<include method="getTemplateContent"/>
+		</create>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.base.BaseEmailtemplate">
+			<param name="include"
+				value="id,etTitleNo,etTitle,etContent,etNotes" />
+		</convert>
+		<!-- 邮件管理设置 -->
+		<create creator="new" javascript="emailsend">
+			<param name="class"
+				value="com.hr.configuration.action.EmailsendAction" />
+			<include method="updateEmailsend" />
+			<include method="delEmailsend" />
+			<include method="updateetStatus" />			
+		</create>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.base.BaseEmailsend">
+			<param name="include"
+				value="id,esTo,esCc,esTitle,esContent,esStatus,esSendtime" />
+		</convert>
+	
+		<!-- 客户注册 -->
+		<create creator="new" scope = "session" javascript="ActiveClient">
+			<param name="class"
+				value="com.hr.security.web.action.ActiveClient" />
+			<include method="activeOperate" />
+			<include method="testConnection" />
+		</create>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+<!--**********************9.共享模块的dwr配置******************************--> 
+	
+			<create creator="new" scope="session" javascript="SearchLog">
+			<param name="class"
+				value="com.hr.training.action.MyTrainingList" />
+			<include method="getLogs" />
+		</create>
+		<convert converter="bean"
+			match="com.hr.configuration.domain.base.BaseSyslog">
+			<param name="include"
+				value="id,slType,slTableName,slEmpno,slRecordId,slAction,slChangeTime,slComments,slChangeEmpno" />
+		</convert>
+	
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+ 
+ <!--**********************10.报表模块的dwr配置******************************--> 
+
+		<convert converter="bean"
+			match="com.hr.report.domain.base.AbstractReportJoinDef">
+			<param name="include"
+				value="reportJoinDefId,reportJoinDefMainTable,reportJoinDefAssistantTable,reportJoinDefMainJoin,reportJoinDefAssistantJoin" />
+		</convert>
+		<convert converter="bean"
+			match="com.hr.report.domain.base.AbstractReportSetsDef">
+			<param name="include"
+				value="reportSetsDefID,reportSetsDefModule,reportSetsDefTable,reportSetsDefFlag,reportSetsDefField,reportSetsDefDesc,reportSetsDefType" />
+		</convert>
+	
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->	
+	
+<!--**********************10.定制报表模块的dwr配置******************************--> 
+
+	<create javascript="customizeReportDWR" creator="new">
+		<param name="class" value="com.hr.report.action.customize.CustomizeReportDWRUtil"/>
+		<include method="findReportsDefByModuleAndTable"/>
+		<include method="loadReportModuleDefs"/>
+		<include method="loadAll"/>
+		<include method="loadReportSetsDefByTableName"/>
+		<include method="getAuthList"/>
+		<include method="getReportModuleDef"/>
+	</create>
+	<convert converter="bean" match="com.hr.report.domain.ReportSetsDef"></convert>
+	<convert converter="bean" match="com.hr.report.domain.ReportJoinDef" ></convert>
+	<convert match="com.hr.report.domain.ReportModuleDef" converter="bean"></convert>
+	<convert match="com.hr.security.domain.Authority" converter="bean"></convert>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->		
+
+
+<!--************************11.系统->基本参数设置模块的DWR设置*************************************************** -->
+
+			  <!--更新邮箱参数设置模块参数的dwr设置-->
+	<create creator="new" javascript="mailDWR">
+		<param name="class" value="com.hr.configuration.action.ConfigMail"></param>
+		<include method="testMail"/>
+	</create>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->		
+
+
+<!--************************12.导入导出模块的DWR设置 add by zchen*************************************************** -->
+	
+	<!--导入导出配置的dwr设置-->
+	<create creator="new" javascript="IodefEdit">
+		<param name="class" value="com.hr.io.action.IodefList"></param>
+		<include method="loadIodef"/>
+		<include method="updateIodef"/>
+		<include method="updateOutmatchBasic"/>
+		<include method="deleteOutmatchBasic"/>
+		<include method="updateInmatchBasic"/>
+		<include method="deleteInmatchBasic"/>
+		<include method="checkOmDataTypeFormat"/>
+		<include method="checkImDataTypeFormat"/>
+		<include method="checkImSample"/>
+	</create>
+	<create creator="new" javascript="OutmatchModelEdit">
+		<param name="class" value="com.hr.io.action.OutmatchModelList"></param>
+		<include method="loadOutmatchModel"/>
+		<include method="saveOrUpdateOutmatchModel"/>
+		<include method="setDefaultOutmatchModel"/>
+		<include method="deleteOutmatchModel"/>
+		<include method="checkDataTypeFormat"/>
+		<include method="getOutmatchModelList"/>
+	</create>
+	<create creator="new" javascript="InmatchModelEdit">
+		<param name="class" value="com.hr.io.action.InmatchModelList"></param>
+		<include method="loadInmatchModel"/>
+		<include method="saveOrUpdateInmatchModel"/>
+		<include method="setDefaultInmatchModel"/>
+		<include method="deleteInmatchModel"/>
+		<include method="getInmatchModelList"/>
+	</create>
+	<convert converter="bean" match="com.hr.io.domain.Iodef"></convert>
+	
+	<convert converter="bean" match="com.hr.io.domain.OutmatchBasic">
+		<param name="exclude" value="ombIo" />
+	</convert>
+	<convert converter="bean" match="com.hr.io.domain.OutmatchModel"></convert>
+	<convert converter="bean" match="com.hr.io.domain.Outmatch">
+		<param name="exclude" value="omOmm" />
+	</convert>
+	<convert converter="array" match="[Lcom.hr.io.domain.Outmatch"></convert>
+	<convert converter="array" match="[Lcom.hr.io.domain.OutmatchBasic"></convert>
+	
+	<convert converter="bean" match="com.hr.io.domain.InmatchBasic">
+		<param name="exclude" value="imbIo" />
+	</convert>
+	<convert converter="bean" match="com.hr.io.domain.InmatchModel"></convert>
+	<convert converter="bean" match="com.hr.io.domain.Inmatch">
+		<param name="exclude" value="imImm" />
+	</convert>
+	
+</allow>
+</dwr>

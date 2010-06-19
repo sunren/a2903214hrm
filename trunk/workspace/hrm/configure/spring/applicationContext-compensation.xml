@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+	<bean id="empsalaryperiodDAO" class="com.hr.compensation.dao.EmpsalaryperiodDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="empsalaryperiodBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.compensation.bo.EmpsalaryperiodBoImpl">
+		       <property name="empsalaryperiodDAO">
+			         <ref local="empsalaryperiodDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+    <!-- 薪资帐套项目定义相关 -->
+    <bean id="empsalarydatadefDao" class="com.hr.compensation.dao.EmpsalarydatadefDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="empsalarydatadefBo"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.compensation.bo.EmpsalarydatadefBoImpl">
+		       <property name="empsalarydatadefDao">
+			         <ref local="empsalarydatadefDao" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+	
+    <!-- 员工薪资配置-->
+	<bean id="salaryconfDAO"
+		class="com.hr.compensation.dao.SalaryconfDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="salaryconfBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.SalaryconfBoImpl">
+				<property name="salaryconfDAO">
+					<ref local="salaryconfDAO" />
+				</property>
+				<property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+    <!-- 薪水计划-->
+	<bean id="compaplanDAO"
+		class="com.hr.compensation.dao.CompaplanDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="compaplanBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.CompaplanBoImpl">
+				<property name="compaplanDAO">
+					<ref local="compaplanDAO" />
+				</property>
+				<property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+ <!-- 薪水发放-->
+	<bean id="salaryPaidDAO" class="com.hr.compensation.dao.SalaryPaidDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="salaryPaidBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.SalaryPaidBoImpl">
+				<property name="salaryPaidDAO">
+					<ref local="salaryPaidDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+		<!-- 帐套定义-->
+	<bean id="empsalaryacctDao" class="com.hr.compensation.dao.EmpSalaryAcctDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empsalaryacctBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.EmpSalaryAcctBoImpl">
+				<property name="empsalaryacctDao">
+					<ref local="empsalaryacctDao" />
+				</property>
+				<property name="empsalaryacctversionDao">
+					<ref local="empsalaryacctversionDao" />
+				</property>				
+			</bean>
+		</property>
+	</bean>
+	<bean id="empsalaryacctitemsDao" class="com.hr.compensation.dao.EmpSalaryAcctitemsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empsalaryacctitemsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.EmpSalaryAcctitemsBoImpl">
+				<property name="empsalaryacctitemsDao">
+					<ref local="empsalaryacctitemsDao" />
+				</property>
+			</bean>
+		</property>
+	</bean> 
+	<bean id="empsalaryacctversionDao" class="com.hr.compensation.dao.EmpSalaryAcctversionDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empsalaryacctversionBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.EmpSalaryAcctversionBoImpl">
+				<property name="empsalaryacctversionDao">
+					<ref local="empsalaryacctversionDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	<!-- 社保管理BO -->
+	<bean id="empbenefitBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.compensation.bo.EmpBenefitBoImpl">
+				<property name="empBenefitDao">
+					<ref local="empbenefitDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	<!-- 社保补缴BO jet miao, 2009-08-03-->
+	<bean id="empbenefitplanBo" parent="baseTransactionProxy">
+	     <property name="target">
+	         <bean class="com.hr.compensation.bo.EmpBenefitPlanBoImpl" >
+	             <property name="empBenefitDao">
+	                 <ref local="empbenefitDao" />
+	             </property>
+	         </bean>
+	     </property>
+	</bean>
+	<!-- 社保管理DAO -->
+	<bean id="empbenefitDao" class="com.hr.compensation.dao.EmpBenefitDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+</beans>

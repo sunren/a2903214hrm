@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.14" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.3.1.v20080911 Build &lt;2.3.1.v20080917-1340></property>
+    <property name="units">in</property>
+    <property name="comments">Copyright (c) 2007 &lt;&lt;Your Company Name here>></property>
+    <html-property name="description">Creates a blank report with no predefined content.</html-property>
+    <property name="theme">datasource.defaultTheme</property>
+    <text-property name="displayName">Blank Report</text-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">../datasource.rptlibrary</property>
+            <property name="namespace">datasource</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="startDate" id="8">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="56">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <property name="distinct">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6"
+ extends="datasource.Data Source">
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/365hrm</property>
+            <property name="odaUser">root</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">MTExMTEx</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="7">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">Data Source</property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">startDate1</property>
+                    <property name="paramName">startDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">startDate2</property>
+                    <property name="paramName">startDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">startDate3</property>
+                    <property name="paramName">startDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate1</property>
+                    <property name="paramName">endDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">startDate4</property>
+                    <property name="paramName">startDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">5</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate2</property>
+                    <property name="paramName">endDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate3</property>
+                    <property name="paramName">endDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate4</property>
+                    <property name="paramName">endDate</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <property name="queryText">select
+  l.location_name,
+  (select count(e1.emp_location_no) from employee as e1 where e1.emp_location_no=l.location_no and e1.emp_join_date&lt;? and ((e1.emp_status=1) or (e1.emp_status=0 and e1.emp_terminate_date>=?)))as original,
+  (select count(e2.emp_location_no) from employee as e2 where e2.emp_location_no=l.location_no and e2.emp_join_date>=? and e2.emp_join_date&lt;=?)as active,
+  (select count(e3.emp_location_no) from employee as e3 where e3.emp_location_no=l.location_no and e3.emp_status=0 and e3.emp_terminate_date>=? and e3.emp_terminate_date&lt;=?)as dimmision,
+  (select count(e4.emp_location_no) from employee as e4 where e4.emp_location_no=l.location_no and e4.emp_join_date&lt;=? and ((e4.emp_status=1) or (e4.emp_status=0 and e4.emp_terminate_date>?)))as total
+from employee as e
+right  join location as l on l.location_no=e.emp_location_no
+group by l.location_no;</property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="crosstab" id="4">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="9">
+            <property name="width">5.9895833333in</property>
+            <column id="10"/>
+            <row id="11">
+                <cell id="12">
+                    <table id="15">
+                        <property name="width">100%</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">location_name</property>
+                                <expression name="expression">dataSetRow["location_name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">active</property>
+                                <expression name="expression">dataSetRow["active"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dimmision</property>
+                                <expression name="expression">dataSetRow["dimmision"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">total</property>
+                                <expression name="expression">dataSetRow["total"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">original</property>
+                                <expression name="expression">dataSetRow["original"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">50</property>
+                        <column id="28"/>
+                        <column id="29"/>
+                        <column id="38">
+                            <property name="paddingRight">20pt</property>
+                            <property name="textAlign">right</property>
+                            <property name="textIndent">0em</property>
+                            <property name="orphans">2</property>
+                        </column>
+                        <column id="34">
+                            <property name="paddingRight">20pt</property>
+                            <property name="textAlign">right</property>
+                        </column>
+                        <column id="30">
+                            <property name="paddingRight">20pt</property>
+                            <property name="textAlign">right</property>
+                        </column>
+                        <column id="50">
+                            <property name="marginLeft">0pt</property>
+                            <property name="paddingRight">20pt</property>
+                            <property name="textAlign">right</property>
+                        </column>
+                        <header>
+                            <row id="16">
+                                <cell id="17">
+                                    <label id="39">
+                                        <text-property name="text">工作地区名称</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="18">
+                                    <label id="41">
+                                        <text-property name="text">期初人数</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="35">
+                                    <label id="43">
+                                        <text-property name="text">入职人数</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="31">
+                                    <label id="45">
+                                        <text-property name="text">离职人数</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="19">
+                                    <label id="51">
+                                        <text-property name="text">期末人数</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="47">
+                                    <label id="54">
+                                        <text-property name="text">离职率(%)</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="20">
+                                <cell id="21">
+                                    <data id="40">
+                                        <property name="resultSetColumn">location_name</property>
+                                    </data>
+                                </cell>
+                                <cell id="22">
+                                    <data id="58">
+                                        <property name="resultSetColumn">original</property>
+                                    </data>
+                                </cell>
+                                <cell id="36">
+                                    <data id="44">
+                                        <property name="resultSetColumn">active</property>
+                                    </data>
+                                </cell>
+                                <cell id="32">
+                                    <data id="46">
+                                        <property name="resultSetColumn">dimmision</property>
+                                    </data>
+                                </cell>
+                                <cell id="23">
+                                    <data id="52">
+                                        <property name="resultSetColumn">total</property>
+                                    </data>
+                                </cell>
+                                <cell id="48">
+                                    <text-data id="53">
+                                        <expression name="valueExpr">new java.text.DecimalFormat("0.0").format(row["dimmision"]*2/(row["origninal"]+row["total"])*100)</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="24">
+                                <cell id="25">
+                                    <property name="colSpan">3</property>
+                                    <property name="rowSpan">1</property>
+                                    <text-data id="55">
+                                        <expression name="valueExpr">'员工离职率统计：从'+params["startDate"]+'到'+params["endDate"]</expression>
+                                        <property name="contentType">html</property>
+                                    </text-data>
+                                </cell>
+                                <cell id="33"/>
+                                <cell id="27"/>
+                                <cell id="49"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+            <row id="13">
+                <cell id="14"/>
+            </row>
+        </grid>
+    </body>
+</report>

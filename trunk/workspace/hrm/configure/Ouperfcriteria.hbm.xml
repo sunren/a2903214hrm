@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Ouperfcriteria"
+		table="ouperfcriteria"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		
+		<id
+			name="id"
+			type="string"
+			column="oup_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<property
+			name="oupName"
+			column="oup_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="oupRate"
+			column="oup_rate"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="oupSortId"
+			column="oup_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		
+		<many-to-one
+			name="oupDept"
+			column="oup_dept_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="oupPb"
+			column="oup_pb_id"
+			class="PositionBase"
+			not-null="false"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

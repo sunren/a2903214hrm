@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class
+		name="Leavecalendar"
+		table="leavecalendar"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="lcId"
+			type="string"
+			column="lc_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="lcDate"
+			column="lc_date"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="lcSign"
+			column="lc_sign"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="lcDateDesc"
+			column="lc_date_desc"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<many-to-one
+			name="lcLocationNo"
+			column="lc_location_no"
+			class="com.hr.configuration.domain.Location"
+			not-null="false"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

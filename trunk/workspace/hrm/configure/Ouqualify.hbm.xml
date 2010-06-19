@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Ouqualify"
+		table="ouqualify"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		
+		<cache usage="nonstrict-read-write"/>
+		
+		<id
+			name="id"
+			type="string"
+			column="ouq_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<property
+			name="ouqName"
+			column="ouq_name"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="ouqDesc"
+			column="ouq_desc"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<many-to-one
+			name="ouqPbId"
+			column="ouq_pb_id"
+			class="PositionBase"
+			not-null="false"
+			
+		/>
+		<property
+			name="ouqSortId"
+			column="ouq_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="initYear">
+		<field-validator type="required">
+			<message>必填选项</message>
+		</field-validator>
+		<field-validator type="int">
+			<message>年份格式错误！</message>
+		</field-validator>
+	</field>
+</validators>

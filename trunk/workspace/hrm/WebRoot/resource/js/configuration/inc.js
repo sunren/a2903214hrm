@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+function doselect(){try{var $=Event.element(event).parentNode;if($.id.length==0)return;if(editObj!=null&&editObj!=$){editObj.className="";editObj=null}editObj=$;if(editObj!=null&&editObj.hasClassName("tr2")){editObj.className="";editObj=null}else if(editObj!=null)editObj.addClassName("tr2")}catch(_){alert(_)}}function clearErr(){$("msg").update("");util.clearFormError(cp+"Form")}function resetForm(){util.clearForm(cp+"Form",true)}function closeDiag(){$(cp+"Formhidd").hide();if(editObj!=null){editObj.className="";editObj=null}}function disableForm($){util.disableForm((cp+"Form"),true)}function addObserve(A){var _=$(A).childNodes;$A(_).each(function($){Event.observe($,"dblclick",showdep,true);Event.observe($,"click",doselect,false)})}

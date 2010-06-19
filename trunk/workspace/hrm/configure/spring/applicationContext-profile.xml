@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<bean id="employeeDAO"
+		class="com.hr.profile.dao.employeeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="empBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmployeeBoImpl">
+				<property name="employeeDAO">
+					<ref local="employeeDAO" />
+				</property>
+				<property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empJobHisDao"
+		class="com.hr.profile.dao.EmpJobHisDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empJobHisBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpJobHisBoImpl">
+				<property name="empJobHisDao">
+					<ref local="empJobHisDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empEduHisDao"
+		class="com.hr.profile.dao.EmpEduHisDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empEduHisBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpEduHisBoImpl">
+				<property name="empEduHisDao">
+					<ref local="empEduHisDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empRelationsDao"
+		class="com.hr.profile.dao.EmpRelationsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empRelationsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpRelationsBoImpl">
+				<property name="empRelationsDao">
+					<ref local="empRelationsDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empTrainHisDao"
+		class="com.hr.profile.dao.EmpTrainHisDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empTrainHisBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpTrainHisBoImpl">
+				<property name="empTrainHisDao">
+					<ref local="empTrainHisDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empAdditionalDao"
+		class="com.hr.profile.dao.EmpAdditionalDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empAdditionalBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpAdditionalBoImpl">
+				<property name="empAdditionalDao">
+					<ref local="empAdditionalDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="headsDao"
+		class="com.hr.profile.dao.OrgheadsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<bean id="headsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.OrgheadsBoImpl">
+				<property name="headsDao">
+					<ref local="headsDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empAddConfDAO"
+		class="com.hr.profile.dao.EmpAddConfDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empAddConfBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpAddConfBoImpl">
+				<property name="empAddConfDAO">
+					<ref local="empAddConfDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empContractDao"
+		class="com.hr.profile.dao.EmpContractDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empContractBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpContractBoImpl">
+				<property name="empContractDao">
+					<ref local="empContractDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empTransferDao"
+		class="com.hr.profile.dao.EmpTransferDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empTransferBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpTransferBoImpl">
+				<property name="empTransferDao">
+					<ref local="empTransferDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="empRewardDao"
+		class="com.hr.profile.dao.EmpRewardDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empRewardBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpRewardBoImpl">
+				<property name="empRewardDao">
+					<ref local="empRewardDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="empEvalDao"
+		class="com.hr.profile.dao.EmpEvalDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empEvalBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpEvalBoImpl">
+				<property name="empEvalDao">
+					<ref local="empEvalDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="empQuitDao"
+		class="com.hr.profile.dao.EmpQuitDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="empQuitBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpQuitBoImpl">
+				<property name="empQuitDao">
+					<ref local="empQuitDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="deptHeadsDao"
+		class="com.hr.profile.dao.DeptHeadsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="deptHeadsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.DeptHeadsBoImpl">
+				<property name="deptHeadsDao">
+					<ref local="deptHeadsDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="deptHeadsHistDao"
+		class="com.hr.profile.dao.DeptHeadsHistDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="deptHeadsHistBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.DeptHeadsHistBoImpl">
+				<property name="deptHeadsHistDao">
+					<ref local="deptHeadsHistDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="deptHistDao"
+		class="com.hr.profile.dao.DeptHistDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="deptHistBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.DeptHistBoImpl">
+				<property name="deptHistDao">
+					<ref local="deptHistDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="empHistEmptypeDao"
+		class="com.hr.profile.dao.EmpHistEmptypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empHistEmptypeBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpHistEmptypeBoImpl">
+				<property name="empHistEmptypeDao">
+					<ref local="empHistEmptypeDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="empHistJobtitleDao"
+		class="com.hr.profile.dao.EmpHistJobtitleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empHistJobtitleBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpHistJobtitleBoImpl">
+				<property name="empHistJobtitleDao">
+					<ref local="empHistJobtitleDao"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="positionDao"
+		class="com.hr.profile.dao.PositionDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="positionBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.PositionBoImpl">
+				<property name="positionDao">
+					<ref local="positionDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+	
+	<bean id="positionBaseDao"
+		class="com.hr.profile.dao.PositionBaseDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="positionBaseBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.PositionBaseBoImpl">
+				<property name="positionBaseDao">
+					<ref local="positionBaseDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="positionBaseHistDao"
+		class="com.hr.profile.dao.PositionBaseHistDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="positionBaseHistBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.PositionBaseHistBoImpl">
+				<property name="positionBaseHistDao">
+					<ref local="positionBaseHistDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="empHistOrgDao"
+		class="com.hr.profile.dao.EmpHistOrgDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="empHistOrgBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.EmpHistOrgBoImpl">
+				<property name="empHistOrgDao">
+					<ref local="empHistOrgDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<bean id="ouqualifyDao"
+		class="com.hr.profile.dao.OuqualifyDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ouqualifyBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.OuqualifyBoImpl">
+				<property name="ouqualifyDao">
+					<ref local="ouqualifyDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="ouresponseDao"
+		class="com.hr.profile.dao.OuresponseDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ouresponseBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.OuresponseBoImpl">
+				<property name="ouresponseDao">
+					<ref local="ouresponseDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="ouperfcriteriaDao"
+		class="com.hr.profile.dao.OuperfcriteriaDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ouperfcriteriaBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.profile.bo.OuperfcriteriaBoImpl">
+				<property name="ouperfcriteriaDao">
+					<ref local="ouperfcriteriaDao" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="roleService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.security.bo.impl.RoleBoImpl">
+				<property name="roleDao" ref="roleDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="userService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.security.bo.impl.UserBoImpl">
+				<property name="userDao" ref="userDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="authService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.security.bo.impl.AuthBoImpl">
+				<property name="authDao" ref="authDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="authPosService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.security.bo.impl.AuthorityPosBoImpl">
+				<property name="authorityPosDao" ref="authorityPosDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="roleDao" class="com.hr.security.dao.impl.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userDao" class="com.hr.security.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="authDao" class="com.hr.security.dao.impl.AuthDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    <bean id="authorityPosDao" class="com.hr.security.dao.impl.AuthorityPosDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

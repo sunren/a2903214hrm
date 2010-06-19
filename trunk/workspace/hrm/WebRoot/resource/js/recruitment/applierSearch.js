@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+function splits($){var _=document.getElementById("operate");_.value=$;document.recruitapplierSearch.submit()}function order_submit(A){var _=document.getElementById("order"),$=document.getElementById(A+"_img").src,B=$.substring($.lastIndexOf("/"),$.length);if(B.lastIndexOf("up")!=-1)_.value=A+"-down";else _.value=A+"-up";document.recruitapplierSearch.submit()}function check_order(){var A=$F("order"),_=A.split("-");if(_!=null&&_[0]!=null&&_.length==2){var $=document.getElementById(_[0]+"_img");if(_[1]=="up")$.setAttribute("src","../resource/images/arrow_up.gif");else $.setAttribute("src","../resource/images/arrow_down.gif")}}

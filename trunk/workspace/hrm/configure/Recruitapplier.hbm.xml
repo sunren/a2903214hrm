@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.recruitment.domain">
+	<class
+		name="Recruitapplier"
+		table="recruitapplier"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="reca_id"
+		>
+			<generator class="uuid.hex"/>
+		</id> 
+
+		<property
+			name="recaName"
+			column="reca_name"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="recaPhone"
+			column="reca_phone"
+			type="string"
+			not-null="false"
+			length="16"
+		/>
+		<property
+			name="recaEmail"
+			column="reca_email"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		
+		<property
+			name="recaDiploma"
+			column="reca_diploma"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		
+		<property
+			name="recaInterviewTime"
+			column="reca_interview_time"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		
+		<property
+			name="recaInterviewer"
+			column="reca_interviewer"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		
+		<property
+			name="recaAttachmentName"
+			column="reca_attachment_name"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="recaStatus"
+			column="reca_status"
+			type="integer"		
+		/>
+		<property
+			name="recaComment"
+			column="reca_comment"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="recaCreateTime"
+			column="reca_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="recaLastChangeTime"
+			column="reca_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<many-to-one
+			name="recaChannel"
+			column="reca_channel_no"
+			class="com.hr.recruitment.domain.Recruitchannel"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recaLastChangeBy"
+			column="reca_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recaPlan"
+			column="reca_plan_id"
+			class="com.hr.recruitment.domain.Recruitplan"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recaCreateBy"
+			column="reca_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

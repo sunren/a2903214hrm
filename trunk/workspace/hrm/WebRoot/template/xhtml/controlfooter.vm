@@ -1,0 +1,9 @@
+$!{parameters.after}
+#if( $fieldErrors.get($parameters.name) )
+  #foreach ($error in $fieldErrors.get($parameters.name)) 
+        <span class="errorMessage">$!webwork.htmlEncode($error)</span>
+  #end
+#end
+#if ($parameters.label)
+</td>
+#end

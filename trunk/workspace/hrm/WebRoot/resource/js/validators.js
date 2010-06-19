@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+if(validator==null)var validator={};if(validator.str==null)validator.str={};if(validatorStr==null)var validatorStr=validator.str;validator.str.isInt=function(_){var $=/^-?[1-9]\d*$/;if(typeof _!="string")return;_=_.trim();if(_.length==0)return false;if(_=="0")return true;return $.test(_)};validator.str.isIntOrEmpty=function(_){var $=/^-?[1-9]\d*$/;if(typeof _!="string")return;_=_.trim();if(_.length==0)return true;if(_=="0")return true;return $.test(_)};validator.str.isInt1=function(_){var $=/^-?\d+$/;if(typeof _!="string")return;_=_.trim();return $.test(_)};validator.str.isPositiveInt=function(_){var $=/^[1-9]\d*$/;if(typeof _!="string")return;_=_.trim();return $.test(_)};validator.str.isNonNegtiveInt=function(_){var $=/^[1-9]\d*$/;if(typeof _!="string")return;_=_.trim();return _=="0"||$.test(_)};validator.str.strLength=function(A){var $=0;for(var _=0;_<A.length;_++){if(A.charCodeAt(_)>255)$++;$++}return $}

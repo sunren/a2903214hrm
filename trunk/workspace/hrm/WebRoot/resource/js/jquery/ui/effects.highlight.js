@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+(function($){$.effects.highlight=function(_){return this.queue(function(){var D=$(this),B=["backgroundImage","backgroundColor","opacity"],E=$.effects.setMode(D,_.options.mode||"show"),A=_.options.color||"#ffff99",C=D.css("backgroundColor");$.effects.save(D,B);D.show();D.css({backgroundImage:"none",backgroundColor:A});var F={backgroundColor:C};if(E=="hide")F["opacity"]=0;D.animate(F,{queue:false,duration:_.duration,easing:_.options.easing,complete:function(){if(E=="hide")D.hide();$.effects.restore(D,B);if(E=="show"&&$.browser.msie)this.style.removeAttribute("filter");if(_.callback)_.callback.apply(this,arguments);D.dequeue()}})})}})(jQuery)

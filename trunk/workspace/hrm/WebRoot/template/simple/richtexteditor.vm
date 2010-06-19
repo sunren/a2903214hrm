@@ -1,0 +1,240 @@
+#if (!$stack.findValue('richtexteditor_js_included'))
+	<script type="text/javascript" src="$!base/fckeditor/fckeditor.js"></script>
+	
+    #set( $tmpVariable = $stack.setValue('richtexteditor_js_included', 'true') )
+#end
+
+<script>
+	var oFCKeditor_$!{webwork.htmlEncode($parameters.id)} = new FCKeditor( '${parameters.name}' ) ;
+	## basePath
+	#if ($parameters.basePath)
+		oFCKeditor_${parameters.id}.BasePath = '${parameters.basePath}' ;
+	#else
+		oFCKeditor_${parameters.id}.BasePath = '../fckeditor/' ;
+	#end
+	##  height 
+	#if (${parameters.height})
+		oFCKeditor_${parameters.id}.Height	= '${parameters.height}' ;
+	#end
+	##  width 
+	#if ($parameters.width)
+		oFCKeditor_${parameters.id}.Width = '${parameters.width}' ;
+	#end
+	## toolbarSet 
+	#if ($parameters.toolbarSet)
+		oFCKeditor_${parameters.id}.ToolbarSet = '${parameters.toolbarSet}' ;
+	#end
+	## checkBrowser 
+	#if ($parameters.checkBrowser)
+		oFCKeditor_${parameters.id}.CheckBrowser = '${parameters.checkBrowser}' ;
+	#end
+	## displayError 
+	#if ($parameters.displayError)
+		oFCKeditor_${parameters.id}.DisplayError = '${parameters.displayError}' ;
+	#end
+	##  value -->
+	#if ($!parameters.nameValue)
+		oFCKeditor_${parameters.id}.Value = '${parameters.nameValue}';
+	#end
+	##  customConfigurationsPath -->
+	#if ($parameters.customConfigurationsPath)
+		oFCKeditor_${parameters.id}.Config['CustomConfigurationsPath'] = '${parameters.customConfigurationsPath}' ;
+	#end
+	##-- editorAreaCSS -->
+	#if ($parameters.editorAreaCss)
+		oFCKeditor_${parameters.id}.Config['EditorAreaCSS'] = '$parameters.editorAreaCss' ;
+	#end
+	##-- baseHref -->
+	#if ($parameters.baseHref)
+			oFCKeditor_${parameters.id}.Config['BaseHref'] = '${parameters.baseHref}' ;
+	#end
+	##-- skinPath -->
+	#if ($parameters.skinPath)
+		oFCKeditor_${parameters.id}.Config['SkinPath'] = '${parameters.skinPath}' ;
+	#end
+	##-- pluginsPath -->
+	#if ($parameters.pluginsPath)
+		oFCKeditor_${parameters.id}.Config['PluginsPath'] = '${parameters.pluginsPath}' ;
+	#end
+	##-- fullPage -->
+	#if ($parameters.fullPage)
+		oFCKeditor_${parameters.id}.Config['FullPage'] = '${parameters.fullPage}' ;
+	#end
+	##-- debug -->
+	#if ($parameters.debug)
+		oFCKeditor_${parameters.id}.Config['Debug'] = '${parameters.debug}' ;
+	#end
+	##-- autoDetectLanguage -->
+	#if ($parameters.autoDetectLanguage)
+		oFCKeditor_${parameters.id}.Config['AutoDetectLanguage'] = '${parameters.autoDetectLanguage}' ;
+	#end
+	##-- defaultLanguage -->
+	#if ($parameters.defaultLanguage)
+		oFCKeditor_${parameters.id}.Config['DefaultLanguage'] = '${parameters.defaultLanguage}' ;
+	#end
+	##-- contentLanguageDirection -->
+	#if ($parameters.contentLangDirection)
+		oFCKeditor_${parameters.id}.Config['ContentLangDirection'] = '${parameters.contentLangDirection}' ;
+	#end
+	##-- enableXHTML  -->
+	#if ($parameters.enableXHTML)
+		oFCKeditor_${parameters.id}.Config['EnableXHTML'] = '${parameters.enableXHTML}' ;
+	#end
+	##-- enableSourceXHTML -->
+	#if ($parameters.enableSourceXHTML)
+		oFCKeditor_${parameters.id}.Config['EnableSourceXHTML'] = '${parameters.enableSourceXHTML}' ;
+	#end
+	##-- fillEmptyBlocks -->
+	#if ($parameters.fillEmptyBlocks)
+		oFCKeditor_${parameters.id}.Config['FillEmptyBlocks'] = '${parameters.fillEmptyBlocks}' ;
+	#end
+	##-- formatSource -->
+	#if ($parameters.formatSource)
+		oFCKeditor_${parameters.id}.Config['FormatSource'] = '${parameters.formatSource}' ;
+	#end
+	##-- formatOutput -->
+	#if ($parameters.formatOutput)
+		oFCKeditor_${parameters.id}.Config['FormatOutput'] = '${parameters.formatOutput}' ;
+	#end
+	##-- formatIndentator -->
+	#if ($parameters.formatIndentator)
+		oFCKeditor_${parameters.id}.Config['FormatIndentator'] = '${parameters.formatIndentator}' ;
+	#end
+	##-- geckoUseSPAN -->
+	#if ($parameters.geckoUseSPAN)
+		oFCKeditor_${parameters.id}.Config['GeckoUseSPAN'] = '${parameters.geckoUseSPAN}' ;
+	#end
+	##-- startupFocus -->
+	#if ($parameters.startupFocus)
+		oFCKeditor_${parameters.id}.Config['StartupFocus'] = '${parameters.startupFocus}' ;
+	#end
+	##-- forcePasteAsPlainText -->
+	#if ($parameters.forcePasteAsPlainText)
+		oFCKeditor_${parameters.id}.Config['ForcePasteAsPlainText'] = '${parameters.forcePasteAsPlainText}' ;
+	#end
+	##-- forceSimpleAmpersand -->
+	#if ($parameters.forceSimpleAmpersand)
+		oFCKeditor_${parameters.id}.Config['ForceSimpleAmpersand'] = '${parameters.forceSimpleAmpersand}' ;
+	#end
+	##-- tabSpaces -->
+	#if ($parameters.tabSpaces)
+		oFCKeditor_${parameters.id}.Config['TabSpaces'] = '${parameters.tabSpaces}' ;	
+	#end
+	##-- useBROnCarriageReturn -->
+	#if ($parameters.useBROnCarriageReturn)
+		oFCKeditor_${parameters.id}.Config['UseBROnCarriageReturn'] = '${parameters.useBROnCarriageReturn}' ;
+	#end
+	##-- toolbarStartExpanded -->
+	#if ($parameters.toolbarStartExpanded)
+		oFCKeditor_${parameters.id}.Config['ToolbarStartExpanded'] = '${parameters.toolbarStartExpanded}' ;
+	#end
+	##-- toolbarCanCollapse -->
+	#if ($parameters.toolbarCanCollapse)
+		oFCKeditor_${parameters.id}.Config['ToolbarCanCollapse'] = '${parameters.toolbarCanCollapse}' ;
+	#end
+	##-- fontColors -->
+	#if ($parameters.fontColors)
+		oFCKeditor_${parameters.id}.Config['FontColors'] = '${parameters.fontColors}' ;
+	#end
+	##-- fontNames -->
+	#if ($parameters.fontNames)
+		oFCKeditor_${parameters.id}.Config['FontNames'] = '${parameters.fontNames}' ;
+	#end
+	##-- fontSizes -->
+	#if ($parameters.fontSizes)
+		oFCKeditor_${parameters.id}.Config['FontSizes'] = '${parameters.fontSizes}' ;
+	#end
+	##-- fontFormats -->
+	#if ($parameters.fontFormats)
+		oFCKeditor_${parameters.id}.Config['FontFormats'] = '${parameters.fontFormats}' ;
+	#end
+	##-- stylesXmlPath -->
+	#if ($parameters.stylesXmlPath)
+		oFCKeditor_${parameters.id}.Config['StylesXmlPath'] = '<@ww.url value=parameters.stylesXmlPath?string />' ;
+	#end
+	##-- templatesXmlPath -->
+	#if ($parameters.templatesXmlPath)
+		oFCKeditor_${parameters.id}.Config['TemplatesXmlPath'] = '<@ww.url value=parameters.templatesXmlPath?string />' ;
+	#end
+	##-- linkBrowserURL -->
+	#if ($parameters.linkBrowserURL)
+		oFCKeditor_${parameters.id}.Config['LinkBrowserURL'] = '<@ww.url value=parameters.linkBrowserURL?string />' ;
+	#end
+	##-- imageBrowserURL -->
+	#if ($parameters.imageBrowserURL)
+		oFCKeditor_${parameters.id}.Config['ImageBrowserURL'] = '<@ww.url value=parameters.imageBrowserURL?string />' ;
+	#end
+	##-- flashBrowserURL -->
+	#if ($parameters.flashBrowserURL)
+		oFCKeditor_${parameters.id}.Config['FlashBrowserURL'] = '<@ww.url value=parameters.flashBrowserURL?string />' ;
+	#end
+	##-- linkUploadURL -->
+	#if ($parameters.linkUploadURL)
+		oFCKeditor_${parameters.id}.Config['LinkUploadURL'] = '<@ww.url value=parameters.linkUploadURL?string />' ;
+	#end
+	##-- imageUploadURL -->
+	#if ($parameters.imageUploadURL)
+		oFCKeditor_${parameters.id}.Config['ImageUploadURL'] = '<@ww.url value=parameters.imageUploadURL?string />' ;
+	#end
+	##-- flashUploadURL -->
+	#if ($parameters.flashUploadURL)
+		oFCKeditor_${parameters.id}.Config['FlashUploadURL'] = '<@ww.url value=parameters.flashUploadURL?string />' ;
+	#end
+	##-- allowImageBrowse -->
+	#if ($parameters.allowImageBrowse)
+		oFCKeditor_${parameters.id}.Config['ImageBrowser'] = '<@ww.url value=parameters.allowImageBrowse?string />' ;
+	#end
+	##-- allowLinkBrowse -->
+	#if ($parameters.allowLinkBrowse)
+		oFCKeditor_${parameters.id}.Config['LinkBrowser'] = '<@ww.url value=parameters.allowLinkBrowse?string />' ;
+	#end
+	##-- allowFlashBrowse -->
+	#if ($parameters.allowFlashBrowse)
+		oFCKeditor_${parameters.id}.Config['FlashBrowser'] = '${parameters.allowFlashBrowse}' ;
+	#end
+	##-- allowImageUpload -->
+	#if ($parameters.allowImageUpload)
+		oFCKeditor_${parameters.id}.Config['ImageUpload'] = '${parameters.allowImageUpload}' ;
+	#end
+	##-- allowLinkUpload -->
+	#if ($parameters.allowLinkUpload)
+		oFCKeditor_${parameters.id}.Config['LinkUpload'] = '${parameters.allowLinkUpload}' ;
+	#end
+	##-- allowFlashUpload -->
+	#if ($parameters.allowFlashUpload)
+		oFCKeditor_${parameters.id}.Config['FlashUpload'] = '${parameters.allowFlashUpload}' ;
+	#end
+	##-- linkUploadAllowedExtension -->
+	#if ($parameters.linkUploadAllowedExtension)
+		oFCKeditor_${parameters.id}.Config['LinkUploadAllowedExtensions'] = '${parameters.linkUploadAllowedExtension}' ;
+	#end
+	##-- linkUploadDeniedExtension -->
+	#if ($parameters.linkUploadDeniedExtension)
+		oFCKeditor_${parameters.id}.Config['LinkUploadDeniedExtensions'] = '${parameters.linkUploadDeniedExtension}' ;
+	#end
+	##-- imageUploadAllowedExtension -->
+	#if ($parameters.imageUploadAllowedExtension)
+		oFCKeditor_${parameters.id}.Config['ImageUploadAllowedExtensions'] = '${parameters.imageUploadAllowedExtension}' ;
+	#end
+	##-- imageUploadDeniedExtension -->
+	#if ($parameters.imageUploadDeniedExtension)
+		oFCKeditor_${parameters.id}.Config['ImageUploadDeniedExtensions'] = '${parameters.imageUploadDeniedExtension}' ;
+	#end
+	##-- flashUploadAllowedExtension -->
+	#if ($parameters.flashUploadAllowedExtension)
+		oFCKeditor_${parameters.id}.Config['FlashUploadAllowedExtensions'] = '${parameters.flashUploadAllowedExtension}' ;
+	#end
+	##-- flashUploadDeniedExtension -->
+	#if ($parameters.flashUploadDeniedExtension)
+		oFCKeditor_${parameters.id}.Config['FlashUploadDeniedExtensions'] = '${parameters.flashUploadDeniedExtension}' ;
+	#end
+	##-- smileyPath -->
+	#if ($parameters.smileyPath)
+		oFCKeditor_${parameters.id}.Config['SmileyPath'] = '<@ww.url value=parameters.smileyPath?string />' ;
+	#end
+	##-- smileyImages -->
+	#if ($parameters.smileyImages)
+		oFCKeditor_${parameters.id}.Config['SmileyImages'] = "${parameters.smileyImages}" ;
+	#end
+	oFCKeditor_${parameters.id}.Create() ;
+</script>

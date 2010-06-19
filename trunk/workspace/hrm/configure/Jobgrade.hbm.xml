@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Jobgrade"
+		table="jobgrade"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>  
+		<id
+			name="id"
+			type="string" 
+			column="jobgrade_id"
+		>
+			<generator class="assigned"/>
+		</id>
+		<property
+			name="jobGradeNo"
+			column="jobgrade_no"
+			type="string"
+			not-null="true"
+			length="16"
+		/>
+		
+		<property
+			name="jobGradeLevel"
+			column="jobgrade_level"
+			type="integer"
+			not-null="true"
+			length="3"
+		/>
+		<property
+			name="jobGradeMrp"
+			column="jobgrade_mrp"
+			type="big_decimal"
+			not-null="false"
+			length="11"
+		/>
+		<property
+			name="jobGradeName"
+			column="jobgrade_name"
+			type="string"
+			not-null="true"
+			length="45"
+		/>
+		
+		<property 
+			name="jobGradeSortId"
+			column="jobgrade_sort_id"
+			type="integer"
+			not-null="false"
+			length="3"
+		/>
+	</class>	
+</hibernate-mapping>

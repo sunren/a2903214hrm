@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.compensation.domain">
+	<class
+		name="Empsalaryacctversion"
+		table="empsalaryacctversion"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="esav_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="esavValidFrom"
+			column="esav_valid_from"
+			type="date"
+			not-null="true"
+			length="45"
+		/>
+		<property
+			name="esavValidTo"
+			column="esav_valid_to"
+			type="date"
+			not-null="false"
+			length="45"
+		/>
+		<property
+			name="esavCreateBy"
+			column="esav_create_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="esavCreateTime"
+			column="esav_create_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="esavLastChangeBy"
+			column="esav_last_change_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="esavLastChangeTime"
+			column="esav_last_change_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<many-to-one
+			name="esavEsac"
+			column="esav_esac_id"
+			class="Empsalaryacct"
+			not-null="true"
+			lazy="false"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

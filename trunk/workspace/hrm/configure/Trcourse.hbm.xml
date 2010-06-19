@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.training.domain">
+	<class
+		name="Trcourse"
+		table="trcourse"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="trcNo"
+			type="string"
+			column="trc_no"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="trcName"
+			column="trc_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="trcInfo"
+			column="trc_info"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="trcStatus"
+			column="trc_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="trcFileName"
+			column="trc_file_name"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="trcCreateTime"
+			column="trc_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="trcLastChangeTime"
+			column="trc_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<many-to-one
+			name="trcType"
+			column="trc_type"
+			class="Trtype"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trcCreateBy"
+			column="trc_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trcLastChangeBy"
+			column="trc_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+	
+
+		<set name="trcourseplans" inverse="true">
+			<key column="trc_no"/>
+			<one-to-many class="Trcourseplan"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="empsalaryconfig.escBankAccountNo">
+		<field-validator type="requiredstring">
+			<message>必填项！</message>
+		</field-validator>
+	</field>
+	<field name="empsalaryconfig.escJobgrade.id">
+		<field-validator type="requiredstring">
+			<message>必填项！</message>
+		</field-validator>
+	</field>
+<field name="empsalaryconfig.escBankAccountNo">
+		<field-validator type="regex" short-circuit="true">
+           <param name="expression"><![CDATA[^([a-zA-Z0-9]|[-_*.]){0,32}$]]></param>
+		   <message>只允许字母，数字和".-_*"！</message>
+        </field-validator>
+	</field>
+</validators>

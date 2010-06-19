@@ -1,0 +1,1 @@
+${SENDER.empName}拒绝了您的培训计划

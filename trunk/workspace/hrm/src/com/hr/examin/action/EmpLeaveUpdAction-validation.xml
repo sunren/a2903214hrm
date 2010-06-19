@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="lf_Bean.lrReason">
+		<field-validator type="stringlength">
+			<param name="maxLength">255</param>
+			<message>请假理由最多为255个字符！</message>
+		</field-validator>
+	</field>
+	<field name="lf_Bean.beginDate">
+		<field-validator type="required">
+			<message>必须填写请假开始日期！</message>
+		</field-validator>
+		<field-validator type="date">
+			<message>日期格式错误！</message>
+		</field-validator>
+	</field>
+	<field name="lf_Bean.endDate">
+		<field-validator type="required">
+			<message>必须填写请假结束日期！</message>
+		</field-validator>
+		<field-validator type="date">
+			<message>日期格式错误！</message>
+		</field-validator>
+	</field>
+</validators>

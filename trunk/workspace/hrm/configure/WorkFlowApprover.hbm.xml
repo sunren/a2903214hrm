@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class name="WorkFlowApprover" table="wfapprover">
+		<cache usage="nonstrict-read-write"/>   
+		<id name="id"
+			type="string"
+			column="workflow_id">
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="workFlowApproverId"
+			column="workflow_approver_id"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="workFlowApproverType"
+			column="workflow_approver_type"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="workFlowApproverLevel"
+			column="workflow_approver_level"
+			type="java.lang.Integer"
+			not-null="false"
+		/>
+		<property
+			name="workFlowLimit"
+			column="workflow_limit"
+			type="big_decimal"
+			not-null="true"
+		/>
+		<property
+			name="workFlowApproverInd"
+			column="workflow_approver_ind"
+			type="java.lang.Integer"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

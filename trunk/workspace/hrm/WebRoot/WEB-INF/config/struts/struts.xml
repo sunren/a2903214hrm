@@ -1,0 +1,80 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="struts-default.xml" />
+	
+	<include file="struts-compensation.xml" />
+	<include file="struts-configuration.xml" />
+	<include file="struts-examin.xml" />
+	<include file="struts-help.xml" />
+	<include file="struts-homepage.xml" />
+	<include file="struts-information.xml" />
+	<include file="struts-io.xml" />
+	<include file="struts-other.xml" />
+	<include file="struts-profile.xml" />
+	<include file="struts-recruitment.xml" />
+	<include file="struts-report.xml" />
+	<include file="struts-security.xml" />
+	<include file="struts-training.xml" />
+
+
+	<package name="default" extends="struts-default">
+		<result-types>
+			<!-- Results necessary when using 'browse server' and 'upload' feature of Richtexteditor -->
+            <result-type name="richtexteditorGetFolders" class="org.apache.struts2.views.jsp.ui.RichtexteditorGetFoldersResult" />
+            <result-type name="richtexteditorGetFoldersAndFiles" class="org.apache.struts2.views.jsp.ui.RichtexteditorGetFoldersAndFilesResult" />
+            <result-type name="richtexteditorCreateFolder" class="org.apache.struts2.views.jsp.ui.RichtexteditorCreateFolderResult" />
+            <result-type name="richtexteditorFileUpload" class="org.apache.struts2.views.jsp.ui.RichtexteditorFileUploadResult" />
+            <!-- 新增用于文件导出，解决了导出后服务器端不能自动删除相应文件的问题 -->
+            <result-type name="streamDeleted" class="org.apache.struts2.dispatcher.StreamResultDeleted" />
+		</result-types>
+		<interceptors>
+			<interceptor name="checklogin"
+				class="com.hr.security.web.interceptor.LoginCheck" />
+			<interceptor name="checkauth"
+				class="com.hr.security.web.interceptor.CheckAuth" />
+
+			<interceptor-stack name="defaultStack0">
+				<interceptor-ref name="checklogin" />
+				<!--<interceptor-ref name="checkauth"/>-->
+				<interceptor-ref name="servlet-config" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="static-params" />
+				<interceptor-ref name="logger" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+
+			<interceptor-stack name="modelParamsStack">
+				<interceptor-ref name="params" />
+				<interceptor-ref name="model-driven" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="defaultStack0">
+		</default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirect">/configuration/login.jsp</result>
+			<result name="noauth" type="redirect">/system/no_auth.jsp</result>
+			<result name="noemp" type="redirect">/system/no_emp.jsp</result>
+			<result name="overLimitUADM" type="redirect">/system/overLimitUADM.jsp</result>
+			<result name="overLimitUMGR" type="redirect">/system/overLimitUMGR.jsp</result>
+			<result name="overLimitU" type="redirect">/system/overLimitU.jsp</result>
+			<result name="overLimitE" type="redirect">/system/overLimitE.jsp</result>  
+			<result name="params_error">/system/params_error.jsp</result>
+			<result name="wait">/system/wait.jsp</result>
+			<result name="download" type="streamDeleted">
+				<param name="contentType">application/x-msdownload</param>
+					<param name="inputName">docStream</param>
+					<param name="bufferSize">1024</param>
+					<param name="contentDisposition">${contentDisposition}</param>
+					<param name="serverFileName">serverFileName</param>
+				</result>
+				<result name="noAuthority" type="chain">
+				<param name="location">index</param>
+			</result>
+		</global-results>
+	</package>
+</struts>

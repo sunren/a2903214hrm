@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Syslog"
+		table="syslog"
+	> 
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="sl_id"
+		>
+		<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="slType"
+			column="sl_type"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="slTableName"
+			column="sl_table_name"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="slEmpno"
+			column="sl_empno"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="slRecordId"
+			column="sl_record_id"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+	
+		<property
+			name="slAction"
+			column="sl_action"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="slChangeTime"
+			column="sl_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="slComments"
+			column="sl_comments"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<many-to-one
+			name="slChangeEmpno"
+			column="sl_change_empno"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

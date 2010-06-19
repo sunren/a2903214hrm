@@ -1,0 +1,15 @@
+## then give the label it's own tds in the table
+#if( $fieldErrors.get($parameters.name) )
+  #set ($hasFieldErrors = $fieldErrors.get($parameters.name))
+#end
+#if ($parameters.label)
+<td class="tag_left_td" align="right" nowrap>
+<label #if ($parameters.id) for="$!webwork.htmlEncode($parameters.id)" #end
+#if ($hasFieldErrors) class="errorLabel" #end>
+$!webwork.htmlEncode($parameters.label)#if($parameters.required)<span class="required">*</span>#end&#65306;
+</label>
+</td>
+<td #if($parameters.colspan) colspan="$!webwork.htmlEncode($parameters.colspan)" #end  class=errorMessage>
+#end
+
+    

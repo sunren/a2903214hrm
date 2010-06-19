@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+(function($){$.effects.pulsate=function(_){return this.queue(function(){var B=$(this),C=$.effects.setMode(B,_.options.mode||"show"),D=_.options.times||5,E=_.duration?_.duration/2:$.fx.speeds._default/2;if(C=="hide")D--;if(B.is(":hidden")){B.css("opacity",0);B.show();B.animate({opacity:1},E,_.options.easing);D=D-2}for(var A=0;A<D;A++)B.animate({opacity:0},E,_.options.easing).animate({opacity:1},E,_.options.easing);if(C=="hide")B.animate({opacity:0},E,_.options.easing,function(){B.hide();if(_.callback)_.callback.apply(this,arguments)});else B.animate({opacity:0},E,_.options.easing).animate({opacity:1},E,_.options.easing,function(){if(_.callback)_.callback.apply(this,arguments)});B.queue("fx",function(){B.dequeue()});B.dequeue()})}})(jQuery)

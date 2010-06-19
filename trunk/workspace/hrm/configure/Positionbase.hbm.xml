@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="PositionBase"
+		table="positionbase"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<cache usage="nonstrict-read-write"/>
+
+		<id
+			name="id"
+			type="string"
+			column="pb_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<many-to-one
+			name="pbJobTitle"
+			column="pb_job_title"
+			class="com.hr.configuration.domain.JobTitle"
+			not-null="false"
+			
+		/>
+		<property
+			name="pbName"
+			column="pb_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="pbDesc"
+			column="pb_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="pbDescAttach"
+			column="pb_desc_attach"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<many-to-one
+			name="pbDeptId"
+			column="pb_dept_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+			
+		/>
+		<many-to-one
+			name="pbSupId"
+			column="pb_sup_id"
+			class="com.hr.profile.domain.PositionBase"
+			not-null="false"
+			
+		/>
+		<property
+			name="pbInCharge"
+			column="pb_in_charge"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="pbMaxEmployee"
+			column="pb_max_employee"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="pbMaxExceed"
+			column="pb_max_exceed"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="pbStatus"
+			column="pb_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="pbSortId"
+			column="pb_sort_id"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+        <property
+			name="pbWorkAddress"
+			column="pb_work_address"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+        <property
+			name="pbWorkTime"
+			column="pb_work_time"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="pbWorkTool"
+			column="pb_work_tool"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+	</class>	
+</hibernate-mapping>

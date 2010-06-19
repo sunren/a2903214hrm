@@ -1,0 +1,1 @@
+${SENDER.empName}พÜพ๘มห${APPLIER.empName}ตฤว๋ผูษ๊ว๋(ฑเบลฮช${LEAVE.lrNo?string.number})

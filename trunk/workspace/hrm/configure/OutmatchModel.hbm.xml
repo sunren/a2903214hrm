@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="OutmatchModel"
+		table="outmatchmodel"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="ommId"
+			type="string"
+			column="omm_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="ommName"
+			column="omm_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="ommDesc"
+			column="omm_desc"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="ommCreateTime"
+			column="omm_create_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="ommLastChangeTime"
+			column="omm_last_change_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="ommStatisticPlace"
+			column="omm_statistic_place"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ommOutputType"
+			column="omm_output_type"
+			type="string"
+			not-null="true"
+			length="8"
+		/>
+		<property
+			name="ommNoTitle"
+			column="omm_no_title"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ommDefault"
+			column="omm_default"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ommLastChangeBy"
+			column="omm_last_change_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="ommCreateBy"
+			column="omm_create_by"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="ommStatisticDisplayType"
+			column="omm_statistic_display_type"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ommRowHeight"
+			column="omm_row_height"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<many-to-one
+			name="ommIo"
+			column="omm_io_id"
+			class="Iodef"
+			not-null="true"
+		>
+		</many-to-one>
+		
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.security.domain">
+	<class name="Authority" table="authority">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-only" />
+		<id name="id" type="integer" column="authority_id">
+			<generator class="native" />
+		</id>
+
+		<property name="authorityModuleNo" column="authority_module_no"
+			type="string" not-null="true" length="6" />
+		<property name="authorityActionNo" column="authority_action_no"
+			type="string" not-null="false" length="32" />
+		<property name="authorityConditionNo"
+			column="authority_condition_no" type="int" not-null="false"
+			length="16" />
+		<property name="authorityDesc" column="authority_desc"
+			type="string" not-null="false" length="128" />
+	
+
+	</class>
+</hibernate-mapping>

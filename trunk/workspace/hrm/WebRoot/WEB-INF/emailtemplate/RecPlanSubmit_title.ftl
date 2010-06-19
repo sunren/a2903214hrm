@@ -1,0 +1,1 @@
+${SENDER.empName}提交了新的招聘计划给您

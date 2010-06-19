@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Depthist"
+		table="depthist"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<cache usage="nonstrict-read-write"/>
+
+		<id
+			name="id"
+			type="string"
+			column="dhi_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<many-to-one
+			name="dhiDeptNo"
+			column="dhi_dept_no"
+			class="com.hr.configuration.domain.Department"
+			not-null="true"
+			
+		/>
+		<property
+			name="dhiDeptName"
+			column="dhi_dept_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="dhiDeptStatus"
+			column="dhi_dept_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<many-to-one
+			name="dhiDeptSupId"
+			column="dhi_dept_sup_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+			
+		/>
+		<property
+			name="dhiValidFrom"
+			column="dhi_valid_from"
+			type="date"
+			not-null="true"
+		/>
+		<property
+			name="dhiValidTo"
+			column="dhi_valid_to"
+			type="date"
+			not-null="false"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

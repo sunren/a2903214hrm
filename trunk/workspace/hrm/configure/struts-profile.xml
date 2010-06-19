@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="profile" extends="default" namespace="/profile">
+		<interceptors>
+            <interceptor-stack name="modelParamsStack">
+				<interceptor-ref name="checklogin"/>
+				<interceptor-ref name="checkauth"/>
+            	<interceptor-ref name="params"/>
+				<interceptor-ref name="chain" />
+            </interceptor-stack>
+	  </interceptors>
+	  
+	  <!-- 我的资料 -->
+	  <action name="myInfo" class="com.hr.profile.action.MyBasicInfo">
+	  		<result name="success" type="dispatcher">/profile/my_basic_info.jsp</result> 
+	  		<result name="noemp" type="dispatcher">/system/no_emp.jsp</result> 
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+	  </action>
+	  <!-- 员工附加资料 -->
+	  <action name="empAdditional" class="com.hr.profile.action.EmpAdditional" method="listAll">
+	  		<result name="success" type="dispatcher">/profile/employee_additional.jsp</result> 
+	  		<result name="noemp" type="dispatcher">/system/no_emp.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 员工简历上传 -->
+	  <action name="resumeUpload" class="com.hr.profile.action.EmpAdditional" method="resumeUpload">
+	  		<result name="success" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="input" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  
+	  <action name="resumeDelete" class="com.hr.profile.action.EmpAdditional" method="resumeDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 员工培训、教育背景和社会关系的增加和修改 -->
+	  <action name="eduAdd" class="com.hr.profile.action.EmpEduHisDWR" method="eduHisAdd">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="eduUpdate" class="com.hr.profile.action.EmpEduHisDWR" method="eduHisUpdate">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="trainAdd" class="com.hr.profile.action.EmpTrainHisDWR" method="trainHisAdd">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="trainUpdate" class="com.hr.profile.action.EmpTrainHisDWR" method="trainHisUpdate">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="relationsAdd" class="com.hr.profile.action.EmpRelationsDWR" method="relationsAdd">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+	  		<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="relationsUpdate" class="com.hr.profile.action.EmpRelationsDWR" method="relationsUpdate">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">empAdditional</param>
+	  			<param name="namespace">/profile</param>
+	  		</result>
+	  		<interceptor-ref name="modelParamsStack"/>
+	  		<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	   <!--　教育背景的附件修改　-->
+	   <action name="deleteEduAttach" class="com.hr.profile.action.EmpEduHisDWR" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	   <!--　培训经历的附件修改　-->
+	   <action name="deleteTrainAttach" class="com.hr.profile.action.EmpTrainHisDWR" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empAdditional</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工合同增加 -->
+	  <action name="empContractAdd" class="com.hr.profile.action.EmpContract" method="addContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		  <result name="input" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	    <!-- 员工合同增加 -->
+	  <action name="empContractManAdd" class="com.hr.profile.action.EmpContract" method="addContract">
+            <result name="success" type="chain">
+            	<param name="actionName">manageContract</param>
+              	<param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		  <result name="input" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	    <!-- 员工合同续签 -->
+	  <action name="empContractManContinue" class="com.hr.profile.action.EmpContract" method="continueContract">
+            <result name="success" type="chain">
+            	<param name="actionName">manageContract</param>
+              	<param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		  <result name="input" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <!-- 员工合同修改 -->
+	  <action name="empContractUpdate" class="com.hr.profile.action.EmpContract" method="updateContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		  <result name="input" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <!--员工合同管理模块使用 -->
+	  <action name="updateContract" class="com.hr.profile.action.EmpContract" method="updateContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+             <result name="input" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+             <result name="error" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <!-- 员工合同修改(合同管理模块) -->
+	  <action name="updateEmpContract" class="com.hr.profile.action.EmpContract" method="updateContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">listContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <action name="deleteEmpContract" class="com.hr.profile.action.ContractManagement" method="deleteContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="deleteContract" class="com.hr.profile.action.EmpContract" method="deleteContract">
+            <result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <interceptor-ref name="modelParamsStack"/>
+      </action>
+	  <action name="batchRepeal" class="com.hr.profile.action.ContractManagement" method="batchRepeal">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="batchContinuous" class="com.hr.profile.action.ContractManagement" method="batchContinuous">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="batchCreate" class="com.hr.profile.action.ContractManagement" method="batchCreate">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 员工合同修改(合同管理模块) -->
+	  <action name="updateManContract" class="com.hr.profile.action.ContractManagement" method="updateContract">
+	  		<result name="success" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">manageContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <!--　合同的附件修改　-->
+	   <action name="deleteContractAttach" class="com.hr.profile.action.EmpContract" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="deleteContractAttach2" class="com.hr.profile.action.EmpContract" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">listContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listContract</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 员工考评信息增加 -->
+	  <action name="empEvalAdd" class="com.hr.profile.action.EmpEval" method="addEval">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  <!-- -考评附件删除- -->
+	  <action name="deleteEvalAttach" class="com.hr.profile.action.EmpEval" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="deleteEvalAttach2" class="com.hr.profile.action.EmpEval" method="attachDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+
+	  <!-- 员工考评信息修改 -->
+	  <action name="empEvalUpdate" class="com.hr.profile.action.EmpEval" method="updateEval">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  
+  	  <!-- 员工考评信息修改(合同管理模块) -->
+	  <action name="updateEmpEval" class="com.hr.profile.action.EmpEval" method="updateEval">
+	  		<result name="success" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	   <!-- 员工变动信息增加 -->
+	  <action name="empTransferAdd" class="com.hr.profile.action.EmpTransfer" method="addTransfer">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+	  </action>
+	  <!-- 员工变动信息修改 -->
+	  <action name="empTransferUpdate" class="com.hr.profile.action.EmpTransfer" method="updateTransfer">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工变动信息修改(合同管理模块) -->
+	  <action name="updateEmpTransfer" class="com.hr.profile.action.EmpTransfer" method="updateEval">
+	  		<result name="success" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listEval</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  
+	  <!-- 员工人事档案 -->
+	  <action name="empProfile" class="com.hr.profile.action.EmpProfile">
+	  		<result name="success" type="dispatcher">/profile/employee_profile.jsp</result> 
+	  		<result name="noemp" type="dispatcher">/system/no_emp.jsp</result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		    <interceptor-ref name="modelParamsStack"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+	  </action>
+	  
+	    <!-- 员工奖惩信息增加 -->
+	  <action name="empRewardAdd" class="com.hr.profile.action.EmpReward" method="addReward">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 员工奖惩信息修改 -->
+	  <action name="empRewardUpdate" class="com.hr.profile.action.EmpReward" method="updateReward">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工奖惩信息修改(合同管理模块) -->
+	  <action name="updateEmpReward" class="com.hr.profile.action.EmpReward" method="updateReward">
+	  		<result name="success" type="chain">
+              <param name="actionName">listReward</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listReward</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  
+	    <!-- 员工离职信息增加 -->
+	  <action name="empQuitAdd" class="com.hr.profile.action.EmpQuit" method="addQuit">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="empQuitDelete" class="com.hr.profile.action.EmpQuit" method="deleteQuit">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工离职信息修改 -->
+	  <action name="empQuitUpdate" class="com.hr.profile.action.EmpQuit" method="updateQuit">
+	  		<result name="success" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">empProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工合同修改(合同管理模块) -->
+	  <action name="updateEmpQuit" class="com.hr.profile.action.EmpQuit" method="updateQuit">
+	  		<result name="success" type="chain">
+              <param name="actionName">listQuit</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="error" type="chain">
+              <param name="actionName">listQuit</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+	  		<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+	  </action>
+	  
+	  <!-- 员工合同管理 -->
+	  <action name="listContract" class="com.hr.profile.action.EmpContract" method="list">
+	  		<result name="success" type="dispatcher">/profile/search_contract.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工变动信息管理 -->
+	  <action name="listTransfer" class="com.hr.profile.action.EmpTransfer" method="list">
+	  		<result name="success" type="dispatcher">/profile/search_transfer.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工考评信息管理 -->
+	  <action name="listEval" class="com.hr.profile.action.EmpEval" method="list">
+	  		<result name="success" type="dispatcher">/profile/search_eval.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工奖惩管理 -->
+	  <action name="listReward" class="com.hr.profile.action.EmpReward" method="list">
+	  		<result name="success" type="dispatcher">/profile/search_reward.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 员工离职信息管理 -->
+	  <action name="listQuit" class="com.hr.profile.action.EmpQuit" method="list">
+	  		<result name="success" type="dispatcher">/profile/search_quit.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	    <!-- 员工合同管理(单独页面的) -->
+	  <action name="manageContract" class="com.hr.profile.action.ContractManagement">
+	  		<result name="success" type="dispatcher">/profile/contract_management.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+		<!-- 我的基本信息 -->
+	  <action name="ajaxSelfInit" class="com.hr.profile.action.EditEmpInit" method="selfInit">
+	  		<result name="success" type="dispatcher">/profile/hr_self_info.jsp</result> 
+		    <result name="general" type="dispatcher">/profile/self_info.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+		  <!--
+            <interceptor-ref name="execAndWait">
+                  <param name="delay">500</param>
+            </interceptor-ref>
+		  -->
+	  </action>
+	  <action name="ajaxSelf" class="com.hr.profile.action.EditEmp" method="updateEmp">
+			  <!-- hr -->
+	  		<result name="success" type="dispatcher">/profile/hr_self_info.jsp</result> 
+			  <!-- employee -->
+			<result name="general" type="dispatcher">/profile/self_info.jsp</result> 
+		    <result name="invalid.token" type="dispatcher">ajaxSelfInit.action</result>
+			<result name="input" type="chain">
+              <param name="actionName">ajaxSelfInit</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack" /> 
+		    <interceptor-ref name="validation"/>
+		    <interceptor-ref name="workflow"/> 
+		    <interceptor-ref name="token"/>  
+	  </action>
+	  <action name="ajaxDelProfile" class="com.hr.profile.action.DeleteRecord" method="delProfile">
+		    <result name="success" type="chain">
+              <param name="actionName">listQuit</param>
+              <param name="namespace">/profile</param>
+            </result>
+            <result name="myprofile" type="chain">
+              <param name="actionName">listQuit</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="checklogin"/>
+	  		<interceptor-ref name="params"/> 
+	  </action>	
+<!-- 修改员工信息 -->	
+	  <action name="updateBasicInfo" class="com.hr.profile.action.UpdateBasicInfo">
+	  		<result name="success" type="dispatcher">/profile/update_basic_info.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+		<!-- 更新员工信息:初始化 -->
+	  <action name="updateEmpInit" class="com.hr.profile.action.EditEmpInit" method="updateInit">
+	  		<result name="success" type="dispatcher">/profile/hr_self_info.jsp</result> 
+		    <result name="general" type="dispatcher">/profile/self_info.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+		<!-- 更新员工信息 -->
+	  <action name="updateEmp" class="com.hr.profile.action.EditEmp" method="updateEmp">
+		   <!-- hr -->
+	  		<result name="success" type="dispatcher">/profile/hr_self_info.jsp</result> 
+		   <!-- employee -->
+			<result name="general" type="dispatcher">/profile/self_info.jsp</result> 
+			<result name="input" type="chain">
+              <param name="actionName">updateEmpInit</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+            <interceptor-ref name="validationWorkflowStack"/>
+            <interceptor-ref name="fileUploadStack"/>
+	  </action>
+	<!-- 查询 -->
+	  <action name="searchEmp" class="com.hr.profile.action.SearchEmp">
+	  		<result name="success" type="dispatcher">/profile/search_emp.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>		
+	<!-- 创建 -->
+	  <action name="empCreateInit" class="com.hr.profile.action.EditEmpInit" method="createInit">
+	  		<result name="success" type="dispatcher">/profile/employee_create.jsp</result> 
+	  		<interceptor-ref name="modelParamsStack"/>
+	  </action>
+		<!-- 创建员工信息 -->
+	  <action name="empCreate" class="com.hr.profile.action.EditEmp" method="createEmp">
+	  		<result name="success" type="redirect">myInfo.action?empNo=${emp.id}&amp;newName=${emp.empName}&amp;createFlag=1</result>
+            <result name="input" type="chain">
+              <param name="actionName">empCreateInit</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<interceptor-ref name="modelParamsStack"/>
+            <interceptor-ref name="validationWorkflowStack"/>
+            <interceptor-ref name="fileUploadStack"/>
+	  </action>
+		<!-- 下载员工档案 -->
+	  <action name="downProfile" class="com.hr.profile.action.DownFile" method="downProfile">
+	  		<result name="nofile" type="redirect">/profile/download.jsp</result>
+		    <interceptor-ref name="checklogin"/>
+	  		<interceptor-ref name="params"/> 
+	  </action>
+	<!-- 删除员工 -->
+	  <action name="delEmp" class="com.hr.profile.action.DeleteRecord" method="delEmp">
+			<result name="success" type="chain">
+              <param name="actionName">searchEmp</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 删除员工（离职员工管理） -->
+	  <action name="deleteEmp" class="com.hr.profile.action.DeleteRecord" method="delEmp">
+			<result name="success" type="chain">
+              <param name="actionName">empQuitManagement</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 批量删除员工（离职员工管理） -->
+	  <action name="batchDeleteEmp" class="com.hr.profile.action.QuitManageAction" method="batchDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">empQuitManagement</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>	
+	  
+	  <!-- 批量删除员工（在职员工管理）已废弃！ -->
+	  <action name="batchDelEmp" class="com.hr.profile.action.QuitManageAction" method="batchDelete">
+	  		<result name="success" type="chain">
+              <param name="actionName">searchEmp</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>	
+	  <!-- 批量复职（离职员工管理） -->
+	  <action name="batchRehabEmp" class="com.hr.profile.action.QuitManageAction">
+	  		<result name="success" type="chain">
+              <param name="actionName">empQuitManagement</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>	
+	  
+	  <!-- 员工批量离职 -->
+	  <action name="batchQuit" class="com.hr.profile.action.QuitManageAction" method="batchQuit">
+	  		<result name="success" type="chain">
+              <param name="actionName">searchEmp</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <!-- 批量变动 -->
+	  <action name="batchTransfer" class="com.hr.profile.action.BatchTransfer">
+	  		<result name="success" type="chain">
+              <param name="actionName">searchEmp</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <action name="delProfile" class="com.hr.profile.action.DeleteRecord" method="delProfile">
+			<result name="myprofile" type="chain">
+              <param name="actionName">myProfileInit</param>
+              <param name="namespace">/profile</param>
+            </result>
+			<result name="success" type="chain">
+              <param name="actionName">searchProfile</param>
+              <param name="namespace">/profile</param>
+            </result>
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  
+	  <action name="detailEmployeeInfo" class="com.hr.profile.action.DetailEmployeeInfo">
+	  		<result name="success" type="dispatcher">/profile/employee_tree_detail.jsp</result> 
+			<result name="error">/homepage/index.jsp</result>
+	  		<interceptor-ref name="modelParamsStack" /> 
+	  </action>
+	  
+	  <action name="empTreeInit" class="com.hr.profile.action.EmpTreeInit">
+	  		<result name="success" type="dispatcher">/profile/employee_tree_info.jsp</result> 
+			<result name="error">/homepage/index.jsp</result>
+	  		<interceptor-ref name="modelParamsStack" /> 
+	  </action>
+	  
+	  <!-- 组织结构管理 -->
+	  <action name="profileConfig" class="com.hr.profile.action.ProfileConfigAction">
+	       <result name="success" type="dispatcher">/profile/employeeBasicInfo.jsp</result> 
+           <result name="error">/homepage/index.jsp</result>
+           <interceptor-ref name="modelParamsStack" /> 
+	  </action>
+	  
+	  <!--员工部门设置-->
+       <action name="departmentConfig" class="com.hr.profile.action.DepartmentManagementAction">
+            <result name="success" type="dispatcher">/profile/department_config.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="modelParamsStack" /> 
+      </action>
+ 
+		<!-- birt report -->
+		<action name="empReport" class="com.hr.report.action.profile.EmpReportAction">
+            <result name="success" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+            <result name="*" type="dispatcher">/examin/error.jsp</result>       
+            <interceptor-ref name="modelParamsStack"/>
+            <interceptor-ref name="validationWorkflowStack"/>
+        </action>
+		
+		<!-- 员工档案管理 -->
+		<action name="profileManagement" class="com.hr.profile.action.ProfileManagement">
+			<result name="success">/profile/profile_management.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		</action>
+		
+		<!-- 员工离职信息管理 -->
+	    <action name="empQuitManagement" class="com.hr.profile.action.SearchEmpQuitAction" method="execute">
+	  		<result name="success" type="dispatcher">/profile/quit_management.jsp</result> 
+	  		<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="modelParamsStack"/>
+	    </action>
+		<!-- 员工资料信息卡 -->
+		<action name="infoCard" class="com.hr.profile.action.EmpInfoCard">
+			<result name="success">/profile/employee_information.jsp</result>
+			<result name="noemp">/system/no_emp.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		</action>
+		
+		<!-- 创建新员工 -->
+		<action name="createBasicInfo" class="com.hr.profile.action.CreateBasicInfo">
+			<result>/profile/create_basic_info.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		</action>
+		<!-- 考勤 -->
+		<action name="myAttendance" class="com.hr.profile.action.MyAttendance">
+				<result>/profile/attendance.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		</action>
+		<action name="attendance" class="com.hr.profile.action.MyAttendance">
+			<result type="dispatcher">/profile/attendance.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="checklogin"/>
+		    <interceptor-ref name="checkauth"/>
+		</action>
+		
+		<!-- 组织结构负责人 -->
+		<action name="orgHeads"
+			class="com.hr.profile.action.OrgHeadsAction">			
+	        <result name="success" type="dispatcher">/profile/employee_orgheads.jsp</result>
+	         <result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+       
+       <!--部门经理设置-->
+       <action name="departmanagerConfig" class="com.hr.profile.action.DepartManagerAction">
+            <result name="success" type="dispatcher">/profile/departmanager_config.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="modelParamsStack" /> 
+      </action>
+      <!--工作地区负责人设置-->
+       <action name="locationmanagerConfig" class="com.hr.profile.action.LocationManagerAction">
+            <result name="success" type="dispatcher">/profile/locationmanager_config.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="modelParamsStack" /> 
+       </action>
+       <!-- 组织结构树管理 -->
+       <!-- 部门树 -->
+       <action name="orgDeptManage" class="com.hr.profile.action.OrgDeptManageAction">
+            <result name="success" type="dispatcher">/profile/org_dept_manage.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goBranchDeptTabs" class="com.hr.profile.action.OrgDeptManageAction" method="goBranchDeptTabs">
+            <result name="branchDeptTabs" type="dispatcher">/profile/org_dept_edit_tabs.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="editBranchDeptInit" class="com.hr.profile.action.OrgDeptManageAction" method="editBranchDeptInit">
+           <result name="editBranchInit" type="dispatcher">/profile/org_new_edit_branch.jsp</result>
+           <result name="editDeptInit" type="dispatcher">/profile/org_new_edit_dept.jsp</result>
+           <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="saveBranchDept" class="com.hr.profile.action.OrgDeptManageAction" method="saveBranchDept">
+           <result name="success" type="chain">
+                <param name="actionName">goBranchDeptTabs</param>
+                <param name="namespace">/profile</param>
+            </result>
+           <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goDeptResTab" class="com.hr.profile.action.OrgDeptManageAction" method="goDeptResTab">
+            <result name="success" type="dispatcher">/profile/org_dept_response.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goDeptPerfcrTab" class="com.hr.profile.action.OrgDeptManageAction" method="goDeptPerfcrTab">
+            <result name="success" type="dispatcher">/profile/org_dept_perfcr.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goDeptPBsTab" class="com.hr.profile.action.OrgDeptManageAction" method="goDeptPBsTab">
+            <result name="success" type="dispatcher">/profile/org_dept_pbs.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goDeptHistTab" class="com.hr.profile.action.OrgDeptManageAction" method="goDeptHistTab">
+            <result name="success" type="dispatcher">/profile/org_dept_hist.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       <action name="goDirectSubDeptTab" class="com.hr.profile.action.OrgDeptManageAction" method="goDirectSubDeptTab">
+            <result name="success" type="dispatcher">/profile/org_dept_directsub_list.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+       </action>
+       
+      <!--显示组织结构图-->
+      <action name="showOrgMap" class="com.hr.profile.action.OrgMapAction" method="showOrgMap">
+            <result name="success" type="dispatcher">/profile/orgMap.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="modelParamsStack" /> 
+      </action>
+      <!--岗位管理-->
+      <action name="showPbManagePage"
+			class="com.hr.profile.action.ShowPbManagePageAction" method="showPbManagePage">			
+	        <result name="success" type="dispatcher">/profile/pb_manage_page.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+      <action name="pbManage"
+			class="com.hr.profile.action.pbManageAction">			
+	        <result name="success" type="dispatcher">/profile/pb_manage.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 <action name="pbBasicInfo"
+			class="com.hr.profile.action.pbManageAction" method="pbBasicInfo">			
+	        <result name="success" type="dispatcher">/profile/pb_basic_info.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 <action name="savePbBasicInfo"
+	         class="com.hr.profile.action.pbManageAction" method="savePbBasicInfo">
+	        <result name="success" type="redirect">
+	              pbManage.action?pbId=${pbId}&amp;lastOperate=${lastOperate}
+	        </result>
+	         <result name="error" type="redirect">
+	              pbManage.action?pbId=${pbId}
+	        </result>
+	 </action>
+	 <action name="showPbTable"
+			class="com.hr.profile.action.pbManageAction" method="showPbTable">			
+	        <result name="success" type="dispatcher">/profile/show_pb_table.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="pbResponse"
+			class="com.hr.profile.action.pbManageAction" method="pbResponse">			
+	        <result name="success" type="dispatcher">/profile/pb_response.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="pbPerfcr"
+			class="com.hr.profile.action.pbManageAction" method="pbPerfcr">			
+	        <result name="success" type="dispatcher">/profile/pb_Perfcr.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 <action name="pbQualify"
+			class="com.hr.profile.action.pbManageAction" method="pbQualify">			
+	        <result name="success" type="dispatcher">/profile/pb_qualify.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="showPbHistAction"
+			class="com.hr.profile.action.pbManageAction" method="showPbHistAction">			
+	        <result name="success" type="dispatcher">/profile/show_pb_histAction.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="showPbManual"
+			class="com.hr.profile.action.PbManualAction" method="showPbManual">			
+	        <result name="success" type="dispatcher">/profile/show_pb_manual.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="showPositionStructure"
+			class="com.hr.profile.action.ShowPositionStructureAction" method="showPositionStructure">			
+	        <result name="success" type="dispatcher">/profile/position_structure.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+	 <action name="positionInfo"
+			class="com.hr.profile.action.PositionManageAction" method="positionInfo">			
+	        <result name="success" type="dispatcher">/profile/position_info.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	 </action>
+	 
+    </package>
+</struts>

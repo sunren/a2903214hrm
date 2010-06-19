@@ -1,0 +1,120 @@
+@charset "utf-8";
+body {
+	font-size: 12px;
+	text-align:center;
+	margin: 0px;
+	padding: 0px;
+}
+ul, li{
+	margin:0px;
+	padding:0px;
+	list-style-type: none;
+}
+*{
+margin:0px auto;
+padding:0px}
+#help_top{
+width:98%;
+
+background-color:#f9faf5;
+float:none;
+border-bottom:#106fa5 3px solid;
+}
+#help_foot{
+width:98%;
+height:30px;
+clear:both;
+margin-top:10px;
+background-color:#f9faf5;
+float:none;
+border-top:#106fa5 1px solid;
+}
+#helpmain{width:98%;
+margin:5px 0px 0px 0px;
+float:none;
+clear:both}
+#help_left{
+width:23%;
+text-align:left;
+float:left}
+#help_right{
+width:77%;
+margin-top:4px;
+text-align:left;
+padding:4px;
+float:right;
+border:1px solid #aacde6}
+#help_right h5{
+font-size:13px;
+width:720px;
+float:left;
+padding:5px 0px 3px 5px;
+background:#ddf0f7;
+}
+#help_right h1{
+font-size:18px;
+width:725px;
+margin:6px 0px 6px 0px;
+float:left;}
+.info{
+width:645px;
+padding:6px;
+background:#f0f0f0;
+border:1px solid #CCCCCC;
+margin:0px 0px 0px 30px;
+line-height:1.8;
+clear:both;
+}
+.firstmenu dt{
+margin:4px 0px 4px 0px}
+.firstmenu dt a,.firstmenu dt a:visited{
+	width:185px;
+	height:18px;
+	padding:5px 0px 0px 18px;
+	display:block;
+	background:url(menu_bg.gif) left top no-repeat;
+	color: #000000;
+	text-decoration: none;
+}
+.firstmenu dt a:hover{
+	background:url(menu_bg.gif) left -23px no-repeat;
+	color: #ffffff;
+}
+#thisfirstmenu a{
+	width:185px;
+	height:18px;
+	padding:5px 0px 0px 18px;
+	display:block;
+	background:url(menu_bg.gif) left -46px no-repeat;
+	color:#ffffff;
+	}
+.secondmenu li a,.secondmenu li a:visited{
+width:150px;
+height:23px;
+margin-left:24px;
+display:block;
+background:url(menu_bg.gif) left -90px no-repeat;
+background:#FFFFFF;
+border-bottom:1px dashed #ccc;}
+.secondmenu li a:hover{
+	background:url(menu_bg.gif) left -69px no-repeat;
+	color:#000000;
+}
+#thissecondmenu a{
+    background:url(menu_bg.gif) left -69px no-repeat;
+	color:#000000;
+	font-weight:bold;}
+.graph{
+	width:680px;
+	margin:24px 0px 0px 30px;
+	}
+.graph h4{
+font-size:12px;
+font-weight:bold;}
+.graph p{
+width:670px;
+text-align:justify;
+line-height:1.6;
+}
+
+

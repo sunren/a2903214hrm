@@ -1,0 +1,32 @@
+##<script type="text/javascript" src="../resource/js/edit_select.js"></script>
+##<link rel="stylesheet" type="text/css" href="../resource/css/edit_select.css" />
+#parse("/$parameters.templateDir/xhtml/controlheader.vm")
+<div id="$!webwork.htmlEncode($parameters.name)_div">
+	<table id="$!webwork.htmlEncode($parameters.name)_table" cellpadding=0 cellspacing=0 class=select>
+		<tr><td bgcolor=#FFFFFF>
+          <input type=text class=selecttext name="$!webwork.htmlEncode($parameters.name)"
+			id="$!webwork.htmlEncode($parameters.name)_id"
+			#if ($parameters.size) size="$!webwork.htmlEncode($parameters.size)"  #else size="10" #end
+            #if ($parameters.nameValue) value="$!webwork.htmlEncode($parameters.nameValue)" #end
+			#if ($parameters.disabled) readonly #end>
+			<button type="button" class=selectbutton id="$!webwork.htmlEncode($parameters.name)_button">&nbsp;
+		</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+e_w="$!webwork.htmlEncode($parameters.width)";
+e_h="$!webwork.htmlEncode($parameters.height)";
+if(e_w==null||e_w==''||e_w=='undefined'){e_w=100;}
+if(e_h==null||e_h==''||e_h=='undefined'){e_h=120;}
+var edit_sel_1=new editselect("$!webwork.htmlEncode($parameters.name)",1,"",e_w,e_h,0);
+#if ($parameters.emptyOption)
+    edit_sel_1.add("");
+#end
+#set( $items = $parameters.list )
+#if( $items )
+    #foreach( $item in $items )
+		edit_sel_1.add("$!webwork.htmlEncode($item)");
+    #end
+#end
+</script>
+#parse("/$parameters.templateDir/xhtml/controlfooter.vm")

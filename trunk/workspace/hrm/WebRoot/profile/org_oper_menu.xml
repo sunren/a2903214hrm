@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<menu>
+	<!--kpicrud-->
+	<item id="muItem_rename" text="更名" img="edit.gif"/>
+	<item type="separator"/>
+	<item id="muItem_stop" text="停用" img="edit_dis.gif"/>
+	<item type="separator"/>
+	<item id="muItem_delete" text="删除" img="del.gif"/>
+</menu>

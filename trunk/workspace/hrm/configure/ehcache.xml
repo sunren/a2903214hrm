@@ -1,0 +1,768 @@
+<ehcache>
+
+    <defaultCache
+        maxElementsInMemory="500"
+        eternal="false"
+        timeToIdleSeconds="3600"
+        timeToLiveSeconds="7200"
+		overflowToDisk="true"
+        />
+
+    <!--Predefined caches.  Add your cache configuration settings here.
+        If you do not have a configuration for your cache a WARNING will be issued when the
+        CacheManager starts
+
+        The following attributes are required:
+
+        name                           - Sets the name of the cache. This is used to identify the cache. 
+                                         It must be unique.
+        maxInMemory                    - Sets the maximum number of objects that will be created in memory
+        eternal                        - Sets whether elements are eternal. If eternal,  timeouts are ignored and the
+                                         element is never expired.
+        overflowToDisk                 - Sets whether elements can overflow to disk when the in-memory cache
+                                         has reached the maxInMemory limit.
+
+        The following attributes are optional:
+        timeToIdleSeconds              - Sets the time to idle for an element before it expires.
+                                         i.e. The maximum amount of time between accesses before an element expires
+                                         Is only used if the element is not eternal.
+                                         Optional attribute. A value of 0 means that an Element can idle for infinity.
+                                         The default value is 0.
+        timeToLiveSeconds              - Sets the time to live for an element before it expires.
+                                         i.e. The maximum time between creation time and when an element expires.
+                                         Is only used if the element is not eternal.
+                                         Optional attribute. A value of 0 means that and Element can live for infinity.
+                                         The default value is 0.
+        diskPersistent                 - Whether the disk store persists between restarts of the Virtual Machine.
+                                         The default value is false.
+        diskExpiryThreadIntervalSeconds- The number of seconds between runs of the disk expiry thread. The default value
+                                         is 120 seconds.
+        -->
+
+    <!-- Sample cache named sampleCache1
+        This cache contains a maximum in memory of 10000 elements, and will expire
+        an element if it is idle for more than 5 minutes and lives for more than
+        10 minutes.
+
+        If there are more than 10000 elements it will overflow to the
+        disk cache, which in this configuration will go to wherever java.io.tmp is
+        defined on your system. On a standard Linux system this will be /tmp"
+
+        <cache name="sampleCache1"
+        	maxElementsInMemory="10000"
+        	eternal="false"
+        	overflowToDisk="true"
+        	timeToIdleSeconds="300"
+        	timeToLiveSeconds="600"
+        />
+       -->
+       
+    <!-- Place configuration for your caches following 
+    
+     <cache name="com.ty.business.purchase.domain.Paymethod"
+        	maxElementsInMemory="50000"
+        	eternal="false"
+        	overflowToDisk="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="3600"
+      />
+     -->
+	 <!--  -->
+	 <cache name="com.hr.examin.domain.Attendshiftareadept"
+        	maxElementsInMemory="30" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+	 <cache name="com.hr.examin.domain.Attdoriginaldata"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Attendperiod"
+        	maxElementsInMemory="5" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Empshift"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportGroups"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.security.domain.Authority"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+
+     <cache name="com.hr.configuration.domain.Branch"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+
+     <cache name="com.hr.configuration.domain.Businessunit"
+        	maxElementsInMemory="40" 
+        	eternal="false"
+         	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+     />
+	 <cache name="com.hr.configuration.domain.BenefitType"
+        	maxElementsInMemory="40" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Department"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Ecptype"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.ContractType"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Emailsend"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Emailtemplate"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Empaddconf"
+        	maxElementsInMemory="16" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.compensation.domain.Empsalaryadj"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Empcontract"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Empbenefit"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+	 <cache name="com.hr.compensation.domain.Empbenefitplan"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Empeval"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Emphistoryedu"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Emphistoryjob"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Emphistorytrain"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Emprelations"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Employee"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="true"
+      />
+     <cache name="com.hr.profile.domain.Empquit"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Empreward"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.compensation.domain.Empsalaryconfig"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.compensation.domain.Empsalarypay"
+        	maxElementsInMemory="1000" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="true"
+      />
+     <cache name="com.hr.compensation.domain.Empsalaryperiod"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.profile.domain.Emptransfer"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Emptype"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.help.domain.Help"
+        	maxElementsInMemory="400" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.help.domain.Helpclass"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Infoclass"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.information.domain.Information"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Jobgrade"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.examin.domain.Leavebalance"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.examin.domain.Leavecalendar"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.examin.domain.Leaverequest"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.examin.domain.Leavetype"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Location"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+
+     <cache name="com.hr.examin.domain.Overtimerequest"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.examin.domain.Overtimetype"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.recruitment.domain.Recruitapplier"
+        	maxElementsInMemory="500" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.recruitment.domain.Recruitchannel"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.recruitment.domain.Recruitplan"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.security.domain.Role"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Statusconf"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.configuration.domain.Syslog"
+        	maxElementsInMemory="2000" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="true"
+      />
+     <cache name="com.hr.training.domain.Trcourse"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.training.domain.Trcourseplan"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.training.domain.Tremployeeplan"
+        	maxElementsInMemory="500" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.training.domain.Trtype"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+       <cache name="com.hr.configuration.domain.Sysconfig"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+     <cache name="com.hr.security.domain.Userinfo"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.compensation.domain.Empsalarydatadef"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportSetsDef"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Orgheads"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.configuration.domain.Group"
+        	maxElementsInMemory="15" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportDef"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportSets"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.compensation.domain.Empsalaryacct"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Attendshift"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.WorkFlowApprover"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportModuleDef"
+        	maxElementsInMemory="60" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Attendmonthly"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportJoinDef"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.configuration.domain.JobTitle"
+        	maxElementsInMemory="30" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.compensation.domain.Empsalaryacctitems"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.compensation.domain.Empsalaryacctversion"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.compensation.domain.Empbenefit"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.Inmatch"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.InmatchBasic"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.InmatchModel"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.Iomatch"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.Iodef"
+        	maxElementsInMemory="10" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Attendshiftowner"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.Outmatch"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.OutmatchBasic"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.io.domain.OutmatchModel"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.report.domain.ReportParams"
+        	maxElementsInMemory="50" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.examin.domain.Attenddaily"
+        	maxElementsInMemory="100" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.security.domain.Client"
+        	maxElementsInMemory="5" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Deptheads"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Deptheadshist"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Depthist"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Emphistdept"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Emphistemptype"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Emphistjobtitle"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Position"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Emphistposition"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.PositionBase"
+        	maxElementsInMemory="20" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.PositionBaseHist"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.EmpHistOrg"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      
+      <cache name="com.hr.profile.domain.Ouqualify"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Ouresponse"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.security.domain.AuthorityPos"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+      <cache name="com.hr.profile.domain.Ouperfcriteria"
+        	maxElementsInMemory="200" 
+        	eternal="false"
+        	timeToIdleSeconds="3600"
+        	timeToLiveSeconds="7200"
+        	overflowToDisk="false"
+      />
+</ehcache>

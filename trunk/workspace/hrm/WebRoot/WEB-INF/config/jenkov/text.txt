@@ -1,0 +1,964 @@
+步骤：
+1：把jenkov-prizetags-bin-x.x.x.jar放在WEB工程的 WEB-INF/lib目录下
+2：解压 treetag.tld文件到WEB工程的 WEB-INF，treetag.tld在JAR包的META-INF目录下
+3：JSP中声明使用
+基本步骤:3步
+1:建立树模型,放入session
+2:指出树型标签将要在哪个session变量中显示
+3:定制外观
+树模型
+标签库中的标签需要树模型的支持,树模型没有什么神秘,下面是它的例子:
+ITree tree = new Tree();
+//参数说明(node's id , node's name , node's type)
+ITreeNode root = new TreeNode(“rootId” , “Servers” , “root”);
+ITreeNode server1 = new TreeNode(“server1Id”, “Exchange Server”, “server”);
+ITreeNode server2 = new TreeNode(“server2Id”, “Notes Server” , “server”);
+root.addChild(server1);
+root.addChild(server2);
+tree.setRoot(root);
+session.setAttribute("tree.model", tree);
+//原型说明：
+void javax.servlet.http.HttpSession.setAttribute(String arg0, Object arg1)；
+先建树,树的实例含哪些结点是被展开或选择.这些信息并不放在节点上,然后,建立根节点,和两个子节点,最后,根被加在树上,在此,当然能给树加更多的层次,这里为了简洁,不赘述.
+最后一行不属于树模型的建造,它只是把树模型存放在一个地方以利用树标签能够找到.把树模型存在SESSION属性中是大众方法.当然,你最好不要每接到一个页面请求就重新生成树模型,否则,包含展开和被选节点的状态将被不断的覆盖.正确的做法:先检查session变量,看是否树模型已经存入,若否,则新建并存入.否则,什么事情都不要做.
+树型标签:
+要想用标签显示树型结构,则需要稍微了解下树型模型.一旦你了解了,你就能用他们做更多的结构出来.格式:
+指向树模型:
+首先,选择要显示的模型,他们通常存在session属性中,所以标签需要知道session属性的名字:下示:
+<%@ taglib uri="/WEB-INF/treetag.tld" prefix="tree" %>
+<tree:tree tree="tree.model">
+</tree:tree>
+标签的作用在于发现树和读取可用的节点,它本身并不设计树,也不显示任何树模型的数据.每颗树标签的以<tree:tree ...>开始,以</tree:tree>结束.这些嵌套的标签需要知道怎么发现可用节点通过读取 <tree:tree ...>标签.所以为了可用,你必须在 <tree:tree ...>标签中指定.指定时,需要说明节点属性
+<tree:tree tree="tree.model" node="tree.node">
+</tree:tree>
+现在<tree:tree ...>标签将按读取过来的顺序存放节点,并把他们作为一个request属性存放,而不是session属性.他们被放在关键字"tree.node"下,嵌套的标签和脚本通过以下方式发现节点:
+<%ITreeIteratorElement nodeElement = (ITreeIteratorElement) request.getAttribute("tree.node");%>
+现在你能通过脚本打印节点ID和别的节点的信息:
+<%=nodeElement.getId()%>
+<%=nodeElement.getNode().getType()%>
+... etc.
+显示节点名称:
+标签<tree:nodeName ...> 显示读取到的树型节点的名称
+<tree:tree tree="tree.model" node="tree.node">
+<tree:nodeName node="tree.node"/>
+</tree:tree>
+这样,它将在浏览器中显示:
+-------------------
+Servers
+-------------------
+它一点都不象树,不是吗?那是因为我们之前没有做一些格式定制的工作.因此现在它只显示了根节点.
+
+添加展开操作:
+为了能顺序显示子节点,第一步是要给每个可用的节点添加展开操作.这样我们才能展开根节点并查看2个增加过的子节点.这些可用通过使用通用标签 <tree:nodeMatch ...>来实现.
+<tree:tree tree="tree.model" node="tree.node">
+ <tree:nodeMatch node="tree.node">
+  <img src="../images/collapsedMidNode.gif" border="0">
+ </tree:nodeMatch>
+ <tree:nodeName node="tree.node"/>
+</tree:tree>
+这样,它将在浏览器中显示:
+--------------------
+| +-Servers
+--------------------
+现在离完美还甚远,下一步是激活展开操作.刚才你使不能单击打开它的,只有一个图象,而没有链接.激活它的最简单的方法是给图片添加一个标准的HTML链接.<tree:tree ...>标签能侦测到节点展开的请求参数. 通常,<tree:tree ...>标签检查这个请求是否含有"expand"参数.如果有,<tree:tree ...>标签将假定参数的值是要展开的节点的ID. <tree:tree ...>标签将调用自己的ITree实例的ITree.expand(nodeId)方法来展开节点.
+简而言之,生成一个回到包含树型标签的页面链接,需要的条件:一个请求参数,展开操作,欲展开的节点ID.总观:
+<tree:tree tree="tree.model" node="tree.node">
+ <tree:nodeMatch node="tree.node">
+  <a href="myTree.jsp?expand=rootId"><img
+  src="../images/collapsedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeName node="tree.node"/>
+</tree:tree>
+然而,上面的链接并不是动态的,它只能展开根结点,而不管下一个节点是否将被显示.为了能动态的链接,它其实需要得到每个读到的节点的ID。这些都是<tree:nodeId ...>标签的作用：例子：
+<tree:tree tree="tree.model" node="tree.node">
+ <tree:nodeMatch node="tree.node">
+  <a href="myTree.jsp?expand=<B><tree:nodeId node='tree.node'/></B>"><img
+  src="../images/collapsedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeName node="tree.node"/>
+</tree:tree>
+这样,点击根节点它将在浏览器中显示:
+--------------------------------------------------
+| +-Servers  +-Exchange Server  +-Notes Server
+--------------------------------------------------
+注意:<a ...>与<img ...>之间没有空格。<img ...>与</a>之间也没有。如果你移动<img ...>标签到下一行，一个空格将出现在图象前，这个空格将是链接的一部分，然而这样看起来并不舒服。
+垂直分放节点：
+这个链接现在可以激活，点开它后，它的两个子节点也是可见的。浏览器中可以看到他们3个是在一行平行排列的。
+为什么节点都在一行显示？前面提到，树标签没有做任何格式的工作。
+他们能够以正确的顺序读取树型结构,并且能匹配节点。所有格式代码是写在树型标签之间的，就像写HTML一样简单.垂直显示的最简单的方法是在</tree:tree>前添加换行<br>。然而，为了方便我们后面对节点进行缩进时，最好把节点放在表格的单独行。所以添加如下代码：
+<table cellspacing="0" cellpadding="0" border="0">
+ <tree:tree tree="tree.model" node="tree.node">
+ <tr>
+  <td>
+   <tree:nodeMatch node="tree.node"><a
+   href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+   src="../images/collapsedMidNode.gif" border="0"></a>
+   </tree:nodeMatch>
+  </td>
+  <td>
+   <tree:nodeName node="tree.node"/>
+  </td>
+ </tr>
+ </tree:tree>
+</table>
+点击根节点后,浏览器中将会以垂直显示:
+-----------------------
+|  +-Servers
+-----|-----------------
+|  +-ExchangServer
+-----|-----------------
+|  +-Notes Server
+-----------------------
+节点的缩进：
+上面显示的节点的图象，并不象树，需要将两个子节点"Exchange Server" 和 "Notes Server"相对他们的父节点"Servers"错开。
+刚开始看起来，缩进显得不是很重要。如果你只通过空格的方式造成缩进，很容易实现。你所需要做的只是知道一个子节点的跟节点的数量。从而子节点的缩进量只是相等数量的空格而已。这种空格缩进太简单了。我们也需要能够在被展开一个或几个节点的祖先节点之间显示垂直线.象在windows浏览器和其他树型控制中一样的实现。垂直线有利于在树型变大时分清节点层次。
+当缩进一个节点时，我们需要读取并知道缩进是否要显示空格或垂直线。这意味着每个节点需要知道它祖先节点在垂直线上是否有兄弟节点。祖先的兄弟节点要先于祖先节点本身显示。问题就来了，因为节点是在祖先节点和祖先的兄弟节点之间显示的。
+情况看起来很复杂，所以我们要先抽象它。
+对于每个可见的读到的节点，产生一个缩进的轮廓。这个轮廓指出每个缩进的读取是否使用垂直线 (nodeIndentVerticalLine)标识缩进或空格(nodeIndentBlankSpace)缩进。作为一个用户，你需要给垂直线缩进或空格缩进指出要使用的图象（HTML/JSP）。下面是个例子：
+
+<table cellspacing="0" cellpadding="0" border="0">
+ <tree:tree tree="tree.model" node="tree.node">
+  <tr>
+   <td>
+    <tree:nodeIndent node="tree.node" indentationType="type">
+     <tree:nodeIndentVerticalLine indentationType="type" >
+      <img src="../images/verticalLine.gif">
+     </tree:nodeIndentVerticalLine>
+     <tree:nodeIndentBlankSpace indentationType="type" >
+      <img src="../images/blankSpace.gif">
+     </tree:nodeIndentBlankSpace>
+    </tree:nodeIndent>
+   </td>
+   <td>
+    <tree:nodeMatch node="tree.node">
+     <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+     src="../images/collapsedMidNode.gif" border="0"></a>
+    </tree:nodeMatch>
+   </td>
+   <td>
+    <tree:nodeName node="tree.node"/>
+   </td>
+  </tr>
+ </tree:tree>
+</table>
+<tree:nodeIndent ...>标签读取目前节点的缩进轮廓.每个读到的缩进,都将被作为request属性使用,他们的的关键字是"type",关键字"type"是可以随机选择的.如果当前读到的是垂直线,<tree:nodeIndentVerticalLine>有效.如果当前读到的是空格, <tree:nodeIndentBlankSpace ...>有效.
+点开根节点,显示如下:
+-----------------------
+|  +-Servers
+-----|-----------------
+|  +-ExchangServer
+-----|-----------------
+|  +-Notes Server
+-----------------------
+即使Servers前没有图象,它
+他们并没有真的错开!原因是<td>间相互依赖.解决的办法是解除依赖,即把每个节点都放入单独的表格.代码如下:
+<table cellspacing="0" cellpadding="0" border="1">
+<tree:tree tree="tree.model" node="tree.node">
+<tr>
+<td>
+ <table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td>
+    <tree:nodeIndent node="tree.node" indentationType="type">
+     <tree:nodeIndentVerticalLine indentationType="type">
+      <img src="../images/verticalLine.gif">
+     </tree:nodeIndentVerticalLine>
+     <tree:nodeIndentBlankSpace indentationType="type">
+      <img src="../images/blankSpace.gif">
+     </tree:nodeIndentBlankSpace>
+    </tree:nodeIndent>
+   </td>
+   <td>
+    <tree:nodeMatch node="tree.node">
+    <a href="myTree.jsp?expand=<tree:nodeId node='tree.node'/>"><img
+       src="../images/collapsedMidNode.gif" border="0"></a>
+    </tree:nodeMatch>
+   </td>
+   <td>
+    <tree:nodeName node="tree.node" />
+   </td>
+  </tr>
+ </table>
+</td>
+</tr>
+</tree:tree>
+</table>
+点开根节点,显示如下:
+---|------------------
+|  + Servers
+---|------------------
+|  | + ExchangServer
+|  |
+|  + Notes Server
+----------------------
+
+调整展开操作:
+从刚才显示的结果看出,节点始终可以被展开,展开操作的图象始终存在,即使没有这两个子节点,为什么一个没有子节点的节点要有展开操作?我们只要那些有子节点的节点才能展开!我们希望所有这类节点将只显示空格而非展开操作的图标.所以我们必须修改 <tree:nodeMatch >的标签属性把<tree:nodeMatch node="tree.node">替换成<tree:nodeMatch node="tree.node" hasChildren="true">,现在<tree:nodeMatch ...>标签体只对那些有子节点的节点有效.代码如下:
+<table cellspacing="0" cellpadding="0" border="0">
+<tree:tree tree="tree.model" node="tree.node">
+<tr>
+<td>
+ <table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td>
+    <tree:nodeIndent node="tree.node" indentationType="type">
+     <tree:nodeIndentVerticalLine indentationType="type">
+      <img src="../images/verticalLine.gif">
+     </tree:nodeIndentVerticalLine>
+     <tree:nodeIndentBlankSpace indentationType="type">
+      <img src="../images/blankSpace.gif">
+     </tree:nodeIndentBlankSpace>
+    </tree:nodeIndent>
+   </td>
+   <td>
+    <tree:nodeMatch node="tree.node" hasChildren="true">
+     <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+       src="../images/collapsedMidNode.gif" border="0"></a>
+    </tree:nodeMatch>
+   </td>
+   <td>
+    <tree:nodeName node="tree.node" />
+   </td>
+  </tr>
+ </table>
+</td>
+</tr>
+</tree:tree>
+</table>
+浏览器显示如下:
+---|------------------
+|  + Servers
+|  |
+|  | ExchangServer
+|
+|  Notes Server
+----------------------
+这样,不切实际的展开操作就不会发生.但是缩进又被破坏了!子节点名字被显示被显示在根节点的名字下面咯!这是因为我们不能给没有子节点的(没有展开操作的)节点成功插入空格!下面的代码也能形成上面的屏幕显示:
+<tree:nodeMatch node="tree.node" hasChildren="false">
+ <img src="../images/blankSpace.gif" >
+</tree:nodeMatch>
+上述行只能放在插入展开操作的<tree:nodeMatch ...> ...</tree:nodeMatch>元素的后面  整体代码如下:
+<table cellspacing="0" cellpadding="0" border="0">
+<tree:tree tree="tree.model" node="tree.node">
+<tr>
+<td>
+ <table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td>
+    <tree:nodeIndent node="tree.node" indentationType="type">
+     <tree:nodeIndentVerticalLine indentationType="type">
+      <img src="../images/verticalLine.gif">
+     </tree:nodeIndentVerticalLine>
+     <tree:nodeIndentBlankSpace indentationType="type">
+      <img src="../images/blankSpace.gif">
+     </tree:nodeIndentBlankSpace>
+    </tree:nodeIndent>
+   </td>
+   <td>
+    <tree:nodeMatch node="tree.node" hasChildren="true">
+     <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+       src="../images/collapsedMidNode.gif" border="0"></a>
+    </tree:nodeMatch>
+    <tree:nodeMatch node="tree.node" hasChildren="false">
+     <img src="../images/blankSpace.gif">
+    </tree:nodeMatch>
+   </td>
+   <td>
+    <tree:nodeName node="tree.node" />
+   </td>
+  </tr>
+ </table>
+</td>
+</tr>
+</tree:tree>
+</table>
+屏幕显示如下:
+---|------------------
+|  + Servers
+|  |
+|  |   ExchangServer
+|
+|    Notes Server
+----------------------
+
+添加收起操作:
+浏览器中,根节点"Servers"即使已经展开,该展开操作的图象仍然存在.我们需要的却是一个收起操作,相对展开操作而言,收起操作看起来要更象一个标记.
+为了实现收起操作,我们首先调整显示展开操作的<tree:nodeMatch ...>标签,首先要知道它是否已经展开,可以从<tree:nodeMatch ...>标签的展开属性得知.代码如下:
+<tree:nodeMatch node="tree.node" hasChildren="true" expanded="false">
+ <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+ src="../images/collapsedMidNode.gif" border="0"></a>
+</tree:nodeMatch>
+需要显示一个可用收起的操作的代码如下:
+<tree:nodeMatch node="tree.node" hasChildren="true" expanded="true">
+ <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+ src="../images/expandedMidNode.gif" border="0"></a>
+</tree:nodeMatch>
+注意到以上两个代码的不同,其实<tree:tree ...> 是有能力侦测出有收起动作的树型节点.所以它的链接只是指回原本只含树型结构的页面.
+上面的代码放在显示展开操作的<tree:nodeMatch ...>之前或之后都可以.下面的代码展现了一个能展开和收起的单元格.
+<td>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="false">
+  <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+    src="../images/collapsedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="true">
+  <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+    src="../images/expandedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="false">
+  <img src="../images/blankSpace.gif">
+ </tree:nodeMatch>
+</td>
+浏览器中显示如下:
+---|------------------
+|  -- Servers
+|  |
+|  |   ExchangServer
+|
+|    Notes Server
+----------------------
+注意下:+变成-了
+浏览器中收起的显示如下:
+---|------------------
+|  + Servers
+---|------------------
+这些才是我们想要的.若加上一些其它的子节点,效果同样很棒:
+---|---------------------
+|  -- Servers
+|  |
+|  -- ExchangServer
+|    |  Peter Johnson
+|  |
+|  -- Notes Server
+|  |   Peter Johnson
+|     Jakob Jenkov
+-------------------------
+注意一下缩进中ExchangServer和Notes Server之间的垂直线并不对齐~!这是空格引起的.在表的单元格中含有如下缩进代码:
+<td>
+ <tree:nodeIndent node="tree.node" indentationType="type">
+  <tree:nodeIndentVerticalLine indentationType="type">
+   <img src="../images/verticalLine.gif">
+  </tree:nodeIndentVerticalLine>
+  <tree:nodeIndentBlankSpace indentationType="type">
+   <img src="../images/blankSpace.gif">
+  </tree:nodeIndentBlankSpace>
+ </tree:nodeIndent>
+</td>
+空格和"/"或线破坏了<td>与</td>的匹配导致了垂直线不对齐.在树型的结构中图象间类似空格和"/"或线等符号都会导致垂直线错位.
+使垂直方向能成线,并增加易读性.应该这样显示更好:
+---|---------------------
+|  -- Servers
+|  |
+|  -- ExchangServer
+|  |    Peter Johnson
+|  |
+|  -- Notes Server
+|  |    Peter Johnson
+|      Jakob Jenkov
+-------------------------
+但是注意到:"Notes Server"节点的展开操作下的垂直线何以向下延伸?即使"Notes Server"后面已经没有兄弟了.根节点"Servers"同样出现这样的情况!这一切当然不尽人意撒~!我们需要对父节点下的最后一个子节点使用特殊的展开或收起操作图标.所以我们引入<tree:nodeMatch ...>标签中的isLastChild属性,是否是结束节点,和是否有展开操作在一起将产生4中组合,我们必须给这四种组合分别指定图片~!
+代码下示:
+<td>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="false"
+  isLastChild="false">
+  <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+    src="../images/collapsedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="true"
+  isLastChild="false">
+  <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+    src="../images/expandedMidNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="false"
+  isLastChild="true">
+  <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+    src="../images/collapsedLastNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="true" expanded="true"
+  isLastChild="true">
+  <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+    src="../images/expandedLastNode.gif" border="0"></a>
+ </tree:nodeMatch>
+ <tree:nodeMatch node="tree.node" hasChildren="false">
+  <img src="../images/blankSpace.gif">
+ </tree:nodeMatch>
+</td>
+其实hasChildren="false"是一般不会做expanded="true"展开操作,所以hasChildren与expanded两属性,
+浏览器显示如下:
+---|--------------------
+|  -- Servers
+|    |
+|  -- ExchangServer
+|  |   Peter Johnson
+|  |
+|  -- Notes Server
+|      Peter Johnson
+|     Jakob Jenkov
+------------------------
+ 
+到此似乎接近完美咯,汇总一下代码,JSP显示如下:
+<%-- 树定义 --%>
+<%@ page
+ import="com.jenkov.prizetags.tree.itf.ITree,
+   com.jenkov.prizetags.tree.impl.Tree,
+   com.jenkov.prizetags.tree.itf.ITreeNode,
+   com.jenkov.prizetags.tree.impl.TreeNode"
+%>
+<%@ taglib uri="/WEB-INF/treetag.tld" prefix="tree"%>
+<%
+ if (session.getAttribute("tree.model") == null) {
+ ITree tree = new Tree();
+ //(node's id , node's name , node's type)
+ ITreeNode root = new TreeNode("rootId", "Servers", "root");
+ ITreeNode server1 = new TreeNode("server1Id","Exchange Server", "server");
+ ITreeNode server2 = new TreeNode("server2Id", "Notes Server","server");
+ ITreeNode user1 = new TreeNode("user1Id", "Peter Johnson","user");
+ ITreeNode user2 = new TreeNode("user1Id", "Jakob Jenkov","user");
+ root.addChild(server1);
+ root.addChild(server2);
+ server1.addChild(user1);
+ server2.addChild(user1);
+ server2.addChild(user2);
+ tree.setRoot(root);
+ session.setAttribute("tree.model", tree);
+ }
+%>
+
+<%-- HTML + Tree Tags  --%>
+<table cellspacing="0" cellpadding="0" border="0">
+<tree:tree tree="tree.model" node="tree.node" includeRootNode="true">
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+ <td>
+  <tree:nodeIndent node="tree.node" indentationType="type">
+   <tree:nodeIndentVerticalLine indentationType="type">
+    <img src="../images/verticalLine.gif">
+   </tree:nodeIndentVerticalLine>
+   <tree:nodeIndentBlankSpace indentationType="type">
+    <img src="../images/blankSpace.gif">
+   </tree:nodeIndentBlankSpace>
+  </tree:nodeIndent>
+ </td>
+ <td>
+  <tree:nodeMatch node="tree.node" hasChildren="true"
+   expanded="false" isLastChild="false">
+   <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+     src="../images/collapsedMidNode.gif" border="0">
+   </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="true"
+   expanded="true" isLastChild="false">
+   <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+     src="../images/expandedMidNode.gif" border="0">
+   </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="true"
+   expanded="false" isLastChild="true">
+   <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+     src="../images/collapsedLastNode.gif" border="0">
+   </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="true"
+   expanded="true" isLastChild="true">
+   <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+     src="../images/expandedLastNode.gif" border="0">
+   </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="false"
+   isLastChild="false">
+   <img src="../images/noChildrenMidNode.gif" border="0">
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="false"
+   isLastChild="true">
+   <img src="../images/noChildrenLastNode.gif" border="0">
+  </tree:nodeMatch>
+ </td>
+ <td>
+  <tree:nodeName node="tree.node" />
+ </td>
+</tr>
+</table>
+</td>
+</tr>
+</tree:tree>
+</table>
+JSP标签使用现总计如下:
+1:获取树结构
+2:指定轮廓<tree:nodeIndent>,也就是每个匹配成功的节点前面单元格内填充的图片,2种
+3:按顺序考虑添加展开操作<tree:nodeMatch>,考虑的次序是:
+ a:是否有子节点hasChildren(防止没有子节点的节点出现展开操作的图标)
+ b:是展开状态还是收起状态expanded(true:已展开可收起,false:已收起可展开)
+ c:是否是最后一个节点isLastChild(干净收尾)
+ d:在hasChildren="true"情况下expanded与isLastChild产生四种组合.
+ e:在hasChildren="false"情况下,给2种isLastChild?的节点指定图片.
+ f:当然还有其它属性,依照需要而定!
+就此结束我们树型标签基本应用的小小探索~~,现在,你能对树型标签怎么工作该有所认识了吧!
+欲知更多,请见下回^_^
+ 
+第二章：树模型详解
+树模型由两国主要的接口和他们的实现类组成。
+这些接口是：
+com.jenkov.prizetags.tree.itf.ITree
+com.jenkov.prizetags.tree.itf.ITreeNode
+实现类是：
+com.jenkov.prizetags.tree.impl.Tree
+com.jenkov.prizetags.tree.impl.TreeNode
+关于tree类
+类tree是跟踪记录哪些节点被展开或选择的。这些记录并不存放在树节点自身。这样就使存在不同的树实例共享相同的节点成为可能。而不会相互影响他们之间的展开选择等操作。这个特征被开发者用来实现不同的用户访问相同的缓存过来的树数据，而不互相影响状态。这个特征的缺点是如果你从一棵树中移除了一个被展开或被选择的节点，你必须从自己的ITree实例中将这个节点的ID移除。这些同样页适合那些没有展开或被选择的节点。
+ 
+展开和收起方法：
+你可以通过实现接口ITree的getExpandedNodes方法得到被展开节点的集合。
+public Set getExpandedNodes();
+只有被展开的节点ID被保存，以便跟踪记录树的展开状态。你可以通过以下ITree的方法实现展开或收起一个节点：
+public void expand (String treeNodeId);
+public void collapse (String treeNodeId);
+通过ITree的isExpanded方法可以知道指定的节点是否被展开
+public boolean isExpanded(String treeNodeId);
+
+Select / Unselect 方法
+和获得展开的节点一样，通过ITree的getSelectedNodes方法可以获得被选择节点的集合：
+public Set getSelectedNodes();
+只有被选择的节点ID被保存，以便跟踪记录树的选择状态。你可以通过以下ITree的方法实现选择或释放一个节点：
+public void select (String treeNodeId);
+public void unSelect (String treeNodeId);
+public void unSelectAll();
+通过ITree的isSelected方法可以知道指定的节点是否被选中：
+public boolean isSelected(String treeNodeId);
+可以把树设置成单选模式，意味着一次只能选择一个节点。一旦你选择了一个节点，以前被选择的节点将自动被释放。在重新载入另外一个含节点信息的窗口时，你不希望在你点击下一个节点后仍然保存着以前被选择的节点。
+树默认情况下不是单选的。按你的需要可以定制树的选择模型。有时也是需要同时选择很多节点的，比如所复选框等。
+服务端事件侦听(event listeners)：
+你可以给ITree实例添加event listeners，你可以侦听展开，收起，选中，或释放选中4种事件。
+当页面刷新或节点被展开或被选择，这个侦听器将会察觉。
+在服务端添加事件侦听方法:
+public void addExpandListener (IExpandListener expandListener);
+public void removeExpandListener (IExpandListener expandListener);
+public void addCollapseListener (ICollapseListener collapseListener);
+public void removeCollapseListener (ICollapseListener collapseListener);
+public void addSelectListener (ISelectListener selectListener);
+public void removeSelectListener (ISelectListener selectListener);
+public void addUnselectListener (IUnselectListener unselectListener);
+public void removeUnselectListener (IUnselectListener unselectListener);
+服务端事件侦听将在下一章详述～
+
+模型抑或视图？
+你也许会断言道接口ITree与类Tree不是真正的模型类而是视图类型或视图帮助器。除去对根节点的引用，他们只含有在JSP种绘画树的相关信息。我们不在此争论，但是他们确实与纯树模型和树的节点有密切的关系。
+现在详细描述一下：
+ITree 接口
+下面是全部的接口，不含注释.
+public interface ITree {
+ public ITreeNode getRoot();
+ public void setRoot(ITreeNode node);
+ public ITreeNode findNode (String treeNodeId);
+ public Set findNodes(Set treeNodeIds);
+ public boolean isExpanded(String treeNodeId);
+ public void expand (String treeNodeId);
+ public void collapse (String treeNodeId);
+ public Set getExpandedNodes();
+ public void addExpandListener (IExpandListener expandListener);
+ public void removeExpandListener (IExpandListener expandListener);
+ public void addCollapseListener (ICollapseListener collapseListener);
+ public void removeCollapseListener (ICollapseListener collapseListener);
+ public boolean isSelected(String treeNodeId);
+ public void select (String treeNodeId);
+ public void unSelect (String treeNodeId);
+ public void unSelectAll();
+ public Set getSelectedNodes();
+ public void addSelectListener (ISelectListener selectListener);
+ public void removeSelectListener (ISelectListener selectListener);
+ public void addUnselectListener (IUnselectListener unselectListener);
+ public void removeUnselectListener (IUnselectListener unselectListener);
+ public void setSingleSelectionMode(boolean mode);
+ public boolean isSingleSelectionMode();
+ public Iterator iterator(boolean includeRootNode);
+}
+
+树节点：
+树节点接口 ITreeNode 并且 类 Tree实现该接口。
+
+节点 Id唯一
+节点id被用来跟踪哪个节点被展开或选择，所以每个节点要用树中唯一的ID来标识。 若节点ID重复，展开或选定节点时将出错。
+在生成节点时，节点的ID是TreeNodeThe构造器提供的。 节点的ID可以通过ITreeNode的方法被访问：
+public String getId();
+public void setId(String id);
+节点ID是String而不是Object型的,似乎看起来象个低级的错误,其实背后是有道理的.树的标签类要通过.equals()方法比较 ID..譬如说,当判断一个节点是否展开或被选中,或要在树中找到需要的节点.如果节点的ID是一个Object型的实例,开发人员就不能把节点的ID作为 String, Integer, Long, BigDecimal 还有自己定制的类随机使用咯~在唯一性上来讲,只要所有的实例都是唯一的,则他们就是合法的.不幸的(抑或幸运),.equals()方法能指出两个不相关类的对象不相等(equal).因此,即使使用 String "123"去发现一个节点是否被选中,所得到的结果将是错误的.纵然这个节点的ID是一个 Integer 类型的对象123.这些都会潜在的导致开发者困惑.尤其是一个树是混合节点时:比如所从不同的表中,不同的JNDI trees,不同的文件,工程中定义的常量节点等得到的.所以为了安全起见,我们还是给ID赋予String类型吧!实际上,既然很多对象都可以与 String 互相转换,也在无形中消除了一些障碍.
+
+添加子节点和设置父节点:
+每个添加删除子节点,设置父节点的方法都有两个版本:
+public void addChild(ITreeNode node);
+public void addChildOnly(ITreeNode node);
+public void removeChild(ITreeNode node);
+public void removeChildOnly(ITreeNode node);
+public void setParent(ITreeNode parent);
+public void setParentOnly(ITreeNode parent);
+其中第二种方法是用来避免在添加子节点或设置父节点时,父子节点之间出现死递归.为了能保证树型结构的牢固连贯,一个节点添加子节点的方法是 child.setParentOnly(this);该方法不需要回访父节点.同样地,如果你给一个节点增加父节点时child.setParent (node).
+子节点的 setParent()方法体中将调用 parent.addChildOnly(this)方法.而addChildOnly方法并不进一步的调用增加子节点方法:
+parent.addChild(child) ---> child.setParentOnly(this) ---> no more calls.
+child.setParent(child) ---> parent.addChildOnly(this) ---> no more calls.
+child.setParent(null) ---> parent.removeChildOnly(this) ---> no more calls.
+parent.removeChild(child) ---> child.setParentOnly(null) ---> no more calls.
+如果每个方法只有一个版本,势必造成死递归:
+parent.addChild(child) ---> child.setParent(this)---> parent.addChild(this) ---> child.setParent(this)---> ...
+parent    child
+|------addChild---> |
+|<-----setParent--- |
+|------addChild---> |
+|<-----setParent--- |
+我们消除了递归,但是把保持树模型完整性的责任推给了使用者.
+每一个对parent.addChild(child)方法的调用后,尽接着必须跟上一个child.setParent(parent)方法. 不尽人意的代码撒. 我们可以采用只对父节点所用addChild()方法的方式产生递归而不采用对子节点所用的setParent()方法.这种做法可能在其它地方被使用的. 所以现在要看情况决定,是使用递归版的方法还是使用非递归版的方法.
+
+给树节点配置属性:
+给树节点配属一个对象是很有必要的,这个对象可用来定制外观和树节点的文本.相应的方法:
+public Object getObject();
+public void setObject(Object object);
+这章包含怎么配属,分离和定制外观.
+
+接口ITreeNode
+下面是全部的接口，不含注释.
+public interface ITreeNode {
+ public String getName();
+ public void setName(String name);
+ public String getId();
+ public void setId(String id);
+ public String getType();
+ public void setType(String type);
+ public Object getObject();
+ public void setObject(Object object);
+ public void addChild(ITreeNode node);
+ public void addChildOnly(ITreeNode node);
+ public void removeChild(ITreeNode node);
+ public void removeChildOnly(ITreeNode node);
+ public void removeAllChildren();
+ public List getChildren();
+ public boolean hasChildren();
+ public ITreeNode getParent();
+ public void setParent(ITreeNode parent);
+ public void setParentOnly(ITreeNode parent);
+}
+在哪里产生树模型?
+树模型是被作为 session属性集合存放的, 一边JSP中<tree:tree ...>标签能取到数据.这并不意味这你也必须在JSP页面中生成树模型.可以在 Servlet,  Struts action, 或另一个JSP页面中生成树模型. 只要最后树模型被存入session属性中可以被<tree:tree...>标签使用即可.
+匹配树节点:
+Tree标签中最强大的一个子标签是<tree:nodeMatch ...>标签,它的反义的标签是<tree:nodeNoMatch ...>.这些匹配标签只有在匹配或不匹配给定的标准是才去取标签体内的值.这个在你想定制个别节点外观时很有用.例如:一个头的图标代表用户,两个头的图标代表用户组.或一个文件夹图标代表一个目录!这个匹配标签能匹配树节点的不同属性.之前你也看过了<tree:nodeMatch ...>标签时如何匹配是否有儿子,是否展开等节点.再看个例子:
+<tree:nodeMatch type="usergroup"><img src="usergroup.gif"></tree:nodeMatch>
+标签体中只有当前节点的类型是"usergroup"的子标签才会被取到.如果被取到的标签体被以HTML形式得到,代码<img src="usergroup.gif">将会最终再HTML文档中显示!然后将显示一个代表用户组的图片.
+相反的,
+<tree:nodeNoMatch type="usergroup"><img src="other.gif"></tree:nodeNoMatch>
+将匹配那些所有不是用户组类型的节点
+这两种匹配标签属性列表:
+Attribute Purpose    Allowed Values  Examples
+--------------------------------------------------------------------------
+type Matches the type  Any string value. type="usergroup"
+  of the current node,      type="folder"
+  as returned by the       type="movies.thriller.*"
+  ITreeNode.getType()
+  method.        
+---------------------------------------------------------------------------         name Matches the name of the Any string value name="Peter Johnson"     
+  current ITreeNode, as      name="*Ltd"
+  returned by the
+  ITreeNode.getName()
+  method.
+---------------------------------------------------------------------------
+id  Matches the id of the Any string value. id="server1"
+  current node, as       id="server*"
+  returned by the
+  ITreeNode.getId()
+  method.
+--------------------------------------------------------------------------- 
+expanded Matches if the current true|false   expanded="true"
+   node is expanded.       expanded="false"
+---------------------------------------------------------------------------
+selected Matches if the current true|false   selected="true"
+   node is selected       selected="false"
+--------------------------------------------------------------------------- 
+hasChildren Matches if the  true|false  hasChildren="true" 
+   current node      hasChildren="false"
+   has any children     
+--------------------------------------------------------------------------- 
+isFirstChild Matches if the  true|false  isFirstChild="true"
+   current node is      isFirstChild="false"
+   the first child of
+   it's parent.
+--------------------------------------------------------------------------- 
+isLastChild Matches if the  true|false  isLastChild="true"
+   current node is      isLastChild="false"
+   the last child of
+   it's parent
+--------------------------------------------------------------------------- 
+如果你在一个匹配标签中使用多个属性,必须保证这些属性同时都匹配,子标签体才会被获取.例子:
+<tree:nodeMatch hasChildren="true" isLastChild="true"><img src="collapsedEndNode.gif"></tree:nodeMatch>
+这个标签体在只有当前标签有子节点并且是父节点的结束节点时才被获取.
+通配符
+属性中支持通配符*,例如:type="movies.*"将匹配所有类型以"movies."开头的节点.name= "*Johnson" 将匹配所有名称以"Johnson"为结尾的节点.type="movies.*.thriller"将匹配所有类型以"movies."开头,以 ".thriller"结尾的所有节点.在使用匹配中它只支持单通配符!结合<tree:nodeNoMatch ...>标签,你可以匹配更多的状态.所以这一切对用户来说足够满足他们的需求了. ("... 对每个人来说,640K足够啦 ."). 不然的话,写信给我们,我们会加上你所需要的匹配子标签.其实 <tree:nodeNoMatch ...>就是这么来滴.
+节点匹配的嵌套:
+你可以在匹配中嵌套节点匹配.匹配标签体被声明为JSP,我们当然就可以在该标签体中插入任何合法的JSP碎片.包括匹配标签~,例子:
+<tree:nodeMatch type="folder.*">
+ <tree:nodeNoMatch type="*.user">
+  <img src="nonUsers.gif" />
+ </tree:nodeNoMatch>
+ <tree:nodeNoMatch type="*.userGroup">
+  <img src="nonUsers.gif" />
+ </tree:nodeNoMatch>
+</tree:nodeMatch>
+这个例子首先匹配所有以"folder."为开始的节点.然后对匹配成功的节点再过滤匹配.最后剩下的是类型以".user" 或".userGroup".为结尾的节点.
+ 
+添加节点图标:
+有时,给节点添加图标,节点将看起来外观更舒服,类型更鲜明.
+例如,一个目录或一个文件夹的前面紧贴一个图标.图标会因为节点状态的不同而变换,比如按是否展开或被选中.一个展开的节点会有一个展开的图标.添加这些类型图标其实使用上一章的节点匹配标签就可以咯.首先,在展开操作前添加一个单独的表格单元格.
+<table cellspacing="0" cellpadding="0" border="0">
+<tree:tree tree="tree.model" node="tree.node">
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+ <td>
+  <tree:nodeIndent>
+  ......
+  </tree:nodeIndent>
+ </td>
+ <td>
+  <tree:nodeMatch node="tree.node" hasChildren="true" expanded="false">
+   <a href="myTree.jsp?expand=<tree:nodeId node="tree.node"/>"><img
+     src="../images/collapsedMidNode.gif" border="0"> </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="true" expanded="true">
+   <a href="myTree.jsp?collapse=<tree:nodeId node="tree.node"/>"><img
+     src="../images/expandedMidNode.gif" border="0"> </a>
+  </tree:nodeMatch>
+  <tree:nodeMatch node="tree.node" hasChildren="false">
+   <img src="../images/blankSpace.gif">
+  </tree:nodeMatch>
+ </td>
+ <td></td>
+ <%-- cell reserved for node type / state icon --%>
+ <td>
+  <tree:nodeName node="tree.node" />
+ </td>
+</tr>
+</table>
+</td>
+</tr>
+</tree:tree>
+</table>
+知道了它的位置后,下一步是使用<tree:nodeMatch ...>或<tree:nodeNoMatch ...>匹配标签选择正确的图标.下面是一个把type 为"folder"的节点都显示"folder"图标:
+<tree:nodeMatch node="tree.node" type="folder">
+ <td><img src="folder.gif"/></td>
+</tree:nodeMatch>
+注意下<tree:nodeMatch ...>如何嵌套<td> and </td>. 下个例子将展示给一个folder配2个图标.展开的和收起的!
+<tree:nodeMatch node="tree.node" type="folder" expanded="true">
+ <td>
+  <img src="openFolder.gif"/>
+ </td>
+</tree:nodeMatch>
+<tree:nodeMatch node="tree.node" type="folder" expanded="false">
+ <td>
+  <img src="closedFolder.gif"/>
+ </td>
+</tree:nodeMatch>
+例子代码中的,与上述代码略有差别,他们并不检查节点 type,它只匹配有子节点得节点，象这样:
+<tree:nodeMatch node="tree.node" hasChildren="true" expanded="true">
+ <td>
+  <img src="openFolder.gif"/>
+ </td>
+</tree:nodeMatch>
+<tree:nodeMatch node="tree.node" hasChildren="true" expanded="false">
+ <td>
+  <img src="closedFolder.gif"/>
+ </td>
+</tree:nodeMatch>
+<tree:nodeMatch node="tree.node" hasChildren="false" >
+ <td>
+  <img src="nonFolder.gif"/>
+ </td>
+</tree:nodeMatch>
+其实这个例子也给其他节点（没有目录得节点）同样指定了图标，而不仅限于这一个目录，这是最后一个匹配得作用。浏览器中得效果：
+---|--------------------
+|  --★Servers
+|  |
+|  --★ExchangServer
+|  |     ■Peter Johnson
+|    |
+|  --★Notes Server
+|        ■Peter Johnson
+|       ■Jakob Jenkov
+------------------------
+也许你希望一个节点能用线与其子节点关联起来。再展开操作后，那些自身也有子节点得节点兄弟间已经可以通过线相关联了。
+ 但是那些没有子节点得节点之间似乎没有没有相互关联。 象没有展开和收起操作得节点"Peter Johnson"和"Jakob Jenkov"。为了实现关联，必须替换掉原来显示空格得代码。重要得是要对含有展开收起操作得单元格，使用一下代码替换：
+<tree:nodeMatch node="tree.node" hasChildren="false">
+ <img src="../images/blankSpace.gif" >
+</tree:nodeMatch>
+---|--------------------
+|  --★Servers
+|    |
+|  --★ExchangServer
+|  |  |--■Peter Johnson
+|    |
+|  --★Notes Server
+|     |--■Peter Johnson
+|     |--■Jakob Jenkov
+------------------------
+综上，用<tree:nodeMatch ...>和<tree:nodeNoMatch ...>标签能让你的图标更完美如果遇见不能显示的情况，请写信给我们。
+
+树节点上的关联对象
+你可以在节点上配置关联对象。当 当前节点的几个属性不能满足你的需要时，而有想显示一些其他信息时，你可以给树节点关联对象，你可以用该关联对象赖定制树外观。树节点类node的被实现接口ITreeNode是有两个相应的对象关联的方法定义的：
+/**
+*返回一个对象。如果你需要在JSP页面使用一个对象来显示树的相关信息，
+* 则这个被关联的对象再好不过了。
+* 通过setObject(Object object)方法把关联对象返回给节点实例。
+*/
+public Object getObject();
+/**
+*使对象与树节点关联。一个关联对象
+*返回一个对象。如果你需要在JSP页面使用一个对象来显示树的相关信息，
+* 则这个被关联的对象再好不过了。
+* 参数object：要关联的对象
+*/
+public void setObject(Object object);
+如果你回头看前面的例子你会发现，给节点"Exhange Server"关联一个节点的代码使这样的：
+server1.setObject(" - extra info ");
+这个例子中，使用 String 型的参数能使该关联对象更可用！再JSP页面中，你可以通过<tree:detachNodeObject ...>标签来剥离一个对象。代码：
+<tree:detachNodeObject node="tree.node" detachedObject="theNodeObject"/>
+被剥离的对象将被作为一个request属性存放在request中。存放时，是按被剥离对象属性中的名字将作为关键字的。接上例，你可以这样的方式访问被剥离者：
+Object detachedObject = request.getAttribute("theNodeObject");
+注意：如果一个节点美元对象关联，你从request.getAttribute("theNodeObject")中得到的返回将是NULL。若存在，则现在你可用为所欲为咯，例如你可用用它的toString()方法将页面上呈现一系列字符串！：
+<% if(request.getAttribute("theNodeObject") != null){
+  out.print(request.getAttribute("theNodeObject"));
+}
+%>
+在节点名字所在的单元格的后面插入关联对象自己的单元格，浏览器显示：
+---|--------------------
+|  --★Servers
+|  |
+|  --★ExchangServer- extra info
+|  |  |--■Peter Johnson
+|    |
+|  --★Notes Server
+|     |--■Peter Johnson
+|     |--■Jakob Jenkov
+------------------------
+在节点"Exhange Server"名字后面显示字符串" - extra info "。如果你用Struts，你可以用自定义标签<bean:write ...>写出对象的属性：
+<bean:write name="theNodeObject" property="someProperty"/>
+抑或可以用Struts的匹配标签来进一步定制节点外观。例如下列添加图标或文字：
+<logic:equal name="theNodeObject" value="expectedValue">
+  ... do something
+</logic:equal>
+...或者使用 <logic:greaterThan ...> 或<logic:lessThan ..>等等。例如你可以使用Struts的匹配标签把超过范围的节点名字着成红色。
+记住，你可以在树标签的匹配标签里面嵌套Struts标签，反之亦然（vice versa）～
+服务器端事件侦听
+给一个ITree实例添加服务期端的事件侦听是很有必要的.可以侦听展开,收起,选择,释放选择事件.用 ITree的下列方法可以添加事件侦听:
+public void addExpandListener (IExpandListener expandListener);
+public void removeExpandListener (IExpandListener expandListener);
+public void addCollapseListener (ICollapseListener collapseListener);
+public void removeCollapseListener (ICollapseListener collapseListener);
+public void addSelectListener (ISelectListener selectListener);
+public void removeSelectListener (ISelectListener selectListener);
+public void addUnselectListener (IUnselectListener unselectListener);
+public void removeUnselectListener (IUnselectListener unselectListener);
+在处理含有树型结构的JSP页面中,当如果任何被侦听的事件发生,Listeners被调用.当你在树实例中自己调用ITree.expand(), ITree.collapse(), ITree.select(),ITree.unselect(),或ITree.unselectAll()方法时侦听器Listeners也会被调用.
+当你想使用fly - lazy的方式赋值时,展开操作的侦听器就很好用.开始时,先建3层树结构中第一层,根节点,这3层是:根节点,他们的第一级子节点,及子节点的子节点.当根节点展开,你就必须显示他们的根节点级子节点.
+在你的展开事件侦听器中,就必须访问被展开节点.外型:
+public class ExpandListener implements IExpandListener{
+public void nodeExpanded(ITreeNode node, ITree tree){
+// - 移除被展开节点的所有子节点 ( node.removeAllChildren(); )
+// - 从节点或关联对象中获得所需ID.
+// - 按照获得的ID加载被展开节点的子节点,并把他们添加到被展开的节点上.
+// - 按照获得的ID加载被展开节点的子节点的子节点.并将他们添加到子节点上
+ }
+}
+你也许会疑问,为什么要加载被展开节点的孙节点!只是被展开节点的子节点被用到了,不是吗?但这是有原因的哈:
+如果你通过看它是否有子节点来判断是否该节点有展开操作, <tree:nodeMatch hasChildren="true">然后子节点加载,但是这些子节点都是没有展开操作的!在模型中,难道子节点就没有儿子?只是没有加载罢了. 一旦加载了孙子节点,子节点就可以有展开操作可用,即使这些孙节点从获得的ID找不到的.通过加载孙节点,可以保证有子节点的节点将显示展开操作,而没有子节点的节点不会有.如果你想精简一点,你可以给没有展开操作的子节点只添加一个孙节点.倘若有的话.当节点被展开时,他们始终重新加载.注意:如果你的 WEB工程跑在一个异构平台下的集群服务器端,事件侦听不许implement java.io.Serializable,更多请见"A Note on Performance" 和 "A Note on Web / Application Server Clusters"章节
+
+客户端事件侦听00：
+你可以在客户端添加类似服务器端的事件侦听器。相比于服务器端，客户端的事件侦听器却不是java类。客户端的事件侦听器是一段当展开，收起，选择，释放选择事件发生时选择执行的JSP片段,下面时展开操作的侦听器。事件侦听标签内的javascript代码重新载入一个"name"祯，该祯里面的页面含有request参数,当前被展开,收起,选择,释放选择的节点的ID。
+<tree:onExpand>
+ <script>
+  top.window.main.location.href="detail.jsp?expand=<tree:expandedNodeId />";
+ </script>
+</tree:onExpand>
+<tree:onCollapse>
+ <script>
+  top.window.main.location.href="detail.jsp?collapse=<tree:collapsedNodeId />";
+ </script>
+</tree:onCollapse>
+<tree:onSelect>
+ <script>
+  top.window.main.location.href="detail.jsp?select=<tree:selectedNodeId />";
+ </script>
+</tree:onSelect>
+<tree:onUnselect>
+ <script>
+  top.window.main.location.href="detail.jsp?unselect=<tree:unselectedNodeId />";
+ </script>
+</tree:onUnselect>
+你可以把合法的JSP碎片放入事件侦听标签中,这里我们选择了javascript,但是它也可以是java代码或html或自定义标签等等.注意下你是如何把我们在标签中用到的节点的ID的作为数据源的.
+<tree:expandedNodeId />
+<tree:collapseNodeId />
+<tree:selectedNodeId />
+<tree:unselectedNodeId />
+你也可以把整个节点作为事件标签的数据源。
+<tree:expandedNode tree="tree.model" expandedNode="tree.expanded"/>
+<tree:collapsedNode tree="tree.model" collapsedNode="tree.collapsed"/>
+<tree:selectedNode tree="tree.model" selectedNode="tree.selected"/>
+<tree:unselectedNode tree="tree.model" unselectedNode="tree.unselected"/>
+执行完上面标签的代码,这个事件源节点就可以作为request属性按以"expandedNode", "collapsedNode", "selectedNode" or
+"unselectedNode" 属性给定关键字使用啦.他们能被java代码或其它标签(Struts标签...etc)访问.和 <tree:tree ...> 标签一样，事件侦听标签在使用到"expand", "collapse", "select", or "unselect"参数时将去request中核对。如果你在<tree:tree ...>标签中修改了这些参数的名称，你同样必须修改事件侦听标签中的名称,与<tree:tree ...>标签的使用类似。例子:
+<tree:onExpand expandParam="expandThis">
+ <tree:expandedNode tree="tree.model" expandedNode="tree.expanded" expandParam="expandThis" />
+ <script>
+  top.window.main.location.href="detail.jsp?expand=<tree:expandedNodeIdexpandParam="expandThis" />";
+ </script>
+</tree:onExpand>
+<tree:onCollapse collapseParam="collapseThis">
+ <tree:collapsedNode tree="tree.model" collapsedNode="tree.collapsed" collapseParam="collapseThis" />
+ <script>
+  top.window.main.location.href="detail.jsp?collapse=<tree:collapsedNodeIdcollapseParam="collapseThis" />";
+ </script>
+</tree:onCollapse>
+显示节点的ID和类型
+节点的ID是用来标记哪个节点是被展开了.节点的类型是是来定制树的外观的(图标,文字...etc).有时他们是永远不会显示在JSP页面上的，但是，在页面以HTML方式显示树时你又不得不需要它.例如,用来展开，收起，选择链接的节点的ID是起着标识的作用. 下面的两个标签能输出被页面获取的节点的ID,类型.
+<tree:nodeId node="tree.node"/>
+<tree:nodeType node="tree.node"/>
+节点的ID或type,在显示的HTML中将会用具体的值替换掉那些标签。
+显示节点提示工具
+可以使用ITreeNode实例的setToolTip(String)方法设置一个提示工具.然后在JSP页面中加入提示工具，运行时当你的鼠标悬在链接的文字,图标上时，将显示一个提示消息.
+要给链接添加提示,则标签<a >对应"title"属性,<img >标签对应"alt"属性:
+<img src="..." alt="<tree:nodeToolTip node="tree.node"/>" />
+隐藏根节点：
+通过设置 <tree:tree ...> 属性includeRootNode="false"隐藏根节点.代码如下:
+<tree:tree includeRootNode="false">
+ <%-- the tree --%>
+</tree:tree>
+如果以前的代码+现在的代码,则浏览器的显示如下：
+-----------------------------------
+|  --★ExchangServer- extra info
+|  |  |--■Peter Johnson
+     |
+|  --★Notes Server
+|     |--■Peter Johnson
+|     |--■Jakob Jenkov
+-----------------------------------
+ 
+
+修改request中展开和选择操作的参数的名称
+Changing Expand and Select Request Parameter Names
+<tree:tree ...>标签能够自动发现节点的展开,收起,选择,和释放选择操作.如果一个包含树结构的页面请求的参数有"expand", "collapse", "select", 或 "unselect"，然后这个参数的值将会被认为是有展开,收起,选择,释放选择等操作的节点的ID.有时，受一些其他因素的影响，你的参数名称不能是 "expand", "collapse", "select", 或 "unselect"。例如，之前你已经使用select参数了.当然当一个页面有多颗树的情况下，修该参数的名字就很有必要！不然的话，一个节点的展开操作很有可能是作用于另外一个节点的。
+在<tree:tree ...>标签中按expandParam, collapseParam, selectParam, 和unselectParam属性修改相应的参数名称。例子：
+<tree:tree tree="tree.model" node="tree.node"
+expandParam="expandThis" collapseParam="collapseThis"
+selectParam="selectThis" unselectParam="unselectThis" >
+现在<tree:tree ...>标签将寻找名字是"expandThis", "collapseThis","selectThis",和"unselectThis"的request参数.如果你在<tree:tree ...>标签中改变了参数名称，在后面相应的expand, collapse, select, 和 unselect链接中要记住上面参数的名字。
+参数名称前缀
+从2.3.7版本开始，树标签 <tree:tree ...>之间又有一种新的修改参数名称的方法，那就是 <tree:tree ...>标签的paramPrefix属性。一旦你设置了paramPrefix变量，<tree:tree ...>标签将paramPrefix的值＋默认的参数名称而形成的新值作为参数名称。例如，展开操作的默认参数名称是"expand"，如果你把 paramPrefix设置为"tree1_"，那么树标签真正起作用的属性的名字是tree1_expand. 当然这个做法对其它属性也是有意义的，比如 "collapse", "select", "selectOnly" 和 "unselect" (加上其它的,比如
+"selectAncestorsAndSelf").当你的同一个页面中有两颗树，那么paramPrefix属性，就大大方便了你的操作，而不会出现该节点的展开操作，作用于另一个节点...etc
+ 
+Model 2 框架 (Struts, Spring etc.)
+解释一下：
+Model 1 中，JSP 直接处理Web 浏览器送来之请求( Request )，并辅以JavaBean 处理应用相关逻辑。Model 1 架构单纯编写比较容易，但在Model 1 中JSP 可能同时肩负View 与Controller 角色，两类程序代码有可能混杂而不易维护。
+Model 2 中将Servlet 纳入架构中扮演前端Controller 角色，将Web 浏览器送出之请求集中送至Servlet ，Servlet 可集中管理使用者登入、权限控制、多国语言转换等前置处理，再视需求转向给对应之JSP 处理。Model 2 中采用了较佳之MVC 模式，但增加了编写复杂度。
+当在WEB项目中使用树型结构，有时，在JSP页面中让树子更新显的很迟。典型的，在WEB项目中，JSP页面是的 handler/action控制链中最后被处理的.你也许需要在handler/action处理JSP页面之前更新下树型结构。类 TreeUpdater解决了这个问题。TreeUpdater与<tree:tree ...>一样可以更新树结构。其实<tree:tree ...>标签本身用的就是TreeUpdater的一个实例。看看怎么用：
+ITree tree1 = (ITree) session.getAttribute("tree.model");
+TreeUpdater treeUpdater = new TreeUpdater(request, tree1 );
+treeUpdater.update();
+update ()方法返回的是一个更新过的树。TreeUpdater也把自身作为一个request属性捆绑到request对象上。这样<tree: tree ...>标签得到的就是更新过的树，但要防止反复更新。因为更新会潜在的破坏展开，选择等操作，因为在handler/action中，这些展开, 选择等操作是在treeUpdater.update()之后的。因此，<tree:tree ...>标签不要再更新自己是很重要的，如果之前已经更新过了的话。因为程序能自动侦测树是否被更新了，所以我们不用担心。
+注意事项：
+在页面显示时，只有可见的节点会被获取。所以树模型的大小在执行时没有太大影响，它应该只影响到有多少节点可见，在有些服务器中，尤其是在集群服务器中，session对象是持久化的，也就是说它是存在数据库，或从其他服务器中复制过来的。这样是为了使用户通过他们的 session访问不同的服务器更加安全。安全的意思是说向不同的服务器发出的对话属性不会丢失，也就是说在session属性中你存放的数据越多，你向数据库或其他服务器存入的数据就越多。这样看来，树模型越大，页面的处理速度就越慢。
+在Web / Application服务器上的一个节点能将不同服务器上的不同节点串在一起，当然也有其他一些情况要考虑。 树模型从v. 2.1.7就Serializable，当添加事件侦听时要记得implement java.io.Serializable.否则，用于串化的服务器就不会serialize树模型和对话,然后树就不会被持久化入不同的服务器中，甚至会报错。

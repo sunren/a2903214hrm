@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="outmatchDAO" class="com.hr.io.dao.OutmatchDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	<bean  id="outmatchBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.OutmatchBOImpl">
+				<property name="dao">
+					<ref local="outmatchDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="outmatchBasicDAO" class="com.hr.io.dao.OutmatchBasicDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	
+	<bean  id="outmatchBasicBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.OutmatchBasicBOImpl">
+				<property name="dao">
+					<ref local="outmatchBasicDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="outmatchModelDAO" class="com.hr.io.dao.OutmatchModelDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	
+	<bean  id="outmatchModelBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.OutmatchModelBOImpl">
+				<property name="dao">
+					<ref local="outmatchModelDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="inmatchDAO" class="com.hr.io.dao.InmatchDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	
+	<bean  id="inmatchBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.InmatchBOImpl">
+				<property name="dao">
+					<ref local="inmatchDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+
+	<bean id="inmatchBasicDAO" class="com.hr.io.dao.InmatchBasicDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	
+	<bean  id="inmatchBasicBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.InmatchBasicBOImpl">
+				<property name="dao">
+					<ref local="inmatchBasicDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="inmatchModelDAO" class="com.hr.io.dao.InmatchModelDAOImpl">
+		<property name="sessionFactory"> 
+			<ref bean="sessionFactory" /> 
+		</property>
+	</bean>	
+	
+	<bean  id="inmatchModelBO"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.InmatchModelBOImpl">
+				<property name="dao">
+					<ref local="inmatchModelDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="transmitbo" class="com.hr.importfile.bo.TransmitBoImpl">
+
+		<property name="readContent">
+			<ref bean="readcontent" />
+		</property>
+
+		<property name="checkContent">
+			<ref bean="checkcontent" />
+		</property>
+	</bean>
+
+	<bean id="readcontent" class="com.hr.importfile.bo.ReadContent" />
+
+	<bean id="checkcontent" class="com.hr.importfile.bo.CheckContent" />
+
+	<bean  id="iodefbo"  parent="baseTransactionProxy">
+		<property  name="target">
+			<bean class="com.hr.io.bo.IodefBoImpl">
+				<property name="iodefdao">
+					<ref local="iodefdao" />
+				</property>
+			</bean>
+		</property>
+	</bean>	
+
+	<bean id="iodefdao" class="com.hr.io.dao.IodefDAOImpl">
+
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+
+	</bean>
+
+	<bean id="iomatchbo" class="com.hr.io.bo.IomatchBoImpl">
+
+		<property name="iomatchdao">
+			<ref bean="iomatchdao" />
+		</property>
+
+	</bean>
+
+	<bean id="iomatchdao" class="com.hr.io.dao.IomatchDaoImpl">
+
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+
+	</bean>
+
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.security.domain">
+	<class
+		name="AuthorityPos"
+		table="authoritypos"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		
+		<cache usage="nonstrict-read-write"/>
+		
+		<id
+			name="id"
+			type="string"
+			column="ap_id"
+		>
+			<generator class="assigned"/>
+		</id>
+
+		<property
+			name="apModule"
+			column="ap_module"
+			type="string"
+			not-null="true"
+			length="6"
+		/>
+		<property
+			name="apAuthValidate"
+			column="ap_auth_validate"
+			type="string"
+			not-null="true"
+			length="42"
+		/>
+		<many-to-one
+			name="apDept"
+			column="ap_dept_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="apPos"
+			column="ap_pos_id"
+			class="com.hr.profile.domain.Position"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="apLoc"
+			column="ap_loc_id"
+			class="com.hr.configuration.domain.Location"
+			not-null="false"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

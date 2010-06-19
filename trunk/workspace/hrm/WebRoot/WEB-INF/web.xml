@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app version="2.3" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_3.xsd">
+	<icon>
+		<small-icon>resource/images/logodot.gif</small-icon>
+		<large-icon>resource/images/logodot.gif</large-icon>
+	</icon>
+	<display-name>Human Resource System</display-name>
+	<description>Welcome to tyhr Project</description>
+
+	<mime-mapping>
+		<extension>action</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+	<!--
+		*********************************************** spring config
+		files***********************************************
+	-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/spring/*.xml</param-value>
+	</context-param>
+
+	<!-- spring listener -->
+	<listener>
+		<listener-class>com.hr.spring.SpringBeanFactory</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.hr.util.Environment</listener-class>
+	</listener>
+	<!-- clear the cache listener-->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!--
+		*********************************************** spring config
+		files***********************************************
+	-->
+
+
+
+
+
+	<!--
+		*********************************************** encoding filter
+		***********************************************
+	-->
+	<filter>
+		<filter-name>FormFilter</filter-name>
+		<filter-class>com.hr.util.ActionFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FormFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--
+		*********************************************** encoding filter
+		***********************************************
+	-->
+
+
+
+
+	<!--
+		*********************************************** ExpiresHeader filter
+		***********************************************
+	-->
+	<filter>
+		<filter-name>ExpiresHeader</filter-name>
+		<filter-class>com.hr.util.ExpiresHeaderFilter</filter-class>
+		<init-param>
+			<param-name>ContentPatterns</param-name>
+			<param-value>.js|.css|.png|.gif|.jpg|.swf|.ico</param-value>
+		</init-param>
+		<init-param>
+			<param-name>max-age</param-name>
+			<param-value>864000</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ExpiresHeader</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--
+		*********************************************** ExpiresHeader filter
+		***********************************************
+	-->
+
+
+	<!--
+		*********************************************** struts2 clean
+		up***********************************************
+	-->
+	<filter>
+		<filter-name>struts-cleanup</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts-cleanup</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--
+		*********************************************** struts2 clean
+		up***********************************************
+	-->
+
+	<!--
+		*********************************************** sitemesh config
+		file***********************************************
+	-->
+	<!-- setemesh  -->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>
+			com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--
+		*********************************************** sitemesh config
+		file***********************************************
+	-->
+
+	<!--
+		*********************************************** struts2 config
+		file***********************************************
+	-->
+	<filter>
+		<filter-name>struts</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--
+		*********************************************** struts2 config
+		file***********************************************
+	-->
+
+
+	<!--
+		*********************************************show employee
+		image****************************************
+	-->
+	<servlet>
+		<servlet-name>image</servlet-name>
+		<servlet-class>com.hr.profile.action.ShowImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>image</servlet-name>
+		<url-pattern>/servlet/showImage</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************show employee
+		image****************************************
+	-->
+
+
+
+	<!--
+		*********************************************** velocity config
+		file***********************************************
+	-->
+	<servlet>
+		<servlet-name>velocity</servlet-name>
+		<servlet-class>
+			org.apache.struts2.views.velocity.StrutsVelocityServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>velocity</servlet-name>
+		<url-pattern>*.vm</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************** velocity config
+		file***********************************************
+	-->
+
+
+
+
+	<!--
+		*********************************************** dwr config
+		file***********************************************
+	-->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************** dwr config
+		file***********************************************
+	-->
+
+
+	<!--
+		*********************************************** birt config
+		file***********************************************
+	-->
+	<servlet>
+		<servlet-name>WebReport</servlet-name>
+		<servlet-class>com.hr.report.servlet.WebReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WebReport</servlet-name>
+		<url-pattern>/report/birtWebReport</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************** birt config
+		file***********************************************
+	-->
+
+	<!--
+		*********************************************** CheckCodeServlet
+		config file***********************************************
+	-->
+	<servlet>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<servlet-class>com.hr.security.web.servlet.CheckCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<url-pattern>/servlet/CheckCodeServlet</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************** CheckCodeServlet
+		config file***********************************************
+	-->
+	<!--
+		*********************************************go to email approve page,
+		jet miao 2010-03-19*********************************
+	-->
+	<servlet>
+		<servlet-name>emailApproveServlet</servlet-name>
+		<servlet-class>com.hr.security.web.servlet.EmailApproveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>emailApproveServlet</servlet-name>
+		<url-pattern>/emailApprove</url-pattern>
+	</servlet-mapping>
+	<!--
+		*********************************************go to email approve page,
+		jet miao 2010-03-19*********************************
+	-->
+
+
+	<!--
+		*********************************************** session avariable time
+		config***********************************************
+	-->
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+	<!--
+		*********************************************** session avariable time
+		config***********************************************
+	-->
+
+
+
+
+	<!--
+		*********************************************** system global file
+		config ***********************************************
+	-->
+	<!-- DEFAULT PAGE -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.action</welcome-file>
+	</welcome-file-list>
+
+	<!-- error pages -->
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/system/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/system/500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/system/exception.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/system/exception.jsp</location>
+	</error-page>
+	<!--
+		*********************************************** system global file config ***********************************************
+	-->
+
+
+
+
+	<!--
+		*********************************************** tag config tiles***********************************************
+	-->
+	<!-- web work -->
+	<taglib>
+		<taglib-uri>webwork</taglib-uri>
+		<taglib-location>/WEB-INF/config/struts/struts-tags.tld</taglib-location>
+	</taglib>
+	<!-- authority tag -->
+	<taglib>
+		<taglib-uri>/tengsource</taglib-uri>
+		<taglib-location>/WEB-INF/config/authority/tengsource.tld</taglib-location>
+	</taglib>
+	<!-- jstl tag -->
+	<taglib>
+		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+		<taglib-location>/WEB-INF/config/jstl/c.tld</taglib-location>
+	</taglib>
+	<!-- sitemesh tag -->
+	<taglib>
+		<taglib-uri>sitemesh-page</taglib-uri>
+		<taglib-location>
+			/WEB-INF/config/sitemesh/sitemesh-page.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>sitemesh-decorator</taglib-uri>
+		<taglib-location>
+			/WEB-INF/config/sitemesh/sitemesh-decorator.tld</taglib-location>
+	</taglib>
+	<!--
+		<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/log-1.0</taglib-uri>
+		<taglib-location>/WEB-INF/config/log/taglibs-log.tld</taglib-location>
+		</taglib>
+	-->
+	<!-- status tag -->
+	<taglib>
+		<taglib-uri>/status</taglib-uri>
+		<taglib-location>/WEB-INF/config/struts/recruitment.tld</taglib-location>
+	</taglib>
+	<!--
+		*********************************************** tag config tiles
+		***********************************************
+	-->
+</web-app>

@@ -1,0 +1,43 @@
+.selecttext{
+ border: 0px;
+ height: 16;
+ font-family: arial;
+ font-size: 12px;
+ }
+ .selectbutton{
+ background-image: url(../images/select_button.BMP);
+ background-repeat: no-repeat;
+ font-family: webdings;
+ font-size: 10px;
+ height: 19;
+ width: 16; 
+ border: 0px solid #83A5EB;
+ line-height: 0px;
+ padding-bottom: 3px;
+ background-color: #D1E0FD;
+}
+ .selecttable{
+ font-family: arial;
+ font-size: 12px;
+ cursor: default;
+ }
+ .selectcontent
+ {
+ position: absolute;
+ top:0;
+ left:0;
+ overflow:auto;
+ border:1px solid #000000;
+ }
+
+.selectdiv
+ {
+ position: absolute; 
+ width:100;
+ overflow:hidden;
+ border:1px solid #000000;
+ }
+ .select{
+ border-collapse: collapse;
+ border:1px solid #6BB5DA;
+ }

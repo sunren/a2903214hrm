@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="applier.recaName">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<field name="applier.recaChannel.id">
+		<field-validator type="requiredstring">
+			<message>必选!</message>
+		</field-validator>
+	</field>
+	
+	<field name="applier.recaPhone">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>	
+	
+	<field name="applier.recaEmail">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message>必填!</message>
+		</field-validator>
+	</field>	
+	
+	<field name="applier.recaEmail">
+		<field-validator type="email" short-circuit="true">
+			<message>邮箱格式错误!</message>
+		</field-validator>
+	</field>
+	<field name="applier.recaDiploma">
+		<field-validator type="required">
+			<message>必选！</message>
+		</field-validator>
+	</field>
+	<field name="applier.recaStatus">
+		<field-validator type="required">
+			<message>必选！</message>
+		</field-validator>
+	</field>
+</validators>

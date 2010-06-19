@@ -1,0 +1,18 @@
+#countInfo {
+	float: left;
+	margin: 6px;
+	width: 180px;
+	}
+html>body #countInfo {
+	width: 180px; /* ie5win fudge ends */
+	height:384px;	
+	}
+#countVote {
+	float: left;
+	margin: 6px;
+	width: 556px;
+	}
+
+html>body #countVote {
+	width: 556px; /* ie5win fudge ends */
+	}	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<bean id="informationDAO"
+		class="com.hr.information.dao.informationDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="informationBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.information.bo.InformationBoImpl">
+				<property name="informationDAO">
+					<ref bean="informationDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="findTipDao"
+		class="com.hr.homepage.dao.FindTipDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="findTip" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.homepage.bo.FindTipImpl">
+				<property name="findTipDao">
+					<ref bean="findTipDao"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>

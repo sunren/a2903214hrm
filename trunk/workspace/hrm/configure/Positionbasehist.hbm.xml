@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="PositionBaseHist"
+		table="positionbasehist"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="pbhi_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<many-to-one
+			name="pbhiPbId"
+			column="pbhi_pb_id"
+			class="PositionBase"
+			not-null="true"
+			
+		/>
+		<many-to-one
+			name="pbhiDeptId"
+			column="pbhi_dept_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+			
+		/>
+		<property
+			name="pbhiInCharge"
+			column="pbhi_in_charge"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="pbhiMaxEmployee"
+			column="pbhi_max_employee"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="pbhiPbStatus"
+			column="pbhi_pb_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="pbhiValidFrom"
+			column="pbhi_valid_from"
+			type="date"
+			not-null="true"
+		/>
+		<property
+			name="pbhiValidTo"
+			column="pbhi_valid_to"
+			type="date"
+			not-null="false"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.training.domain">
+	<class
+		name="Trcourseplan"
+		table="trcourseplan"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="trcpId"
+			type="string"
+			column="trcp_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="trcpBudgetYear"
+			column="trcp_budget_year"
+			type="string"
+			not-null="false"
+			length="4"
+		/>
+		<property
+			name="trcpBudgetFee"
+			column="trcp_budget_fee"
+			type="big_decimal"
+			not-null="false"
+			length="9"
+		/>
+		<property
+			name="trcpBudgetHour"
+			column="trcp_budget_hour"
+			type="big_decimal"
+			not-null="true"
+			length="6"
+		/>
+		<property
+			name="trcpAttendeeNo"
+			column="trcp_attendee_no"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="trcpDeptLimit"
+			column="trcp_dept_limit"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="trcpTeacher"
+			column="trcp_teacher"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="trcpLocation"
+			column="trcp_location"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="trcpInstitution"
+			column="trcp_institution"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="trcpStartDate"
+			column="trcp_start_date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="trcpEndDate"
+			column="trcp_end_date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="trcpEnrollStartDate"
+			column="trcp_enroll_start_date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="trcpEnrollEndDate"
+			column="trcp_enroll_end_date"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+		<property
+			name="trcpStatus"
+			column="trcp_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="trcpComments"
+			column="trcp_comments"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="trcpFileName"
+			column="trcp_file_name"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="trcpCreateTime"
+			column="trcp_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="trcpLastChangeTime"
+			column="trcp_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<many-to-one
+			name="trcpCreateBy"
+			column="trcp_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trcpCoordinator"
+			column="trcp_coordinator"
+			class="com.hr.profile.domain.Employee"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trcpCourseNo"
+			column="trcp_course_no"
+			class="Trcourse"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trcpLastChangeBy"
+			column="trcp_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+	
+
+		<set name="tremployeeplans" inverse="true">
+			<key column="trcp_id"/>
+			<one-to-many class="Tremployeeplan"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="of_Bean.orEmpNo.empName">
+		<field-validator type="requiredstring">
+			<message>必选项！</message>
+		</field-validator>
+	</field>
+	
+	<field name="of_Bean.orReason">		        
+		<field-validator type="requiredstring">
+			<message>必须填写加班理由！</message>
+		</field-validator>	
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">255</param>
+				<message>长度应小于${maxLength}</message>
+		 </field-validator>		
+	</field>
+
+	<field name="of_Bean.startDate">
+		<field-validator type="required">
+			<message>必须填写加班日期！</message>
+		</field-validator>
+		<field-validator type="date">
+			<message>日期格式错误！</message>
+		</field-validator>
+	</field>
+
+ </validators>

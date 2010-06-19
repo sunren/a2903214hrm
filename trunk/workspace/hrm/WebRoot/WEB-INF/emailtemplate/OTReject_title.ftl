@@ -1,0 +1,1 @@
+${SENDER.empName}拒绝了${APPLIER.empName}的加班申请(编号为${OR.orNo?string.number})

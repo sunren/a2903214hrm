@@ -1,0 +1,1 @@
+${SENDER.empName}批准了${APPLIER.empName}的请假申请(编号为${LEAVE.lrNo?string.number})

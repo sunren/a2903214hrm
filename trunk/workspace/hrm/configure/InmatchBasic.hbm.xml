@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="InmatchBasic"
+		table="inmatchbasic"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="imbId"
+			type="string"
+			column="imb_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="imbFieldName"
+			column="imb_field_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="imbFieldDesc"
+			column="imb_field_desc"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="imbDataType"
+			column="imb_data_type"
+			type="string"
+			not-null="true"
+			length="16"
+		/>
+		<property
+			name="imbFormat"
+			column="imb_format"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="imbDetectError"
+			column="imb_detect_error"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imbRequired"
+			column="imb_required"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imbSortId"
+			column="imb_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imbSample"
+			column="imb_sample"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<many-to-one
+			name="imbIo"
+			column="imb_io_id"
+			class="Iodef"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

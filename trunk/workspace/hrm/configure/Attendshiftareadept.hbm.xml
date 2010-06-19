@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class
+		name="Attendshiftareadept"
+		table="attendshiftareadept">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="asad_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<many-to-one
+			name="asadShiftId"
+			column="asad_shift_id"
+			class="com.hr.examin.domain.Attendshift"
+			not-null="true"
+		/>
+		<many-to-one
+			name="asadAreaId"
+			column="asad_area_id"
+			class="com.hr.configuration.domain.Location"
+			not-null="false"
+		/>
+		<many-to-one
+			name="asadDeptId"
+			column="asad_dept_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+		/>
+
+	</class>	
+</hibernate-mapping>

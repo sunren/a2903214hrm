@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!--DAO Beans-->
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+	<bean id="leavebalanceDAO"
+		class="com.hr.examin.dao.LeavebalanceDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="leavecalendarDAO"
+		class="com.hr.examin.dao.LeavecalendarDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="leaverequestDAO"
+		class="com.hr.examin.dao.LeaverequestDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="leavetypeDAO"
+		class="com.hr.examin.dao.LeavetypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="attenddailyDAO"
+		class="com.hr.examin.dao.AttenddailyDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="attendshiftDAO"
+		class="com.hr.examin.dao.AttendshiftDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- 考勤机导入数据dao -->
+	<bean id="attdoriginaldataDAO"
+	    class="com.hr.examin.dao.AttdoriginaldataDAOImpl">
+	    <property name="sessionFactory">
+	        <ref bean="sessionFactory"/>
+	    </property>
+	</bean>
+	<!-- 考勤机同步记录数据dao -->
+	<bean id="attdSyncRecordDAO"
+	    class="com.hr.examin.dao.AttdSyncRecordDAOImpl">
+	    <property name="sessionFactory">
+	        <ref bean="sessionFactory"/>
+	    </property>
+	</bean>	
+	<!-- 员工排班数据DAO -->	
+	<bean id="empshiftDAO" class="com.hr.examin.dao.EmpshiftDAOImpl">
+	    <property name="sessionFactory">
+	        <ref bean="sessionFactory"/>
+	    </property>
+	</bean>
+	<!-- BO Beans-->
+	
+	<bean id="leavecalendarBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.LeavecalendarBOImpl">
+				<property name="lc_DAO">
+					<ref local="leavecalendarDAO" />
+				</property>
+				<property name="l_BO">
+					<ref bean="locationBO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="attenddailyBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.AttenddailyBOImpl">
+				<property name="attenddailyDAO">
+					<ref local="attenddailyDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 考勤机数据BO -->
+	<bean id="attdoriginaldataBO" class="com.hr.examin.bo.AttdoriginaldataBOImpl">
+	    <property name="attdoriginaldataDAO">
+	        <ref bean="attdoriginaldataDAO"/>
+	    </property>
+	</bean>
+	<!-- 考勤机同步记录BO -->
+	<bean id="attdSyncRecordBO" class="com.hr.examin.bo.AttdSyncRecordBOImpl">
+	    <property name="attdSyncRecordDAO">
+	        <ref bean="attdSyncRecordDAO"/>
+	    </property>
+	</bean>
+	<!-- 员工排班数据BO -->
+	<bean id="empshiftBO" class="com.hr.examin.bo.EmpshiftBOImpl">
+	    <property name="empshiftDAO">
+	        <ref bean="empshiftDAO"/>
+	    </property>
+	</bean>
+	
+	
+	<!-- 每月考勤数据相关配置 -->
+	<!-- 抽象实现 -->
+	<bean id="abstractAttendmonthlyBo" class="com.hr.examin.bo.AbstractAttendmonthlyBo" abstract="true">
+		<property name="attenddailyDAO">
+			<ref local="attenddailyDAO"/>
+		</property>
+		<property name="lc_BO">
+			<ref local="leavecalendarBO"/>
+		</property>
+		<property name="lrDataCheck">
+			<ref local="lrDataCheck"/>
+		</property>
+	</bean>
+	<!-- 按班次计算每月考勤数据 -->
+	<bean id="hourBasedAttendMonthlyBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.HourBasedAttendMonthlyBo" parent="abstractAttendmonthlyBo">
+			</bean>
+		</property>
+	</bean>
+	<!-- 默认每月考勤数据汇总 -->
+	<bean id="attendmonthlyBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.AttendmonthlyBOImpl" parent="abstractAttendmonthlyBo"/>
+		</property>
+	</bean>
+	<!-- *************************************************** -->
+	<bean id="defaultExaminFactory" class="com.hr.examin.defaults.DefaultExaminBoFactory">
+	</bean>
+	<bean id="hourExaminFactory" class="com.hr.examin.shift.HourBasedBoFactory"></bean>
+	
+	<bean id="baseExaminBo" class="com.hr.examin.bo.ExaminBoImpl" abstract="true">
+		<property name="lr_DAO">
+            <ref local="leaverequestDAO"/>
+        </property>
+        <property name="sl_BO">
+            <ref bean="logBO"/>
+        </property>
+        <property name="es_BO">
+			<ref bean="emailsendBO" />
+		</property>
+		<property name="or_DAO">
+	         <ref local="overtimerequestDAO" />
+        </property>
+	</bean>
+    <bean id="leaverequestBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.LeaverequestBOImpl" parent="baseExaminBo">
+	            <property name="lt_BO">
+	                <ref local="leavetypeBO" />
+	            </property>
+				<property name="workFlowBo">
+				    <ref bean="workFlowBO"/>
+				</property>
+				<property name="st_BO">
+					<ref bean="statBO" />
+				</property>
+				<property name="lc_BO">
+					<ref local="leavecalendarBO" />
+				</property>
+				<property name="attendBo">
+	                <ref local="attendshiftBO"/>
+	            </property>
+	            <property name="lrDataCheckBO">
+	                <ref local="lrDataCheck"/>
+	            </property>
+	            <property name="empShiftBo">
+	                <ref local="empshiftBO"/>
+	            </property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 对请假申请和请假修改的数据进行验证的数据验证类 -->
+	<bean id="lrDataCheck" parent="baseTransactionProxy">
+	    <property name="target">
+	        <bean class="com.hr.examin.bo.LrDataCheckImpl">
+	            <property name="lb_BO">
+					<ref local="leavebalanceBO" />
+				</property>
+				<property name="lc_BO">
+					<ref local="leavecalendarBO" />
+				</property>
+				<property name="lr_DAO">
+	                <ref local="leaverequestDAO"/>
+	            </property>
+	            <property name="empShiftBo">
+	                <ref local="empshiftBO"/>
+	            </property>
+	            <property name="attendBo">
+	                <ref local="attendshiftBO"/>
+	            </property>
+	            <property name="or_Bo">
+	                <ref local="overtimerequestBO"/>
+	            </property>
+	        </bean>
+	    </property>
+	</bean>
+	
+	<bean id="leavetypeBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.LeavetypeBOImpl">
+				<property name="lt_DAO">
+					<ref local="leavetypeDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 年假管理 -->
+	<bean id="leavebalanceBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.LeavebalanceBOImpl">
+				<property name="lb_DAO">
+					<ref local="leavebalanceDAO" />
+				</property>
+				<property name="e_DAO">
+					<ref bean="employeeDAO" />
+				</property>
+				<property name="dp_BO">
+					<ref bean="departmentBO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+	<!--加班-->
+	<!-- 加班申请DAO-->
+	<bean id="overtimerequestDAO" class="com.hr.examin.dao.OvertimerequestDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+ 
+	<!-- 加班申请BO-->
+	<bean  id="overtimerequestBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.examin.bo.OvertimerequestBoImpl" parent="baseExaminBo">
+			   <property name="ot_BO">
+			         <ref local="overtimetypeBO" />
+		        </property>
+				<property name="st_BO">
+					<ref bean="statBO" />
+				</property>
+				<property name="dp_BO">
+					<ref bean="departmentBO" />
+				</property>	  
+				<property name="workFlowBO">
+				    <ref bean="workFlowBO"/>
+				</property>
+				<property name="lcBO">
+				    <ref bean="leavecalendarBO"/>
+				</property>
+			</bean>			
+        </property>
+    </bean>
+	 <!-- 加班类型DAO-->
+	<bean id="overtimetypeDAO" class="com.hr.examin.dao.OvertimetypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+ 
+	<!-- 加班类型BO-->
+	<bean  id="overtimetypeBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.examin.bo.OvertimetypeBoImpl">
+		       <property name="dao">
+			         <ref local="overtimetypeDAO" />
+		        </property>		    
+			</bean>
+        </property>
+    </bean>
+	<!-- 排班管理 -->
+	<bean id="attendshiftBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.AttendshiftBOImpl">
+				<property name="attendshiftDAO">
+					<ref local="attendshiftDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>   
+	<!-- 审批流程工作流 -->
+	<bean id="workFlowApproverDAO" class="com.hr.examin.dao.WorkFlowApproverDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="workFlowApproverBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.examin.bo.WorkFlowApproverBo">
+				<property name="workFlowApproverDAO">
+					<ref local="workFlowApproverDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean> 
+	
+	<!--基本工作流的bean对象  -->
+	<bean id="workFlowBO" parent="baseTransactionProxy">
+	   <property name="target">
+	        <bean class="com.hr.examin.bo.WorkFlowBOImpl">
+	            <property name="wfdao">
+	                <ref local="workFlowApproverDAO"/>
+	            </property>
+	        </bean>
+	    </property>
+	</bean>
+	
+</beans>

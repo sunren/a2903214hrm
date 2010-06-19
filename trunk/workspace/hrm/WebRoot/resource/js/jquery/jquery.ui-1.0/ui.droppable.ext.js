@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+(function($){$.ui.plugin.add("droppable","activate","activeClass",function(A,_){$(this).addClass(_.options.activeClass)});$.ui.plugin.add("droppable","deactivate","activeClass",function(A,_){$(this).removeClass(_.options.activeClass)});$.ui.plugin.add("droppable","drop","activeClass",function(A,_){$(this).removeClass(_.options.activeClass)});$.ui.plugin.add("droppable","over","hoverClass",function(A,_){$(this).addClass(_.options.hoverClass)});$.ui.plugin.add("droppable","out","hoverClass",function(A,_){$(this).removeClass(_.options.hoverClass)});$.ui.plugin.add("droppable","drop","hoverClass",function(A,_){$(this).removeClass(_.options.hoverClass)})})(jQuery)

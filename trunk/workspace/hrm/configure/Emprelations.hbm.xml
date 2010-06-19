@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.hr.profile.domain.Emprelations" table="emprelations">
+    <cache usage="read-write"/>
+    <id 
+        name="erelId" 
+        type="string" 
+        column="erel_id" 
+      >
+            <generator class="uuid.hex"/>
+     </id>
+     
+     <many-to-one
+			name="employee"
+			column="erel_emp_no"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+	 >
+	 </many-to-one>
+	 <property 
+			name="erelRelationship"
+			column="erel_relationship"
+			type="string"
+			not-null="true"
+			length="16"
+	/>
+	 <property 
+			name="erelName"
+			column="erel_name"
+			type="string"
+			not-null="true"
+			length="64"
+	/>
+	<property 
+			name="erelBirthday"
+			column="erel_birthday"
+			type="date"
+			not-null="false"
+	/>
+	<property 
+			name="erelBirthdayRemind"
+			column="erel_birthday_remind"
+			type="integer"
+			not-null="false"
+	/>
+	<property 
+			name="erelCompany"
+			column="erel_company"
+			type="string"
+			not-null="false"
+			length="64"
+	/>
+	<property 
+			name="erelPosition"
+			column="erel_position"
+			type="string"
+			not-null="false"
+			length="64"
+	/>
+	<property 
+			name="erelContactInfo"
+			column="erel_contact_info"
+			type="string"
+			not-null="false"
+			length="128"
+	/>
+	<property 
+			name="erelCreateBy"
+			column="erel_create_by"
+			type="string"
+			not-null="true"
+			length="32"
+	/>
+	<property 
+			name="erelCreateDate"
+			column="erel_create_date"
+			type="timestamp"
+			not-null="true"
+	/>
+	<property 
+			name="erelLastChangeTime"
+			column="erel_last_change_time"
+			type="timestamp"
+			not-null="true"
+	/>
+	<property 
+			name="erelLastChangeBy"
+			column="erel_last_change_by"
+			type="string"
+			not-null="true"
+			length="32"
+	/>
+	
+	</class>    
+</hibernate-mapping>   

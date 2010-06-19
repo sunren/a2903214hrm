@@ -1,0 +1,1 @@
+${SENDER.empName}提交了新的培训计划给您

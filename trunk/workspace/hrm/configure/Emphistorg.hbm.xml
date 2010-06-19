@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="EmpHistOrg"
+		table="emphistorg"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="eho_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<many-to-one
+			name="ehoEmpNo"
+			column="eho_emp_no"
+			class="Employee"
+			not-null="true"
+			
+		/>
+		<many-to-one
+			name="ehoDeptNo"
+			column="eho_dept_no"
+			class="com.hr.configuration.domain.Department"
+			not-null="true"
+			
+		/>
+		<many-to-one
+			name="ehoPbNo"
+			column="eho_pb_no"
+			class="PositionBase"
+			not-null="true"
+			
+		/>
+		<property
+			name="ehoValidFrom"
+			column="eho_valid_from"
+			type="date"
+			not-null="true"
+		/>
+		<property
+			name="ehoValidTo"
+			column="eho_valid_to"
+			type="date"
+			not-null="false"
+		/>
+		<property
+			name="ehoIsLatest"
+			column="eho_is_latest"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

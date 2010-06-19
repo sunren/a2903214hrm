@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="info.infoClass.id">
+		<field-validator type="requiredstring">
+				<message>请选择!</message>
+		</field-validator>
+	</field>	
+	<field name="info.infoTitle">
+		<field-validator type="requiredstring">
+				<message>必填项!</message>
+		</field-validator>
+	</field>
+	<field name="info.infoTitle">		
+		<field-validator type="stringlength">
+				<param name="minLength">2</param>
+				<param name="maxLength">64</param>
+				<message>字符长度在${minLength}-${maxLength}之间!</message>
+		 </field-validator>		
+	</field>
+	<field name="info.infoBreif">
+		<field-validator type="requiredstring">
+			<message>必填项!</message>
+		</field-validator>
+	</field>	
+	<field name="info.infoFileDesc">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">255</param>
+				<message>不能超过最大长度????${maxLength}！</message>
+		 </field-validator>		
+	</field>
+	<field name="info.infoPicDesc">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">255</param>
+				<message>不能超过最大长度${maxLength}!</message>
+		 </field-validator>		
+	</field>
+</validators>

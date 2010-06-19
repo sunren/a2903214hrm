@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="training" extends="default" namespace="/training">
+		<interceptors>
+			<interceptor-stack name="modelParamsStack">
+				<interceptor-ref name="checklogin"/>
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="chain"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<action name="myTrainingList"
+			class="com.hr.training.action.MyTrainingList">
+			<result name="success" type="dispatcher">my_training_list.jsp</result>
+			<result name="error" type="dispatcher">my_training_list.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+	
+		<action name="trepList" class="com.hr.training.action.TrepList">
+			<result name="success" type="dispatcher">trep_list.jsp</result>
+		<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trepCancel" class="com.hr.training.action.TrepList"
+			method="cancelTrep">
+			<result name="success" type="chain">trepList</result>
+			<result name="repeat" type="redirect">trepList.action</result>
+			<result name="error" type="dispatcher">trep_list.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="feedback" class="com.hr.training.action.TrepList"
+			method="feedback">
+			<result name="success" type="chain">trepList</result>
+			<result name="error" type="chain">trepList</result>
+			<result name="input" type="chain">trepList</result>
+			<result name="repeat" type="chain">trepList</result>
+			<result name="invalid.token" type="redirect">/training/trepList.action</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="workflow"/>
+			<interceptor-ref name="token"></interceptor-ref>
+			<interceptor-ref name="params"></interceptor-ref>
+		</action>
+	
+		<action name="trtConfig"
+			class="com.hr.training.action.TrtConfig">
+			<result name="success" type="dispatcher">trt_config.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="trcourseConfig"
+			class="com.hr.training.action.TrcourseConfig">
+			<result name="success" type="dispatcher">trcourse_config.jsp</result>
+		<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trcAddInit" class="com.hr.training.action.TrcourseConfig"
+			method="trcAddInit">
+			<result name="success" type="dispatcher">trcourse_add.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trcourseAdd" class="com.hr.training.action.TrcourseConfig"
+			method="trcourseAdd">
+			<result name="success" type="chain">trcourseConfig</result>
+			<result name="error" type="chain">trcAddInit</result>
+			<result name="input" type="chain">trcAddInit</result>
+			<result name="invalid.token" type="redirect">/training/trcourseConfig.action</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="token"/> 
+		</action>
+		<action name="updateTrcInit" class="com.hr.training.action.TrcourseConfig"
+			method="updateTrcInit">
+			<result name="success" type="dispatcher">update_trcourse.jsp</result>
+			<result name="error" type="chain">trcourseConfig</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="updateTrc" class="com.hr.training.action.TrcourseConfig"
+			method="updateTrc">
+			<result name="success" type="chain">trcourseConfig</result>
+			<result name="error" type="dispatcher">update_trcourse.jsp</result>
+			<result name="input" type="chain">updateTrcInit</result>
+			<result name="invalid.token" type="redirect">/training/trcourseConfig.action</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="token"/> 
+		</action>
+		
+		<action name="deleteTrc" class="com.hr.training.action.TrcourseConfig"
+			method="deleteTrc">
+			<result name="success" type="chain">trcourseConfig</result>
+			<result name="error" type="chain">trcourseConfig</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="viewTrcTrcpInit"
+			class="com.hr.training.action.TrcourseConfig" method="viewTrcTrcpInit">
+			<result name="success" type="dispatcher">view_trcourse_detail.jsp</result>
+			<result name="error" type="chain">trcourseConfig</result>
+		<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="closeTrc" class="com.hr.training.action.TrcourseConfig"
+			method="closeTrc">
+			<result name="success" type="chain">trcourseConfig</result>
+			<result name="error" type="chain">trcourseConfig</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="trcOpen" class="com.hr.training.action.TrcourseConfig"
+			method="openTrc">
+			<result name="success" type="chain">trcourseConfig</result>
+			<result name="error" type="chain">trcourseConfig</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trcpAddInit" class="com.hr.training.action.TrcpConfig"
+			method="trcpAddInit">
+			<result name="success" type="dispatcher">trcp_add.jsp</result>
+			<result name="error" type="chain">viewTrcTrcpInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trcpAdd" class="com.hr.training.action.TrcpConfig"
+			method="addTrcp">
+			<result name="success" type="chain">viewTrcTrcpInit</result>
+			<result name="error" type="dispatcher">trcp_add.jsp</result>
+			<result name="input" type="chain">trcpAddInit</result>
+			<result name="invalid.token" type="redirect">/training/viewTrcTrcpInit.action?trcNo=${trcNo}</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="token"/> 
+		</action>
+		<action name="trcpUpdateInit" class="com.hr.training.action.TrcpConfig"
+			method="trcpUpdateInit">
+			<result name="success" type="dispatcher">trcp_update.jsp</result>
+			<result name="error" type="chain">viewTrcTrcpInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trcpUpdate" class="com.hr.training.action.TrcpConfig"
+			method="updateTrcp">
+			<result name="success" type="chain">viewTrcTrcpInit</result>
+			<result name="error" type="dispatcher">trcp_update.jsp</result>
+			<result name="input" type="chain">trcpUpdateInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+			<result name="invalid.token" type="redirect">/training/viewTrcTrcpInit.action?trcNo=${trcNo}</result>
+			<interceptor-ref name="token"/>
+		</action>
+		<action name="trcpDelete" class="com.hr.training.action.TrcpConfig"
+			method="deleteTrcp">
+			<result name="success" type="chain">viewTrcTrcpInit</result>
+			<result name="error" type="chain">trcourseConfig</result>
+			<result name="input" type="chain">viewTreTrcpInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="closeTrcp" class="com.hr.training.action.TrcpConfig"
+			method="closeTrcp">
+			<result name="success" type="chain">viewTrcTrcpInit</result>
+			<result name="error" type="chain">viewTrcTrcpInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="trcpOpen" class="com.hr.training.action.TrcpConfig"
+			method="openTrcp">
+			<result name="success" type="chain">viewTrcTrcpInit</result>
+			<result name="error" type="chain">viewTrcTrcpInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<!-- Trep -->
+		<action name="trepAddInit" class="com.hr.training.action.TrepAdd"
+			method="trepAddInit">
+			<result name="success" type="dispatcher">trep_add.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trepAdd" class="com.hr.training.action.TrepAdd">
+			<result name="success" type="chain">trepAddInit</result>
+			<result name="repeatSubmit" type="redirect">trepAddInit.action</result>
+			<result name="error" type="chain">trepAddInit</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="reSubmit" class="com.hr.training.action.TrepAdd" method="reSubmit">
+			<result name="success" type="chain">myTrainingList</result>
+			<result name="error" type="chain">myTrainingList</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="trepDelete" class="com.hr.training.action.TrepAdd"
+			method="deleteTrep">
+			<result name="success" type="chain">myTrainingList</result>
+			<result name="error" type="chain">myTrainingList</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		
+		<action name="trepDeptApprove"
+			class="com.hr.training.action.TrepDeptApprove">
+			<result name="success" type="dispatcher">trep_dept_approval.jsp</result>
+			<result name="input" type="chain">trep_dept_approval.jsp</result>
+			<result name="error" type="dispatcher">trep_dept_approval.jsp</result>			
+			<interceptor-ref name="modelParamsStack"/>			
+		</action>
+	
+		<action name="trepHrApprove" class="com.hr.training.action.TrepHrApprove">
+			<result name="success" type="dispatcher">trep_hr_approval.jsp</result>
+			<result name="error" type="dispatcher">trep_hr_approval.jsp</result>						
+			<interceptor-ref name="modelParamsStack"/>			
+		</action>				
+		
+		<action name="downFile" class="com.hr.training.action.DownFile"
+			method="downTrainingFile">
+			<result name="error" type="dispatcher">/training/file_error.jsp</result>
+			<interceptor-ref name="checklogin"/>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<!-- report -->
+		<action name="trReport" class="com.hr.report.action.training.TrainingReportAction">
+			<result name="success" type="dispatcher">/report/training/trcourseplanReport.jsp</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+		    <interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.recruitment.domain">
+	<class
+		name="Recruitplan"
+		table="recruitplan"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="recp_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="recpNo"
+			column="recp_No"
+			type="integer"
+			not-null="true"
+		/>
+		<property
+			name="recpJobDesc"
+			column="recp_job_desc"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		
+		<property
+			name="recpStartDate"
+			column="recp_start_date"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="recpEndDate"
+			column="recp_end_date"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="recpNumberExpect"
+			column="recp_number_expect"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		
+		<property
+			name="recpDegree"
+			column="recp_degree"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="recpLanguageSkill"
+			column="recp_language_skill"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="recpJobSkill"
+			column="recp_job_skill"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="recpComments"
+			column="recp_comments"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="recpStatus"
+			column="recp_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="recpCreateTime"
+			column="recp_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="recpLastChangeTime"
+			column="recp_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		
+		<many-to-one
+			name="recpWorkLocation"
+			column="recp_work_location"
+			class="com.hr.configuration.domain.Location"
+			not-null="true"
+		>
+		</many-to-one>
+		
+		<many-to-one
+			name="recpLastChangeBy"
+			column="recp_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recpDepartmentNo"
+			column="recp_department_no"
+			class="com.hr.configuration.domain.Department"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recpCreateBy"
+			column="recp_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="recpType"
+			column="recp_type"
+			class="com.hr.configuration.domain.Emptype"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one name="recpJobTitle"
+			column="recp_job_title"
+			class="com.hr.configuration.domain.JobTitle"
+			not-null="true">
+		</many-to-one>
+		<set inverse="true" name="recruitappliers">
+			<key column="reca_plan_id" />
+			<one-to-many class="com.hr.recruitment.domain.Recruitapplier" />
+		</set>
+
+	</class>	
+</hibernate-mapping>

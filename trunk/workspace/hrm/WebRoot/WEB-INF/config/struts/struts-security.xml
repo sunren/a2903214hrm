@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="security" extends="default" namespace="/configuration">
+		<interceptors>
+			<interceptor-stack name="myCheck">
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 登陆验证 单客户版-->
+		<action name="dologin_single"
+			class="com.hr.security.web.action.LoginAction" method ="singleLoginExecute">
+			<result name="error">login.jsp</result>
+			<result name="input">login.jsp</result>
+			<result name="success" type="chain">getSession</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 登陆验证 多客户版-->
+		<action name="dologin_mutiple"
+			class="com.hr.security.web.action.LoginAction" method ="mutipleLoginExecute">
+			<result name="error">login.jsp</result>
+			<result name="input">login.jsp</result>
+			<result name="success" type="chain">getSession</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 登陆验证 单客户demo版-->
+		<action name="dologin_demo"
+			class="com.hr.security.web.action.LoginAction" method ="demoLoginExecute">
+			<result name="demoerror">login_demo.jsp</result>
+			<result name="success" type="chain">getSession</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 登陆验证 多客户阿里版-->
+		<action name="dologin_ali"
+			class="com.hr.security.web.action.ValidateUserAction">
+			<result name="registClient" type="chain">ali_regist_init</result>
+			<result name="registUser" type="chain">ali_regist_user_init</result>
+			<result name="error">ali_error.jsp</result>
+			<result name="success" type="chain">aligetSession</result>
+			<result name="input">ali_error.jsp</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 注册客户及用户初始化 多客户阿里版本-->
+		<action name="ali_regist_init"
+			class="com.hr.security.web.action.ALiRegistInitAction">
+			<result name="success">ali_regist_client.jsp</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 注册客户 多客户阿里版本-->
+		<action name="ali_regist_client"
+			class="com.hr.security.web.action.ALiRegistClientAction">
+			<result name="success" type="chain">aligetSession</result>
+			<result name="error" type="chain">ali_regist_init</result>
+			<result name="input" type="chain">ali_regist_init</result>
+			<result name="invalid.token" type="redirect">ali_regist_init</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="validationWorkflowStack" />
+			<interceptor-ref name="token" />
+		</action>
+		
+		<!-- 注册用户初始化 多客户阿里版本-->
+		<action name="ali_regist_user_init"
+			class="com.hr.security.web.action.ALiRegistUserInitAction">
+			<result name="success">ali_regist_user.jsp</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 注册用户 多客户阿里版本-->
+		<action name="ali_regist_user"
+			class="com.hr.security.web.action.ALiRegistUserAction">
+			<result name="error" type="chain">ali_regist_user_init</result>
+			<result name="input" type="chain">ali_regist_user_init</result>
+			<result name="success" type="chain">aligetSession</result>
+		 <result name="invalid.token" type="redirect">ali_regist_user_init</result>	
+		 <interceptor-ref name="params" />
+		 <interceptor-ref name="chain" />
+		 <interceptor-ref name="validationWorkflowStack" />
+		 <interceptor-ref name="token" />
+		</action>
+		
+		<!-- 得到权限 必须参数为 用户 对象(阿里版) -->
+		<action name="aligetSession"
+			class="com.hr.security.web.action.GetUserSessionAction">
+			<result name="success" type="redirect">/profile/myInfo.action</result>
+			<interceptor-ref name="params"/>
+		</action>
+		
+		<!-- 注册初始化 多客户版本-->
+		<action name="regist_init"
+			class="com.hr.security.web.action.RegistInitAction">
+			<result name="success">regist_client.jsp</result>
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 注册初始化 多客户版本-->
+		<action name="regist_user_init"
+			class="com.hr.security.web.action.RegistUserInitAction">
+			<result name="success">regist_user.jsp</result>			
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 注册客户 多客户版本-->
+		<action name="regist_client"
+			class="com.hr.security.web.action.RegistClientAction">
+			<result name="success" type="chain">regist_user_init</result>
+			<result name="error">regist_client.jsp</result>
+			<result name="input">regist_client.jsp</result>
+			<result name="invalid.token" type="redirect">regist_init.action</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="validationWorkflowStack" />
+			<interceptor-ref name="token" />
+		</action>
+		
+		<!-- 注册用户 多客户版本-->
+		<action name="regist_user"
+			class="com.hr.security.web.action.RegistUserAction">
+			<result name="error" type="chain">regist_user_init</result>
+			<result name="input" type="chain">regist_user_init</result>
+			<result name="success" type="chain">
+				<param name="actionName">index</param>
+				<param name="namespace">/homepage</param>
+		  </result>
+		 <result name="invalid.token" type="redirect">regist_user_init.action</result>	
+		 <interceptor-ref name="params" />
+		 <interceptor-ref name="chain" />
+		 <interceptor-ref name="validationWorkflowStack" />
+		 <interceptor-ref name="token" />
+		</action>
+		
+		<!-- 得到权限 必须参数为 用户 对象 -->
+		<action name="getSession"
+			class="com.hr.security.web.action.GetUserSessionAction">
+			<result name="success" type="redirect">/homepage/index.action</result>
+			<interceptor-ref name="params"/>
+		</action>
+		<!-- 登出 -->
+		<action name="logout"
+			class="com.hr.security.web.action.LoginOutAction">
+			<result name="demosuccess" type="redirect">login_demo.jsp</result>
+			<result name="alimtsuccess" type="redirect">ali_return.jsp</result>
+			<interceptor-ref name="params"/>
+		</action>
+		
+		<!-- role 角色操作 -->
+		<action name="addRoleInit"
+			class="com.hr.security.web.action.RoleInitAction" method="addinit">
+			<result name="success">roleadd.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="roleEdit"
+			class="com.hr.security.web.action.RoleInitAction">
+			<result name="success">roleedit.jsp</result>
+			<result name="error" type="chain">getRoleList</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<action name="addRole"
+			class="com.hr.security.web.action.RoleAction">
+			<result name="success" type="chain">getRoleList</result>
+			<result name="input" type="chain">addRoleInit</result>	
+			<result name="invalid.token" type="redirect">getRoleList.action</result>
+			<interceptor-ref name="checklogin" />			
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token" />
+		</action>
+
+		<action name="roleUpdate"
+			class="com.hr.security.web.action.RoleAction" method="update">
+			<result name="input" type="chain">roleEdit</result>
+			<result name="success" type="chain">getRoleList</result>	
+			<result name="invalid.token" type="redirect">getRoleList.action</result>
+			<interceptor-ref name="checklogin" />	
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token" />
+		</action>
+		
+		<action name="roleView"
+			class="com.hr.security.web.action.RoleListAction" method="view">
+			<result name="success">roleview.jsp</result>
+			<result name="error" type="chain">getRoleList</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="roleDel"
+			class="com.hr.security.web.action.RoleListAction" method="del">
+			<result name="success" type="chain">getRoleList</result>	
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="getRoleList"
+			class="com.hr.security.web.action.RoleListAction">
+			<result name="success">rolelist.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- user 用户操作 -->
+		<action name="addUserInit"
+			class="com.hr.security.web.action.UserAddOrEditInit">
+			<result name="success">useradd.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<action name="addMultiUserInit"
+			class="com.hr.security.web.action.UserAddOrEditInit">
+			<result name="success">multiuseradd.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<action name="addUser"
+			class="com.hr.security.web.action.UserCreateAction">
+			<result name="success" type="chain">userList</result>
+			<result name="input" type="chain">addUserInit</result>
+			<result name="invalid.token" type="redirect">userList</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token" />
+		</action>
+		
+		
+		
+		<action name="userList"
+			class="com.hr.security.web.action.UserListAction">
+			<result name="success">userlist.jsp</result>
+			<result name="error" type="chain">editOwnUser</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="delUser"
+			class="com.hr.security.web.action.UserListAction" method="del">
+			<result name="success" type="chain">userList</result>
+			<result name="error" type="chain">userList</result>
+			<result name="invalid.token" type="redirect">userList.action</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token" />
+		</action>
+		<!-- auth 权限操作-->
+		<action name="getAuthList"
+			class="com.hr.security.web.action.AuthListAction">
+			<result name="success">authList.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<!-- data 备份还原操作-->
+		<action name="backup"
+			class="com.hr.security.web.action.BackupResumeAction" method="saveBackup">
+			<result name="success" type="chain">backupResume</result>
+			<result name="input" type="chain">backupResume</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token"/>
+			<result name="invalid.token" type="redirect">backupResume.action</result>
+		</action>
+		<action name="delete"
+			class="com.hr.security.web.action.BackupResumeAction" method="delete">
+			<result name="success" type="chain">backupResume</result>
+			<result name ="input" type="chain">backupResume</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token"/>
+			<result name="invalid.token" type="redirect">backupResume.action</result>
+		</action>
+		<action name="resume"
+			class="com.hr.security.web.action.BackupResumeAction" method="resume">
+			<result name="success" type="chain">backupResume</result>
+			<result name="input" type="chain">backupResume.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<interceptor-ref name="token"/>
+			<result name="invalid.token" type="redirect">backupResume.action</result>
+		</action>		
+		<action name="sqlbin"
+			class="com.hr.security.web.action.BackupResumeAction" method="sqlbin" >
+			<result name="success" type="chain">backupResume</result>
+			<result name="input" type="chain">backupResume</result>
+			<interceptor-ref name="token"/>
+			<result name="invalid.token" type="redirect">backupResume.action</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<action name="backupResume"
+			class="com.hr.security.web.action.BackupResumeAction" >
+			<result name="success">backupresume.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- data 清理-->
+		<action name="dataclean" class="com.hr.security.web.action.DataCleanAction" >
+			<result name="success" >dataclean.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="datascan"
+			class="com.hr.security.web.action.DataCleanAction" method="scanData">
+			<result name="success" type="chain">dataclean</result>
+			<result name="input" type="chain">dataclean</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="datadelete"
+			class="com.hr.security.web.action.DataCleanAction" method="deleteData">
+			<result name="success" type="chain">datascan</result>
+			<result name="input" type="chain">datascan</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<result name="invalid.token" type="redirect">dataclean</result>
+			<interceptor-ref name="token" />
+		</action>
+		
+		<!-- 日志管理-->
+		<action name="logscan" class="com.hr.security.web.action.LogsManager" >
+			<result name="success" >showLog.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="logclean"
+			class="com.hr.security.web.action.LogsManager" method="deleteAllLogs">
+			<result name="success" type="chain">logscan</result>
+			<result name="input" type="chain">logscan</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		
+		<!-- 客户管理-->
+		<action name="clientscan" class="com.hr.security.web.action.ClientManageAction" >
+			<result name="success" type="chain">clientmanage.jsp</result>
+			<result name="input" type="chain">clientmanage.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+		</action>
+		<action name="clientdelete" class="com.hr.security.web.action.ClientManageAction" method="delete" >
+			<result name="success" type="chain">clientscan</result>
+			<result name="input" type="chain">clientscan</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<result name="invalid.token" type="redirect">clientscan</result>
+			<interceptor-ref name="token" />
+		</action>
+		<action name="clientupdate" class="com.hr.security.web.action.ClientManageAction" method="update">
+			<result name="success" type="chain">clientscan</result>
+			<result name="input" type="chain">clientscan</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="myCheck" />
+			<result name="invalid.token" type="redirect">clientscan</result>
+			<interceptor-ref name="token" />
+		</action>
+		
+		
+	</package>
+</struts>

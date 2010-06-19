@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="Iodef"
+		table="iodef"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="ioId"
+			type="string"
+			column="io_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="ioName"
+			column="io_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="ioDesc"
+			column="io_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="ioType"
+			column="io_type"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ioFilePath"
+			column="io_file_path"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ioFileHasTitle"
+			column="io_file_has_title"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ioMatchType"
+			column="io_match_type"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ioModule"
+			column="io_module"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ioAuthority"
+			column="io_authority"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="ioIsExtend"
+			column="io_is_extend"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ioImportMode"
+			column="io_import_mode"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ioClassName"
+			column="io_class_name"
+			type="string"
+			not-null="true"
+			length="128"
+		/>
+		<property
+			name="ioFetchNames"
+			column="io_fetch_names"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="ioCreateBy"
+			column="io_create_by"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="ioCreateTime"
+			column="io_create_time"
+			type="timestamp"
+			not-null="true"
+		/>
+		<property
+			name="ioLastChangeBy"
+			column="io_last_change_by"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="ioLastChangeTime"
+			column="io_last_change_time"
+			type="timestamp"
+			not-null="true"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

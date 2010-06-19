@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.compensation.domain">
+	<class
+		name="Empsalaryacct"
+		table="empsalaryacct"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="esac_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="esacName"
+			column="esac_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="esacDesc"
+			column="esac_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<set name="empsalaryacctitems" inverse="true">
+			<key column="esac_id"/>
+			<one-to-many class="Empsalaryacctitems"/>
+		</set>
+		<set name="empsalaryacctversion" inverse="true">
+			<key column="esac_id"/>
+			<one-to-many class="Empsalaryacctversion"/>
+		</set>
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Emailsend"
+		table="emailsend"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="es_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="esFrom"
+			column="es_from"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="esTo"
+			column="es_to"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="esCc"
+			column="es_cc"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="esTitle"
+			column="es_title"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="esContent"
+			column="es_content"
+			type="string"
+			not-null="true"
+			length="1000"
+		/>
+		<property
+			name="esStatus"
+			column="es_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="esCreatetime"
+			column="es_createtime"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="esSendtime"
+			column="es_sendtime"
+			type="timestamp"
+			not-null="false"
+			length="19"
+		/>
+
+
+	</class>	
+</hibernate-mapping>
