@@ -44,6 +44,6 @@ public class DeleteRecruitplanADM extends BaseAction implements Constants {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.recruitment.action.DeleteRecruitplanADM JD-Core Version: 0.5.4
  */

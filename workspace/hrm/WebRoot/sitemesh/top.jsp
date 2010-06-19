@@ -256,10 +256,10 @@
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="top">
 	<tr style="padding-left:5px;padding-top:5px;padding-bottom:5px">
-		<td rowspan="2" width="200"><img src="../resource/images/logo_365hrm.gif" alt="365hrm logo" /></td>
+		<td rowspan="2" width="200"><img src="../resource/images/logo_hr.gif" alt="hr logo" /></td>
 		<td align="right" valign="bottom">
 			<span class="welcome">
-				<a href="http://www.tengsource.com/contact.htm" target="_blank">联系我们</a>
+				<a href="http://www.hr.com/contact.htm" target="_blank">联系我们</a>
 				| <a href="../help/searchHelp.action" target="_blank">帮助</a>
 				| <a href="../system/about.jsp" target="_blank">版本信息</a> &nbsp;
 			</span>

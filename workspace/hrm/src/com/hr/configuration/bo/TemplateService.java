@@ -21,6 +21,6 @@ public abstract interface TemplateService {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.configuration.bo.TemplateService JD-Core Version: 0.5.4
  */

@@ -17,7 +17,7 @@
     <td background="../resource/images/login_bg.gif" align="center">
 		<table align="center" cellpadding="5" width="50%">
         		<tr>
-                	<td>上海腾源软件有限公司</td>
+                	<td>上海人力资源管理系统有限公司</td>
 				</tr>
 				<tr>
 					<td>365HRM V1.5.0 2010/04/08</td>
@@ -29,10 +29,10 @@
 					<td>MySQL数据库名称：365HRM</td>
 				</tr>
                 <tr>	
-                    <td>Copyright(C) 腾源软件 2008</td>
+                    <td>Copyright(C) 人力资源管理系统 2008</td>
                 </tr>
                 <tr>	
-                    <td><a href="http://www.365hrm.com">http://www.365hrm.com</a></td>
+                    <td><a href="http://www.hr.com">http://www.hr.com</a></td>
                 </tr>
                 <tr>
                     <td height="32" align="center"><input type="button" value="关闭" onclick="window.close();"></td>

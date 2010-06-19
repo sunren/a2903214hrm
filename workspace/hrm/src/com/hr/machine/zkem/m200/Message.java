@@ -68,6 +68,6 @@ public class Message {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.machine.zkem.m200.Message JD-Core Version: 0.5.4
  */

@@ -81,6 +81,6 @@ public class DaoBean extends BaseDomain implements Serializable, Cloneable {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name: com.hr.base.DaoBean
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name: com.hr.base.DaoBean
  * JD-Core Version: 0.5.4
  */

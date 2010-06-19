@@ -49,7 +49,7 @@ public class ParametersTask {
         IReportRunnable design = null;
 
         design = engine
-                .openReportDesign("F:/myeclipse/365hrm/src/com/hr/report/factory/test/test_param.rptdesign");
+                .openReportDesign("F:/myeclipse/hr/src/com/hr/report/factory/test/test_param.rptdesign");
 
         IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(design);
 

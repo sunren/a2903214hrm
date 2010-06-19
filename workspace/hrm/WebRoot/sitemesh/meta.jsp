@@ -7,7 +7,7 @@ HTTP 1.0
 
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
 
-<meta name="author" content="tyf@tengsource.com)" />
+<meta name="author" content="tyf@hr.com)" />
 <link rel="shortcut icon" href="<c:url value='/resource/images/favicon.ico'/>" type="image/x-icon">
 <link rel="Bookmark" href="<c:url value='/resource/images/favicon.ico'/>" type="image/x-icon">
 <link rel="icon" href="<c:url value='/resource/images/logodot.gif'/>" type="image/gif"/>

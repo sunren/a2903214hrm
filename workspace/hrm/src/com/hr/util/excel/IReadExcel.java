@@ -52,6 +52,6 @@ public abstract class IReadExcel {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.util.excel.IReadExcel JD-Core Version: 0.5.4
  */

@@ -17,7 +17,7 @@
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6"
  extends="datasource.Data Source">
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/365hrm</property>
+            <property name="odaURL">jdbc:mysqhrcalhost:3306/365hrm</property>
             <property name="odaUser">root</property>
             <encrypted-property name="odaPassword" encryptionID="base64">MTExMTEx</encrypted-property>
         </oda-data-source>

@@ -57,15 +57,15 @@ public class PropertiesFileConfigManager implements SysConfigManager {
     public String getDatabaseSchemaName() {
         String driverClassName = this.config.getString("jdbc.driverClassName");
 
-        String DEFAULT_SCHEMA = "365hrm";
+        String DEFAULT_SCHEMA = "hr";
         String url = this.config.getString("jdbc.url");
 
         if (driverClassName.indexOf("mysql") != -1) {
             if (url == null)
-                return "365hrm";
+                return "hr";
             int index = url.indexOf("?");
             if (index == -1)
-                return "365hrm";
+                return "hr";
             int end = index;
             while ((url.charAt(index) != '/') && (index > 0)) {
                 --index;
@@ -95,6 +95,6 @@ public class PropertiesFileConfigManager implements SysConfigManager {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.util.PropertiesFileConfigManager JD-Core Version: 0.5.4
  */

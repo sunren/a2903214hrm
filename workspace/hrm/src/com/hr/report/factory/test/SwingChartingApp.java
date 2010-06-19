@@ -250,6 +250,6 @@ public final class SwingChartingApp extends JPanel implements IUpdateNotifier, C
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.report.factory.test.SwingChartingApp JD-Core Version: 0.5.4
  */

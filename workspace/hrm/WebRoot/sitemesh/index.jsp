@@ -4,10 +4,10 @@ taglib uri="sitemesh-decorator" prefix="decorator"%><%@
 taglib uri="sitemesh-page" prefix="page"%><%@ 
 taglib prefix="s" uri="webwork"%>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
-<meta name="Keywords" content="sw.365hrm.com, 365HRM - HR的好伙伴、好助手" />
-<meta name="Author" content="腾源软件, admin@tengsource.com" />
+<meta name="Keywords" content="sw.hr.com, 365HRM - HR的好伙伴、好助手" />
+<meta name="Author" content="人力资源管理系统, admin@hr.com" />
 <meta name="Copyright" content="TengSource, All Rights Reserved" />
-<title><decorator:title default="腾源365人力资源管理软件" /></title>
+<title><decorator:title default="人力资源管理软件" /></title>
 <link rel="icon" href="../resource/images/logodot.gif" />
 <link rel="stylesheet" href="../resource/css/style.css" type="text/css" />
 

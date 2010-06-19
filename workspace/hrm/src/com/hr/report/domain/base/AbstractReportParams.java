@@ -88,6 +88,6 @@ public abstract class AbstractReportParams extends BaseDomain implements Seriali
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.report.domain.base.AbstractReportParams JD-Core Version: 0.5.4
  */

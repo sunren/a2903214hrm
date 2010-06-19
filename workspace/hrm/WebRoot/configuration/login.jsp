@@ -104,7 +104,7 @@ body {
 	   else if(localIp=='noIp'){
            var tr1 = document.createElement("tr");
 	       var td1 = document.createElement("td");
-	       td1.innerHTML="<input type='textfield' name='url' id='url' value='http://0.0.0.0:8080/365hrm/' size='33' />";
+	       td1.innerHTML="<input type='textfield' name='url' id='url' value='http://0.0.0.0:8080/hr/' size='33' />";
 	       td1.setAttribute("align","center");
            tr1.appendChild(td1);
 
@@ -121,7 +121,7 @@ body {
            allowLogin ='1';
 	       var tr1 = document.createElement("tr");
 	       var td1 = document.createElement("td");
-	       td1.innerHTML="<input type='textfield' name='url' id='url' value='http://"+localIp+":8080/365hrm/' size='33' onclick='doCopy();'/>";
+	       td1.innerHTML="<input type='textfield' name='url' id='url' value='http://"+localIp+":8080/hr/' size='33' onclick='doCopy();'/>";
 	       tr1.appendChild(td1);
            td1.setAttribute("align","center");
 	       var tr2 = document.createElement("tr");

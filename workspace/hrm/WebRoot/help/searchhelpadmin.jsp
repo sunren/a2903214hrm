@@ -66,7 +66,7 @@
 		</ww:if>
 	</div>
 </div>
-<div id="help_foot">腾源软件版权所有&copy;1997-2007</div>
+<div id="help_foot">人力资源管理系统版权所有&copy;1997-2007</div>
 <script>
  var tmpbrief=document.getElementById('classBrief').value;
  if(tmpbrief!=''){
