@@ -181,6 +181,6 @@ public class Empsalaryadj extends BaseEmpsalaryadj implements Constants {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.compensation.domain.Empsalaryadj JD-Core Version: 0.5.4
  */

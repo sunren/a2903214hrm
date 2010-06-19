@@ -67,6 +67,6 @@ public final class DatabaseSysConfigManager implements SysConfigManager {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.util.DatabaseSysConfigManager JD-Core Version: 0.5.4
  */

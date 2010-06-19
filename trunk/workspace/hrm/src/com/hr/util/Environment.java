@@ -57,7 +57,7 @@ public class Environment implements ServletContextListener {
     private void doInit() {
         sysMap.put(SystemVariables.FILE_SEPARATOR, SystemUtils.FILE_SEPARATOR);
 
-        logger.info("365hrm系统初始化开始...");
+        logger.info("hr系统初始化开始...");
         Map props = this.config.getProperties();
 
         String path = application.getRealPath("");
@@ -81,7 +81,7 @@ public class Environment implements ServletContextListener {
 
         doCopyEmailTemplate();
 
-        logger.info("365hrm系统初始化结束");
+        logger.info("hr系统初始化结束");
     }
 
     private void doCopyEmailTemplate() {

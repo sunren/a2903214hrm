@@ -205,17 +205,17 @@ function callback_active(str) {
     if(str == "yes"){
         successMsg("errMsg","激活成功，请重新登录。");
     }else if(str == ":AR101"){
-        errMsg("errMsg","该序列号已经被注册，请购买正版软件，或者和365hrm客服联系，电话021-50905715！");
+        errMsg("errMsg","该序列号已经被注册，请购买正版软件，或者和hr客服联系，电话13581875415！");
     }else if(str == "demo"){
-        errMsg("errMsg","demo版本不能执行此功能，请购买正版软件，或者和365hrm客服联系，电话021-50905715！");
+        errMsg("errMsg","demo版本不能执行此功能，请购买正版软件，或者和hr客服联系，电话13581875415！");
     }else if(str == ":S901"){
-        errMsg("errMsg","序列号错误，请重新输入，如果确定输入无误，请和365hrm客服联系，电话021-50905715！");
+        errMsg("errMsg","序列号错误，请重新输入，如果确定输入无误，请和hr客服联系，电话13581875415！");
     }else if(str == ":A801"){
         errMsg("errMsg","激活失败，请重试！");
     }else if(str == ":C101"){
         errMsg("errMsg","链接服务器失败，服务器正忙或网络连接异常，请稍后重试！");
     }else if(str == ":NA301"){
-        errMsg("errMsg","您未被授权注册，请请购买正版软件，或者和365hrm客服联系，电话021-50905715！");
+        errMsg("errMsg","您未被授权注册，请请购买正版软件，或者和hr客服联系，电话13581875415！");
     }else {
         errMsg("errMsg","激活失败，请重试！");
     }

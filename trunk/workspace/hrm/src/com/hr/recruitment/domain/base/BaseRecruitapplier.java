@@ -230,6 +230,6 @@ public abstract class BaseRecruitapplier extends BaseDomain implements Serializa
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.recruitment.domain.base.BaseRecruitapplier JD-Core Version: 0.5.4
  */

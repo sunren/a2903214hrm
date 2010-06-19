@@ -97,7 +97,7 @@
 	</div>
 	</ww:form>
 </div>
-<div id="help_foot">腾源软件版权所有&copy;1997-2007</div>
+<div id="help_foot">人力资源管理系统版权所有&copy;1997-2007</div>
 
 <script>
 $('classBrief').value=$('tmpBrief').value;

@@ -510,6 +510,6 @@ public class LeaverequestBOImpl extends ExaminBoImpl implements ILeaverequestBO 
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.examin.bo.LeaverequestBOImpl JD-Core Version: 0.5.4
  */

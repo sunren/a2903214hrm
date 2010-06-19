@@ -7,11 +7,11 @@
 ' File: employee_update.jsp
 ' Version:1.1.0 standard version
 ' Date: 2007-2-2
-' Script Written by tengsource.com
+' Script Written by hr.com
 '=========================================================
-' Copyright   2007 tengsource.com. All rights reserved.
-' Web: http://www.tengsource.com
-' Email: admin@tengsource.com
+' Copyright   2007 hr.com. All rights reserved.
+' Web: http://www.hr.com
+' Email: admin@hr.com
 '=======================================================
  -->
 <head>

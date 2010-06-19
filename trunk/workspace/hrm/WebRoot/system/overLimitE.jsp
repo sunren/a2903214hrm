@@ -12,7 +12,7 @@
 		<tr>
 			<td id="bodyId" valign="middle" align="center" width="100%" height="100%">
 			    <img src="../resource/images/error1.gif" >
-			      员工人数超过限制，请联系腾源公司客户服务，电话021-50905715。
+			      员工人数超过限制，请联系腾源公司客户服务，电话13581875415。
 			    <a href="#" onclick="back();" class="listViewTdLinkS1">返回上一页!</a>
 			    <a href="<ww:url namespace='/homepage' action='index'/>" class="listViewTdLinkS1">返回首页!</a>
 			</td>

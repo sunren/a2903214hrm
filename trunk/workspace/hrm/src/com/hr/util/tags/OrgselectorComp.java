@@ -67,6 +67,6 @@ public class OrgselectorComp extends UIBean {
 }
 
 /*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
+ * Location: D:\Program Files\365HRM\web\WEB-INF\lib\hr.jar Qualified Name:
  * com.hr.util.tags.OrgselectorComp JD-Core Version: 0.5.4
  */

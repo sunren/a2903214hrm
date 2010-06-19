@@ -4,7 +4,7 @@
 <html>
 <link href="../resource/css/index.css" rel="stylesheet" type="text/css" />	
 <head>
-<title>腾源软件首页</title>
+<title>人力资源管理系统首页</title>
 <style type="text/css">
 img.mouseOut {
 	padding: 3px;
@@ -205,7 +205,7 @@ function showMoreTip(){
 }
 
 function toUpgrade(){
-	return confirm ("注册后，您将获得100员工/10用户的365HRM免费体验版，包含员工、薪资、考勤、信息中心等模块。如果您需要更多人数，或希望使用软件的完整版本，请联系腾源公司客户服务，电话021-50905715");
+	return confirm ("注册后，您将获得100员工/10用户的365HRM免费体验版，包含员工、薪资、考勤、信息中心等模块。如果您需要更多人数，或希望使用软件的完整版本，请联系腾源公司客户服务，电话13581875415");
 }
 
 function toAction(str){
