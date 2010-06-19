@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.security.domain">
+	<class
+		name="Role"
+		table="role"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="role_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+		<property
+			name="roleNo"
+			type="int"
+			column="role_no"
+		/>
+		
+		<property
+			name="roleName"
+			column="role_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="roleDesc"
+			column="role_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="roleSortId"
+			column="role_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="roleAuthority"
+			column="role_authority"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		
+	</class>	
+</hibernate-mapping>

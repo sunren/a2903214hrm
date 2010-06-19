@@ -1,0 +1,1 @@
+${SENDER.empName}批准了您的招聘计划

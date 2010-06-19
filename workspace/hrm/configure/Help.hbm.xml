@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.help.domain">
+	<class
+		name="Help"
+		table="help"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="help_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="helpTitle"
+			column="help_title"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="helpDesc"
+			column="help_desc"
+			type="string"
+			not-null="true"
+		/>
+		<many-to-one
+			name="helpClass"
+			column="help_class_id"
+			class="Helpclass"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

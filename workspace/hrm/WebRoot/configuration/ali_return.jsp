@@ -1,0 +1,1 @@
+<% response.sendRedirect("http://mall.alisoft.com/apps/mysoft/mySoft!show.jspa"); %>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Emptype"
+		table="emptype"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="emptype_no"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="emptypeName"
+			column="emptype_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="emptypeDesc"
+			column="emptype_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property 
+			name="emptypeSortId"
+			column="emptype_sortid"
+			type="integer"
+			not-null="true"
+		/>
+		<property 
+			name="emptypeStatus"
+			column="emptype_status"
+			type="integer"
+			not-null="true"
+		/>
+		<set inverse="true" name="empsalarypaids">
+			<key column="emptype_no" />
+			<one-to-many class="com.hr.compensation.domain.Empsalarypay" />
+		</set>
+
+		<set inverse="true" name="employees">
+			<key column="emptype_no" />
+			<one-to-many class="com.hr.profile.domain.Employee" />
+		</set>
+
+
+
+	</class>	
+</hibernate-mapping>

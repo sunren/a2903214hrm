@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.compensation.domain">
+	<class
+		name="Empsalaryacctitems"
+		table="empsalaryacctitems"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="esai_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+		<property
+			name="esaiDataSeq"
+			column="esai_data_seq"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="esaiDataIsCalc"
+			column="esai_data_is_calc"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="esaiDataCalc"
+			column="esai_data_calc"
+			type="string"
+			not-null="false"
+			length="512"
+		/>
+		<property
+			name="esaiDataRounding"
+			column="esai_data_rounding"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<many-to-one
+			name="esaiEsav"
+			column="esai_esav_id"
+			class="Empsalaryacctversion"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="esaiEsdd"
+			column="esai_data_id"
+			class="Empsalarydatadef"
+			not-null="true"
+			lazy="false"
+		>
+		</many-to-one>
+	
+	</class>	
+</hibernate-mapping>

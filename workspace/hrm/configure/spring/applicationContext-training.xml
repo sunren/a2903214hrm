@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<bean id="trcourseDAO" class="com.hr.training.dao.TrcourseDAOImpl">
+		<property name="sessionFactory"> <ref bean="sessionFactory" /> </property>
+	</bean>	
+	
+	<bean id="trTypeDAO" class="com.hr.training.dao.TrTypeDAOImpl">
+		<property name="sessionFactory"> <ref bean="sessionFactory" /> </property>
+	</bean>	
+	
+	<bean id="trcourseplanDAO" class="com.hr.training.dao.TrcourseplanDAOImpl">
+		<property name="sessionFactory"> <ref bean="sessionFactory" /> </property>
+	</bean>
+	
+	<bean id="tremployeeplanDAO" class="com.hr.training.dao.TremployeeplanDAOImpl">
+		<property name="sessionFactory"> <ref bean="sessionFactory" /> </property>
+	</bean>
+	
+	
+ 	<bean id="trcourseBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.training.bo.TrcourseBOImpl">				
+				<property name="trcourseDAO"><ref bean="trcourseDAO" /></property>
+			</bean>
+		</property>
+	</bean>	
+	
+	<bean id="trTypeBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.training.bo.TrTypeBOImpl">				
+				<property name="trTypeDAO"><ref bean="trTypeDAO" /></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="tremployeeplanBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.training.bo.TremployeeplanBOImpl">
+				<property name="tremployeeplanDAO"><ref bean="tremployeeplanDAO" /></property>
+				<property name="trcourseDAO"><ref bean="trcourseDAO" /></property>
+				<property name="trcourseplanDAO"><ref bean="trcourseplanDAO" /></property>
+				<property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+		</property>
+    </bean>	
+	
+	<bean id="trcourseplanBO" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.training.bo.TrcourseplanBOImpl">
+				<property name="trcourseplanDAO"><ref bean="trcourseplanDAO" /></property>
+				<property name="tremployeeplanDAO"><ref bean="tremployeeplanDAO" /></property>
+			</bean>
+		</property>
+    </bean>	
+	
+</beans>

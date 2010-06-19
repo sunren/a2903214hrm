@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="Inmatch"
+		table="inmatch"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="imId"
+			type="string"
+			column="im_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="imFieldDesc"
+			column="im_field_desc"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="imFormat"
+			column="im_format"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="imDetectError"
+			column="im_detect_error"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imRequired"
+			column="im_required"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imIsInput"
+			column="im_is_input"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imSortId"
+			column="im_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="imSample"
+			column="im_sample"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<property
+			name="imSampleWidth"
+			column="im_sample_width"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<many-to-one
+			name="imImm"
+			column="im_imm_id"
+			class="InmatchModel"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="imImb"
+			column="im_imb_id"
+			class="InmatchBasic"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

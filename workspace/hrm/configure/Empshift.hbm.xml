@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="com.hr.examin.domain">
+    <class name="Empshift" table="empshift">
+   		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+        <id 
+        	name="id" 
+        	type="string" 
+        	column="empshift_id" 
+        >
+            <generator class="uuid.hex"/>
+        </id>
+		<many-to-one
+			name="empshiftEmpNo"
+			column="empshift_emp_no"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="empshiftShiftNo"
+			column="empshift_shift_no"
+			class="com.hr.examin.domain.Attendshift"
+			not-null="true"
+		>
+		</many-to-one>
+       
+        <property 
+			name="empshiftDate"
+			column="empshift_date"
+			type="date"
+			not-null="true"
+		/>
+		<property 
+			name="empshiftCreateBy"
+			column="empshift_create_by"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property 
+			name="empshiftCreateTime"
+			column="empshift_create_time"
+			type="timestamp"
+			not-null="false"
+		/>
+        <property 
+			name="empshiftLastChangeBy"
+			column="empshift_last_change_by"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property 
+			name="empshiftLastChangeTime"
+			column="empshift_last_change_time"
+			type="timestamp"
+			not-null="false"
+		/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.help.domain">
+	<class
+		name="Helpclass"
+		table="helpclass"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="hc_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="hcClassName"
+			column="hc_class_name"
+			type="string"
+			not-null="true"
+			length="128"
+		/>
+		<property
+			name="hcSortId"
+			column="hc_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="hcBrief"
+			column="hc_brief"
+			type="string"
+			not-null="true"
+			length="255"
+		/>
+		<many-to-one
+			name="hcFather"
+			column="hc_father_id"
+			class="Helpclass"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="helps" inverse="true">
+			<key column="hc_id"/>
+			<one-to-many class="Help"/>
+		</set>
+
+		<set name="helpclass" inverse="true">
+			<key column="hc_id"/>
+			<one-to-many class="Helpclass"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

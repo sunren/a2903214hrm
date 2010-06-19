@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.recruitment.domain">
+	<class
+		name="Recruitchannel"
+		table="recruitchannel"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="recch_no"			
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="recchName"
+			column="recch_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="recchRespPerson"
+			column="recch_resp_person"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="recchPhone"
+			column="recch_phone"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="recchEmail"
+			column="recch_email"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="recchCityNo"
+			column="recch_city_no"
+			type="string"
+			not-null="false"
+			length="16"
+		/>
+		<property
+			name="recchAddr"
+			column="recch_addr"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="recchAddrZip"
+			column="recch_addr_zip"
+			type="string"
+			not-null="false"
+			length="6"
+		/>
+		<property
+			name="recchComments"
+			column="recch_comments"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<set name="recruitappliers" inverse="true">
+			<key column="reca_channel_id"/>
+			<one-to-many class="com.hr.recruitment.domain.Recruitapplier"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="Outmatch"
+		table="outmatch"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="omId"
+			type="string"
+			column="om_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="omFieldDesc"
+			column="om_field_desc"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="omStatistic"
+			column="om_statistic"
+			type="string"
+			not-null="false"
+			length="8"
+		/>
+		<property
+			name="omFormat"
+			column="om_format"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="omSortId"
+			column="om_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="omColumnWidth"
+			column="om_column_width"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="omIsGroup"
+			column="om_is_group"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<many-to-one
+			name="omOmb"
+			column="om_omb_id"
+			class="OutmatchBasic"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="omOmm"
+			column="om_omm_id"
+			class="OutmatchModel"
+			not-null="true"
+			lazy="proxy"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

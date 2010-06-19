@@ -1,0 +1,297 @@
+body {
+	margin: 0;
+	font-size: 9pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #F9F9F5;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* CSS Content */
+#content {
+	float: right;
+	text-align: center;
+	/*padding-left: 220px; 内容往回挤100px */
+    width:84%;
+}
+
+/* CSS Tabs */
+#userinfo {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #66B3D9;
+	background-color: #EDF4FC;
+	
+}
+
+#button {
+	height: 360px;
+	width: 16%;
+	margin-right: -200px;  /*强行往左拉回200px */
+	float: left;
+	text-align: center;
+	border-right: 1px solid #66B3D9;
+	padding: 0 0 1em 0;
+	margin-bottom: 1em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*'Trebuchet MS', 'Lucida Grande', Verdana, Arial, sans-serif;*/
+	font-size: 9pt;
+	background-color: #90bade;
+	color: #333;
+}
+
+#button ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#button li {
+	border-bottom: 1px solid #90bade;
+	margin: 0;
+	list-style: none;
+	list-style-image: none;
+}
+
+#button li a {
+	display: block;
+	padding: 5px 5px 5px 0.5em;
+	border-left: 10px solid #1958b7;
+	border-right: 10px solid #508fc4;
+	background-color: #2175bc;
+	color: #fff;
+	text-decoration: none;
+	width: 100%;
+}
+
+html>body #button li a {
+	width: auto;
+}
+
+#button li a:hover {
+	border-left: 10px solid #1c64d1;
+	border-right: 10px solid #5ba3e0;
+	background-color: #2586d7;
+	color: #fff;
+}
+
+#button li #active {
+	border-left: 10px solid #1c64d1;
+	border-right: 10px solid #5ba3e0;
+	background-color: #2586d7;
+	color: #fff;
+}
+
+h2 {
+	font: bold 14px Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	margin: 0px;
+	padding: 0px 0px 0px 15px;
+}
+
+img {
+	border: none;
+}
+
+/*- Menu Tabs 9--------------------------- */
+#tabs9 {
+	font: 13px Verdana, Arial, Helvetica, sans-serif;
+	float: right;
+	width: 100%;
+	border-bottom: 1px solid #66B3D9;
+	line-height: normal;
+}
+
+#tabs9 ul {
+	margin: 0;
+	padding: 10px 10px 0 50px;
+	list-style: none;
+}
+
+#tabs9 li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#tabs9 a {
+	float: right;
+	background: url("../images/tableft9.gif") no-repeat left top;
+	margin: 0;
+	padding: 0 0 0 4px;
+	text-decoration: none;
+}
+
+#tabs9 a span {
+	float: right;
+	display: block;
+	background: url("../images/tabright9.gif") no-repeat right top;
+	padding: 5px 15px 4px 6px;
+	color: #000;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabs9 a span {
+	float: none;
+}
+
+/* End IE5-Mac hack */
+#tabs9 a:hover span {
+	color: #000;
+}
+
+#tabs9 a:hover {
+	background-position: 0% -42px;
+}
+
+#tabs9 a:hover span {
+	background-position: 100% -42px;
+}
+
+#tabs9 #current a {
+	background-position: 0% -42px;
+}
+
+#tabs9 #current a span {
+	background-position: 100% -42px;
+}
+
+.myInfo {
+	border: 1px solid #CCCCCC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+}
+
+.blackblod {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+	line-height: 20px;
+}
+
+.frameblue {
+	background-image: url(../images/bg.gif);
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #66B3D9;
+	border-right-color: #66B3D9;
+	border-bottom-color: #66B3D9;
+	border-left-color: #66B3D9;
+}
+
+.orangeFont {
+	color: #FF9900;
+}
+
+.blueframeleft {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #66B3D9;
+	background-color: #EDF4FC;
+}
+
+.blueframetop {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #66B3D9;
+}
+
+.blueBgWhiteFont {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FFDF5E;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #FF9933;
+}
+
+.style1 {
+	color: #FFFFFF
+}
+
+.searchinput {
+	background-color: #106FA5;
+	border: 1px solid #FFFFFF;
+	text-indent: 5px;
+	color: #FFFFFF;
+	white-space: nowrap;
+}
+
+.errorBox {
+	background-image: url(../images/errBox.gif);
+	border: 1px solid #508FC4;
+	position: absolute;
+	left: 40%;
+	top: 40%;
+	width: 250px;
+	height: 100px;
+	z-index: 1;
+	line-height: 22px;
+	text-align: left;
+	vertical-align: 50%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FF0000;
+	padding: 30px 30px 15px 30px;
+	filter: alpha(opacity = 90);
+}
+
+.errorMsg {
+	background-image: url(../images/errBg.gif);
+	background-repeat: no-repeat;
+	width: 94%;
+	height: 42px;
+	z-index: 1;
+	line-height: 21px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #FF0000;
+	text-align: left;
+	padding: 10px 15px 15px 50px;
+}
+
+.successBox {
+	background-image: url(../images/errBox.gif);
+	border: 1px solid #508FC4;
+	position: absolute;
+	left: 40%;
+	top: 40%;
+	width: 250px;
+	height: 100px;
+	z-index: 1;
+	line-height: 22px;
+	text-align: left;
+	vertical-align: 50%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #58A307;
+	padding: 30px 30px 15px 30px;
+	filter: alpha(opacity = 90);
+}
+
+.successMsg {
+	background-image: url(../images/errBg-success.gif);
+	background-repeat: no-repeat;
+	width: 94%;
+	height: 42px;
+	z-index: 1;
+	line-height: 21px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #58A307;
+	text-align: left;
+	padding: 10px 15px 15px 50px;
+}

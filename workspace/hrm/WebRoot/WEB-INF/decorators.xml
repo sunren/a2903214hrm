@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/sitemesh">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>
+        <pattern>*login*</pattern>
+        <pattern>*/left*.jsp</pattern>
+		<pattern>*/top.jsp</pattern>
+		<pattern>*/foot.jsp</pattern>
+		<!-- profile -->
+		<pattern>*detailEmployeeInfo.action*</pattern>
+		<pattern>*/myProfile*.action*</pattern>
+		<pattern>*/updateEmp*.action*</pattern>
+		<pattern>*/ajax*.*</pattern>
+		<pattern>*/jr*.action</pattern>
+		<pattern>*/open*.action*</pattern>	
+		<pattern>*chooserecruitplan*.action*</pattern>
+		<pattern>*infoCard*.action*</pattern>
+		<pattern>*salary_create*.jsp*</pattern>
+		<pattern>*/empAdditional.action*</pattern>
+		<pattern>*/resumeUpload.action*</pattern>
+		<pattern>*/empAdditional.action*</pattern>
+		<pattern>*/eduAdd.action*</pattern>
+		<pattern>*/eduUpdate.action*</pattern>
+		<pattern>*/trainAdd.action*</pattern>
+		<pattern>*/trainUpdate.action*</pattern>
+		<pattern>*/relationsAdd.action*</pattern>
+		<pattern>*/relationsUpdate.action*</pattern>
+		<pattern>*/deleteEduAttach.action*</pattern>
+		<pattern>*/deleteTrainAttach.action*</pattern>
+		<pattern>*/deleteContractAttach2.action*</pattern>
+		<pattern>*/deleteEvalAttach2.action*</pattern>
+		<pattern>*/deleteContract.action*</pattern>
+		<pattern>*/resumeUpload.action*</pattern>
+		<pattern>*/resumeDelete.action*</pattern>
+		<pattern>*/empProfile.action*</pattern>
+		<pattern>*/deleteContractAttach.action*</pattern>
+		<pattern>*/deleteEvalAttach.action*</pattern>
+		<pattern>*/empContractAdd.action*</pattern>
+		<pattern>*/empContractUpdate.action*</pattern>
+		<pattern>*/empTransferAdd.action*</pattern>
+		<pattern>*/empTransferUpdate.action*</pattern>
+		<pattern>*/empEvalAdd.action*</pattern>
+		<pattern>*/empEvalUpdate.action*</pattern>
+		<pattern>*/empRewardAdd.action*</pattern>
+		<pattern>*/empRewardUpdate.action*</pattern>
+		<pattern>*/empQuitAdd.action*</pattern>
+		<pattern>*/empQuitUpdate.action*</pattern>
+		<pattern>*/empQuitDelete.action*</pattern>
+		<pattern>*/listContract.action*</pattern>
+		<pattern>*/listTransfer.action*</pattern>
+		<pattern>*/listEval.action*</pattern>
+		<pattern>*/listReward.action*</pattern>
+		<pattern>*/listQuit.action*</pattern>
+		<pattern>*/branchConfig.action*</pattern>
+		<pattern>*/departmentConfig.action*</pattern>
+		<pattern>*/businessunitConfig.action*</pattern>
+		<pattern>*/groupConfig.action*</pattern>
+		<pattern>*/jobtitleConfig.action*</pattern>
+		<pattern>*/emptypeConfig.action*</pattern>
+		<pattern>*/locationConfig.action*</pattern>
+		<pattern>*/attdMachine.action*</pattern>
+		
+		<pattern>*/branchmanagerConfig.action*</pattern>
+		<pattern>*/departmanagerConfig.action*</pattern>
+		<pattern>*/unitmanagerConfig.action*</pattern>
+		<pattern>*/groupmanagerConfig.action*</pattern>
+		<pattern>*/locationmanagerConfig.action*</pattern>
+		<pattern>*/goBranchDeptTabs.action*</pattern>
+		<pattern>*/editBranchDeptInit.action*</pattern>
+		<pattern>*/editBranchDeptInit.action*</pattern>
+		<pattern>*/saveBranchDept.action*</pattern>
+		<pattern>*/goDeptResTab.action*</pattern>
+		<pattern>*/goDeptPerfcrTab.action*</pattern>
+		<pattern>*/goDeptPBsTab.action*</pattern>
+		<pattern>*/goDeptHistTab.action*</pattern>
+		<pattern>*/goDirectSubDeptTab.action*</pattern>
+		<!-- pb relation -->
+		<pattern>*/pbManage.action*</pattern>
+		<pattern>*/pbBasicInfo.action*</pattern>
+		<pattern>*/pbResponse.action*</pattern>
+		<pattern>*/pbPerfcr.action*</pattern>
+		<pattern>*/pbQualify.action*</pattern>
+		<pattern>*/showPbTable.action*</pattern>
+		<pattern>*/showPbHistAction.action*</pattern>
+		<pattern>*/showPbManual.action*</pattern>
+		
+		<pattern>*/positionInfo.action*</pattern>
+		<!-- configuration -->
+		<pattern>*/contractType.action*</pattern>
+		<pattern>*/payriseType.action*</pattern>
+		<pattern>*/holidayType.action*</pattern>
+		<pattern>*/overworkType.action*</pattern>
+		<pattern>*/staffCustom.action*</pattern>
+		<pattern>*/attendanceCustom.action*</pattern>
+		
+		<pattern>*/showConfigProfile.action*</pattern>
+		<pattern>*/showConfigSalary.action*</pattern>
+		<pattern>*/showConfigExamin.action*</pattern>
+		<pattern>*/showExaminShift.action*</pattern>
+		<pattern>*/showConfigMail.action*</pattern>
+		<pattern>*/showConfigOthers.action*</pattern>
+		<!-- compensation -->
+		<pattern>*/addSalaryConfigInitForBasic.action*</pattern>
+		<pattern>*myAttendance*.action*</pattern>
+		<pattern>*/attendanceConfigInit*.action*</pattern>
+		<pattern>*/attendance*.action*</pattern>
+		<pattern>*/salaryRatingConfig*.action*</pattern>
+		<pattern>*/benefitTypeList*.action*</pattern>
+		<pattern>*/acctItemDef*.action*</pattern>
+		<pattern>*/UpdateEmpsalaryacct*.action*</pattern>
+		<!-- examin -->
+		<pattern>*workFlowApproveShow.action*</pattern>
+		<pattern>*workFlowApproveManage.action*</pattern>
+		<pattern>*authorityPosManage.action*</pattern>
+		<pattern>*workFlowApproveManageAdd.action*</pattern>
+		<pattern>*workFlowApproveManageUpdate.action*</pattern>
+		<pattern>*workFlowApproveManageDelete.action*</pattern>
+		<pattern>*leavebalanceCurYear.action*</pattern>
+		<pattern>*leavecalendarManage.action*</pattern>
+		<pattern>*examinShiftSearch.action*</pattern>
+		<pattern>*sortShift.action*</pattern>
+		<pattern>*initLeaveBalance.action*</pattern>
+		<pattern>*doSubmitLeaveBalance.action*</pattern>
+		<pattern>*doDeleteLeaveBalance*</pattern>
+		
+		<pattern>*myOTAddInit.action*</pattern>
+		<pattern>*myOTAddDo.action*</pattern>
+		<pattern>*myOTUpdate*.action*</pattern>
+		<pattern>*myLeaveSearch.action*</pattern>
+		<pattern>*myOvertimeSearch.action*</pattern>
+		<pattern>*deptLeave*.action*</pattern>
+		<pattern>*deptOvertime*.action*</pattern>
+		<pattern>*hrLeaveSearch*.action*</pattern>
+		<pattern>*hrOvertimeSearch*.action*</pattern>
+		<pattern>*allLeaveSearch.action*</pattern>
+		<pattern>*allOvertimeSearch.action*</pattern>
+		<pattern>*empOTAdd*.action*</pattern>
+		<pattern>*empLRAdd*.action</pattern>	
+		<pattern>*deptOTUpdate*.action*</pattern>
+		<pattern>*hrOTUpdate*.action*</pattern>
+		<pattern>*sortShift*.action*</pattern>
+		<pattern>*deptApproveOrReject*.action*</pattern>
+		<pattern>*deptLrModifyAndApprove*.action*</pattern>
+		<pattern>*hrLrApproveOrReject*.action*</pattern>
+		<pattern>*hrLrModifyAndApprove*.action*</pattern>
+		<pattern>*allLrModifyAndConfirm*.action*</pattern>
+		<pattern>*deptOtApproveOrReject*.action*</pattern>
+		<pattern>*deptOtModifyAndApprove*.action*</pattern>
+		<pattern>*hrOtApproveOrReject*.action*</pattern>
+		<pattern>*allOtModifyAndConfirm*.action*</pattern>
+		<pattern>*emailConfirm*.action*</pattern>
+		
+		<!-- next is Leave Mode By Hour action -->
+		<pattern>*LRUpdateInit.action*</pattern>
+		<pattern>*LRUpdateDo.action*</pattern>
+		<pattern>*deptHrApproveLRInit.action*</pattern>
+		<pattern>*deptHrApproveLR.action*</pattern>
+		<pattern>*showOTApprove_M.action*</pattern>
+		<pattern>*showOTApprove_HR.action*</pattern>
+		<pattern>*showOtInfo.action*</pattern>
+		<pattern>*showOtLogInfo.action*</pattern>
+		<!-- birt -->
+		<pattern>*employeeSum.action*</pattern>
+		<pattern>*employDimissionSum.action*</pattern>
+		<pattern>*employeeDimissionRate.action*</pattern>
+		
+		<pattern>*employeeNew.action*</pattern>
+		<pattern>*employeeNewRate.action*</pattern>
+		<pattern>*employeeNetRate.action*</pattern>
+		<!-- 
+		<pattern>*/report*</pattern>-->
+		<pattern>*employeeDimissionReport*.action*</pattern>
+		<pattern>*employeeReport*.action*</pattern>
+		<pattern>*empReportByDept*.action*</pattern>
+		<pattern>*empReportByOthers*.action*</pattern>
+		<pattern>*newEmpReport*.action*</pattern>
+		<pattern>*viewReport*.action*</pattern>
+		<pattern>*leaveEmpReport*.action*</pattern>
+		<pattern>*rpReportByNow*.action*</pattern>
+		<pattern>*raReportByTime*.action*</pattern>
+		<pattern>*lrReportByTime*.action*</pattern>
+		<pattern>*otReportByTime*.action*</pattern>
+		<pattern>*alyReportByType*.action*</pattern>
+		<pattern>*trReportByTime*.action*</pattern>
+		<pattern>*userReport*.action*</pattern>
+		<pattern>*salaryRp.action*</pattern>
+		<pattern>*salaryHistoryReport*.action*</pattern>
+		<pattern>*salaryCostReport*.action*</pattern>
+		<pattern>*/frameset*</pattern>
+		<pattern>*/run*</pattern>
+		<pattern>*/download*</pattern>
+		<pattern>*/parameter*</pattern>
+		<pattern>/help/*</pattern>	
+		<pattern>/yuanhao/*</pattern>
+		<pattern>/io/import.action*</pattern>
+		<!-- end profile -->
+		<!-- regist -->
+		<pattern>*/ali_*.action*</pattern>
+		<pattern>*/regist_*.action*</pattern>		
+		<!-- end regist -->
+
+	</excludes>
+	<decorator name="index" page="index.jsp">
+		<pattern>/homepage/index.*</pattern>
+	</decorator>
+	
+	<decorator name="main" page="main.jsp">
+		<pattern>/*.action</pattern>
+	</decorator>
+
+	<decorator name="main" page="main.jsp">
+		<pattern>/*.rp</pattern>
+	</decorator>
+	
+
+</decorators>

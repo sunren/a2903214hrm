@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="help" extends="default" namespace="/help">
+		
+ 
+	<!-- 搜索 -->
+	  <action name="searchHelp" class="com.hr.help.action.SearchHelp">
+	  		<result name="success" type="dispatcher">searchhelp.jsp</result> 
+	  		<interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+	  </action>
+
+	  <action name="searchHelpAdmin" class="com.hr.help.action.SearchHelp">
+	  		<result name="success" type="dispatcher">searchhelpadmin.jsp</result> 
+	  		<interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+	  </action>	
+	  <action name="searchHelpUpdate" class="com.hr.help.action.UpdateHelp">
+	  		<result name="success" type="chain">
+	  			<param name="namespace">/help</param>
+	  			<param name="actionName">searchHelpAdmin</param>
+	  		</result>
+		    <result name="input" type="dispatcher">searchhelpupdate.jsp</result>
+	  		<interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+	  </action>				
+    </package>
+</struts>

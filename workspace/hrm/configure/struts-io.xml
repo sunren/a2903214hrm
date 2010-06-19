@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="io" extends="default" namespace="/io">
+		<interceptors>
+			<interceptor-stack name="paramsStack">
+				<interceptor-ref name="checklogin" />
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 上传 -->
+		<action name="import" class="com.hr.io.action.Import">
+			<result name="success" type="dispatcher">/io/upload_result.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+			<interceptor-ref name="fileUploadStack" />
+		</action>
+		<!-- 下载 -->
+		<action name="downloadModel" class="com.hr.io.action.DownloadModel">
+			<result name="error" type="dispatcher">/io/error.htm</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+	</package>
+</struts>

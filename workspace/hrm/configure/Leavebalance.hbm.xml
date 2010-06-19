@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class
+		name="Leavebalance"
+		table="leavebalance"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="lbId"
+			type="string"
+			column="lb_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="lbYear"
+			column="lb_year"
+			type="string"
+			not-null="true"
+			length="4"
+		/>
+		<property
+			name="lbLeaveType"
+			column="lb_leave_type"
+			type="integer"
+			not-null="true"
+		/>
+		<property
+			name="lbBalForwardDay"
+			column="lb_bal_forward_day"
+			type="big_decimal"
+			not-null="false"
+			length="6"
+		/>
+		<property
+			name="lbBalForwardHour"
+			column="lb_bal_forward_hour"
+			type="big_decimal"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="lbBalEndDate"
+			column="lb_bal_end_date"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="lbComments"
+			column="lb_comments"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="lbDaysOfYear"
+			column="lb_days_of_year"
+			type="big_decimal"
+			not-null="false"
+			length="6"
+		/>
+		<property
+			name="lbHoursOfYear"
+			column="lb_hours_of_year"
+			type="big_decimal"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="lbDaysForRelease"
+			column="lb_days_for_release"
+			type="big_decimal"
+			not-null="false"
+			length="6"
+		/>
+		<property
+			name="lbHoursForRelease"
+			column="lb_hours_for_release"
+			type="big_decimal"
+			not-null="false"
+			length="7"
+		/>
+		<property
+			name="lbReleaseStartDate"
+			column="lb_release_start_date"
+			type="date"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="lbOtherDays"
+			column="lb_other_days"
+			type="big_decimal"
+			not-null="false"
+		/>
+		<property
+			name="lbOtherHours"
+			column="lb_other_hours"
+			type="big_decimal"
+			not-null="false"
+		/>
+		<property 
+			name="lbStatus"
+			column="lb_status"
+			type="integer"
+			not-null="true"
+		/>
+		<many-to-one
+			name="lbEmpNo"
+			column="lb_emp_no"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Position"
+		table="position"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<cache usage="nonstrict-read-write"/>
+
+		<id
+			name="id"
+			type="string"
+			column="position_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		 <many-to-one
+			name="positionPbId"
+			column="position_pb_id"
+			class="PositionBase"
+			not-null="false"
+			
+		/>
+		<many-to-one
+			name="positionParentId"
+			column="position_parent_id"
+			class="com.hr.profile.domain.Position"
+			not-null="false"
+
+		/>
+		<property
+			name="positionTakeNum"
+			column="position_take_num"
+			type="integer"
+			not-null="false"
+			length="10"
+		/>
+		<many-to-one
+			name="positionEmpNo"
+			column="position_emp_no"
+			class="Employee"
+			not-null="false"
+		/>
+		
+	</class>	
+</hibernate-mapping>

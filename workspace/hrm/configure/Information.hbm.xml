@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.information.domain">
+	<class
+		name="Information"
+		table="information"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="info_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="infoTag"
+			column="info_dept_limit"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="infoTitle"
+			column="info_title"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="infoBreif"
+			column="info_breif"
+			type="string"
+			not-null="true"
+			length="128"
+		/>
+		<property
+			name="infoContent"
+			column="info_content"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="infoFileName"
+			column="info_file_name"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="infoFileDesc"
+			column="info_file_desc"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="infoPicName"
+			column="info_pic_name"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="infoPicDesc"
+			column="info_pic_desc"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="infoViewedNum"
+			column="info_viewed_num"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="infoStatus"
+			column="info_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="infoCreateTime"
+			column="info_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="infoLastChangeTime"
+			column="info_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<many-to-one
+			name="infoCreateBy"
+			column="info_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="infoClass"
+			column="info_class_id"
+			class="com.hr.configuration.domain.Infoclass"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="infoLastChangeBy"
+			column="info_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="configuration" extends="default" namespace="/configuration">
+
+		<interceptors>
+			<!-- 定义的一个拦截器栈 -->
+			<interceptor-stack name="configStack">
+				<interceptor-ref name="checklogin" />
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params" />
+
+			</interceptor-stack>
+		</interceptors>
+
+
+		<!--进入"系统->系统资料设置 "页面的action  -->
+		<action name="config" class="com.hr.configuration.action.ConfigList">
+			<result name="success">basicConfig.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+
+
+		<!--系统->系统资料设置->合同种类设置-->
+		<action name="contractType" class="com.hr.configuration.action.ContractTypeAction">
+			<result name="success">contract_type.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+
+		<!--系统->系统资料设置->加薪类型设置-->
+		<action name="payriseType" class="com.hr.configuration.action.PayriseTypeAction">
+			<result name="success">payrise_type.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--系统->系统资料设置->休假种类设置-->
+		<action name="holidayType" class="com.hr.configuration.action.HolidayTypeAction">
+			<result name="success">holiday_type.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--系统->系统资料设置->加班类型设置-->
+		<action name="overworkType" class="com.hr.configuration.action.OverworkTypeAction">
+			<result name="success">overwork_type.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--系统->系统资料设置->员工自定义设置-->
+		<action name="staffCustom" class="com.hr.configuration.action.StaffCustomAction">
+			<result name="success">staff_custom.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--系统->系统资料设置->考勤自定义设置-->
+		<action name="attendanceCustom"
+			class="com.hr.configuration.action.AttendanceCustomAction">
+			<result name="success">attendance_custom.jsp
+			</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+
+		<!--邮件模板列表-->
+		<action name="etSearch" class="com.hr.configuration.action.EmailtemplateSearch">
+			<result name="success">etsearch.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--邮件模板修改初始化-->
+		<action name="modifyTemplateInit" class="com.hr.configuration.action.EmailtemplateSearch" method="modifyTemplateInit">
+			<result name="success">emailtemplate_modify.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+		<!--邮件模板修改-->
+		<action name="modifyTemplate" class="com.hr.configuration.action.EmailtemplateSearch" method="modifyTemplate">
+			<result name="success" type="chain">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">etSearch</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">modifyTemplateInit</param>
+			</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+		</action>
+		<!--邮件管理-->
+		<action name="emailSearch" class="com.hr.configuration.action.EmailManageSearch">
+			<result name="success">emailSearch.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="checkauth" />
+		</action>
+		<!--发送邮件-->
+		<action name="emailsend" class="com.hr.configuration.action.EmailsendBatch">
+			<result name="input">esbatch.jsp</result>
+			<result name="success" type="chain">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">emailSearch</param>
+			</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+		</action>
+		<!--系统环境配置 初始化-->
+		<action name="systemconfiginit" class="com.hr.configuration.action.SystemConfigInit">
+			<result name="input">login.jsp</result>
+			<result name="success">systemconfig.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+		</action>
+
+
+		<!--到达"系统->基本参数设置->员工模块"页面的action-->
+		<action name="showConfigProfile" class="com.hr.configuration.action.ConfigProfile">
+			<result name="success" type="dispatcher">/configuration/configProfile.jsp
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+		<!--对"系统-> 基本参数设置-> 员工模块"页面进行更新的action  -->
+		<action name="profileUpdateConfig" class="com.hr.configuration.action.ConfigProfile"
+			method="executeUpdate">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!--到达"系统->基本参数设置->考勤设置"页面的action-->
+		<action name="showConfigExamin" class="com.hr.configuration.action.ConfigExamin"
+			method="showConfigExamin">
+			<result name="success" type="dispatcher">/configuration/configExamin.jsp
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+		<!--对"系统-> 基本参数设置-> 考勤设置"页面进行更新的action  -->
+		<action name="examinUpdateConfig" class="com.hr.configuration.action.ConfigExamin"
+			method="executeExamin">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!--到达"系统->基本参数设置->薪资设置"页面的action-->
+		<action name="showConfigSalary" class="com.hr.configuration.action.ConfigSalary"
+			method="showConfigSalary">
+			<result name="success" type="dispatcher">/configuration/configSalary.jsp
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+		<!--对"系统-> 基本参数设置-> 薪资设置"页面进行更新的action  -->
+		<action name="salaryUpdateConfig" class="com.hr.configuration.action.ConfigSalary"
+			method="executeSalary">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!-- 到达 系统参数设置-考勤基础模块的action -->
+		<action name="showExaminShift" class="com.hr.configuration.action.ConfigExaminShift"
+			method="showExaminShift">
+			<result name="success" type="dispatcher">
+				/configuration/configExaminShift.jsp</result>
+			<interceptor-ref name="configStack"></interceptor-ref>
+		</action>
+		<!--对"系统-> 基本参数设置-> 考勤高级"页面进行更新的action  -->
+		<action name="examinShiftUpdateConfig" class="com.hr.configuration.action.ConfigExaminShift"
+			method="updateExaminShift">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!--到达"系统->基本参数设置->邮箱参数设置"页面的action-->
+		<action name="showConfigMail" class="com.hr.configuration.action.ConfigMail"
+			method="showConfigMail">
+			<result name="success" type="dispatcher">/configuration/configMail.jsp
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+		<!--对"系统-> 基本参数设置-> 邮箱参数设置"页面进行更新的action  -->
+		<action name="mailUpdateConfig" class="com.hr.configuration.action.ConfigMail"
+			method="executeMail">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!--到达"系统->基本参数设置->系统"页面的action-->
+		<action name="showConfigOthers" class="com.hr.configuration.action.ConfigOthers"
+			method="showConfigOthers">
+			<result name="success" type="dispatcher">/configuration/configOthers.jsp
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+		<!--对"系统-> 基本参数设置-> 系统"页面进行更新的action  -->
+		<action name="otherUpdateConfig" class="com.hr.configuration.action.ConfigOthers"
+			method="executeOthers">
+			<result name="success" type="redirect-action">
+				<param name="namespace">/configuration</param>
+				<param name="actionName">systemconfiginit</param>
+			</result>
+			<interceptor-ref name="configStack" />
+		</action>
+
+        <!--对"系统-> 基本参数设置->-用工形式设置-->
+       <action name="emptypeConfig" class="com.hr.profile.action.EmptypeManagementAction">
+            <result name="success" type="dispatcher">/profile/emptype_config.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="configStack" /> 
+      </action>
+
+      <!--对"系统-> 基本参数设置->-员工工作地点设置-->
+	   <action name="locationConfig" class="com.hr.profile.action.LocationManagementAction">
+	  		<result name="success" type="dispatcher">/profile/location_config.jsp</result> 
+			<result name="error">/homepage/index.jsp</result>
+	  		<interceptor-ref name="configStack" /> 
+	  </action>
+
+	  
+	  <!--系统->系统资料设置->考勤机设置-->
+		<action name="attdMachine" class="com.hr.configuration.action.AttdMachineAction">
+			<result name="success">attdMachine.jsp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="configStack" /> 
+		</action>
+      
+       <!--系统->系统资料设置->岗位设置-->
+       <action name="jobtitleConfig" class="com.hr.profile.action.JobtitleManagementAction">
+            <result name="success" type="dispatcher">/profile/jobtitle_config.jsp</result> 
+            <result name="error">/homepage/index.jsp</result>
+            <interceptor-ref name="configStack" /> 
+      </action>
+
+		<!--公司资料设置-->
+		<action name="clientInit" class="com.hr.configuration.action.ClientManage"
+			method="executeInit">
+			<result name="success" type="dispatcher">client.jsp</result>
+			<interceptor-ref name="modelParamsStack" />
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+
+		</action>
+
+		<action name="updateClient" class="com.hr.configuration.action.ClientManage">
+			<result name="success" type="redirect">
+				clientInit.action?check=true
+			</result>
+			<result name="input" type="dispatcher">client.jsp</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="modelParamsStack" />
+			<interceptor-ref name="validationWorkflowStack" />
+
+		</action>
+
+		<!-- IO接口列表 -->
+		<action name="iodefList" class="com.hr.io.action.IodefList">
+			<result name="success" type="dispatcher">
+				/io/iodefList.jsp
+			</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="checkauth" />
+		</action>
+		<!-- 导出模板列表 -->
+		<action name="ommList" class="com.hr.io.action.OutmatchModelList">
+			<result name="success" type="dispatcher">
+				/io/ommList.jsp
+			</result>
+			<result name="input" type="redirect">
+				/configuration/iodefList.action
+			</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="checkauth" />
+		</action>
+		<!-- 导入模板列表 -->
+		<action name="immList" class="com.hr.io.action.InmatchModelList">
+			<result name="success" type="dispatcher">
+				/io/immList.jsp
+			</result>
+			<result name="input" type="redirect">
+				/configuration/iodefList.action
+			</result>
+			<interceptor-ref name="checklogin" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="chain" />
+			<interceptor-ref name="checkauth" />
+		</action>
+	</package>
+</struts>

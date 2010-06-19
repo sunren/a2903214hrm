@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.io.domain">
+	<class
+		name="OutmatchBasic"
+		table="outmatchbasic"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="ombId"
+			type="string"
+			column="omb_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="ombFieldName"
+			column="omb_field_name"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="ombCanGroup"
+			column="omb_can_group"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ombDataType"
+			column="omb_data_type"
+			type="string"
+			not-null="true"
+			length="16"
+		/>
+		<property
+			name="ombFieldDesc"
+			column="omb_field_desc"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="ombSortId"
+			column="omb_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="ombFormat"
+			column="omb_format"
+			type="string"
+			not-null="false"
+			length="32"
+		/>
+		<property
+			name="ombColumnWidth"
+			column="omb_column_width"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<many-to-one
+			name="ombIo"
+			column="omb_io_id"
+			class="Iodef"
+			not-null="true"
+		>
+		</many-to-one>
+
+	</class>	
+</hibernate-mapping>

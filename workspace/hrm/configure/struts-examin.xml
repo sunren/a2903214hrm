@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="examin" extends="default" namespace="/examin">
+		<interceptors>
+			<interceptor-stack name="modelParamsStack">
+				<interceptor-ref name="checklogin"/>
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+
+		<action name="leaveTotalCalc"
+			class="com.hr.profile.action.MyAttendance">
+			<result name="success" type="dispatcher">
+				/examin/myleave_total.jsp
+			</result>
+			<interceptor-ref name="modelParamsStack" />
+		</action>
+		<!--我的请假加班  里面没有什么具体方法，只是转向下面的jsp页面，在jsp页面里面有两个action转向相应的页面去-->
+		<action name="myExamins" class="com.hr.examin.action.MyExaminSearchAction">
+			<result name="success" type="dispatcher">/examin/myexamin_search.jsp</result>
+			<result name="input" type="dispatcher">/examin/myexamin_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<action name="empExaminAdd" class="com.hr.examin.action.EmpExaminAddAction">
+			<result name="success" type="dispatcher">/examin/empexamin_add.jsp</result>
+			<result name="input" type="dispatcher">/examin/empexamin_add.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<!-- 到达"我的请假加班"里面的"我的请假列表"选项卡对应jsp页面的action -->
+		<action name="myLeaveSearch" class="com.hr.examin.action.MyLeaveSearchAction">
+			 <result name="success" type="dispatcher">/examin/myleave_search.jsp</result>
+			 <result name="input" type="chain">
+			 	<param name="actionName">myLeaveSearchInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			 <interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="myLeaveSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/myleave_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!--加班action-->
+		<action name="myOvertimeSearch" class="com.hr.examin.action.MyOvertimeSearchAction">
+			<result name="success" type="dispatcher">/examin/myovertime_search.jsp</result>
+			<result name="input" type="chain">
+			 	<param name="actionName">myOvertimeSearchInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>	
+		<action name="myOvertimeSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/myovertime_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!--更新-->
+		<action name="myOTUpdateInit" class="com.hr.examin.action.EmpOvertimeUpdAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empovertime_upd.jsp</result> 		
+		    <interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="myOTUpdateDo" class="com.hr.examin.action.EmpOvertimeUpdAction">
+			<result name="success" type="chain">
+			 	<param name="actionName">myOvertimeSearch</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			 <result name="allList" type="chain">
+			 	<param name="actionName">allOvertimeSearch</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			 <result name="input" type="chain">
+			 	<param name="actionName">myOTUpdateInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			<result name="invalid.token" type="redirect">/examin/myOvertimeSearch.action</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+		    <interceptor-ref name="validationWorkflowStack"></interceptor-ref>
+		</action>
+		
+		<!--添加"请假加班申请"初始化(按 天 计算请假)-->
+		<action name="empLRAddInit" class="com.hr.examin.action.EmpLeaveAddAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empleave_add.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!--添加保存-->
+		<!--向数据库中添加一条"请假申请"的action  -->
+		<action name="empLRAddDo" class="com.hr.examin.action.EmpLeaveAddAction">
+			<result name="success" type="chain">
+			 	<param name="actionName">empLRAddInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			 <result name="input" type="chain">
+			 	<param name="actionName">empLRAddInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"></interceptor-ref>
+		</action>
+		<!-- 经理审批总经理审批时候的修改以及员工考勤列表中的销假操作执行的action初始化 -->
+		<action name="deptHrApproveLRInit" class="com.hr.examin.action.DeptHRApproveLRAction" method="executeInit">
+		    <result name="success" type="dispatcher">/examin/lrModifyandApprove.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<!--添加-->
+		<action name="empOTAddInit" class="com.hr.examin.action.EmpOvertimeAddAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empovertime_add.jsp</result>
+		    <interceptor-ref name="modelParamsStack"/>
+		</action>
+		<action name="empOTAddDo" class="com.hr.examin.action.EmpOvertimeAddAction">
+			<result name="success" type="chain">
+			 	<param name="actionName">empOTAddInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+			 <result name="input" type="chain">
+			 	<param name="actionName">empOTAddInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+		    <interceptor-ref name="modelParamsStack"/>
+		    <interceptor-ref name="validationWorkflowStack"/>	 
+		</action>
+
+	<!-- 审批阶段acition -->
+	<!-- dept 到达"经理审批"页面的action-->
+	<action name="deptExaminSearch" class="com.hr.examin.action.DeptSearchAction">
+		<result name="success" type="dispatcher">/examin/empsexamin_dept_search.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>	
+	</action>
+	<!-- "经理审批页面"的到达"审批请假列表"的action -->
+	<action name="deptLeaveSearch" class="com.hr.examin.action.DeptLeaveSearchAction">
+		<result name="success" type="dispatcher">/examin/empsleave_dept_search.jsp</result>
+		<result name="input" type="chain">
+			 	<param name="actionName">deptLeaveSearchInit</param>
+			 	<param name="namespace">/examin</param>
+		 </result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- lr:经理总经理审批动作 -->
+	<action name="deptApproveOrReject" class="com.hr.examin.action.DeptLeaveSearchAction" method="deptApproveOrReject">
+	    <result name="success" type="chain">
+	        <param name="actionName">deptLeaveSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">deptLeaveSearch</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- lr:经理总经理修改并审批动作 -->
+	<action name="deptLrModifyAndApprove" class="com.hr.examin.action.DeptLeaveSearchAction" method="deptApproveOrRejectWithModify">
+	    <result name="success" type="chain">
+	       <param name="actionName">redirectToUpdateAction</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">deptHrApproveLRInit</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- lr:HR审批动作 -->
+	<action name="hrLrApproveOrReject" class="com.hr.examin.action.HRLeaveSearchAction" method="hrLeaveApproveOrReject">
+	    <result name="success" type="chain">
+	        <param name="actionName">hrLeaveSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	</action>
+	<!-- lr:HR修改并审批动作 -->
+	<action name="hrLrModifyAndApprove" class="com.hr.examin.action.HRLeaveSearchAction" method="hrLeaveApproveOrRejectWithMOdify">
+	    <result name="success" type="chain">
+	       <param name="actionName">redirectToUpdateAction</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">deptHrApproveLRInit</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	</action>
+	<!-- lr:HR修改并销假动作 -->
+	<action name="allLrModifyAndConfirm" class="com.hr.examin.action.AllLeaveSearchAction" method="hrConfirmWithModify">
+	    <result name="success" type="chain">
+	       <param name="actionName">redirectToUpdateAction</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">deptHrApproveLRInit</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	</action>
+	<!-- ot:经理总经理审批动作 -->
+	<action name="deptOtApproveOrReject" class="com.hr.examin.action.DeptOvertimeSearchAction" method="deptOtApproveOrReject">
+	    <result name="success" type="chain">
+	        <param name="actionName">deptOvertimeSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <result name="input" type="chain">
+	        <param name="actionName">deptOvertimeSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- ot:经理总经理修改并审批 -->
+	<action name="deptOtModifyAndApprove" class="com.hr.examin.action.DeptOvertimeSearchAction" method="deptOtApproveOrRejectWithModify">
+	    <result name="success" type="chain">
+	       <param name="actionName">deptOvertimeSearch</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">showOTApprove_M</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- ot:HR审批动作 -->
+	<action name="hrOtApproveOrReject" class="com.hr.examin.action.HROvertimeSearchAction" method="hrOtApproveOrReject">
+	    <result name="success" type="chain">
+	        <param name="actionName">hrOvertimeSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <result name="input" type="chain">
+	        <param name="actionName">hrOvertimeSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- ot:加班列表处hr修改并确认动作； -->
+	<action name="allOtModifyAndConfirm" class="com.hr.examin.action.AllOvertimeSearchAction" method="hrOtConfirmWithModify">
+	    <result name="success" type="chain">
+	       <param name="actionName">allOvertimeSearch</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <result name="input" type="chain">
+	       <param name="actionName">allOvertimeSearch</param>
+	       <param name="namespace">/examin</param>
+	   </result>
+	   <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deptLeaveSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empsleave_dept_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deptOvertimeSearch" class="com.hr.examin.action.DeptOvertimeSearchAction">
+		<result name="success" type="dispatcher">/examin/empsovertime_dept_search.jsp</result>
+		<result name="input" type="chain">
+			 	<param name="actionName">deptOvertimeSearchInit</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deptOvertimeSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empsovertime_dept_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	</action>
+
+	<!--点击经理总经理审批的修改按钮 或者是 员工加班列表里面的hr确认按钮触发的事件  -->
+	<action name="showOTApprove_M" class="com.hr.examin.action.DeptHRApproveOTAction" method="showOT_M">
+	    <result name="success" type="dispatcher">/examin/otApproveByDept.jsp</result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="showOTApprove_HR" class="com.hr.examin.action.DeptHRApproveOTAction" method="showOT_HR">
+	    <result name="success" type="dispatcher">/examin/otApproveByHr.jsp</result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	
+	<!--=================下面是新修改的关于 修改请假单 的xml定义====================================-->
+	<!--修改初始化-->
+	<action name="LRUpdateInit" class="com.hr.examin.action.EmpLeaveUpdAction" method="executeInit">
+		<result name="success" type="dispatcher">/examin/empleave_upd.jsp</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!--修改结果处理-->
+	<action name="LRUpdateDo" class="com.hr.examin.action.EmpLeaveUpdAction">
+	    <result name="success" type="chain">
+	        <param name="actionName">redirectToUpdateAction</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+		<result name="input" type="chain">
+			 <param name="actionName">LRUpdateInit</param>
+			 <param name="namespace">/examin</param>
+		</result>
+		<result name="invalid.token" type="redirect">/examin/redirectToUpdateAction</result>
+		<interceptor-ref name="modelParamsStack"/>
+		<interceptor-ref name="validationWorkflowStack"></interceptor-ref>
+	</action>	
+	<action name="redirectToUpdateAction" class="com.hr.examin.action.DeptLeaveSearchAction" method="redirectToUpdateAction">
+	    <result name="gotoAllLeaveSearch" type="chain">
+	        <param name="actionName">allLeaveSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <result name="gotoDeptLeaveSearch" type="chain">
+	        <param name="actionName">deptLeaveSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <result name="gotoMyLeaveSearch" type="chain">
+	        <param name="actionName">myLeaveSearch</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <result name="gotoLeaveAdd" type="chain">
+	        <param name="actionName">empLRAddInit</param>
+	        <param name="namespace">/examin</param>
+	    </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!--=================上面是新修改的关于 修改请假单 的xml定义====================================-->	
+	<!-- hr备案 -->
+	<action name="hrExaminSearch" class="com.hr.examin.action.HRSearchAction">
+		<result name="success" type="dispatcher">/examin/empsexamin_hr_search.jsp</result> 
+	</action>
+	<action name="hrLeaveSearch" class="com.hr.examin.action.HRLeaveSearchAction">
+		<result name="success" type="dispatcher">/examin/empsleave_search.jsp</result>
+		<result name="input" type="chain">
+			 	<param name="actionName">hrLeaveSearchInit</param>
+			 	<param name="namespace">/examin</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="hrLeaveSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empsleave_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="hrOvertimeSearch" class="com.hr.examin.action.HROvertimeSearchAction">
+		<result name="success" type="dispatcher">/examin/empsovertime_search.jsp</result> 
+		<result name="input" type="chain">
+			 	<param name="actionName">hrOvertimeSearchInit</param>
+			 	<param name="namespace">/examin</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>	
+	</action>
+	<action name="hrOvertimeSearchInit" class="com.hr.examin.action.EmpExaminAction" method="executeInit">
+			<result name="success" type="dispatcher">/examin/empsovertime_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+	</action>
+
+	<!-- 请假加班查看Action 请假加班列表-->
+	<action name="allExaminSearch" class="com.hr.examin.action.AllExaminSearchAction">
+		<result name="success" type="dispatcher">/examin/allexamin_search.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="allLeaveSearch" class="com.hr.examin.action.AllLeaveSearchAction">
+		<result name="success" type="dispatcher">/examin/allleave_search.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="allOvertimeSearch" class="com.hr.examin.action.AllOvertimeSearchAction">
+		<result name="success" type="dispatcher">/examin/allovertime_search.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	
+	<!-- 日历管理 -->
+	<action name="leavecalendarManage" class="com.hr.examin.action.LeavecalendarManageAction">
+		<result name="success" type="dispatcher">/examin/leavecalendar_management.jsp</result> 
+		<result name="input" type="dispatcher">/examin/leavecalendar_management.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+		<interceptor-ref name="validationWorkflowStack"/>
+	</action>
+	<!-- 考勤班次 -->
+	<action name="examinShiftSearch" class="com.hr.examin.action.ExaminScheduleAction" method="shiftSearch">
+		<result name="success" type="dispatcher">/examin/examinshift_search.jsp</result>
+		<result name="input" type="dispatcher">/examin/examinshift_search.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+		<interceptor-ref name="validationWorkflowStack"/>
+	</action>
+	<!-- 年假管理 -->
+	<action name="leavebalanceManage" class="com.hr.examin.action.LeavebalanceManageAction">
+		<result name="success" type="dispatcher">/examin/leavebalance_management.jsp</result> 
+		<result name="input" type="dispatcher">/examin/leavebalance_management.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+		<interceptor-ref name="validationWorkflowStack"/>	
+	</action>
+	<!--年份年假管理表  -->
+	<action name="leavebalanceCurYear" class="com.hr.examin.action.LeavebalanceCurrentYear">
+		<result name="success" type="dispatcher">/examin/leavebalance_currentYear.jsp</result> 
+		<result name="input" type="dispatcher">/examin/leavebalance_currentYear.jsp</result> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!--假期余额初始化  -->
+	<action name="initLeaveBalance" class="com.hr.examin.action.LeavebalanceCurrentYear" method="initLeaveBalance">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">leavebalanceCurYear</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!--假期余额提交  -->
+	<action name="doSubmitLeaveBalance" class="com.hr.examin.action.LeavebalanceCurrentYear" method="doSubmitLeaveBalance">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">leavebalanceCurYear</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!--假期余额审核  -->
+	<action name="doDeleteLeaveBalance" class="com.hr.examin.action.LeavebalanceCurrentYear" method="doDeleteLeaveBalance">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">leavebalanceCurYear</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- 每日考勤查询 -->
+	<action name="searchAttenddaily" class="com.hr.examin.action.SearchAttenddaily">
+		<result name="success" type="dispatcher">
+			/examin/search_attenddaily.jsp
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	
+	<!-- 每月考勤查询 -->
+	<action name="searchAttendmonthly" class="com.hr.examin.action.SearchAttendmonthly">
+		<result name="success" type="dispatcher">
+			/examin/search_attendmonthly.jsp
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- 每月考勤数据申请-->
+	<action name="applyAttendperiod" class="com.hr.examin.action.SearchAttendmonthly" method="applyAttendperiod">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- 每月考勤数据封帐 -->
+	<action name="closeAttendperiod" class="com.hr.examin.action.SearchAttendmonthly" method="closeAttendperiod">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<!-- 每月考勤数据解封 -->
+	<action name="reOpenAttendperiod" class="com.hr.examin.action.SearchAttendmonthly" method="reOpenAttendperiod">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deleteAttendmonthly" class="com.hr.examin.action.SearchAttendmonthly" method="deleteAttendmonthly">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="error" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="invalid.token" type="redirect">/examin/searchAttendmonthly.action</result> 
+		<interceptor-ref name="token"/>
+		<interceptor-ref name="modelParamsStack"/> 
+	</action>
+	<action name="batchDelAttendmonthly" class="com.hr.examin.action.SearchAttendmonthly" method="batchDelAttendmonthly">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="error" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="invalid.token" type="redirect">/examin/searchAttendmonthly.action</result> 
+		<interceptor-ref name="token"/> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="calDailyToAttendmonthly" class="com.hr.examin.action.SearchAttendmonthly" method="calDailyToAttendmonthly">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="error" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="invalid.token" type="redirect">/examin/searchAttendmonthly.action</result> 
+		<interceptor-ref name="token"/> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="calExaminToAttendmonthly" class="com.hr.examin.action.SearchAttendmonthly" method="calExaminToAttendmonthly">
+		<result name="success" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="error" type="chain">
+			<param name="namespace">/examin</param>
+			<param name="actionName">searchAttendmonthly</param>
+		</result>
+		<result name="invalid.token" type="redirect">/examin/searchAttendmonthly.action</result> 
+		<interceptor-ref name="token"/> 
+		<interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="originalDataImportShow" class="com.hr.examin.action.OriginalDataImportShowAction">
+	    <result name="success" type="dispatcher">
+	        /examin/examinschedule_import_dataShow.jsp
+	    </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="attdSyncRecordShow" class="com.hr.examin.action.AttdSyncRecordShowAction">
+	    <result name="success" type="dispatcher">
+	        /examin/examinsynchronize_record_dataShow.jsp
+	    </result>
+	    <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deleteOriginalData" class="com.hr.examin.action.OriginalDataImportShowAction" method="deleteOriginalData">
+	    <result name="success" type="chain">
+            <param name="namespace">/examin</param>
+            <param name="actionName">originalDataImportShow</param>
+        </result>
+        <interceptor-ref name="modelParamsStack"/>
+	</action>
+	<action name="deleteOneOriginalData" class="com.hr.examin.action.OriginalDataImportShowAction" method="deleteOneOriginalData">
+	    <result name="success" type="chain">
+            <param name="namespace">/examin</param>
+            <param name="actionName">originalDataImportShow</param>
+        </result>
+        <interceptor-ref name="modelParamsStack"/>
+	</action>
+
+	<!-- 报表 -->
+	<action name="examinReportInit" class="com.hr.report.action.examin.ExaminReportAction">
+			<result name="success" type="dispatcher">/report/examin/examinReport.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+	</action>
+	<action name="examinReport" class="com.hr.report.action.examin.ExaminReportAction">
+			<result name="success" type="dispatcher">/report/examin/examinReport.jsp</result>
+			<result name="*" type="redirect">/examin/examinReportInit.action?repeated=true</result> 	
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>	
+	</action>
+	<!-- 排班  -->	
+		<action name="examinScheduleSearch" class="com.hr.examin.action.ExaminScheduleAction">
+			<result name="success" type="dispatcher">/examin/examinschedule_search.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>				
+		<action name="examinShiftInsert" class="com.hr.examin.action.ExaminScheduleAction" method="insertShift">
+			<result name="input" type="dispatcher">/examin/examinshift_insert.jsp</result>
+			<result name="success" type="chain">
+				<param name="namespace">/examin</param>
+				<param name="actionName">examinShiftSearch</param>
+			</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>				
+		<action name="sortShift" class="com.hr.examin.action.ExaminScheduleAction" method="sortShift">
+			<result name="success" type="chain">
+				<param name="namespace">/examin</param>
+				<param name="actionName">examinShiftSearch</param>
+			</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		
+		<!-- 工作流配置  修改 -->
+		<action name="workFlowApprove" class="com.hr.examin.action.WorkFlowApproveManageAction" method="workFlowConfig">
+			<result name="success" type="dispatcher">/examin/workFlowApprove.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- 工作流配置切换  修改 -->
+		<action name="workFlowApproveShow" class="com.hr.examin.action.WorkFlowApproveManageAction" method="workFlowShow">
+			<result name="success" type="dispatcher">/examin/workFlowApprover_Show.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- 工作流修改配置  修改 -->
+		<action name="workFlowApproveManage" class="com.hr.examin.action.WorkFlowApproveManageAction" method="workFlowList">
+			<result name="success" type="dispatcher">/examin/position_workFlowApprove_info.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- 工作流范围和地区修改配置  修改 -->
+		<action name="authorityPosManage" class="com.hr.examin.action.WorkFlowApproveManageAction" method="authorityPos">
+			<result name="success" type="dispatcher">/examin/authorityPos_show.jsp</result> 
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- 工作流添加  修改 -->
+		<action name="workFlowApproveManageAdd" class="com.hr.examin.action.WorkFlowApproveManageAction" method="add">
+			<result name="success" type="chain">
+			 	<param name="actionName">workFlowApproveShow</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+		</action>
+		<!-- 工作流修改  修改 -->
+		<action name="workFlowApproveManageUpdate" class="com.hr.examin.action.WorkFlowApproveManageAction" method="update">
+			<result name="success" type="chain">
+			 	<param name="actionName">workFlowApproveShow</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+		</action>
+		<!-- 工作流修改  修改 -->
+		<action name="workFlowApproveManageDelete" class="com.hr.examin.action.WorkFlowApproveManageAction" method="delete">
+			<result name="success" type="chain">
+			 	<param name="actionName">workFlowApproveShow</param>
+			 	<param name="namespace">/examin</param>
+			 </result>
+		</action>
+		
+		<!-- email审批相关 -->
+		<action name="emailConfirm" class="com.hr.examin.action.EmailConfirmAction">
+			<result name="input" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+			<!-- 请假部门经理/总经理同意action -->
+			<result name="emailDeptApproveOrReject" type="chain">
+				<param name="actionName">emailDeptApproveOrReject</param>
+				<param name="namespace">/examin</param>
+			</result>
+			<!-- HR审批请假 -->
+			<result name="emailHrLeaveApproveOrReject" type="chain">
+				<param name="actionName">emailHrLeaveApproveOrReject</param>
+				<param name="namespace">/examin</param>
+			</result>
+			<!-- 加班部门经理/总经理同意action -->
+			<result name="emailDeptOtApproveOrReject" type="chain">
+				<param name="actionName">emailDeptOtApproveOrReject</param>
+				<param name="namespace">/examin</param>
+			</result>
+			<!--HR审批请假 -->
+			<result name="emailHrOtApproveOrReject" type="chain">
+				<param name="actionName">emailHrOtApproveOrReject</param>
+				<param name="namespace">/examin</param>
+			</result>
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="params"/>
+			<interceptor-ref name="chain" />
+		</action>
+		<!-- leaverequest -->
+		<!-- 经理总经理邮件同意/拒绝请假动作 -->
+		<action name="emailDeptApproveOrReject" class="com.hr.examin.action.EmailConfirmDeptLeaveSearchAction" method="deptApproveOrReject">
+		    <result name="success" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <result name="input" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <result name="error" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- HR邮件同意/拒绝请假 -->
+		<action name="emailHrLeaveApproveOrReject" class="com.hr.examin.action.EmailHRLeaveSearchAction" method="hrLeaveApproveOrReject">
+		    <result name="success" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <result name="input" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <result name="error" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- overtimerequest -->
+		<!-- 经理总经理邮件同意/拒绝加班动作 -->
+		<action name="emailDeptOtApproveOrReject" class="com.hr.examin.action.EmailConfirmOvertimeRequestAction" method="deptOtApproveOrReject">
+		    <result name="success" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <interceptor-ref name="modelParamsStack"/>
+		</action>
+		<!-- HR邮件同意/拒绝加班 -->
+		<action name="emailHrOtApproveOrReject" class="com.hr.examin.action.EmailHROvertimeSearchAction" method="hrOtApproveOrReject">
+		    <result name="success" type="dispatcher">/examin/emailconfirmresult.jsp</result>
+		    <interceptor-ref name="modelParamsStack"/>
+		</action>
+	</package>
+</struts>

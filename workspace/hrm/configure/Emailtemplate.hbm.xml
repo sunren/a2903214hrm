@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Emailtemplate"
+		table="emailtemplate"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id 
+			name="id"
+			type="string"
+			column="et_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="etTitleNo"
+			column="et_title_no"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="etNotes"
+			column="et_notes"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="etStatus"
+			column="et_status"
+			type="integer"
+			not-null="false"
+		/>
+		<property
+			name="etSendMode"
+			column="et_send_mode"
+			type="integer"
+			not-null="false"
+		/>
+
+	</class>	
+</hibernate-mapping>

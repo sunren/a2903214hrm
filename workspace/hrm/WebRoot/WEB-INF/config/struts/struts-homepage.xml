@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="homepage" extends="default" namespace="/homepage">
+
+		
+		<!-- 默认页 -->
+	  <action name="index" class="com.hr.homepage.action.Index">
+	  		<result name="success" type="dispatcher">/homepage/index.jsp</result> 
+	  		<interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+	  </action>				
+	
+	
+    </package>
+</struts>

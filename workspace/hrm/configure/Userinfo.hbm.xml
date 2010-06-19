@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.security.domain">
+	<class name="Userinfo" table="userinfo">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="string" column="ui_emp_no">
+			<generator class="assigned"/>
+		</id>
+		<property name="uiUsername" column="ui_username" type="string"
+			not-null="true" length="64"/>
+		<property name="uiPassword" column="ui_password" type="string"
+			not-null="true" length="64"/>
+		<property name="uiRole" column="ui_role" type="string" not-null="true"
+			length="128"/>
+		<property name="uiAuth" column="ui_auth" type="string" not-null="true"
+			length="255"/>
+		<property name="uiStatus" column="ui_status" type="integer" not-null="true"
+			length="11"/>
+		<property name="uiLastLoginIp" column="ui_login_ip" type="string"
+			not-null="false" length="64"/>
+		<!-- /////////////////////////////-->
+		<property name="uiMacRestrict" column="ui_mac_restrict" type="string"
+			not-null="false" length="64"/>
+		<property name="uiIpRestrict" column="ui_ip_restrict" type="string"
+			not-null="false" length="64"/>
+		<property name="uiTimeRestrict" column="ui_time_restrict" type="string"
+			not-null="false" length="64"/>
+		<property name="uiLevelRestrict" column="ui_level_restrict" type="integer"
+			not-null="false" length="64"/>
+		<property name="uiIsGmHr" type="java.lang.String">
+            <column name="ui_is_gm_hr" length="32" />
+        </property>
+        <property name="uiReferenceId" type="java.lang.String">
+            <column name="ui_reference_id" length="36" />
+        </property>
+		<!-- ////////////////////////////-->
+		<property name="uiCurrentLoginTime" column="ui_login_time" type="timestamp"
+			not-null="false" length="19"/>
+		<property name="uiLastLoginTime" column="ui_last_login_time"
+			type="timestamp" not-null="false" length="19"/>
+		<property name="uiCreateTime" column="ui_create_time" type="timestamp"
+			not-null="true" length="19"/>
+		<property name="uiLastChangeTime" column="ui_last_change_time"
+			type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="uiCreateBy" column="ui_create_by"
+			class="com.hr.profile.domain.Employee" not-null="true">
+		</many-to-one>
+		<many-to-one name="uiLastChangeBy" column="ui_last_change_by"
+			class="com.hr.profile.domain.Employee" not-null="true">
+		</many-to-one>
+		<one-to-one name="employee" class="com.hr.profile.domain.Employee"
+			cascade="none" constrained="false"/>
+		
+	</class>
+</hibernate-mapping>

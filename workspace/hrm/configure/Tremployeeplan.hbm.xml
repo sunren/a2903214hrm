@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.training.domain">
+	<class
+		name="Tremployeeplan"
+		table="tremployeeplan"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="trpId"
+			type="string"
+			column="trp_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+		<property
+			name="trpStatus"
+			column="trp_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="trpComments"
+			column="trp_comments"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="trpFileName"
+			column="trp_file_name"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="trpCreateTime"
+			column="trp_create_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="trpLastChangeTime"
+			column="trp_last_change_time"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		
+		<many-to-one
+			name="trpTraineeDept"
+			column="trp_trainee_dept"
+			class="com.hr.configuration.domain.Department"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trpCreateBy"
+			column="trp_create_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trpTraineeNo"
+			column="trp_trainee_no"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trpTrcp"
+			column="trp_trcp_id"
+			class="Trcourseplan"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="trpLastChangeBy"
+			column="trp_last_change_by"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one 
+			name="trpTraineeJobTitle"
+			column="trp_trainee_job_title"
+			class="com.hr.configuration.domain.JobTitle">
+		</many-to-one>
+	</class>	
+</hibernate-mapping>

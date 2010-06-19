@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+if(window.addEventListener)FixPrototypeForGecko();function FixPrototypeForGecko(){HTMLElement.prototype.__defineGetter__("runtimeStyle",element_prototype_get_runtimeStyle);window.constructor.prototype.__defineGetter__("event",window_prototype_get_event);Event.prototype.__defineGetter__("srcElement",event_prototype_get_srcElement)}function element_prototype_get_runtimeStyle(){return this.style}function window_prototype_get_event(){return getEvent()}function event_prototype_get_srcElement(){return this.target}function getEvent(){if(document.all)return window.event;func=getEvent.caller;while(func!=null){var $=func.arguments[0];if($)if(($.constructor==Event||$.constructor==MouseEvent)||(typeof($)=="object"&&$.preventDefault&&$.stopPropagation))return $;func=func.caller}return null}

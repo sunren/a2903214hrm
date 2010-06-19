@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.training.domain">
+	<class
+		name="Trtype"
+		table="trtype"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="trtNo"
+			type="string"
+			column="trt_no"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="trtName"
+			column="trt_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="trtDesc"
+			column="trt_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+	
+
+		<set name="trcourses" inverse="true">
+			<key column="trt_no"/>
+			<one-to-many class="Trcourse"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

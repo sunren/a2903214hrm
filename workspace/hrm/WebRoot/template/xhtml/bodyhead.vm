@@ -1,0 +1,82 @@
+### bodyhead about page title and print , help .and message
+#if ($parameters.pagetitle)  
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td width="2%">
+			<img src="$!{req.getContextPath()}/resource/images/h3Arrow.gif">
+		</td>
+		<td width="82%" class="titlepage">
+			<h3>$parameters.pagetitle</h3>
+		</td>
+		#if ($parameters.printUrl) 
+		<td width="2%">
+			<img src="$!{req.getContextPath()}/resource/images/print.gif">
+		</td>
+		<td width="6%">
+			<a href="$!webwork.htmlEncode($parameters.printUrl)" class=utilsLink >&#25171;&#21360;</a>     
+		</td>
+		#end
+		#if ($parameters.helpUrl)
+		<td width="2%" style="CURSOR: help">
+			<img src="$!{req.getContextPath()}/resource/images/help.gif">
+		</td>
+		<td width="6%">
+			<a href="$!{req.getContextPath()}/help/searchHelp.action?classId=$parameters.helpUrl" class=utilsLink target="_help">&#24110;&#21161;</a>     
+		</td>
+		#end		
+		#if ($parameters.help)
+		<td width="2%" style="CURSOR: help">
+			<img src="$!{req.getContextPath()}/resource/images/help.gif">
+		</td>
+		<td width="6%">
+			<a href="$!{req.getContextPath()}/help/$!webwork.htmlEncode($parameters.help)" class=utilsLink target="_help">&#24110;&#21161;</a>     
+		</td>
+		#end
+		
+	</tr>
+</table>
+<div class="clear"></div>
+<div style="clear:both; height: 5px; overflow: hidden"></div>
+#end
+<div id="body_msg" align="left">
+###### show system message
+#if ($!actionMessages && $!actionMessages.size()>0)
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr><td id="errMsg" align="left" width="100%" class="successMsg">		
+	#foreach ($msg in $actionMessages) 
+			<span>$!webwork.htmlEncode($msg)&nbsp;</span>
+	#end
+  </td></tr>	
+</table>
+#end
+#if ($!actionErrors && $!actionErrors.size()>0)
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr><td align="left" width="100%" id="errMsg" class="errorMsg">		
+	#foreach ($error in $actionErrors)
+		<span>$!webwork.htmlEncode($error)&nbsp;</span>
+	#end
+  </td></tr>	
+</table>
+#end
+###### show page form  message or error
+#set ($errorsmsg=$fieldErrors.get("error"))
+#if( $!errorsmsg && $!errorsmsg.size()>0 )
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr><td align="left" width="100%" id="errMsg" class="errorMsg">		
+      #foreach ($fe in $errorsmsg) 
+            <span>$!webwork.htmlEncode($fe)&nbsp;</span>
+      #end
+  </td></tr>	
+</table>
+#end
+#set ($successinfo=$fieldErrors.get("success"))
+#if( $!successinfo && $!successinfo.size()>0 )
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tr><td align="left" width="100%" id="errMsg" class="successMsg">		
+      #foreach ($fm in $successinfo) 
+            <span>$!webwork.htmlEncode($fm)&nbsp;</span>
+      #end
+  </td></tr>	
+</table>
+#end
+</div>

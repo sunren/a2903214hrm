@@ -1,0 +1,7 @@
+<a 
+#if ($parameters.id) id="$!webwork.htmlEncode($parameters.id)" #end
+#if ($parameters.cssClass)	class="$!webwork.htmlEncode($parameters.cssClass)" #end
+#if ($parameters.href) href="$!webwork.htmlEncode($parameters.href)" #end
+>
+#if ($parameters.label) $!webwork.htmlEncode($parameters.label)#end
+

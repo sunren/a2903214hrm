@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="compensation" extends="default"
+		namespace="/compensation">
+		<interceptors>
+			<interceptor-stack name="paramsStack">
+				<interceptor-ref name="checklogin" />
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- salaryconfig的所有action START -->
+		<!--  birt report 薪资报表   -->
+		<action name="salaryRpInit"
+			class="com.hr.report.action.compensation.SalaryReportInit">
+			<result name="success" type="dispatcher">
+				/report/compensation/salary_report.jsp
+			</result>
+			<result name="other" type="chain">salaryRp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="salaryRp"
+			class="com.hr.report.action.compensation.SalaryRport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 薪资历史分析报表 -->
+		<action name="salaryHistoryReport"
+			class="com.hr.report.action.compensation.SalaryHistoryReport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 薪资人工成本分析报表 -->
+		<action name="salaryCostReport"
+			class="com.hr.report.action.compensation.SalaryCostReport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 添加、修改salaryconfig -->
+		<action name="addSalaryConfigInit"
+			class="com.hr.compensation.action.SalaryConfigAction" method="addSalaryConfigInit">
+			<result name="success" type="dispatcher">
+				/compensation/addsalaryconfig.jsp
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>	
+				<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="updateSalaryConfigInit"
+			class="com.hr.compensation.action.SalaryConfigAction" method="updateSalaryConfigInit">
+			<result name="success" type="dispatcher">
+				/compensation/update_salaryconfig.jsp
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>	
+				<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="addSalaryConfig" class="com.hr.compensation.action.SalaryConfigAction" method="addSalaryConfig">
+			<interceptor-ref name="validationWorkflowStack" />
+			<interceptor-ref name="paramsStack" />
+			<result name="success" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">addSalaryConfigInit</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<result name="invalid.token" type="redirect">
+				/compensation/searchSalary.action
+			</result>
+			<interceptor-ref name="token" />
+		</action>
+		<action name="updateSalaryConfig" class="com.hr.compensation.action.SalaryConfigAction" method="updateSalaryConfig">
+			<interceptor-ref name="validationWorkflowStack" />
+			<interceptor-ref name="paramsStack" />
+			<result name="success" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">updateSalaryConfigInit</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<result name="invalid.token" type="redirect">
+				/compensation/searchSalary.action
+			</result>
+			<interceptor-ref name="token" />
+		</action>
+		<!--查询salaryconfig -->
+		<action name="searchSalary"
+			class="com.hr.compensation.action.SalaryConfigAction">
+			<result name="success" type="dispatcher">
+				/compensation/search_salary_conf.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 删除salaryconfig -->
+		<action name="deleteSalaryConfig"
+			class="com.hr.compensation.action.SalaryConfigAction" method="deleteSalaryConfig">
+			<result name="success" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">searchSalary</param>
+				<param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+	
+		<!-- 查询我的调薪计划 -->
+		<action name="searchBatchCompaplan"
+			class="com.hr.compensation.action.SearchBatchCompaplan">
+			<result name="success" type="dispatcher">
+				/compensation/add_batchCompaplan.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!--我的调薪计划end-->
+		
+		 <action name="addEmpsalaryadj" class="com.hr.compensation.action.DWRforSearchBatchCompaplan" method="addEmpsalaryadj">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">searchBatchCompaplan</param>
+	  			<param name="namespace">/compensation</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">searchBatchCompaplan</param>
+	  			<param name="namespace">/compensation</param>
+	  		</result>
+	  		<result name="invalid.token" type="redirect">
+				/compensation/searchBatchCompaplan.action
+			</result>
+			<interceptor-ref name="paramsStack" />
+	  </action>
+	  
+	  <action name="deleteEmpsalaryadj" class="com.hr.compensation.action.DWRforSearchBatchCompaplan" method="deleteCompaplan">
+	  		<result name="success" type="chain">
+	  			<param name="actionName">searchBatchCompaplan</param>
+	  			<param name="namespace">/compensation</param>
+	  		</result>
+	  		<result name="error" type="chain">
+	  			<param name="actionName">searchBatchCompaplan</param>
+	  			<param name="namespace">/compensation</param>
+	  		</result>
+	  		<result name="invalid.token" type="redirect">
+				/compensation/searchBatchCompaplan.action
+			</result>
+			<interceptor-ref name="paramsStack" />
+	  </action>
+
+		<!-- 查询 -薪资，调薪计划，薪资发放-->
+
+		<action name="searchCompaplan"
+			class="com.hr.compensation.action.SearchCompaplan">
+			<result name="success" type="dispatcher">
+				/compensation/search_compaplan.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+
+		<action name="searchSalaryPaid"
+			class="com.hr.compensation.action.SearchSalaryPaid">
+			<result name="success" type="dispatcher">
+				/compensation/search_salary_paid.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+
+		</action>
+		
+		<!-- 我的薪资列表 -->
+		<action name="mySalaryPaid" 
+		    class="com.hr.compensation.action.MySalaryPaid">
+		    <result name="success" type="dispatcher">
+		    /compensation/my_salary_paid.jsp
+		    </result>
+		    <result name="error" > /compensation/my_salary_paid.jsp </result> 
+		    <interceptor-ref name="paramsStack">
+		    </interceptor-ref>
+		</action>
+		
+		<action name="initPaid"
+			class="com.hr.compensation.action.SearchSalaryPaid"
+			method="initPaid">
+			<result name="success" type="dispatcher">
+				/compensation/search_salary_paid.jsp
+			</result>
+			<result name="invalid.token" type="redirect">
+				/compensation/searchSalaryPaid.action
+			</result>
+			<interceptor-ref name="token" />
+			<interceptor-ref name="paramsStack" />
+			<!--
+				<interceptor-ref name="execAndWait"/> <result name="wait">/system/wait.jsp</result>
+			-->
+		</action>
+
+		<!-- 审批salaryconpaid -->
+		<action name="approve"
+			class="com.hr.compensation.action.SearchSalaryPaid"
+			method="approve">
+			<result name="success" type="chain">
+				<!-- /compensation/approve_salary_paid.jsp-->
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchSalaryPaid</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchApproveSalaryPaid</param>
+			</result>
+			<result name="invalid.token" type="redirect">
+				/compensation/searchSalaryPaid.action
+			</result>
+			
+			<interceptor-ref name="token" />
+			<interceptor-ref name="paramsStack" />
+		</action>
+		
+		<!-- salarypaid提交页面用的ACTION -->
+		<action name="viewAllSalarypaid"
+			class="com.hr.compensation.action.SearchSalaryPaid"
+			method="viewAllSalarypaid">
+			<result name="success">submitandaggree_salary_paid.jsp</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		
+		<!-- 提交salarypaid -->
+		<action name="confirmSubmit"
+			class="com.hr.compensation.action.SearchSalaryPaid"
+			method="confirmSubmit">
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchSalaryPaid</param>
+			</result>
+			<result name="invalid.token" type="redirect">
+				/compensation/searchSalaryPaid.action
+			</result>
+			<interceptor-ref name="token" />
+			<interceptor-ref name="paramsStack" />
+		</action>
+
+		<!--	在查询列表中点链接要调用的方法 START -->
+		<action name="viewdetail"
+			class="com.hr.compensation.action.ViewDetail">
+			<result name="success" type="dispatcher">
+				/compensation/viewdetail.jsp
+			</result>
+			<result name="error" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchSalary</param>
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="ajaxEmpSalaryPaid"
+			class="com.hr.compensation.action.ViewDetail"
+			method="empSalaryPaid">
+			<result name="success" type="dispatcher">
+				/compensation/emp_salary_paid.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="ajaxempCompaplan"
+			class="com.hr.compensation.action.ViewDetail"
+			method="empCompaplan">
+			<result name="success" type="dispatcher">
+				/compensation/emp_compaplan.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!--	在查询列表中点链接要调用的方法 END -->
+
+		<!-- 查看我的薪资配置 -->
+		<action name="mySalaryConf"
+			class="com.hr.compensation.action.ViewDetail">
+			<result name="success" type="dispatcher">
+				/compensation/viewdetail.jsp
+			</result>
+			<result name="error" > /compensation/viewdetail.jsp</result> 
+			<interceptor-ref name="paramsStack" />
+		</action>
+
+		<!--薪资级别设置-->
+		<action name="salaryRatingConfig"
+			class="com.hr.compensation.action.SalaryRatingAction">
+            <result name="success" type="dispatcher">/compensation/salaryrating_config.jsp</result> 
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!--　薪资帐套项目定义　-->
+		<action name="acctItemDef"
+			class="com.hr.compensation.action.AcctItemDef">
+			<result name="success">
+				/compensation/acctItemDef.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 薪资设置（薪资级别、社保种类、薪资帐套项目、薪资帐套配置） -->
+		<action name="compensationConfig" class="com.hr.compensation.action.CompensationConfig">
+			<result name="success" type="dispatcher">
+				/compensation/compensation_config.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />	
+		</action>
+		<!--帐套查询-->
+		<action name="searchesa" class="com.hr.compensation.action.SearchEmpsalaryacct">
+			<result name="success" type="dispatcher">
+				/compensation/search_empsalaryacct.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />	
+		</action>
+		<action name="addesa" class="com.hr.compensation.action.AddEmpsalaryacct">
+			<result name="success" type="dispatcher">
+				/compensation/add_empsalaryacct.jsp
+			</result>			
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<result name="input" type="dispatcher">
+				/compensation/add_empsalaryacct.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="addAcctVersion" class="com.hr.compensation.action.UpdateEmpsalaryacct" method="geneNewVersion">
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<result name="input" type="dispatcher">
+				/compensation/update_empsalaryacct.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="delesa" class="com.hr.compensation.action.DelEmpsalaryacct" >	
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<interceptor-ref name="paramsStack" />			
+		</action>		
+	    <action name="updateesainit" class="com.hr.compensation.action.UpdateEmpsalaryacct" method="updateInit" >
+			<result name="success" type="dispatcher">
+				/compensation/update_empsalaryacct.jsp
+			</result>		
+			<interceptor-ref name="paramsStack" />	
+		</action>
+		<action name="copyAcct" class="com.hr.compensation.action.UpdateEmpsalaryacct" method="updateInit">
+			<result name="success" type="dispatcher">
+				/compensation/add_empsalaryacct.jsp
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<interceptor-ref name="paramsStack" />	
+		</action>
+		<action name="updateesa" class="com.hr.compensation.action.UpdateEmpsalaryacct" >	
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchesa</param>
+			</result>
+			<result name="input" type="dispatcher">
+				/compensation/update_empsalaryacct.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		
+		<!-- 员工社保配置 -->
+		<action name="searchEmpbenefit"
+			class="com.hr.compensation.action.SearchEmpbenefit">
+			<result name="success" type="dispatcher">/compensation/search_empbenefit_config.jsp</result> 
+		    <interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 查看员工社保 -->
+		<action name="showEmpbenefit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="showEmpbenefit">
+			<result name="success" type="dispatcher">/compensation/show_empbenefit.jsp</result> 
+		   	<result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>          
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 新增加员工社保 -->
+		<action name="addBenefitInit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="addBenefitInit">
+			<result name="success" type="dispatcher">/compensation/add_empbenefit.jsp</result> 
+		    <result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>          
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="addBenefit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="addNewBenefit">
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>  
+			<result name="input" type="dispatcher">/compensation/add_empbenefit.jsp</result> 
+		    <interceptor-ref name="paramsStack" />
+		</action>
+		
+		<!-- 更新员工社保 -->
+		<action name="updateBenefitInit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="updateBenefitInit">
+			<result name="success" type="dispatcher">/compensation/update_empbenefit.jsp</result> 
+		   	<result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>          
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<action name="updateBenefit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="updateBenefit">
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result> 
+			<result name="input" type="dispatcher">/compensation/update_empbenefit.jsp</result> 
+		</action>
+		<!-- 删除员工社保 -->
+		<action name="delEmpbenefit"
+			class="com.hr.compensation.action.SearchEmpbenefit" method="delEmpbenefit">
+			<result name="success" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/compensation</param>
+				<param name="actionName">searchEmpbenefit</param>
+			</result>  
+		</action>
+		<!--　社保种类列表　-->
+		<action name="benefitTypeList"
+			class="com.hr.compensation.action.BenefitTypeList">
+			<result name="success" type="dispatcher">
+				/compensation/benefittypeList.jsp
+			</result>
+			<interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 查询社保补缴记录 -->
+		<action name="searchEbp" class="com.hr.compensation.action.SearchEbpAction">
+		    <result name="success" type="dispatcher">/compensation/searchEbp.jsp</result>
+		    <interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 删除一条补缴记录 -->
+		<action name="deleteOneEbp" class="com.hr.compensation.action.SearchEbpAction" method="deleteEbpById">
+		    <result name="success" type="chain">
+		        <param name="namespace">/compensation</param>
+				<param name="actionName">searchEbp</param>
+		    </result>
+		    <interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 添加社保补缴记录 -->
+		<action name="saveBeneAddData" class="com.hr.compensation.action.SearchEbpAction" method="saveBeneAddData">
+		    <result name="success" type="chain">
+		        <param name="namespace">/compensation</param>
+				<param name="actionName">searchEbp</param>
+		    </result>
+		    <interceptor-ref name="paramsStack" />
+		</action>
+		<!-- 查询社保缴费历史记录 -->
+		<action name="searchBeneHistory" class="com.hr.compensation.action.SearchBeneHistoryAction">
+		    <result name="success" type="dispatcher">/compensation/search_empbenefit_history.jsp</result>
+		    <interceptor-ref name="paramsStack" />
+		</action>
+	</package>
+</struts>

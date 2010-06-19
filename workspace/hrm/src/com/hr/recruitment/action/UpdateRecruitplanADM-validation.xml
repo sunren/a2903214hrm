@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<!--职位名称 -->
+	<field name="recruitplan.recpJobTitle.jobtitleNo">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<!--职位描述 -->
+	<field name="recruitplan.recpJobDesc">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<!-- 应聘者用工形式 -->
+	<field name="recruitplan.recpType.id">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<!-- 计划状态 -->
+	<field name="recruitplan.recpStatus">
+		<field-validator type="required">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<!-- 职位所属部门 -->
+	<field name="recruitplan.recpDepartmentNo.id">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+	<!--工作地区-->
+	
+	<field name="recruitplan.recpWorkLocation.id">
+		<field-validator type="requiredstring">
+			<message>必填!</message>
+		</field-validator>
+	</field>
+
+	<!-- 计划招聘人数 -->
+	<field name="recruitplan.recpNumberExpect">
+		<field-validator type="required">
+			<message>必填!</message>
+		</field-validator>	
+	</field>	
+	<!-- 备注 -->
+	<field name="recruitplan.recpComments">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">255</param>
+				<message>字符数必须小于${maxLength}</message>
+		 </field-validator>		
+	</field>
+	<!-- 职位描述 -->	
+	<field name="recruitplan.recpJobDesc">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">500</param>
+				<message>字符数必须小于${maxLength}</message>
+		 </field-validator>	
+		 </field>
+	<!-- 语言 -->	
+	<field name="recruitplan.recpLanguageSkill">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">64</param>
+				<message>字符数必须小于${maxLength}</message>
+		 </field-validator>		
+	</field>	
+	<!-- 技能 -->
+	<field name="recruitplan.recpJobSkill">		
+		<field-validator type="stringlength">
+				<param name="minLength">0</param>
+				<param name="maxLength">255</param>
+				<message>字符数必须小于${maxLength}</message>
+		 </field-validator>		
+	</field>	
+</validators>

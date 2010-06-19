@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="es_Bean.startDate">
+		<field-validator type="date">
+			<message>日期格式错误！</message>
+		</field-validator>
+	</field>
+	<field name="es_Bean.endDate">
+		<field-validator type="date">
+			<message>日期格式错误！</message>
+		</field-validator>
+	</field>
+</validators>

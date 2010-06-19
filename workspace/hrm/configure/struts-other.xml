@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="other" extends="default" namespace="/other">
+		<interceptors>
+			<interceptor-stack name="paramsStack">
+				<interceptor-ref name="checklogin" />
+				<interceptor-ref name="checkauth" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 弹出员工查询Ajax对话框的action -->
+		<action name="ajaxEmpList" class="com.hr.base.action.AjaxEmpList"/>
+		
+	</package>
+</struts>

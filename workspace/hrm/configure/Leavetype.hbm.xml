@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class
+		name="Leavetype"
+		table="leavetype"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="ltNo"
+			type="string"
+			column="lt_no"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="ltName"
+			column="lt_name"
+			type="string"
+			not-null="true"
+			length="64"
+		/>
+		<property
+			name="ltDesc"
+			column="lt_desc"
+			type="string"
+			not-null="true"
+			length="128"
+		/>
+		<property
+			name="ltMaxApplyDays"
+			column="lt_max_apply_days"
+			type="big_decimal"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ltMaxApplyHours"
+			column="lt_max_apply_hours"
+			type="big_decimal"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ltMinApplyDays"
+			column="lt_min_apply_days"
+			type="big_decimal"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ltMinApplyHours"
+			column="lt_min_apply_hours"
+			type="big_decimal"
+			not-null="false"
+			length="10"
+		/>
+		<property
+			name="ltInclHoliday"
+			column="lt_incl_holiday"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+        <property
+			name="ltSpecialCat"
+			column="lt_special_cat"
+			type="integer"
+			not-null="true"
+		/>
+		<property 
+			name="ltBalForward"
+			column="lt_bal_forward"
+			type="java.util.Date"
+			not-null="false"
+		/>
+		<property 
+			name="ltBalForwardDayLimit"
+			column="lt_bal_forward_day_limit"
+			type="big_decimal"
+			not-null="false"
+		/>
+		<property 
+			name="ltBalForwardHourLimit"
+			column="lt_bal_forward_hour_limit"
+			type="big_decimal"
+			not-null="false"
+		/>
+		<property 
+			name="ltBalForwardPerLimit"
+			column="lt_bal_forward_per_limit"
+			type="big_decimal"
+			not-null="false"
+		/>
+		<property 
+			name="ltBalForwardRounding"
+			column="lt_bal_forward_rounding"
+			type="integer"
+			not-null="false"
+		/>
+		<property 
+			name="ltDaysOfYear"
+			column="lt_days_of_year"
+			type="string"
+			not-null="false"
+		/>
+		<property 
+			name="ltDaysForRelease"
+			column="lt_days_for_release"
+			type="string"
+			not-null="false"
+		/>
+		<property 
+			name="ltHoursForRelease"
+			column="lt_hours_for_release"
+			type="string"
+			not-null="false"
+		/>
+		<property 
+			name="ltReleaseMethod"
+			column="lt_release_method"
+			type="string"
+			not-null="false"
+		/>
+		<property 
+			name="ltReleaseRounding"
+			column="lt_release_rounding"
+			type="integer"
+			not-null="false"
+		/>
+		<property 
+			name="ltOtherParameter"
+			column="lt_other_parameter"
+			type="string"
+			not-null="false"
+		/>
+		<property 
+			name="ltHoursOfYear"
+			column="lt_hours_of_year"
+			type="string"
+			not-null="false"
+		/>
+		<property
+			name="ltSortId"
+			column="lt_sort_id"
+			type="integer"
+			not-null="true"
+		/>
+		<property
+			name="ltNeedComments"
+			column="lt_need_comments"
+			type="integer"
+			not-null="true"
+		/>
+		<set inverse="true" name="leaverequests">
+			<key column="lt_no" />
+			<one-to-many class="Leaverequest" />
+		</set>
+
+	
+
+	</class>	
+</hibernate-mapping>

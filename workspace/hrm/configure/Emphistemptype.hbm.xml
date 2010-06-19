@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Emphistemptype"
+		table="emphistemptype"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="ehet_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<property
+			name="ehetValidFrom"
+			column="ehet_valid_from"
+			type="date"
+			not-null="true"
+		/>
+		<property
+			name="ehetValidTo"
+			column="ehet_valid_to"
+			type="date"
+			not-null="false"
+		/>
+		<property
+			name="ehetIsLatest"
+			column="ehet_is_latest"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<many-to-one
+			name="ehetEmptypeNo"
+			column="ehet_emptype_no"
+			class="com.hr.configuration.domain.Emptype"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="ehetEmpNo"
+			column="ehet_emp_no"
+			class="Employee"
+			not-null="true"
+		>
+		</many-to-one>
+
+
+	</class>	
+</hibernate-mapping>

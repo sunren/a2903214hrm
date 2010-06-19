@@ -1,0 +1,1 @@
+${SENDER.empName}拒绝了您的招聘计划

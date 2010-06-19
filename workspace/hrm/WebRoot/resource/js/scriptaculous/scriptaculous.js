@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+var Scriptaculous={Version:"1.7.0",require:function($){document.write("<script type=\"text/javascript\" src=\""+$+"\"></script>")},load:function(){if((typeof Prototype=="undefined")||(typeof Element=="undefined")||(typeof Element.Methods=="undefined")||parseFloat(Prototype.Version.split(".")[0]+"."+Prototype.Version.split(".")[1])<1.5)throw("script.aculo.us requires the Prototype JavaScript framework >= 1.5.0");$A(document.getElementsByTagName("script")).findAll(function($){return($.src&&$.src.match(/scriptaculous\.js(\?.*)?$/))}).each(function(A){var _=A.src.replace(/scriptaculous\.js(\?.*)?$/,""),$=A.src.match(/\?.*load=([a-z,]*)/);($?$[1]:"builder,effects,dragdrop,controls,slider").split(",").each(function($){Scriptaculous.require(_+$+".js")})})}};Scriptaculous.load()

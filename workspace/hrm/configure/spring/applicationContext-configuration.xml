@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+<!-- 维护薪资级别的配置-->
+<bean id="jobgradeDAO" class="com.hr.configuration.dao.JobgradeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="jobgradeBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.JobgradeBOImpl">
+		       <property name="dao">
+			         <ref local="jobgradeDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+	
+ <!-- 维护用工形式的配置-->
+	<bean id="emptypeDAO" class="com.hr.configuration.dao.EmpTypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="emptypeBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.EmpTypeBOImpl">
+		       <property name="dao">
+			         <ref local="emptypeDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+    <!-- 维护工作地区的配置-->
+    <bean id="locationDAO" class="com.hr.configuration.dao.LocationDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="locationBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.LocationBOImpl">
+		       <property name="dao">
+			         <ref local="locationDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+   
+    <!-- 维护考勤机的配置-->
+    <bean id="attdMachineDAO" class="com.hr.configuration.dao.AttdMachineDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+   <bean  id="attdMachineBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.AttdMachineBOImpl">
+		       <property name="attdMachineDAO">
+			         <ref local="attdMachineDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+	<!-- 维护部门的配置-->
+     <bean id="departmentDAO" class="com.hr.configuration.dao.DepartmentDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	
+	
+   <bean  id="departmentBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.DepartmentBOImpl">
+		       <property name="dao">
+			         <ref local="departmentDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+	<!--员工合同种类配置 -->
+	<bean id="contractTypeDao" class="com.hr.configuration.dao.ContractTypeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="contractTypeBo" class="com.hr.configuration.bo.ContractTypeBoImpl">
+		<property name="contractDao">
+			<ref local="contractTypeDao"></ref>
+		</property>
+	</bean>
+       <!-- 维护员工状态的配置-->
+	<bean id="statusDAO"
+		class="com.hr.configuration.dao.StatusDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+   <bean  id="statBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.StatBOImpl">
+		       <property name="statusDAO">
+			         <ref local="statusDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+    
+    <!-- 维护工作岗位的配置 -->
+    <bean id="jobTitleDao" class="com.hr.configuration.dao.JobTitleDaoImpl">
+    	<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+    </bean>
+    <bean id="jobTitleBo" parent="baseTransactionProxy">
+    	<property name="target">
+    		<bean class="com.hr.configuration.bo.JobTitleBo">
+    			<property name="jobTitleDao">
+    				<ref local="jobTitleDao"/>
+    			</property>
+    		</bean>
+    	</property>
+    </bean>
+    
+     <!-- 维护公司信息的配置-->
+     <bean id="infoDAO" class="com.hr.configuration.dao.InfoDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+   <bean  id="infoBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.InfoBOImpl">
+		       <property name="dao">
+			         <ref local="infoDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+ 
+     <!-- 维护调薪种类的配置-->
+       <bean id="ecptypeDAO" class="com.hr.configuration.dao.EcptypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="ecptypeBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.EcptypeBOImpl">
+		       <property name="dao">
+			         <ref local="ecptypeDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+ <!-- 系统日志愿的配置-->
+	<bean id="logDAO" class="com.hr.configuration.dao.SysLogDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+   <bean  id="logBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.SysLogBOImpl">
+		       <property name="logDAO">
+			         <ref local="logDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+
+
+ <!-- Email发送-->
+    <bean id="emailsendDAO" class="com.hr.configuration.dao.EmailsendDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="emailsendBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.EmailsendBoImpl">
+		       <property name="dao">
+			         <ref local="emailsendDAO" />
+		        </property>
+		        <property name="mailSender" ref="mailSender"></property>
+		        <property name="emailTemplateService" ref="emailTemplateService"></property>
+			</bean>
+        </property>
+    </bean>	
+    <!-- freemarker邮件模板 -->
+    <bean id="emailTemplateService" class="com.hr.configuration.bo.TemplateServiceFreeMarkerImpl">
+    	<property name="templateFilePath" value="emailtemplate/"></property>
+    	<property name="freemarkerSettings">
+  			<props>
+  				 <prop key="template_update_delay">0</prop>
+                 <prop key="default_encoding">GBK</prop>
+                 <prop key="locale">zh_CN</prop>
+                 <prop key="date_format">yyyy-MM-dd</prop>
+                 <prop key="time_format">hh:mm:ss</prop>
+                 <prop key="datetime_format">yyyy-MM-dd hh:mm:ss</prop>
+                 <prop key="number_format">##########0.00</prop>
+  			</props>
+  		</property>
+    	<property name="supportedVariables">
+    		<ref bean="emailTemplateParams"/>
+    	</property>
+    </bean>
+    <bean id="emailTemplateParams" class="org.springframework.beans.factory.config.MapFactoryBean">  
+	   <property name="sourceMap">  
+	       <map>  
+    			<entry key="PASSWORD" value=""></entry>
+    			<entry key="USERNAME" value=""></entry>
+    			<entry key="SYSNAME"><value>${email.sys.mailSystemName}</value></entry>
+    			<entry key="PHONE"><value>${email.sys.mailAdminPhone}</value></entry>
+    			<entry key="URL"><value>${email.sys.url}</value></entry>
+    			<!-- 邮件审批相关的变量 -->
+    			<entry key="APPROVEURL" value=""></entry>
+	       </map>  
+	   </property>  
+	 </bean> 
+     <!-- Email模版配置-->
+    <bean id="emailtemplateDAO" class="com.hr.configuration.dao.EmailtemplateDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="emailtemplateBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.EmailtemplateBoImpl">
+		       <property name="dao">
+			         <ref local="emailtemplateDAO" />
+		        </property>
+		        <property name="templateService" ref="emailTemplateService"></property>
+			</bean>
+        </property>
+    </bean>		
+	<!-- 数据备份还原-->
+    <bean id="backupDAO" class="com.hr.security.dao.impl.BackupDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="backupRBo"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.security.bo.impl.BackupRBoImpl">
+		       <property name="backupDAO">
+			         <ref local="backupDAO" />
+		        </property>
+			</bean>
+        </property>
+    </bean>		
+		<!-- 数据清理-->
+    <bean id="dataCleanDao" class="com.hr.security.dao.impl.DataCleanDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="dataclean"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.security.bo.impl.DataCleanImpl">
+		       <property name="dataCleanDao">
+			         <ref local="dataCleanDao" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+    
+    	<!--日志管理-->
+  
+   <bean  id="logmanager"  class="com.hr.security.bo.impl.LogBoImpl"/>
+    
+	<!--公司基本信息维护-->
+    <bean id="clientDao" class="com.hr.configuration.dao.ClientDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+   </bean>
+   <bean  id="clientBo"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.ClientBOImpl">
+		       <property name="clientDao">
+			         <ref local="clientDao" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+    <!-- sysconfig -->
+    <bean id="sysDAO" class="com.hr.configuration.dao.SysconfigDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	<!-- 社保种类DAO -->
+	<bean id="benefitTypeDao" class="com.hr.configuration.dao.BenefitTypeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />			
+		</property>
+	</bean>
+	<!-- 社保种类BO -->
+	<bean  id="benefitTypeBo"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.configuration.bo.BenefitTypeBOImpl">
+		       <property name="benefitTypeDao">
+			         <ref local="benefitTypeDao" />
+		        </property>
+			</bean>
+        </property>
+    </bean>
+</beans>

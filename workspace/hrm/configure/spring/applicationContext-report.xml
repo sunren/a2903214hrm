@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<bean id="reportDAO"
+		class="com.hr.report.dao.ReportDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="reportBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.ReportBoImpl">
+				<property name="lr_DAO">
+					<ref bean="leaverequestDAO" />
+				</property>
+				<property name="lc_BO">
+					<ref bean="leavecalendarBO" />
+				</property>
+				<property name="d_BO">
+					<ref bean="departmentBO" />
+				</property>
+				<property name="l_BO">
+					<ref bean="locationBO" />
+				</property>
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+				
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="customizeReportBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="customizeReportParamsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportParamsBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="customizeReportJoinDefBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportJoinDefBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="customizeReportSetsBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportSetsBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="customizeReportSetsDefBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportSetsDefBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="customizeReportModuleDefBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.report.bo.CustomizeReportModuleDefBoImpl">
+				<property name="reportDAO">
+					<ref local="reportDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="salaryReportBo" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.hr.report.bo.SalaryReportBoImpl">
+                <property name="reportDao">
+                    <ref local="reportDAO" />
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="examinReportBo" parent="baseTransactionProxy">
+        <property name="target">
+            <bean class="com.hr.report.bo.ExaminReportBoImpl">
+                <property name="reportDao">
+                    <ref local="reportDAO" />
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- ========================== 开始:调度作业 员工汇总、薪资汇总、调薪确认 =========================== -->
+	<!-- 
+	<bean id="empTotalBean" class="com.hr.base.quartz.EmpTotal"></bean>  
+
+	<bean id="empTotal" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+	         <ref  local="empTotalBean"/>       
+		 </property>  
+	     <property name="targetMethod">  
+			 <value>execute</value>  
+		 </property>  
+	</bean>  -->
+	<!-- 员工汇总、薪资汇总、调薪确认: 启动的规则 每天临晨2点启动-->
+	<!-- 
+	 <bean id="empTotalJob" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		 <property  name="jobDetail">
+			 <ref local="empTotal"/>  
+		 </property>  
+		 <property name="cronExpression">
+			 <value>${quartz.empTotal}</value>
+		</property>  
+	 </bean>
+	 
+	<bean id="adjustBean" class="com.hr.base.quartz.AdjustSalary"></bean>  
+
+	<bean id="adjustDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+	         <ref  local="adjustBean"/>       
+		 </property>  
+	     <property name="targetMethod">  
+			 <value>execute</value>  
+		 </property>  
+	</bean> -->
+	<!-- 员工汇总、薪资汇总、调薪确认: 启动的规则 每天临晨2点启动-->
+	<!-- 
+	 <bean id="adjustDetailJob" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		 <property  name="jobDetail">
+			 <ref local="adjustDetail"/>  
+		 </property>  
+		 <property name="cronExpression">
+			 <value>${quartz.salaryAdj}</value>
+		</property>  
+	 </bean>
+	 
+	 	<bean id="salaryTotalBean" class="com.hr.base.quartz.SalaryTotal"></bean>  
+
+	<bean id="salaryTotalDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+	         <ref  local="salaryTotalBean"/>       
+		 </property>  
+	     <property name="targetMethod">  
+			 <value>execute</value>  
+		 </property>  
+	</bean>  -->
+	<!-- 员工汇总、薪资汇总、调薪确认: 启动的规则 每天临晨2点启动-->
+	<!-- 
+	 <bean id="salaryTotalJob" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		 <property  name="jobDetail">
+			 <ref local="salaryTotalDetail"/>  
+		 </property>  
+		 <property name="cronExpression">
+			 <value>${quartz.salaryTotal}</value>
+		</property>  
+	 </bean> -->
+
+	<!-- ========================== 开始:调度作业 Email Send =========================== -->
+	<bean id="execEmailSend" class="com.hr.base.quartz.EmailSend"></bean>
+	
+	<bean id="emailDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="execEmailSend"/>
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>
+	
+	<!-- 发送email: 启动的规则 开机延时1分钟，每10分钟执行一次 -->
+	<bean id ="emailTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean" >
+		<property name="jobDetail">
+			<ref bean="emailDetail"/>
+		</property>
+		<property name="startDelay">
+			<value>300000</value>
+		</property>
+		<property name="repeatInterval">
+			<value>${quartz.emailRepeatInterval}</value>
+		</property>
+	</bean>
+
+	<!-- 定时器 起动Bean --> 
+	 <bean id="tyhrTimer" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">  
+		<property name="triggers">
+			<list>
+				<!--<ref local="empTotalJob"/>-->
+				<!-- <ref local="adjustDetailJob"/> -->
+				<!--<ref local="salaryTotalJob"/>-->
+				<ref local="emailTrigger"/>
+				<ref local="backupJob"/>
+				<ref local="syncAttdRecordJob"/>
+			</list>  
+		</property>
+	 </bean>
+	 <!-- 数据备份定时器 -->
+	 <bean id="backupService" class="com.hr.base.quartz.DatabaseBackupService"/>
+	 <bean id="backupTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	 	<property name="targetObject">
+           	<ref bean="backupService"/>
+        </property>
+	 	<property name="targetMethod">
+            <value>executeBackup</value>
+        </property>
+	 </bean>
+	 <!-- 定义触发时间 -->
+     <bean id="backupJob" class="org.springframework.scheduling.quartz.CronTriggerBean">
+         <property name="jobDetail">
+             <ref bean="backupTask"/>
+         </property>
+         <!-- cron表达式 -->
+         <property name="cronExpression">
+             <value>${quartz.dbBackup}</value>
+         </property>
+     </bean>
+     
+     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+     	<property name="host" value="${email.smtp.host}"></property>
+     	<property name="username" value="${email.user.name}"></property>
+     	<property name="password" value="${email.user.password}"></property>
+     	<property name="defaultEncoding" value="gbk"></property>
+     	<property name="javaMailProperties">
+     		<props>
+     			<prop key="mail.smtp.auth">${email.smtp.auth}</prop>
+     			<prop key="mail.smtp.connectiontimeout">${email.smtp.connectiontimeout}</prop>
+     			<prop key="mail.smtp.timeout">${email.smtp.timeout}</prop>
+     			<!-- <prop key="mail.debug">${email.smtp.debug}</prop> -->
+     			<prop key="java,mail.smtp.from">${email.smtp.host}</prop>
+				<!-- 使用email加密端口（如gmail）时，需要去掉下面4行的注释
+     			<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+     			<prop key="mail.smtp.socketFactory.fallback">false</prop>
+     			<prop key="mail.smtp.port">465</prop>
+     			<prop key="mail.smtp.socketFactory.port">465</prop>
+				-->
+     		</props>
+     	</property>
+     </bean>
+     
+	<!-- 定时同步员工考勤记录 -->
+     <bean id="syncAttdRecord" class="com.hr.base.quartz.SyncAttdRecord"></bean>
+
+	<bean id="syncAttdRecordDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		 <property name="targetObject">  
+	         <ref  local="syncAttdRecord"/>       
+		 </property>  
+	     <property name="targetMethod">  
+			 <value>execute</value>  
+		 </property>  
+	</bean>
+	<!-- 定时同步员工考勤记录: 启动的规则 每天临晨2点启动-->
+	
+	 <bean id="syncAttdRecordJob" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		 <property  name="jobDetail">
+			 <ref local="syncAttdRecordDetail"/>  
+		 </property>  
+		 <property name="cronExpression">
+			 <value>${quartz.syncAttdRecord}</value>
+		</property>  
+	 </bean>
+</beans>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="recruitment" extends="default" namespace="/recruitment">
+	<interceptors>
+            <interceptor-stack name="modelParamsStack">				
+				<interceptor-ref name="checklogin"/>
+				 <interceptor-ref name="checkauth"/>  
+            	<interceptor-ref name="params"/>
+				<interceptor-ref name="chain" />				
+            </interceptor-stack>
+	 </interceptors>
+		
+	 <!-- 添加招聘方案 -->
+	  <action name="AddRecruitplanInit" class="com.hr.recruitment.action.AddRecruitplanInit">
+	  		<result name="success" type="dispatcher">/recruitment/addrecruitplan.jsp</result> 		   
+	  		<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <action name="AddRecruitplan" class="com.hr.recruitment.action.AddRecruitplan">
+	     	<result name="success" type="chain">
+				<param name="actionName">SearchRecruitplan</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="actionName">AddRecruitplanInit</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+		    <result name="invalid.token" type="redirect">/recruitment/SearchRecruitplan.action</result>
+			  <interceptor-ref name="validationWorkflowStack"/>
+		      <interceptor-ref name="modelParamsStack"/>			 
+		      <interceptor-ref name="token"/> 
+	  </action>
+	  	<!-- 查询招聘方案 -->
+	  	 <action name="SearchRecruitplan" class="com.hr.recruitment.action.SearchRecruitplan">
+	  		<result name="success" type="dispatcher">/recruitment/searchrecruitplan.jsp</result> 
+			 <result name="error" type="redirect">/recruitment/SearchRecruitplan.action</result>			
+			<interceptor-ref name="modelParamsStack"/>
+			 
+	  </action>
+	  <!-- HR招聘专用查询招聘计划 -->
+	  	 <action name="SearchRecruitplanForHR" class="com.hr.recruitment.action.SearchRecruitplanForHR">
+	  		<result name="success" type="dispatcher">/recruitment/searchrecruitplanforhr.jsp</result> 
+			   <result name="error" type="redirect">/recruitment/SearchRecruitplanForHR.action</result> 
+			<interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  	<!-- 删除招聘方案 -->
+	  <action name="DeleteRecruitplan" class="com.hr.recruitment.action.DeleteRecruitplan">
+	  		<result name="success" type="chain">
+				<param name="actionName">SearchRecruitplan</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">SearchRecruitplan</param>
+				<param name="namespace">/recruitment</param>
+			</result>		  
+		   <interceptor-ref name="modelParamsStack"/>		 
+	  </action>
+			<!-- 删除招聘方案 -->
+	  <action name="DeleteRecruitplanADM" class="com.hr.recruitment.action.DeleteRecruitplanADM">
+	  		<result name="success" type="chain">
+				<param name="actionName">SearchRecruitplanForHR</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">SearchRecruitplanForHR</param>
+				<param name="namespace">/recruitment</param>
+			</result>		  
+		   <interceptor-ref name="modelParamsStack"/>		 
+	  </action>
+	   <!-- 编辑招聘方案(初始化) -->
+	   <action name="UpdateRecruitplanInit" class="com.hr.recruitment.action.UpdateRecruitplanInit">
+	  		<result name="success" type="dispatcher">/recruitment/updaterecruitplan.jsp</result> 
+	  	    <interceptor-ref name="modelParamsStack"/>		    
+	  </action>
+	  <!-- 编辑招聘方案 -->
+	  <action name="UpdateRecruitplan" class="com.hr.recruitment.action.UpdateRecruitplan">	
+	  	<result name="success" type="chain">
+				<param name="actionName">SearchRecruitplan</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">UpdateRecruitplanInit</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+		<result name="input" type="chain">
+            <param name="actionName">UpdateRecruitplanInit</param>
+            <param name="namespace">/recruitment</param>
+       </result>
+	   <result name="invalid.token" type="redirect">/recruitment/SearchRecruitplan.action</result>
+		 <interceptor-ref name="validationWorkflowStack"/>
+	    <interceptor-ref name="modelParamsStack"/>
+		<interceptor-ref name="token"/>
+	  </action>
+		 <!-- 编辑招聘方案(初始化) 管理员入口 -->
+	    <action name="UpdateRecruitplanInitADM" class="com.hr.recruitment.action.UpdateRecruitplanInitADM">
+	  		<result name="success" type="dispatcher">/recruitment/updaterecruitplanADM.jsp</result> 
+	  	    <interceptor-ref name="modelParamsStack"/>		    
+	  </action>
+	<!-- 编辑招聘方案 管理员入口 -->
+	  <action name="UpdateRecruitplanADM" class="com.hr.recruitment.action.UpdateRecruitplanADM">	
+	    <interceptor-ref name="validationWorkflowStack"/>
+	  		<result name="success" type="chain">
+				<param name="actionName">SearchRecruitplanForHR</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="error" type="chain">
+				<param name="actionName">UpdateRecruitplanInitADM</param>
+				<param name="namespace">/recruitment</param>
+			</result>
+			<result name="input" type="chain">
+	            <param name="actionName">UpdateRecruitplanInit</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+			<result name="input" type="chain">
+				  <param name="actionName">UpdateRecruitplanInitADM</param>
+				  <param name="namespace">/recruitment</param>
+			</result>
+		    <result name="invalid.token" type="redirect">/recruitment/SearchRecruitplanForHR.action</result>
+			 <interceptor-ref name="modelParamsStack"/>
+		    <interceptor-ref name="token"/> 
+	  </action>
+	  <!--	在招聘计划列表中点链接要调用的方法  -->
+	   <action name="ViewRecruiplandetailforHR" class="com.hr.recruitment.action.ViewRecruitplanDetailForHR">
+	  		<result name="success" type="dispatcher">/recruitment/viewrecruitplandetailforhr.jsp</result>  
+	  		<result name="input" type="chain">
+	            <param name="actionName">SearchRecruitplanForHR</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+		   <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	 
+	  	 <!-- 招聘方案部门审批 -->
+	  <action name="ApproverRecruitplanDept" class="com.hr.recruitment.action.ApproverRecruitplanDept">
+	  		<result name="success" type="dispatcher">/recruitment/approverecruitplanDept.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action>
+	  <!-- 招聘方案HR备案 -->
+	     <action name="ApproverRecruitplanHR" class="com.hr.recruitment.action.ApproverRecruitplanHR">
+	  		<result name="success" type="dispatcher">/recruitment/approverecruitplanHR.jsp</result> 
+		    <interceptor-ref name="modelParamsStack"/>
+	  </action> 
+		
+		
+	
+	  <!-- 列出所有渠道-->
+		 <action name="recruitchannellist"
+			class="com.hr.recruitment.action.RecruitchannelList">
+			<result name="success">recruitchannelList.jsp</result>
+			<interceptor-ref name="modelParamsStack"/>
+		</action>
+	
+		
+	 <!--创建应聘者,初始化-->
+		 <action name="recruitapplierCreateInit"
+			class="com.hr.recruitment.action.RecruitapplierCreateInit">			
+			<result name="success">/recruitment/recruitapplier_create.jsp</result>
+			 <result name="successForDetail">/recruitment/recruitapplier_create_detail.jsp</result>
+			 <interceptor-ref name="modelParamsStack"/>
+		</action> 	
+		
+		 <!-- 创建应聘者-->
+		 <action name="recruitapplierCreate"
+			class="com.hr.recruitment.action.RecruitapplierCreate"> 
+			<result name="success" type="chain">
+	            <param name="actionName">recruitapplierSearch</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+	       <result name="input" type="chain">
+	            <param name="actionName">recruitapplierCreateInit</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+			 <result name="invalid.token" type="redirect">/recruitment/recruitapplierSearch.action</result> 
+			<interceptor-ref name="checkauth"/>   
+			<interceptor-ref name="params"/> 
+		    <interceptor-ref name="fileUploadStack" /> 
+		    <interceptor-ref name="validationWorkflowStack"/>    
+		    <interceptor-ref name="token"/> 
+		</action>	
+		
+		
+		 <!-- 创建应聘者 详细新系列表中-->
+		 <action name="recruitapplierCreateDetail"
+			class="com.hr.recruitment.action.RecruitapplierCreateDetail">
+			<result name="success" type="chain">
+	            <param name="actionName">ViewRecruiplandetailforHR</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+	       <result name="input" type="chain">
+	            <param name="actionName">recruitapplierCreateInit</param>
+	            <param name="namespace">/recruitment</param>
+	       </result>
+			 <result name="invalid.token" type="dispatcher">/recruitment/ViewRecruiplandetailforHR.action?errorFlag=0</result> 		
+			 <interceptor-ref name="checkauth"/>   
+			<interceptor-ref name="params"/> 
+		    <interceptor-ref name="fileUploadStack" /> 
+		    <interceptor-ref name="validationWorkflowStack"/>    
+		     <interceptor-ref name="token"/> 
+		</action>	
+		
+	 <!--更新应聘者,初始化-->
+		 <action name="recruitapplierUpdateInit"
+			class="com.hr.recruitment.action.RecruitapplierUpdateInit">
+			<result name="success">/recruitment/recruitapplier_update.jsp</result>
+			 <result name="successForDetail">/recruitment/recruitapplier_update_detail.jsp</result>
+			 <interceptor-ref name="params"/> 
+			<interceptor-ref name="chain" />  
+  		</action>
+	 <!--更新应聘者-->
+		 <action name="recruitapplierUpdate"
+			class="com.hr.recruitment.action.RecruitapplierUpdate">
+			<result name="success" type="chain">
+			  		<param name="actionName">recruitapplierSearch</param>
+					<param name="namespace">/recruitment</param>
+			  </result>			 
+			 <result name="input" type="chain">
+			  		<param name="actionName">recruitapplierUpdateInit</param>
+					<param name="namespace">/recruitment</param>
+			  </result>
+			  <result name="invalid.token" type="redirect">/recruitment/recruitapplierSearch.action</result> 
+			 <interceptor-ref name="checkauth"/>  
+			  <interceptor-ref name="params"/> 
+			 <interceptor-ref name="chain" />
+			<interceptor-ref name="fileUploadStack" /> 
+			<interceptor-ref name="validationWorkflowStack"/>
+			  <interceptor-ref name="token"/> 
+  		</action>
+		 <!--更新应聘者 详细新系列表中-->
+		 <action name="recruitapplierUpdateDetail"
+			class="com.hr.recruitment.action.RecruitapplierUpdateDetail">
+			<result name="success" type="chain">
+			  		<param name="actionName">ViewRecruiplandetailforHR</param>
+					<param name="namespace">/recruitment</param>
+			  </result>			 
+			 <result name="input" type="chain">
+			  		<param name="actionName">recruitapplierUpdateInit</param>
+					<param name="namespace">/recruitment</param>
+			  </result>
+			  <result name="invalid.token" type="dispatcher">/recruitment/ViewRecruiplandetailforHR.action?errorFlag=0</result> 		
+			 <interceptor-ref name="checkauth"/>  
+			  <interceptor-ref name="params"/> 
+			 <interceptor-ref name="chain" />
+			<interceptor-ref name="fileUploadStack" /> 
+			<interceptor-ref name="validationWorkflowStack"/>
+			  <interceptor-ref name="token"/> 
+  		</action>
+		
+		<!-- 应聘者列表  -->
+		 <action name="recruitapplierSearch"
+			class="com.hr.recruitment.action.RecruitapplierSearch">
+			<result name="success">recruitapplier_search.jsp</result>
+		   <interceptor-ref name="modelParamsStack"/>		    
+  		</action>
+		<!--删除应聘者 -->
+		 <action name="deleteapplier"
+			class="com.hr.recruitment.action.RecruitapplierDelete">	
+			<result name="success" type="chain">
+			  		<param name="actionName">recruitapplierSearch</param>
+					<param name="namespace">/recruitment</param>
+			  </result>	
+			<result name="error" type="redirect">/recruitment/recruitapplierSearch.action</result>
+		   <interceptor-ref name="modelParamsStack"/>  
+  		</action>	
+		<!--更新备注 (非笔试和面试)-->
+		 <action name="recruitapplierUpdateRemark"
+			class="com.hr.recruitment.action.RecruitapplierUpdateRemark">
+			<result name="success" type="chain">
+			  		<param name="actionName">recruitapplierSearch</param>
+					<param name="namespace">/recruitment</param>
+			  </result>
+			<result name="error" type="redirect">recruitapplierSearch.action</result>
+		   <interceptor-ref name="modelParamsStack"/>    
+  		</action>	
+		
+		<!--更新备注 (笔试和面试)-->
+		 <action name="recruitapplierUpdateRemarkBishi"
+			class="com.hr.recruitment.action.RecruitapplierUpdateRemarkBishi">
+			<result name="success" type="chain">
+			  		<param name="actionName">recruitapplierSearch</param>
+					<param name="namespace">/recruitment</param>
+			  </result>
+			 <result name="error" type="redirect">recruitapplierSearch.action</result>
+		    <interceptor-ref name="modelParamsStack"/>    
+  		</action>	
+		
+		
+		<!--下载简历-->
+		 <action name="recruitapplierDownFile"	class="com.hr.recruitment.action.DownFile" method="downProfile">
+			 	<result name="fileError" type="dispatcher">/recruitment/file_error.jsp</result> 
+			 <interceptor-ref name="checklogin"/>
+	  		<interceptor-ref name="params"/> 	    
+  		</action>	
+		<!-- 报表 -->
+		<action name="recruitmentReport" class="com.hr.report.action.recruitment.RecruitmentReportAction">
+			<result name="success" type="dispatcher">/report/recruitment/recruitmentReport.jsp</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>
+			<interceptor-ref name="modelParamsStack"/> 		
+		    <interceptor-ref name="validationWorkflowStack"/>
+		</action>
+</package>
+</struts>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+    <!-- 渠道配置DAO-->
+	<bean id="channelDAO" class="com.hr.recruitment.dao.impl.RecruitchannelDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 招聘申请配置DAO-->
+	<bean id="applierDAO" class="com.hr.recruitment.dao.impl.RecruitapplierDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+    <!-- 招聘方案DAO-->
+	<bean id="recruitplanDAO" class="com.hr.recruitment.dao.impl.RecruitplanDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+    <!-- 招聘人员面试资料DAO-->
+	<bean id="recruitappDAO" class="com.hr.recruitment.dao.impl.RecruitapplierDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 渠道配置BO-->
+	<bean id="channelBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.recruitment.bo.impl.RecruitchannelBoImpl">
+				<property name="channelDAO">
+					<ref local="channelDAO" />
+				</property>
+				<property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 招聘方案BO-->
+	<bean  id="recruitplanBO"  parent="baseTransactionProxy">       
+        <property  name="target">
+           <bean class="com.hr.recruitment.bo.impl.RecruitplanBoImpl">
+		       <property name="dao">
+			         <ref local="recruitplanDAO" />
+		        </property>
+		        <property name="statusDAO">
+					<ref bean="statusDAO" />
+				</property>
+			</bean>
+        </property>
+    </bean>
+	<!-- 招聘申请配置BO-->
+	<bean id="applierBo" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.hr.recruitment.bo.impl.RecruitapplierBoImpl">				
+				<property name="applierDAO">
+					<ref local="applierDAO" />
+				</property>				
+			</bean>
+		</property>
+	</bean>
+
+	
+</beans>

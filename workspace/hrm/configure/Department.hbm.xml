@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Department"
+		table="department"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="department_no"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<property
+			name="departmentName"
+			column="department_name"
+			type="string"
+			not-null="true"
+			length="32"
+		/>
+		<property
+			name="departmentDesc"
+			column="department_desc"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="departmentStatus"
+			column="department_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="departmentSortId"
+			column="department_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		
+		
+		<property
+			name="departmentCate"
+			column="department_cate"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="departmentBusinessDesc"
+			column="department_business_desc"
+			type="string"
+			not-null="false"
+			length="255"
+		/>
+		<property
+			name="departmentBusinessAttach"
+			column="department_business_attach"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<property
+			name="departmentCreateDate"
+			column="department_create_date"
+			type="date"
+			not-null="false"
+		/>
+		<property
+			name="departmentEndDate"
+			column="department_end_date"
+			type="date"
+			not-null="false"
+		/>
+		<property
+			name="departmentTrade"
+			column="department_trade"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="departmentPersonInlaw"
+			column="department_person_inlaw"
+			type="string"
+			not-null="false"
+			length="64"
+		/>
+		<property
+			name="departmentMemo"
+			column="department_memo"
+			type="string"
+			not-null="false"
+			length="128"
+		/>
+		<many-to-one name="departmentParentId"
+			column="department_parent_id"
+			class="com.hr.configuration.domain.Department"
+			not-null="false"
+			lazy="proxy"
+			>
+			
+		</many-to-one>
+		
+		
+		
+		<set inverse="true" name="empsalarypaids">
+			<key column="department_no" />
+			<one-to-many class="com.hr.compensation.domain.Empsalarypay" />
+		</set>
+
+		<set inverse="true" name="employees">
+			<key column="department_no" />
+			<one-to-many class="com.hr.profile.domain.Employee" />
+		</set>
+
+
+
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+    <class name="BenefitType" table="benefittype">
+        <cache usage="nonstrict-read-write"/>   
+        <id name="id"
+            type="string"
+            column="benefittype_id">
+            <generator class="uuid.hex"/>
+        </id>
+
+        <property
+            name="benefitTypeName"
+            column="benefittype_name"
+            type="string"
+            not-null="true"
+            length="64"
+        />
+        <property
+            name="benefitTypeDescription"
+            column="benefittype_desc"
+            type="string"
+            not-null="false"
+            length="128"
+        />
+        <many-to-one
+            name="benefitTypeLocNo"
+            column="benefittype_loc_no"
+            class="com.hr.configuration.domain.Location"
+            not-null="false"
+        />
+        <property
+            name="benefitTypeSortId"
+            column="benefittype_sort_id"
+            type="integer"
+            not-null="true"
+            length="10"
+        />
+        <property 
+            name="benefitTypePayType"
+            column="benefittype_pay_type"
+            type="integer"
+            not-null="true"
+            length="10"
+        />
+        <property name="ebfTypePensionUplimit" type="big_decimal">
+            <column name="benefittype_pension_uplimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypePensionLowlimit" type="big_decimal">
+            <column name="benefittype_pension_lowlimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeUnemploymentUplimit" type="big_decimal">
+            <column name="benefittype_unemployment_uplimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeUnemploymentLowlimit" type="big_decimal">
+            <column name="benefittype_unemployment_lowlimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeMedicareUplimit" type="big_decimal">
+            <column name="benefittype_medicare_uplimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeMedicareLowlimit" type="big_decimal">
+            <column name="benefittype_medicare_lowlimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeInjuryUplimit" type="big_decimal">
+            <column name="benefittype_injury_uplimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeInjuryLowlimit" type="big_decimal">
+            <column name="benefittype_injury_lowlimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeChildbirthUplimit" type="big_decimal">
+            <column name="benefittype_childbirth_uplimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeChildbirthLowlimit" type="big_decimal">
+            <column name="benefittype_childbirth_lowlimit" precision="9">
+            </column>
+        </property>
+        <property name="ebfTypeHousingUplimit" type="big_decimal">
+            <column name="benefittype_housing_uplimit" precision="9">
+            </column>
+        </property> 
+        <property name="ebfTypeHousingLowlimit" type="big_decimal">
+            <column name="benefittype_housing_lowlimit" precision="9">
+            </column>
+        </property> 
+        <property name="ebfTypeOtherUplimit" type="big_decimal">
+            <column name="benefittype_other_uplimit" precision="9">
+            </column>
+        </property> 
+        <property name="ebfTypeOtherLowlimit" type="big_decimal">
+            <column name="benefittype_other_lowlimit" precision="9">
+            </column>
+        </property>
+    </class>    
+</hibernate-mapping>

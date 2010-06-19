@@ -1,0 +1,4 @@
+/*
+ * Compressed by JSA(www.xidea.org)
+ */
+$.fn.inputer=function(_){var A=this;jQuery.each(A,function(C,E){var F="_inputer"+E.id,B=$("input[id="+E.id+"]").offset();$("input[id="+E.id+"]").after("<select id='"+F+"' name='"+F+"'></select>");$("select[id="+F+"]").width($(E).width()+($.browser.msie?6:4)+"px");$("select[id="+F+"]").css({position:"absolute",display:"none",left:function(){return B.left},top:function(){return $.browser.msie?B.top:B.top+1+"px"},clip:"rect(1px "+($("select[id="+F+"]").width()+($.browser.msie?6:8)+"px")+" "+($("select[id="+F+"]").height()+($.browser.msie?1:2)+"px")+" "+($("select[id="+F+"]").width()-15+"px")+")","font-size":A.css("font-size")});var D="<option value=''></option>";$.each(_,function($,_){D+="<option value="+$+">"+_+"</option>"});$("select[id="+F+"]").html(D).css({display:"block"}).change(function(){$("input[id="+E.id+"]").val($("option:selected",this).html())})})}

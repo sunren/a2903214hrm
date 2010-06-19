@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="report" extends="default" namespace="/report">
+		<interceptors>
+			<interceptor-stack name="modelParamsStack">
+				<interceptor-ref name="checklogin"/>
+				<interceptor-ref name="params"/>
+				<interceptor-ref name="chain" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 员工模块相关report(new!) -->
+        <action name="employeeReport" class="com.hr.report.action.profile.EmployeeReportAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action> 
+        <action name="employeeDimissionReport" class="com.hr.report.action.profile.EmployeeDimission">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+        <action name="employeeSum" class="com.hr.report.action.profile.EmployeeSumAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+
+          <action name="employDimissionSum" class="com.hr.report.action.profile.DimissionSumAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+        
+          <action name="employeeDimissionRate" class="com.hr.report.action.profile.EmployeeDimissionRateAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+        
+        <action name="employeeNew" class="com.hr.report.action.profile.EmployeeNewAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+         <action name="employeeNewRate" class="com.hr.report.action.profile.EmployeeNewRateAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+        <action name="employeeNetRate" class="com.hr.report.action.profile.EmployeeNetRateAction">
+             <result name="success" type="dispatcher">/report/birtWebReport</result> 
+             <result name="input" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+             <interceptor-ref name="modelParamsStack"/>
+        </action>
+        <action name="empReport" class="com.hr.report.action.profile.EmpReportAction">
+            <result name="success" type="dispatcher">/report/profile/employee_report_list.jsp</result> 
+            <result name="*" type="dispatcher">/examin/error.jsp</result>
+            <interceptor-ref name="modelParamsStack"/>
+            <interceptor-ref name="validationWorkflowStack"/>
+        </action>
+       <!-- end of 员工相关report -->
+       
+       <!-- 薪资报表(new) -->
+       <action name="salaryRpInit"
+			class="com.hr.report.action.compensation.SalaryReportInit">
+			<result name="success" type="dispatcher">
+				/report/compensation/salary_report.jsp
+			</result>
+			<result name="other" type="chain">salaryRp</result>
+			<result name="error">/homepage/index.jsp</result>
+			<interceptor-ref name="modelParamsStack" />
+		</action>
+		<action name="salaryRp"
+			class="com.hr.report.action.compensation.SalaryRport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="modelParamsStack" />
+		</action>
+		<!-- 薪资历史分析报表 -->
+		<action name="salaryHistoryReport"
+			class="com.hr.report.action.compensation.SalaryHistoryReport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="modelParamsStack" />
+		</action>
+		<!-- 薪资人工成本分析报表 -->
+		<action name="salaryCostReport"
+			class="com.hr.report.action.compensation.SalaryCostReport">
+			<result name="success" type="dispatcher">
+				/report/birtWebReport
+			</result>
+			<result name="input" type="chain">
+			     <param name="actionName">salaryRpInit</param>
+			     <param name="namespace">/compensation</param>
+			</result>
+			<interceptor-ref name="modelParamsStack" />
+		</action>
+		<!-- end of薪资报表 -->
+		
+		<action name="rpReportByNow" class="com.hr.report.action.recruitment.RecruitmentReportAction" method="executeRPByNow">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<action name="raReportByTime" class="com.hr.report.action.recruitment.RecruitmentReportAction" method="executeRAByTime">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		
+		<action name="examinReport" class="com.hr.report.action.examin.ExaminReportAction">
+			<result name="success" type="dispatcher">/report/examin/examinReport.jsp</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<action name="lrReportByTime" class="com.hr.report.action.examin.ExaminReportAction" method="executeEmpLr">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<action name="otReportByTime" class="com.hr.report.action.examin.ExaminReportAction" method="executeEmpOt">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<action name="alyReportByType" class="com.hr.report.action.examin.ExaminReportAction" method="executeEmpAly">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		
+		<action name="trReportByTime" class="com.hr.report.action.training.TrainingReportAction" method="executeTRShow">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		
+		<action name="userReport" class="com.hr.report.action.userinfos.UserInfoAction">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="dispatcher">/report/birtWebReport</result> 
+			<result name="*" type="dispatcher">/examin/error.jsp</result>		
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		
+		<!-- 自定义报表部分 -->
+		<!-- 新建定制报表（初始化） -->
+		<action name="createInit" class="com.hr.report.action.customize.CreateReportInitAction">
+			<result name="success" type="dispatcher">/reports/createReport.jsp</result>
+		</action>
+		<!-- 新建用户预定义报表（初始化） -->
+		<action name="uploadInit" class="com.hr.report.action.customize.CreateReportInitAction">
+			<result name="success" type="dispatcher">/reports/uploadReport.jsp</result>
+		</action>
+		<!-- 新建用户预定义报表 -->
+		<action name="uploadReport" class="com.hr.report.action.customize.UploadReportAction">
+			<result name="success" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">preList</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">uploadInit</param>
+			</result>
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="fileUploadStack"/>
+		</action>
+		<!-- 更新用户自定义报表信息(初始化) -->
+		<action name="updateReportInit" class="com.hr.report.action.customize.UpdateReportInitAction">
+			<result name="success" type="dispatcher">/reports/updateReport.jsp</result>
+			<result name="error" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<interceptor-ref name="checklogin"/> 
+			<interceptor-ref name="checkauth" />
+	  		<interceptor-ref name="params"/> 
+		</action>
+		<!-- 更新用户预定义报表 -->
+		<action name="updateUploadReport" class="com.hr.report.action.customize.UpdateUploadReportAction">
+			<result name="success" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">updateUploadReportInit</param>
+			</result>
+			<interceptor-ref name="modelParamsStack"/>
+			<interceptor-ref name="validationWorkflowStack"/>
+			<interceptor-ref name="fileUploadStack"/> 
+		</action>
+		<!-- 新建定制报表 -->
+		<action name="editReport" class="com.hr.report.action.customize.EditReportAction">
+			<result name="success" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">createInit</param>
+			</result>
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<!-- 显示所有定制报表信息 -->
+		<action name="listAll" class="com.hr.report.action.customize.ListReportAction">
+			<result name="success" type="dispatcher">/reports/listAll.jsp</result>
+		</action>
+		<!-- 删除定制报表信息 -->
+		<action name="deleteReport" class="com.hr.report.action.customize.DeleteReportAction">
+			<result name="success" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+		</action>
+		
+		<!-- 报表参数填充页面 -->
+		<action name="paramsInit" class="com.hr.report.action.customize.ParameterInitAction">
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<result name="success" type="dispatcher">/reports/report_params.jsp</result>
+			<result name="ban" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+			<interceptor-ref name="checkauth" />
+			<interceptor-ref name="validationWorkflowStack"/>
+		</action>
+		<!-- 查看定制报表(运行初始化) -->
+		<action name="viewReport" class="com.hr.report.action.customize.ViewReportAction">
+			<result name="success" type="dispatcher">/report/birtWebReport</result> 
+			<result name="input" type="chain">
+				<param name="namespace">/report</param>
+				<param name="actionName">listAll</param>
+			</result>
+		</action>
+		<action name="runReport" class="com.hr.report.action.customize.RenderReportAction">
+			<result name="success" type="dispatcher">/report/birtWebReport</result>
+		</action>
+		<action name="preList" class="com.hr.report.action.customize.ReportPreListAction">
+			<result name="success" type="dispatcher">/reports/predeflist.jsp</result>
+		</action>
+		
+	</package>
+</struts>

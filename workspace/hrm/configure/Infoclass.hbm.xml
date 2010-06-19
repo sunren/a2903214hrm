@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class
+		name="Infoclass"
+		table="infoclass"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>   
+		<id
+			name="id"
+			type="string"
+			column="infoclass_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="infoclassName"
+			column="infoclass_name"
+			type="string"
+			not-null="true"
+			length="16"
+		/>
+		<property
+			name="infoclassSortId"
+			column="infoclass_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="infoclassStatus"
+			column="infoclass_status"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+	
+
+		<set name="informations" inverse="true">
+			<key column="infoclass_id"/>
+			<one-to-many class="com.hr.information.domain.Information"/>
+		</set>
+
+
+	</class>	
+</hibernate-mapping>

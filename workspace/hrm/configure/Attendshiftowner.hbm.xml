@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.examin.domain">
+	<class
+		name="Attendshiftowner"
+		table="attendshiftowner"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="attso_id"
+		>
+			<generator class="uuid.hex"/>
+		</id>
+
+		<property
+			name="attsoEmpNo"
+			column="attso_emp_no"
+			type="string"
+			not-null="true"
+			length="36"
+		/>
+		<property
+			name="attsoDeptId"
+			column="attso_dept_id"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="attsoBuId"
+			column="attso_bu_id"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="attsoLocId"
+			column="attso_loc_id"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+		<property
+			name="attsoGroupId"
+			column="attso_group_id"
+			type="string"
+			not-null="false"
+			length="36"
+		/>
+
+
+	</class>	
+</hibernate-mapping>

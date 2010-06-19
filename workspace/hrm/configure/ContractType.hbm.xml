@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.configuration.domain">
+	<class name="ContractType" table="ecttype">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write" />
+		<id name="id" type="string" column="ecttype_no">
+			<generator class="uuid.hex" />
+		</id>
+
+		<property name="ectName" column="ecttype_name" type="string"
+			not-null="true" length="32" />
+		<property name="ectDescription" column="ecttype_desc" type="string"
+			not-null="false" length="128" />
+		<property
+			name="ectSortId"
+			column="ecttype_sort_id"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+	</class>
+</hibernate-mapping>

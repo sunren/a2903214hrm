@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.hr.profile.domain">
+	<class
+		name="Deptheadshist"
+		table="deptheadshist"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="nonstrict-read-write"/>
+		<id
+			name="id"
+			type="string"
+			column="dhh_id"
+		>
+			<generator class="uuid"/>
+		</id>
+
+		<many-to-one
+			name="dhhEmpNo"
+			column="dhh_emp_no"
+			class="com.hr.profile.domain.Employee"
+			not-null="true"
+			
+		/>
+		<many-to-one
+			name="dhhDeptNo"
+			column="dhh_dept_no"
+			class="com.hr.configuration.domain.Department"
+			not-null="true"
+			
+		/>
+		<property
+			name="dhhIsHead"
+			column="dhh_is_head"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="dhhValidFrom"
+			column="dhh_valid_from"
+			type="date"
+			not-null="true"
+		/>
+		<property
+			name="dhhValidTo"
+			column="dhh_valid_to"
+			type="date"
+			not-null="false"
+		/>
+
+
+	</class>	
+</hibernate-mapping>
