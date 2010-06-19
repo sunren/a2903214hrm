@@ -92,8 +92,8 @@ public class DepartmentBOImpl implements IDepartmentBO {
 
     public boolean addDeptSave(Department dept, PositionBase respPB, Position pos,
             Depthist deptHist, PositionBaseHist respPBHist) {
-        String msgNewDept = "新建部门{0}〄1�7";
-        String msgNewPB = "新建职位{0}〄1�7";
+        String msgNewDept = "新建部门{0}成功";
+        String msgNewPB = "新建职位{0}成功";
 
         HttpSession session = ServletActionContext.getRequest().getSession();
         Employee currentEmp = ((Userinfo) session.getAttribute("userinfo")).getEmployee();
@@ -323,7 +323,7 @@ public class DepartmentBOImpl implements IDepartmentBO {
                 this.dao.exeHql("delete from Orgheads where orgheads_org_no='" + id + "'");
             }
         } catch (Exception e) {
-            message.append("系统异常＄1�7" + e.getMessage());
+            message.append("系统异常：" + e.getMessage());
         }
         return message.toString();
     }
@@ -889,7 +889,7 @@ public class DepartmentBOImpl implements IDepartmentBO {
         }
 
         if (status != 0) {
-            nodeList.add(new TreeNode("disabled", "停用的组织结构1�7", "0", 11));
+            nodeList.add(new TreeNode("disabled", "停用的组织结构", "0", 11));
         }
 
         return depts;

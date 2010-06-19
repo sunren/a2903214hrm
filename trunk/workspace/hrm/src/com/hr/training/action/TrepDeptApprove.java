@@ -44,7 +44,7 @@ public class TrepDeptApprove extends BaseAction implements Status {
             }
             Tremployeeplan trep = tremployeeplanBO.loadById(trepId.toString());
             if (trep == null) {
-                return "该培训计划不存在＄1�7";
+                return "该培训计划不存在！";
             }
             if (("DEPT".equals(result)) && (!getCurrentEmp().equals(trep.getTrpTraineeNo()))
                     && (!checkDeptInCharge(getCurrentEmp(), trep.getTrpTraineeDept()))) {
@@ -95,7 +95,7 @@ public class TrepDeptApprove extends BaseAction implements Status {
             }
             Tremployeeplan trep = tremployeeplanBO.loadById(trepId.toString());
             if (trep == null) {
-                return "该培训计划不存在＄1�7";
+                return "该培训计划不存在！";
             }
             if (("DEPT".equals(result)) && (!getCurrentEmp().equals(trep.getTrpTraineeNo()))
                     && (!checkDeptInCharge(getCurrentEmp(), trep.getTrpTraineeDept()))) {
@@ -190,11 +190,11 @@ public class TrepDeptApprove extends BaseAction implements Status {
                 }
             }
             if (sb.length() > 0) {
-                return "友情提示＄1�7" + sb.toString().substring(0, sb.length() - 1)
-                        + "的培训申请由于状态已经不在已提交状�1�7�，没有审批通过";
+                return "友情提示：" + sb.toString().substring(0, sb.length() - 1)
+                        + "的培训申请由于状态已经不在已提交状态，没有审批通过";
             }
 
-            return "恭喜您：扄1�7选培训申请已经全部审批�1�7�过";
+            return "恭喜您：所选培训申请已经全部审批通过";
         }
 
         return null;
@@ -263,8 +263,3 @@ public class TrepDeptApprove extends BaseAction implements Status {
         this.page = page;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrepDeptApprove JD-Core Version: 0.5.4
- */

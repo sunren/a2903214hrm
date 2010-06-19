@@ -50,11 +50,11 @@ public class LeavecalendarManageAction extends BaseAction {
 
     public String getTypeDescription(int lc_sign) {
         if (lc_sign == 0)
-            return "公休旄1�7";
+            return "公休日";
         if (lc_sign == 1)
-            return "工作旄1�7";
+            return "工作日";
         if (lc_sign == 2) {
-            return "节假旄1�7";
+            return "节假日";
         }
         return "Error";
     }
@@ -84,7 +84,7 @@ public class LeavecalendarManageAction extends BaseAction {
 
     public String insertLeavecalendar(Leavecalendar lc) {
         if (!DWRUtil.checkAuth("leavecalendarManage", "execute").equals("HR")) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆";
         }
         String check = checkLeavecalendar(lc);
         if (check != null) {
@@ -99,7 +99,7 @@ public class LeavecalendarManageAction extends BaseAction {
 
     public String delLeavecalendar(String lcId) {
         if (!DWRUtil.checkAuth("leavecalendarManage", "execute").equals("HR")) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆";
         }
         this.lc_BO = ((ILeavecalendarBO) getBean("leavecalendarBO"));
         List result = this.lc_BO.deleteLeavecalendar(lcId);
@@ -110,7 +110,7 @@ public class LeavecalendarManageAction extends BaseAction {
 
     public String updateLeavecalendar(Leavecalendar lc) {
         if (!DWRUtil.checkAuth("leavecalendarManage", "execute").equals("HR")) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆";
         }
         String check = checkLeavecalendar(lc);
         if (check != null) {

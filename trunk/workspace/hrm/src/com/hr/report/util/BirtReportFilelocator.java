@@ -39,7 +39,7 @@ public final class BirtReportFilelocator {
         File outputFolder = new File(outputPath);
         if ((!outputFolder.exists()) && (!outputFolder.mkdirs())) {
             try {
-                throw new IOException("创建自定义报表输出文件目录时发生错误＄1�7");
+                throw new IOException("创建自定义报表输出文件目录时发生错误");
             } catch (IOException e) {
                 e.printStackTrace();
             }

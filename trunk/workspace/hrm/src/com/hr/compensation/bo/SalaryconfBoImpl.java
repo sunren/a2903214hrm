@@ -198,9 +198,9 @@ public class SalaryconfBoImpl implements ISalaryconfBo, Constants, Status {
                 tmpListArray[0].add("部门");
                 tmpListArray[0].add("用工形式");
                 tmpListArray[0].add("工作地区");
-                tmpListArray[0].add("状�1�7�1�7");
+                tmpListArray[0].add("状态");
                 tmpListArray[0].add("银行帐号");
-                tmpListArray[0].add("银行弄1�7户行");
+                tmpListArray[0].add("银行开户行");
                 tmpListArray[0].add("成本中心");
                 tmpListArray[0].add("薪资级别");
                 tmpListArray[0].add("薪资帐套");
@@ -424,17 +424,17 @@ public class SalaryconfBoImpl implements ISalaryconfBo, Constants, Status {
             List acctList = empSalaryAcctitemsBo.getItemsByAcctversion(esc.getEscEsavId().getId());
             calcSalaryConfByType(acctList, esc);
             String[][] returnValue = new String[7][2];
-            returnValue[0][0] = "个人缴社俄1�7";
+            returnValue[0][0] = "个人缴社保";
             returnValue[0][1] = esc.getShowColumn10().toString();
             returnValue[1][0] = "公司代缴社保";
             returnValue[1][1] = esc.getShowColumn11().toString();
             returnValue[2][0] = "个人缴公积金";
             returnValue[2][1] = esc.getShowColumn12().toString();
-            returnValue[3][0] = "公司代缴公积釄1�7";
+            returnValue[3][0] = "公司代缴公积金";
             returnValue[3][1] = esc.getShowColumn13().toString();
-            returnValue[4][0] = "其他福利顄1�7";
+            returnValue[4][0] = "其他福利项";
             returnValue[4][1] = esc.getShowColumn14().toString();
-            returnValue[5][0] = "个人缴社保�1�7�额";
+            returnValue[5][0] = "个人缴社保总额";
             returnValue[5][1] = esc.getShowColumn15().toString();
             returnValue[6][0] = "公司代缴社保总额";
             returnValue[6][1] = esc.getShowColumn16().toString();
@@ -455,7 +455,7 @@ public class SalaryconfBoImpl implements ISalaryconfBo, Constants, Status {
             config.setEscLastChangeTime(changeTime);
             config.encryEmpSalaryConf(config);
 
-            strBuf.append(config.getEmployee().getEmpName()).append("〄1�7");
+            strBuf.append(config.getEmployee().getEmpName()).append("、");
 
             Employee emp = config.getEmployee();
             config.setEmployee(new Employee(emp.getId()));

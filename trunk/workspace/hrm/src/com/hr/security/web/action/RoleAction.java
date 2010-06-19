@@ -18,7 +18,7 @@ public class RoleAction extends BaseAction {
 
     public String execute() throws Exception {
         if (this.authId == null) {
-            addErrorInfo("此角色未设置权限＄1�7");
+            addErrorInfo("此角色未设置权限");
             return "input";
         }
         if ((this.authId != null) && (this.authId.length > 85)) {
@@ -26,17 +26,17 @@ public class RoleAction extends BaseAction {
             return "input";
         }
         if (getRoleBo().findRoleByName(this.role.getRoleName())) {
-            addActionError("该角色名已存圄1�7!");
+            addActionError("该角色名已存在!");
             return "input";
         }
 
         String msg = getRoleBo().addRole(this.role, this.authId);
         if ("yes".equals(msg)) {
-            addSuccessInfo("添加角色成功〄1�7");
+            addSuccessInfo("添加角色成功");
             return "success";
         }
         if ("noAuth".equals(msg)) {
-            addErrorInfo("此角色未设置权限＄1�7");
+            addErrorInfo("此角色未设置权限");
             return "input";
         }
         if ("authOver".equals(msg)) {
@@ -48,7 +48,7 @@ public class RoleAction extends BaseAction {
             return "input";
         }
         if ("no".equals(msg)) {
-            addErrorInfo("创建角色出现异常＄1�7");
+            addErrorInfo("创建角色出现异常");
             return "input";
         }
         return "success";
@@ -61,11 +61,11 @@ public class RoleAction extends BaseAction {
         }
         String msg = getRoleBo().updateRole(this.role, this.authId, getUserBo());
         if (msg.equals("yes")) {
-            addSuccessInfo("角色修改成功〄1�7");
+            addSuccessInfo("角色修改成功");
             return "success";
         }
         if ("noAuth".equals(msg)) {
-            addErrorInfo("此角色未设置权限＄1�7");
+            addErrorInfo("此角色未设置权限");
             return "input";
         }
         if ("nullAuth".equals(msg)) {
@@ -77,11 +77,11 @@ public class RoleAction extends BaseAction {
             return "input";
         }
         if ("no".equals(msg)) {
-            addErrorInfo("创建角色出现异常＄1�7");
+            addErrorInfo("创建角色出现异常");
             return "input";
         }
         if ("exist".equals(msg)) {
-            addErrorInfo("该角色名已经存在，请重新输入丄1�7个角色名＄1�7");
+            addErrorInfo("该角色名已经存在，请重新输入另一个角色名");
             return "input";
         }
         return "success";

@@ -37,7 +37,7 @@ public class ConfigMail extends BaseAction {
 
     public String showConfigMail() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "input";
         }
         Map dbMap = this.fileConfigManager.getProperties();
@@ -73,7 +73,7 @@ public class ConfigMail extends BaseAction {
 
     public String executeMail() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "input";
         }
         try {

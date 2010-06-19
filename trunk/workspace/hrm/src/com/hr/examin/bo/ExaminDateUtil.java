@@ -44,7 +44,7 @@ public class ExaminDateUtil {
                 temp[i] = Integer.parseInt(str[i]);
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("您在转换数组的第 " + (i + 1) + " 个元素的时�1�7�出错了");
+                System.out.println("您在转换数组的第 " + (i + 1) + " 个元素的时出错了");
                 temp[i] = 0;
             }
         }

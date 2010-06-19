@@ -27,23 +27,23 @@ public class IEmpreward extends ICheckAndInsert {
     private IEmpRewardBo rewardBo;
 
     public IEmpreward() {
-        this.msgDbInsertError = "数据库插入失贄1�7";
+        this.msgDbInsertError = "数据库插入失败";
 
         this.msgGreaterThan = "{0}大于{1}";
 
-        this.msgExist = "{0}已存圄1�7";
+        this.msgExist = "{0}已存在";
 
         this.msgNoNull = "{0}不能为空";
 
-        this.msgNotExist = "{0}不存圄1�7";
+        this.msgNotExist = "{0}不存在";
 
         this.msgNotExistOrQuit = "{0}不存在或已经离职";
 
-        this.msgNotExistOrStop = "{0}不存在或已经被停甄1�7";
+        this.msgNotExistOrStop = "{0}不存在或已经被停用";
 
         this.msgNumLimit = "导入员工数目超过限制";
 
-        this.msgCanNotQuit = "该员工有下属员工，无法离聄1�7";
+        this.msgCanNotQuit = "该员工有下属员工，无法离职";
 
         this.msgQuitNeedInfo = "离职人员必须填写离职相关信息";
 

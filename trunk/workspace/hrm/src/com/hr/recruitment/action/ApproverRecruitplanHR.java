@@ -57,8 +57,8 @@ public class ApproverRecruitplanHR extends BaseAction implements Status {
             String empNo = ((Userinfo) session.getAttribute("userinfo")).getId();
             Recruitplan temPlan = recruitplanBo.loadRecruitplan(approve_recordId, null);
             if (temPlan.getRecpStatus().intValue() != 11)
-                return "友情提示：招聘计刄1�7 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
-                        + ") 已不在部门已审状态，现在您无权拒绝了＄1�7";
+                return "友情提示：招聘计划 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
+                        + ") 已不在部门已审状态，现在您无权拒绝了";
             if (recruitplanBo.updateRecruitplan(Integer.valueOf(21), approve_recordId, null, empNo)) {
                 try {
                     logBO.addToSyslog("recruitplan", getCurrentEmpNo(session), temPlan
@@ -192,11 +192,11 @@ public class ApproverRecruitplanHR extends BaseAction implements Status {
                 }
             }
             if (sb.length() > 0) {
-                return "友情提示＄1�7" + sb.toString().substring(0, sb.length())
+                return "友情提示：" + sb.toString().substring(0, sb.length())
                         + "的招聘计划由于状态已经不在部门已审状态，没有审批通过";
             }
 
-            return "友情提示：所选招聘计划已经全部审批�1�7�过";
+            return "友情提示：所选招聘计划已经全部审批通过";
         }
 
         return null;

@@ -55,7 +55,7 @@ public class EditEmp extends BaseAction {
             return "input";
         if ((this.emp.getPosition() == null)
                 || (StringUtils.isEmpty(this.emp.getPosition().getId()))) {
-            addErrorInfo("请�1�7�择该员工的职位＄1�7");
+            addErrorInfo("请选择该员工的职位！");
             return "input";
         }
 
@@ -88,7 +88,7 @@ public class EditEmp extends BaseAction {
         getSession().setAttribute("curr_oper_no", this.emp.getId());
         setEmpNo(this.emp.getId());
         this.emp.setEmpName(URLEncoder.encode(this.emp.getEmpName(), "GBK"));
-        addSuccessInfo("添加员工基本资料成功〄1�7");
+        addSuccessInfo("添加员工基本资料成功。");
         return "success";
     }
 
@@ -99,7 +99,7 @@ public class EditEmp extends BaseAction {
             return "input";
         if ((this.emp.getPosition() == null)
                 || (StringUtils.isEmpty(this.emp.getPosition().getId()))) {
-            addErrorInfo("请�1�7�择该员工的职位＄1�7");
+            addErrorInfo("请选择该员工的职位！");
             return "input";
         }
 
@@ -113,7 +113,7 @@ public class EditEmp extends BaseAction {
 
         if ((this.authorityCondition != null) && (this.authorityCondition.equalsIgnoreCase("OWN"))
                 && (!getCurrentEmpNo().equalsIgnoreCase(this.emp.getId()))) {
-            addErrorInfo("您没权限对其他员工资料进行修改操佄1�7!");
+            addErrorInfo("您没权限对其他员工资料进行修改操作!");
             return "general";
         }
 
@@ -153,7 +153,7 @@ public class EditEmp extends BaseAction {
                 renameFile((tempImageName == null) ? this.emp.getEmpImage() : tempImageName,
                            this.emp.getEmpDistinctNo());
             }
-            addSuccessInfo("修改员工基本资料成功〄1�7");
+            addSuccessInfo("修改员工基本资料成功。");
         }
 
         if (this.authorityCondition.equalsIgnoreCase("ADM"))
@@ -167,7 +167,7 @@ public class EditEmp extends BaseAction {
             String pattern18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}(\\d{1}|[xX])$";
             if ((!Pattern.matches(pattern15, this.emp.getEmpIdentificationNo()))
                     && (!Pattern.matches(pattern18, this.emp.getEmpIdentificationNo()))) {
-                addFieldError("emp.empIdentificationNo", "格式错误＄1�7");
+                addFieldError("emp.empIdentificationNo", "格式错误！");
                 return false;
             }
         }
@@ -181,7 +181,7 @@ public class EditEmp extends BaseAction {
         if (this.connectionType.equals("0")) {
             String pattern = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*.\\w+([-.]\\w+)*";
             if (!Pattern.matches(pattern, this.connectionNo)) {
-                addFieldError("connectionNo", "格式错误＄1�7");
+                addFieldError("connectionNo", "格式错误！");
                 return false;
             }
         } else if ((this.connectionType.equals("1")) && (!isNumeric(this.connectionNo))) {
@@ -210,13 +210,13 @@ public class EditEmp extends BaseAction {
 
             if (!"success".equals(message)) {
                 if ("error".equals(message))
-                    addFieldError("file", "文件操作错误＄1�7");
+                    addFieldError("file", "文件操作错误！");
                 else if ("fileExtendNameError".equals(message))
                     addFieldError("file", "图片类型不匹配！");
                 else if ("fileTooLength".equals(message))
-                    addFieldError("file", "图片过大＄1�7");
+                    addFieldError("file", "图片过大！");
                 else if ("property".equals(message)) {
-                    addFieldError("file", "属�1�7�文件配置错误！");
+                    addFieldError("file", "属性文件配置错误！");
                 }
                 return message;
             }
@@ -339,8 +339,3 @@ public class EditEmp extends BaseAction {
         this.exShiftEnable = exShiftEnable;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.action.EditEmp JD-Core Version: 0.5.4
- */

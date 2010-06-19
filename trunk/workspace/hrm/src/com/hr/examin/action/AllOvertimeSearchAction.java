@@ -54,11 +54,11 @@ public class AllOvertimeSearchAction extends EmpExaminAction {
             return "废弃时，必须填写备注";
         }
         if ((logMeg != null) && (logMeg.trim().length() > 255)) {
-            return "备注朄1�7长为255个字笄1�7!";
+            return "备注最长为255个字符!";
         }
         String auth = DWRUtil.checkAuth("allOvertimeSearch", "execute");
         if ("error".equals(auth)) {
-            return "没有权限＄1�7";
+            return "没有权限";
         }
 
         IOvertimerequestBo or_BO = (IOvertimerequestBo) getBean("overtimerequestBO");
@@ -78,7 +78,7 @@ public class AllOvertimeSearchAction extends EmpExaminAction {
 
         String auth = this.authorityCondition;
         if (!"HR".equals(auth)) {
-            addErrorInfo("您无权执行此操作＄1�7");
+            addErrorInfo("您无权执行此操作");
             return "noauth";
         }
 

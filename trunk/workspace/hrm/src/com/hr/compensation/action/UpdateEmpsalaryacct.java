@@ -57,7 +57,7 @@ public class UpdateEmpsalaryacct extends CompAction {
         this.empsalaryacctversion = esavBo.loadObject(this.id, new String[0]);
 
         if (this.empsalaryacctversion == null) {
-            addActionError("薪资帐套版本不存在，请检查后重试＄1�7");
+            addActionError("薪资帐套版本不存在，请检查后重试");
             return "success";
         }
 
@@ -82,7 +82,7 @@ public class UpdateEmpsalaryacct extends CompAction {
         }
 
         if (esaiList.size() == 0) {
-            addActionError("薪资帐套版本无任何项目，不能修改＄1�7");
+            addActionError("薪资帐套版本无任何项目，不能修改");
             return "success";
         }
 
@@ -117,7 +117,7 @@ public class UpdateEmpsalaryacct extends CompAction {
 
     public String execute() throws Exception {
         if (this.empsalaryacct == null) {
-            addActionError("请设置帐套名称和描述＄1�7");
+            addActionError("请设置帐套名称和描述");
             return "input";
         }
 
@@ -141,7 +141,7 @@ public class UpdateEmpsalaryacct extends CompAction {
         if ((salaryPayList.size() > 0) || (planList.size() > 0)) {
             int hasDiff = checkDiff(oldMap, newItems);
             if (hasDiff == 1) {
-                addErrorInfo("帐套有重大改变，更新将导致薪资发放历史数据异常，请您另存为新版本＄1�7");
+                addErrorInfo("帐套有重大改变，更新将导致薪资发放历史数据异常，请您另存为新版本");
                 return "input";
             }
             if (hasDiff == 0) {
@@ -161,7 +161,7 @@ public class UpdateEmpsalaryacct extends CompAction {
         esavBo.updateAcctVersion(this.empsalaryacctversion, newItems, salaryconfigList,
                                  salaryPayList, planList);
 
-        addActionMessage("修改" + this.empsalaryacct.getEsacName() + "成功〄1�7");
+        addActionMessage("修改" + this.empsalaryacct.getEsacName() + "成功");
 
         this.empsalaryacct = null;
         this.empsalaryacctversion = null;
@@ -175,7 +175,7 @@ public class UpdateEmpsalaryacct extends CompAction {
 
     public String geneNewVersion() throws Exception {
         if (this.empsalaryacct == null) {
-            addActionError("请设置帐套名称和描述＄1�7");
+            addActionError("请设置帐套名称和描述");
             return "input";
         }
 
@@ -187,7 +187,7 @@ public class UpdateEmpsalaryacct extends CompAction {
 
         Date today = DateUtil.convDateTimeToDate(new Date());
         if (DateUtil.dateDiff(today, this.empsalaryacctversion.getEsavValidFrom(), 5) == 0) {
-            addActionError("您今天已存过薪资帐套版本，同丄1�7帐套丄1�7天只能存丄1�7个新版本＄1�7");
+            addActionError("您今天已存过薪资帐套版本，同一帐套一天只能存一个新版本！");
             return "input";
         }
 
@@ -204,7 +204,7 @@ public class UpdateEmpsalaryacct extends CompAction {
 
         esavBo.updateAcctVersion(this.empsalaryacctversion, newItems, salaryconfigList);
 
-        addActionMessage("另存帐套" + this.empsalaryacct.getEsacName() + "的新版本成功〄1�7");
+        addActionMessage("另存帐套" + this.empsalaryacct.getEsacName() + "的新版本成功");
 
         this.empsalaryacct = null;
         this.empsalaryacctversion = null;
@@ -223,7 +223,7 @@ public class UpdateEmpsalaryacct extends CompAction {
         }
 
         if (this.empsalaryacctversion.getEsavValidTo() != null) {
-            return "此帐套为历史帐套，请在最新帐套版本上修改＄1�7";
+            return "此帐套为历史帐套，请在最新帐套版本上修改";
         }
 
         for (int i = this.dataDefIds.length; i > 0; --i) {
@@ -253,13 +253,13 @@ public class UpdateEmpsalaryacct extends CompAction {
                 hasIncomeAfTax = Boolean.valueOf(true);
             }
         if (hasBasicSalary.booleanValue() != true)
-            return "项目种类不完整，帐套必须包含“基本工资�1�7�！";
+            return "项目种类不完整，帐套必须包含“基本工资”！";
         if (hasIncomeBfTax.booleanValue() != true)
-            return "项目种类不完整，帐套必须包含“税前收入�1�7�！";
+            return "项目种类不完整，帐套必须包含“税前收入”！";
         if (hasTax.booleanValue() != true)
             return "项目种类不完整，帐套必须包含“所得税”！";
         if (hasIncomeAfTax.booleanValue() != true)
-            return "项目种类不完整，帐套必须包含“税后收入�1�7�！";
+            return "项目种类不完整，帐套必须包含“税后收入”！";
 
         StringBuffer formularError = new StringBuffer();
         for (int i = 0; i < this.acctitemNos; ++i) {

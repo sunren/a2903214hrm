@@ -42,7 +42,7 @@ public class TrepHrApprove extends BaseAction {
             }
             Tremployeeplan trep = tremployeeplanBO.loadById(trepId.toString());
             if (trep == null) {
-                return "该培训计划不存在＄1�7";
+                return "该培训计划不存在！";
             }
             trep.setTrpStatus(new Integer(12));
             trep.setTrpLastChangeBy(getCurrentEmp());
@@ -98,7 +98,7 @@ public class TrepHrApprove extends BaseAction {
             }
             Tremployeeplan trep = tremployeeplanBO.loadById(trepId.toString());
             if (trep == null) {
-                return "该培训计划不存在＄1�7";
+                return "该培训计划不存在！";
             }
             trep.setTrpStatus(new Integer(21));
             trep.setTrpLastChangeBy(getCurrentEmp());
@@ -176,11 +176,11 @@ public class TrepHrApprove extends BaseAction {
                 }
             }
             if (sb.length() > 0) {
-                return "友情提示＄1�7" + sb.toString().substring(0, sb.length() - 1)
+                return "友情提示：" + sb.toString().substring(0, sb.length() - 1)
                         + "的培训申请由于状态已经不在部门已审状态，没有审批通过";
             }
 
-            return "扄1�7选培训申请已经全部审批�1�7�过";
+            return "所选培训申请已经全部审批通过";
         }
 
         return null;
@@ -248,8 +248,3 @@ public class TrepHrApprove extends BaseAction {
         this.trcpLocation = trcpLocation;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrepHrApprove JD-Core Version: 0.5.4
- */

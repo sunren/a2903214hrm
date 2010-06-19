@@ -61,7 +61,7 @@ public class ImportCheckAction extends BaseAction {
         }
 
         if (!hasMultipleAuth(this.iodef.getIoAuthority())) {
-            addErrorInfo("对不资1�7,您不具有操作权限!");
+            addErrorInfo("对不起,您不具有操作权限!");
             return "success";
         }
 
@@ -100,7 +100,7 @@ public class ImportCheckAction extends BaseAction {
         IIomatchBo iomatchBo = (IIomatchBo) SpringBeanFactory.getBean("iomatchbo");
 
         Iomatch iomatch = new Iomatch();
-        iomatch.setIomatchFieldDesc("请�1�7�择");
+        iomatch.setIomatchFieldDesc("请选择");
         iomatch.setIomatchRequired(Integer.valueOf(0));
         iomatch.setIomatchValidType("String");
         List chooseList = new ArrayList();
@@ -117,7 +117,7 @@ public class ImportCheckAction extends BaseAction {
                                                           this.userChoose, chooseList);
 
         if (messageTable == null) {
-            addErrorInfo("导入文件为空或�1�7�不可读，请重新上传导入文件＄1�7");
+            addErrorInfo("导入文件为空或者不可读，请重新上传导入文件！");
             return "success";
         }
         this.matchList = ((List) messageTable.get("matchList"));
@@ -129,7 +129,7 @@ public class ImportCheckAction extends BaseAction {
         if ((this.logicList != null) && (this.logicList.size() > 0))
             return "input";
 
-        addSuccessInfo("共计" + content.length + "条数据检查全部成功，可以导入〄1�7");
+        addSuccessInfo("共计" + content.length + "条数据检查全部成功，可以导入。");
         return "success";
     }
 
@@ -234,8 +234,3 @@ public class ImportCheckAction extends BaseAction {
         this.year = year;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.importfile.action.ImportCheckAction JD-Core Version: 0.5.4
- */

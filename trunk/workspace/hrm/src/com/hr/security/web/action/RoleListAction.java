@@ -47,12 +47,12 @@ public class RoleListAction extends BaseAction {
         }
         String callBack = getRoleBo().delRole(this.roleNo, getUserBo());
         if ("yes".equals(callBack)) {
-            addSuccessInfo("删除成功〄1�7");
+            addSuccessInfo("删除成功");
             this.roleList = this.roleBo.getRoleList();
         } else if ("err".equals(callBack)) {
             addErrorInfo("此角色有用户与之关联，不能删除！");
         } else if ("ref".equals(callBack)) {
-            addErrorInfo("不能重复提交＄1�7");
+            addErrorInfo("不能重复提交");
         }
         return "success";
     }

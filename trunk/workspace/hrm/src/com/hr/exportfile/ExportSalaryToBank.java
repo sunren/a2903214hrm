@@ -38,7 +38,7 @@ public class ExportSalaryToBank extends SingleSheetExportHandler {
         writableSheet.addCell(new Label(0, 0, "工号", this.titleCellFormat));
         writableSheet.addCell(new Label(1, 0, "姓名", this.titleCellFormat));
         writableSheet.addCell(new Label(2, 0, "银行帐号", this.titleCellFormat));
-        writableSheet.addCell(new Label(3, 0, "银行弄1�7户行", this.titleCellFormat));
+        writableSheet.addCell(new Label(3, 0, "银行开户行", this.titleCellFormat));
         writableSheet.addCell(new Label(4, 0, "税后收入", this.titleCellFormat));
         return writableSheet;
     }

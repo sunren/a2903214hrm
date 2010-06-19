@@ -54,12 +54,12 @@ public class RecruitapplierCreateDetail extends BaseAction {
         this.errors = applierBo.insertApplier(this.applier, getCurrentEmpNo());
         try {
             logBO.addToSyslog("recruitapplier", getCurrentEmpNo(), getCurrentEmpNo(), this.applier
-                    .getId().toString(), 0, "新增应聘耄1�7", this.applier.getRecaComment());
+                    .getId().toString(), 0, "新增应聘者", this.applier.getRecaComment());
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (this.errors.size() < 1) {
-            addSuccessInfo("应聘耄1�7" + this.applier.getRecaName() + "添加成功〄1�7");
+            addSuccessInfo("应聘者" + this.applier.getRecaName() + "添加成功");
             this.applier = new Recruitapplier();
             return "success";
         }

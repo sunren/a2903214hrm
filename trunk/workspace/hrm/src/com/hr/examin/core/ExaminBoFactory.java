@@ -27,7 +27,7 @@ public abstract class ExaminBoFactory {
         Map map = new HashMap();
         String[] dayProps = getDisplayDayProperties();
         for (int i = 0; i < dayProps.length; ++i) {
-            map.put(dayProps[i], "处1�7");
+            map.put(dayProps[i], "天");
         }
         String[] hourProps = getDisplayHourProperties();
         for (int i = 0; i < hourProps.length; ++i) {

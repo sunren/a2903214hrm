@@ -20,7 +20,7 @@ public class TemplateFactory {
         else if (type.indexOf("Line") != -1)
             template = new LineTemplate(context, model);
         else {
-            throw new IllegalArgumentException("不支持的报表类型＄1�7");
+            throw new IllegalArgumentException("不支持的报表类型");
         }
 
         return template;

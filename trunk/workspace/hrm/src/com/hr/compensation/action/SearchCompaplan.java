@@ -99,7 +99,7 @@ public class SearchCompaplan extends BaseAction implements Status {
                 clearErrorsAndMessages();
                 return "download";
             } catch (Exception e) {
-                addActionError("数据导出失败＄1�7");
+                addActionError("数据导出失败");
                 e.printStackTrace();
                 return "success";
             }

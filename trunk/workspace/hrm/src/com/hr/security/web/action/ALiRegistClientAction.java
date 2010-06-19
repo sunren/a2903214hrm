@@ -122,7 +122,7 @@ public class ALiRegistClientAction extends BaseAction {
             if ((Pattern.matches(pattern15, this.employee.getEmpIdentificationNo()))
                     || (Pattern.matches(pattern18, this.employee.getEmpIdentificationNo())))
                 return;
-            addFieldError("employee.empIdentificationNo", "格式错误＄1�7");
+            addFieldError("employee.empIdentificationNo", "格式错误");
         }
     }
 

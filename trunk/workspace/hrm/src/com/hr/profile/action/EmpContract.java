@@ -136,7 +136,7 @@ public class EmpContract extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addActionError("您没有新增权限执行本操作＄1�7");
+            addActionError("您没有新增权限执行本操作！");
             return "error";
         }
 
@@ -167,7 +167,7 @@ public class EmpContract extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empcontract.setEctAttatchment(this.fileFileName);
@@ -196,7 +196,7 @@ public class EmpContract extends BaseDownloadAction {
         }
         employee.setContract(empcontract);
         empContractBo.updateObj(employee);
-        addActionMessage("新增员工合同成功〄1�7");
+        addActionMessage("新增员工合同成功。");
         return "success";
     }
 
@@ -207,7 +207,7 @@ public class EmpContract extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addActionError("您没有新增权限执行本操作＄1�7");
+            addActionError("您没有新增权限执行本操作！");
             return "error";
         }
 
@@ -216,7 +216,7 @@ public class EmpContract extends BaseDownloadAction {
         Employee employee = empBo.loadEmp(this.employeeId, fetch);
         if ((employee.getContract() == null)
                 || (StringUtils.isEmpty(employee.getContract().getEctId()))) {
-            addErrorInfo("员工无合同，无法进行续签操作＄1�7");
+            addErrorInfo("员工无合同，无法进行续签操作！");
             return "error";
         }
 
@@ -237,7 +237,7 @@ public class EmpContract extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empcontract.setEctAttatchment(this.fileFileName);
@@ -267,24 +267,24 @@ public class EmpContract extends BaseDownloadAction {
         }
         employee.setContract(empcontract);
         empContractBo.updateObj(employee);
-        addActionMessage("续签员工合同成功〄1�7");
+        addActionMessage("续签员工合同成功。");
         return "success";
     }
 
     public String deleteContract() {
         if (StringUtils.isEmpty(this.updateEctId)) {
-            addErrorInfo("请�1�7�择要删除的合同!");
+            addErrorInfo("请选择要删除的合同!");
             return "success";
         }
         IEmpContractBo empContractBo = (IEmpContractBo) getBean("empContractBo");
         Empcontract ect = empContractBo.getById(this.updateEctId);
         if (ect == null) {
-            addErrorInfo("合同不存在或已经被删附1�7!");
+            addErrorInfo("合同不存在或已经被删除!");
             return "success";
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(ect.getEmployee().getId()))) {
-            addErrorInfo("您没有删除权限执行本操作＄1�7");
+            addErrorInfo("您没有删除权限执行本操作！");
             return "success";
         }
 
@@ -302,7 +302,7 @@ public class EmpContract extends BaseDownloadAction {
             emp.setContract(null);
         }
         empContractBo.updateObj(emp);
-        addSuccessInfo("删除员工合同成功〄1�7");
+        addSuccessInfo("删除员工合同成功。");
         return "success";
     }
 
@@ -312,7 +312,7 @@ public class EmpContract extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作！");
             return "error";
         }
 
@@ -341,7 +341,7 @@ public class EmpContract extends BaseDownloadAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empcontract.setEctAttatchment(this.fileFileName);
@@ -366,7 +366,7 @@ public class EmpContract extends BaseDownloadAction {
         if (StringUtils.isNotEmpty(error))
             addActionError(error);
         else {
-            addActionMessage("更新员工合同成功〄1�7");
+            addActionMessage("更新员工合同成功。");
         }
         clear();
         return "success";
@@ -375,26 +375,26 @@ public class EmpContract extends BaseDownloadAction {
     public String attachDelete() throws Exception {
         if ((this.updateEctId == null) || (this.updateEctId.equals(""))
                 || (this.fileFileName == null) || ("".equals(this.fileFileName))) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
         IEmpContractBo empContractBo = (IEmpContractBo) getBean("empContractBo");
         Empcontract ect = empContractBo.getById(this.updateEctId);
         if (ect == null) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(ect.getEmployee().getId()))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作！");
             return "error";
         }
 
         if (!empContractBo.deleteAttach(this.updateEctId, this.fileFileName)) {
-            addActionError("附件删除失败＄1�7");
+            addActionError("附件删除失败！");
             return "error";
         }
-        addActionMessage("附件删除成功〄1�7");
+        addActionMessage("附件删除成功。");
         return "success";
     }
 
@@ -621,8 +621,3 @@ public class EmpContract extends BaseDownloadAction {
         this.departmentName = departmentName;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.action.EmpContract JD-Core Version: 0.5.4
- */

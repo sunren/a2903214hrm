@@ -71,10 +71,10 @@ public class BackupResumeAction extends BaseAction {
         this.sqlbin = changePath(this.sqlbin);
         String binPath = backupRBo.sqlbin(this.sqlbin);
         if ("success".equals(binPath)) {
-            addSuccessInfo("保存配置路径成功.服务器将重起,请�1�7�1�7出重新登录�1�7�1�7");
+            addSuccessInfo("保存配置路径成功.服务器将重起,请退出重新登录。");
             return "success";
         }
-        addActionError("保存配置路径失败＄1�7");
+        addActionError("保存配置路径失败！");
         return "input";
     }
 
@@ -109,12 +109,12 @@ public class BackupResumeAction extends BaseAction {
         Userinfo userinfo = (Userinfo) session.getAttribute("userinfo");
         if (backupRBo.resume(changePath(sqlBinPath), changePath(filePath), dataBase, userName,
                              password)) {
-            logger.info(userinfo.getUiUsername() + " 圄1�7" + new Date() + "还原数据成功.");
-            addSuccessInfo("数据还原成功〄1�7");
+            logger.info(userinfo.getUiUsername() + " 在" + new Date() + "还原数据成功.");
+            addSuccessInfo("数据还原成功。");
             return "success";
         }
-        logger.info(userinfo.getUiUsername() + " 圄1�7" + new Date() + "还原数据失败.");
-        addActionError("数据还原失败＄1�7");
+        logger.info(userinfo.getUiUsername() + " 在" + new Date() + "还原数据失败.");
+        addActionError("数据还原失败！");
         return "input";
     }
 
@@ -142,13 +142,13 @@ public class BackupResumeAction extends BaseAction {
         if (backupRBo.saveBackup(changePath(sqlBinPath), changePath(filePath), dataBase, userName,
                                  password)) {
             if (userinfo != null) {
-                logger.info(userinfo.getUiUsername() + " 圄1�7" + new Date() + "备份数据成功.");
-                addSuccessInfo("数据备份成功〄1�7");
+                logger.info(userinfo.getUiUsername() + " 在" + new Date() + "备份数据成功.");
+                addSuccessInfo("数据备份成功。");
             }
             return "success";
         }
-        logger.info(userinfo.getUiUsername() + " 圄1�7" + new Date() + "备份数据失败.");
-        addSuccessInfo("数据备份失败！请配置mysql下bin的绝对路径�1�7�1�7");
+        logger.info(userinfo.getUiUsername() + " 在" + new Date() + "备份数据失败.");
+        addSuccessInfo("数据备份失败！请配置mysql下bin的绝对路径。");
         return "input";
     }
 
@@ -163,7 +163,7 @@ public class BackupResumeAction extends BaseAction {
         }
         HttpSession session = getSession();
         Userinfo userinfo = (Userinfo) session.getAttribute("userinfo");
-        logger.info(userinfo.getUiUsername() + " 圄1�7" + new Date() + "删除备份成功.");
+        logger.info(userinfo.getUiUsername() + " 在" + new Date() + "删除备份成功.");
         addSuccessInfo("删除备份成功");
         return "success";
     }
@@ -234,8 +234,3 @@ public class BackupResumeAction extends BaseAction {
         this.testbin = testbin;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.security.web.action.BackupResumeAction JD-Core Version: 0.5.4
- */

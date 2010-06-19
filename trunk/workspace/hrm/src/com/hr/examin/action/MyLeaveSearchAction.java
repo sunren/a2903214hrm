@@ -75,7 +75,7 @@ public class MyLeaveSearchAction extends EmpExaminAction {
                 || (lr.getLrStatus().intValue() != 21)
                 || ((!getCurrentEmp().equals(lr.getLrEmpNo())) && (!getCurrentEmp()
                         .equals(lr.getLrCreateBy())))) {
-            return "您无权执行此操作＄1�7";
+            return "您无权执行此操作";
         }
         List result = lr_BO.delLeaveRequest(lrId, getCurrentEmp());
         if (result.size() > 0) {

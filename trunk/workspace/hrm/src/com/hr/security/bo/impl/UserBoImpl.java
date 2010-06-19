@@ -216,7 +216,7 @@ public class UserBoImpl implements UserBo {
         Userinfo oldUser = getUserById(user.getId());
         if ((!oldUser.getUiUsername().equals(user.getUiUsername()))
                 && (existUserByName(user.getUiUsername())))
-            return "已存在该用户各1�7!";
+            return "已存在该用户名";
 
         oldUser.setUiUsername(user.getUiUsername());
         oldUser.setUiStatus(user.getUiStatus());
@@ -255,13 +255,13 @@ public class UserBoImpl implements UserBo {
     public String doLogin(Userinfo user, String password, String macAddress, String loginModel) {
         Userinfo u = getUserByName(user.getUiUsername());
         if (u == null)
-            return "无此用户＄1�7";
+            return "无此用户";
         user.setId(u.getId());
         user.setUiPasswordEncrypt(StringUtil.encodePassword(password));
         if (u.getUiPasswordDecrypt().trim().compareTo(user.getUiPasswordDecrypt().trim()) != 0)
-            return "密码错误＄1�7";
+            return "密码错误";
         if (u.getUiStatus().intValue() == 0)
-            return "用户已被停用＄1�7";
+            return "用户已被停用";
 
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Employee.class);
         detachedCriteria.add(Restrictions.eq("id", u.getId()));
@@ -293,7 +293,7 @@ public class UserBoImpl implements UserBo {
                 u.setUiIpRestrict(loginIp);
             } else if ((level != null) && (level.intValue() == 1)) {
                 if (!ipIsValid(u.getUiIpRestrict(), user.getUiLastLoginIp()))
-                    return "您的登陆IP地址超出限制范围＄1�7";
+                    return "您的登陆IP地址超出限制范围";
 
             } else if ((level != null) && (level.intValue() == 2)) {
                 if ((((mac == null) || (mac.length() < 17)))
@@ -304,7 +304,7 @@ public class UserBoImpl implements UserBo {
                         || ("00-00-00-00-00-00".equals(u.getUiMacRestrict()))) {
                     u.setUiMacRestrict(mac);
                 } else if (!macIsValid(u.getUiMacRestrict(), mac))
-                    return "您的登陆机器地址超出限制范围＄1�7";
+                    return "您的登陆机器地址超出限制范围";
 
             } else if ((level != null) && (level.intValue() == 3)) {
                 boolean ipRight = ipIsValid(u.getUiIpRestrict(), user.getUiLastLoginIp());
@@ -316,7 +316,7 @@ public class UserBoImpl implements UserBo {
                                 .getUiMacRestrict()))))) {
                     u.setUiMacRestrict(mac);
                 } else if ((!ipRight) && (!macIsValid(u.getUiMacRestrict(), mac)))
-                    return "您的登陆IP地址和机器地坄1�7均超出限制范围！";
+                    return "您的登陆IP地址和机器地址均超出限制范围！";
             }
         }
 

@@ -36,14 +36,14 @@ public class IEmpSalaryPay extends ICheckAndInsert {
     public IEmpSalaryPay() {
         this.msgNoPayExist = "请先初始化要导入员工的薪资数据！";
         this.msgEmpNotExist = "员工编号为{0}的员工不存在";
-        this.msgPayNotInited = "员工编号为{0}的员工本月薪资未初始匄1�7";
+        this.msgPayNotInited = "员工编号为{0}的员工本月薪资未初始化";
         this.msgItemCannotnull = "{0}为固定项或浮动项不能为空";
     }
 
     public int[] insertTransmit(List insertList, CommonParameters commonParas) throws Exception {
-        String msgPeriodInitErr = "计薪周期必须为初始化状�1�7�，才可以执行本操作＄1�7";
-        String msgNoPayExist = "找不到可以导入的薪资发放数据，请先初始化薪资＄1�7";
-        String msgNoAcctExist = "薪资帐套异常，不能导入员工的薪资发放数据＄1�7";
+        String msgPeriodInitErr = "计薪周期必须为初始化状态，才可以执行本操作！";
+        String msgNoPayExist = "找不到可以导入的薪资发放数据，请先初始化薪资！";
+        String msgNoAcctExist = "薪资帐套异常，不能导入员工的薪资发放数据！";
 
         List<Empsalarypay> excelDataList = insertList;
         String yearmonth = commonParas.getImportParameter();

@@ -1193,7 +1193,7 @@ public class LeavebalanceBOImpl implements ILeavebalanceBO {
         result.put(Integer.valueOf(7), "产假");
         result.put(Integer.valueOf(8), "出差");
         result.put(Integer.valueOf(9), "因公外出");
-        result.put(Integer.valueOf(10), "调休(不过朄1�7)");
+        result.put(Integer.valueOf(10), "调休(不过期)");
         result.put(Integer.valueOf(11), "调休(过期)");
         result.put(Integer.valueOf(20), "其他");
         return result;

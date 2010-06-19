@@ -57,14 +57,14 @@ public class Environment implements ServletContextListener {
     private void doInit() {
         sysMap.put(SystemVariables.FILE_SEPARATOR, SystemUtils.FILE_SEPARATOR);
 
-        logger.info("365hrm系统初始化开姄1�7...");
+        logger.info("365hrm系统初始化开始...");
         Map props = this.config.getProperties();
 
         String path = application.getRealPath("");
         String filePath = new File(path).getParentFile().getAbsolutePath();
         String readPath = StringUtils.defaultIfEmpty((String) props.get("sys.file.path"), "file/");
         readPath = "/" + readPath;
-        logger.info("用户文件的完整存放路径为＄1�7" + filePath + readPath);
+        logger.info("用户文件的完整存放路径为：" + filePath + readPath);
         File file = new File(filePath + readPath);
         if (!file.exists())
             file.mkdirs();
@@ -81,7 +81,7 @@ public class Environment implements ServletContextListener {
 
         doCopyEmailTemplate();
 
-        logger.info("365hrm系统初始化结杄1�7");
+        logger.info("365hrm系统初始化结束");
     }
 
     private void doCopyEmailTemplate() {
@@ -101,11 +101,11 @@ public class Environment implements ServletContextListener {
         try {
             dataSource.getConnection().close();
         } catch (SQLException e) {
-            logger.warn("无法连接数据库，跳过数据备份〄1�7");
+            logger.warn("无法连接数据库，跳过数据备份。");
             return;
         }
         String folderPath = path + this.config.getProperty("sys.security.backup.path");
-        logger.info("数据备份弄1�7始，棄1�7查备份目录：" + folderPath);
+        logger.info("数据备份开始，检查备份目录：" + folderPath);
         File files = new File(folderPath);
         if (!files.exists()) {
             files.mkdirs();
@@ -121,15 +121,10 @@ public class Environment implements ServletContextListener {
         }
         DatabaseBackupService service = new DatabaseBackupService();
         service.executeBackup();
-        logger.info("数据库备份完毄1�7");
+        logger.info("数据库备份完毕");
     }
 
     private static enum SystemVariables {
         FILE_SEPARATOR, APPLICATION_HOME, TEMPLATE_HOME, PAGE_SIZE, CUSTOMER_FILE_HOME;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.util.Environment JD-Core Version: 0.5.4
- */

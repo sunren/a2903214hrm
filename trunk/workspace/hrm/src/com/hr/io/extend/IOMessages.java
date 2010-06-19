@@ -26,14 +26,14 @@ public class IOMessages {
         String result = "";
         if (this.msgFormat.equalsIgnoreCase("excel")) {
             if (ioMessageSingle.getRowNum() != null) {
-                result = result + "笄1�7" + ioMessageSingle.getRowNum() + "衄1�7";
+                result = result + "第" + ioMessageSingle.getRowNum() + "行";
             }
             if (ioMessageSingle.getColNum() != null) {
                 if (result.length() > 0) {
-                    result = result + "＄1�7";
+                    result = result + "，";
                 }
-                result = result + "笄1�7" + numToExcelColNum(ioMessageSingle.getColNum().intValue())
-                        + "刄1�7";
+                result = result + "第" + numToExcelColNum(ioMessageSingle.getColNum().intValue())
+                        + "列";
             }
         }
 
@@ -146,8 +146,3 @@ public class IOMessages {
             this.msgFormat = msgFormat;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.io.extend.IOMessages JD-Core Version: 0.5.4
- */

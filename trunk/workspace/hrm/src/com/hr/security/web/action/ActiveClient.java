@@ -51,12 +51,12 @@ public class ActiveClient extends BaseAction {
                                                MyTools.getUpKey(clientId, MyTools.STRING),
                                                MyTools.ENCRYPT_MODE);
 
-            System.out.println("濄1�7活的时�1�7�客户端向服务器端传入的数据昄1�7=" + clientNo + "#" + clientId + "#"
+            System.out.println("激活时客户端向服务器端传入的数据为：" + clientNo + "#" + clientId + "#"
                     + checkStr);
             String testMessage = new RegistClient(host, port).activeConnection(clientNo + "#"
                     + clientId + "#" + checkStr);
 
-            System.out.println("濄1�7活返回的数据昄1�7=" + testMessage);
+            System.out.println("激活返回的数据为：" + testMessage);
             if (testMessage.length() < 7)
                 return testMessage;
             String[] insertMessage = testMessage.split("#");

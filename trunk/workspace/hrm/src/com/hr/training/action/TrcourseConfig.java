@@ -58,18 +58,18 @@ public class TrcourseConfig extends BaseAction {
             String localName = upload(this.fileFileName);
             try {
                 if (localName.equals("error")) {
-                    addActionError("上传文件失败，请重试＄1�7");
+                    addActionError("上传文件失败，请重试！");
                     return "error";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                addActionError("上传文件失败，请重试＄1�7");
+                addActionError("上传文件失败，请重试！");
                 return "error";
             }
             this.trc.setTrcFileName(localName);
         }
         trcourseBO.addTrc(this.trc);
-        addActionMessage("新增课程" + this.trc.getTrcName() + "成功〄1�7");
+        addActionMessage("新增课程" + this.trc.getTrcName() + "成功。");
         this.trc = new Trcourse();
         return "success";
     }
@@ -80,11 +80,11 @@ public class TrcourseConfig extends BaseAction {
         }
         if ((this.trc.getTrcType().getTrtNo() == null)
                 || (this.trc.getTrcType().getTrtNo().trim().equals(""))) {
-            addFieldError("trc.trcType.trtNo", "必�1�7�项＄1�7");
+            addFieldError("trc.trcType.trtNo", "必选项！");
         }
         if ((this.trc.getTrcStatus() == null)
                 || ((this.trc.getTrcStatus().intValue() < 0) && (this.trc.getTrcStatus().intValue() > 1))) {
-            addFieldError("trc.trcStatus", "必�1�7�项＄1�7");
+            addFieldError("trc.trcStatus", "必选项！");
         }
         if ((this.trc.getTrcInfo() == null) || (this.trc.getTrcInfo().trim().equals("")))
             addFieldError("trc.trcInfo", "必填项！");
@@ -128,7 +128,7 @@ public class TrcourseConfig extends BaseAction {
 
         trcourseBO.updateTrc(this.trc);
         this.trTypeList = trTypeBO.loadAll();
-        addActionMessage("修改课程" + this.trc.getTrcName() + "成功〄1�7");
+        addActionMessage("修改课程" + this.trc.getTrcName() + "成功。");
         this.trc = new Trcourse();
         return "success";
     }
@@ -140,7 +140,7 @@ public class TrcourseConfig extends BaseAction {
             return "params_error";
         Trcourse trcLoad = trcourseBO.loadTrc(trcNo);
         if (trcLoad == null) {
-            addActionError("该课程不存在＄1�7");
+            addActionError("该课程不存在！");
             return "error";
         }
 
@@ -156,7 +156,7 @@ public class TrcourseConfig extends BaseAction {
             FileOperate.deleteFile(pathConfig, trcLoad.getTrcFileName());
         }
         trcourseBO.deleteTrc(trcNo);
-        addActionMessage("课程" + trcLoad.getTrcName() + "已被删除〄1�7");
+        addActionMessage("课程" + trcLoad.getTrcName() + "已被删除。");
         ITrTypeBO trTypeBO = (ITrTypeBO) BaseAction.getBean("trTypeBO");
         this.trTypeList = trTypeBO.loadAll();
         this.trc = new Trcourse();
@@ -173,13 +173,13 @@ public class TrcourseConfig extends BaseAction {
 
     private String setTrcStatus(Integer status) {
         if (this.trcNo == null) {
-            addActionError("请�1�7�定丄1�7个课程记录！");
+            addActionError("请选定一个课程记录！");
             return "error";
         }
         ITrcourseBO trcourseBO = (ITrcourseBO) BaseAction.getBean("trcourseBO");
         Trcourse trc = trcourseBO.loadTrc(this.trcNo);
         if (trc == null) {
-            addActionError("该课程不存在＄1�7");
+            addActionError("该课程不存在！");
             return "error";
         }
         trc.setTrcStatus(status);
@@ -207,7 +207,7 @@ public class TrcourseConfig extends BaseAction {
         ITrcourseBO trcourseBO = (ITrcourseBO) BaseAction.getBean("trcourseBO");
         this.trc = trcourseBO.loadTrc(this.trcNo);
         if (this.trc == null) {
-            addActionError("该课程不存在＄1�7");
+            addActionError("该课程不存在！");
             return "error";
         }
         setTrcName(this.trc.getTrcName());
@@ -306,8 +306,3 @@ public class TrcourseConfig extends BaseAction {
         this.trcName = trcName;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrcourseConfig JD-Core Version: 0.5.4
- */

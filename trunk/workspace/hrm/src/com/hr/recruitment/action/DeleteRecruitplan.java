@@ -23,11 +23,11 @@ public class DeleteRecruitplan extends BaseAction implements Constants {
             }
             if (recruitplanBo.deleteRecruitplan(this.id).size() < 1) {
                 addSuccessInfo("删除招聘计划" + tempPlan.getRecpJobTitle().getJobtitleName() + "("
-                        + tempPlan.getRecpNo() + ")成功〄1�7");
+                        + tempPlan.getRecpNo() + ")成功");
                 return "success";
             }
             addErrorInfo("删除招聘计划" + tempPlan.getRecpJobTitle().getJobtitleName() + "("
-                    + tempPlan.getRecpNo() + ")失败＄1�7");
+                    + tempPlan.getRecpNo() + ")失败");
             return "error";
         }
 

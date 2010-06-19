@@ -9,7 +9,7 @@ public class ExportSalaryPaidInit implements IIExportList {
     private List<Container> salaryPaidInitList = new ArrayList();
 
     public ExportSalaryPaidInit() {
-        this.salaryPaidInitList.add(new Container("员工叄1�7", "espEmpno", "String", false));
+        this.salaryPaidInitList.add(new Container("员工号", "espEmpno", "String", false));
         this.salaryPaidInitList.add(new Container("员工姓名", "empName", "String", false));
         this.salaryPaidInitList.add(new Container("银行帐号", "escBankAccountNo", "StringD", false));
         this.salaryPaidInitList.add(new Container("税后收入", "espNetamt", "BigDecimal", false));

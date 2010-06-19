@@ -46,8 +46,8 @@ public class Import extends BaseAction {
 
         this.msgModelIlleagle = "模板参数非法";
         this.msgFileTypeError = "文件类型出错";
-        this.msgAllNum = "本次导入总计{0}条数据，成功导入{1}条数捄1�7";
-        this.msgRepeatNum = "出现重复记录{0}杄1�7";
+        this.msgAllNum = "本次导入总计{0}条数据，成功导入{1}条数据";
+        this.msgRepeatNum = "出现重复记录{0}条";
         this.msgNoAuth = "您没有相应的权限";
     }
 

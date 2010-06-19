@@ -40,7 +40,7 @@ public class ExportSalary extends MutipleSheetExportHandler implements Constants
 
             int count = 0;
             if (this.mySalary) {
-                this.writableSheets[i].addCell(new Label(0, 0, "幄1�7-朄1�7", this.titleCellFormat));
+                this.writableSheets[i].addCell(new Label(0, 0, "年-月", this.titleCellFormat));
                 count = 1;
             }
 
@@ -150,9 +150,9 @@ public class ExportSalary extends MutipleSheetExportHandler implements Constants
         case 2:
             return "停薪留职";
         case 3:
-            return "逄1�7伄1�7";
+            return "退休";
         case 4:
-            return "辞�1�7�1�7";
+            return "辞退";
         case 5:
             return "合同到期";
         case 6:

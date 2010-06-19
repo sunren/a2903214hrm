@@ -69,7 +69,7 @@ public class ImportInsertAction extends BaseAction {
         }
 
         if (!hasMultipleAuth(this.iodef.getIoAuthority())) {
-            addErrorInfo("对不资1�7,您不具有操作权限!");
+            addErrorInfo("对不起,您不具有操作权限!");
             return "success";
         }
 
@@ -96,7 +96,7 @@ public class ImportInsertAction extends BaseAction {
         if ((this.fileExtends == null) || (this.fileExtends.length() == 0)) {
             oldFile = getExistFile(fileNameWithoutExtend);
             if (!oldFile.exists()) {
-                addErrorInfo("文件还未上传，请先上传一个导入文仄1�7");
+                addErrorInfo("文件还未上传，请先上传一个导入文件");
                 return "success";
             }
 
@@ -108,7 +108,7 @@ public class ImportInsertAction extends BaseAction {
         IIomatchBo iomatchBo = (IIomatchBo) SpringBeanFactory.getBean("iomatchbo");
 
         Iomatch iomatch = new Iomatch();
-        iomatch.setIomatchFieldDesc("请�1�7�择");
+        iomatch.setIomatchFieldDesc("请选择");
         iomatch.setIomatchRequired(Integer.valueOf(0));
         iomatch.setIomatchValidType("String");
 
@@ -143,7 +143,7 @@ public class ImportInsertAction extends BaseAction {
                                                            this.paramMap);
 
         if (messageTable == null) {
-            addErrorInfo("导入文件为空或�1�7�不可读，请重新上传导入文件!");
+            addErrorInfo("导入文件为空或者不可读，请重新上传导入文件!");
             return "success";
         }
 
@@ -160,16 +160,16 @@ public class ImportInsertAction extends BaseAction {
         this.inserted = "YES";
 
         if ((this.matchList != null) && (this.matchList.size() > 0)) {
-            addErrorInfo("数据导入棄1�7查未通过!");
+            addErrorInfo("数据导入检查未通过!");
             return "input";
         }
 
         if ((this.logicList != null) && (this.logicList.size() > 0)) {
-            addErrorInfo("数据导入棄1�7查未通过!");
+            addErrorInfo("数据导入检查未通过!");
             return "input";
         }
 
-        addSuccessInfo("共计" + insertedCount + "条数据导入全部成功�1�7�1�7");
+        addSuccessInfo("共计" + insertedCount + "条数据导入全部成功。");
         return "success";
     }
 
@@ -282,8 +282,3 @@ public class ImportInsertAction extends BaseAction {
         this.year = year;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.importfile.action.ImportInsertAction JD-Core Version: 0.5.4
- */

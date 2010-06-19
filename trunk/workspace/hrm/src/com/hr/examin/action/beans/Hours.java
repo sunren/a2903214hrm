@@ -16,7 +16,7 @@ public class Hours {
         for (int i = 0; i < limit; ++i) {
             Hours h = new Hours();
             h.setHour(i);
-            h.setDescription(String.valueOf(i) + "炄1�7");
+            h.setDescription(String.valueOf(i) + "点");
             list.add(h);
         }
         return list;
@@ -28,7 +28,7 @@ public class Hours {
         for (int i = 0; i <= limit; ++i) {
             Hours h = new Hours();
             h.setHour(i);
-            h.setDescription(String.valueOf(i) + "炄1�7");
+            h.setDescription(String.valueOf(i) + "点");
             list.add(h);
         }
         return list;

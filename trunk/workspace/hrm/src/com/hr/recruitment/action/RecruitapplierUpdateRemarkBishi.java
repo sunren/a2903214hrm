@@ -36,7 +36,7 @@ public class RecruitapplierUpdateRemarkBishi extends BaseAction implements Statu
                 + "',r.recaStatus='" + status + "',r.recaInterviewTime='" + reviewtime
                 + "',r.recaInterviewer='" + reviewer + "' where id='" + id + "'");
 
-        addSuccessInfo("应聘耄1�7" + name + "状�1�7�更新成功�1�7�1�7");
+        addSuccessInfo("应聘者" + name + "状态更新成功");
         String statusText = "";
         switch (status.intValue()) {
         case 2:
@@ -51,7 +51,7 @@ public class RecruitapplierUpdateRemarkBishi extends BaseAction implements Statu
         try {
             ISysLogBO logBO = (ISysLogBO) SpringBeanFactory.getBean("logBO");
             logBO.addToSyslog("recruitapplier", getCurrentEmpNo(), tempApplier.getRecaCreateBy()
-                    .getId(), id, 0, "状�1�7�更改为" + statusText, comment);
+                    .getId(), id, 0, "状态更改为" + statusText, comment);
         } catch (Exception e) {
             e.printStackTrace();
         }

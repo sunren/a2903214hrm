@@ -49,14 +49,14 @@ public class ParameterInitAction extends BaseAction {
         }
 
         if (StringUtils.isEmpty(this.reportId)) {
-            addErrorInfo("错误的请求参数！您要查看的报表记录不存在或已经被删除＄1�7");
+            addErrorInfo("错误的请求参数！您要查看的报表记录不存在或已经被删除");
             return "input";
         }
         CustomizeReportBo customizeReportBo = (CustomizeReportBo) SpringBeanFactory
                 .getBean("customizeReportBo");
         ReportDef report = customizeReportBo.loadReport(this.reportId, null);
         if (report == null) {
-            addErrorInfo("错误的请求参数！您要查看的报表记录不存在或已经被删除＄1�7");
+            addErrorInfo("错误的请求参数！您要查看的报表记录不存在或已经被删除");
             return "input";
         }
 

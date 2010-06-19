@@ -128,7 +128,7 @@ public class EmpReward extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有新增权限执行本操作＄1�7");
+            addErrorInfo("您没有新增权限执行本操作");
             return "success";
         }
 
@@ -153,7 +153,7 @@ public class EmpReward extends BaseDownloadAction {
 
         IEmpRewardBo empRewardBo = (IEmpRewardBo) getBean("empRewardBo");
         empRewardBo.insert(empreward);
-        addActionMessage("新增员工奖惩信息成功〄1�7");
+        addActionMessage("新增员工奖惩信息成功");
         return "success";
     }
 
@@ -190,7 +190,7 @@ public class EmpReward extends BaseDownloadAction {
         }
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.employeeId))) {
-            addErrorInfo("您没有修改权限执行本操作＄1�7");
+            addErrorInfo("您没有修改权限执行本操作");
             return "success";
         }
 
@@ -205,7 +205,7 @@ public class EmpReward extends BaseDownloadAction {
 
         IEmpRewardBo empRewardBo = (IEmpRewardBo) getBean("empRewardBo");
         empRewardBo.update(empreward, this.updateErId);
-        addActionMessage("更新员工奖惩信息成功〄1�7");
+        addActionMessage("更新员工奖惩信息成功");
         this.employeeId = null;
         this.erContent = null;
         this.erExeDate = null;

@@ -43,7 +43,7 @@ public class DataCleanAction extends BaseAction {
 
     public String scanData() throws Exception {
         if (this.modelChoose == null) {
-            addSuccessInfo("请设置查询条件�1�7�1�7");
+            addSuccessInfo("请设置查询条件");
             return "input";
         }
         Date cbegain = getDate(this.begainCreate);
@@ -51,16 +51,16 @@ public class DataCleanAction extends BaseAction {
         Date chbegain = getDate(this.begainChange);
         Date chend = getDate(this.endChange);
         if ((cbegain != null) && (cend != null) && (cbegain.after(cend))) {
-            addSuccessInfo("创建弄1�7始日期不能大于结束日期！");
+            addSuccessInfo("创建开始日期不能大于结束日期！");
             return "input";
         }
         if ((chbegain != null) && (chend != null) && (chbegain.after(chend))) {
-            addSuccessInfo("朄1�7后一次修改开始日期不能大于结束日期！");
+            addSuccessInfo("后一次修改开始日期不能大于前一次结束日期！");
             return "input";
         }
 
         if ("None".equals(this.modelChoose)) {
-            addSuccessInfo("请设置查询模块�1�7�1�7");
+            addSuccessInfo("请设置查询模块");
             return "input";
         }
 
@@ -73,10 +73,10 @@ public class DataCleanAction extends BaseAction {
     public String deleteData() throws Exception {
         DataCleanBo dataCleanBo = (DataCleanBo) SpringBeanFactory.getBean("dataclean");
         if ("success".equals(dataCleanBo.deleteData(this.deleteChoose))) {
-            addSuccessInfo("删除信息成功〄1�7");
+            addSuccessInfo("删除信息成功");
             return "success";
         }
-        addActionError("删除信息失败＄1�7");
+        addActionError("删除信息失败");
         return "input";
     }
 

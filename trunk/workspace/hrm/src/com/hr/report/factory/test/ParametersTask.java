@@ -34,7 +34,7 @@ public class ParametersTask {
         try {
             config = new EngineConfig();
             config
-                    .setEngineHome("D:/弄1�7源项盄1�7/birt 安装/birt-runtime-2_2_1/birt-runtime-2_2_1/ReportEngine");
+                    .setEngineHome("D:/开源项目/birt 安装/birt-runtime-2_2_1/birt-runtime-2_2_1/ReportEngine");
 
             config.setLogConfig(null, Level.FINE);
             Platform.startup(config);
@@ -236,8 +236,3 @@ public class ParametersTask {
         }
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.report.factory.test.ParametersTask JD-Core Version: 0.5.4
- */

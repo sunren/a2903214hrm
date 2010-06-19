@@ -49,7 +49,7 @@ public class ExportPayslip extends MutipleSheetExportHandler implements Constant
             for (int j = 0; j < list.size(); ++j) {
                 Empsalarypay emp = (Empsalarypay) list.get(j);
                 if (!emp.getEspDept().getId().equals(currentDept)) {
-                    this.writableSheet = this.writableWorkbook.createSheet("工资杄1�7-"
+                    this.writableSheet = this.writableWorkbook.createSheet("工资条-"
                             + emp.getEspDept().getDepartmentName(), workSheetIndex++);
 
                     this.writableSheet.setRowView(0, 800);
@@ -139,9 +139,9 @@ public class ExportPayslip extends MutipleSheetExportHandler implements Constant
         case 2:
             return "停薪留职";
         case 3:
-            return "逄1�7伄1�7";
+            return "退休";
         case 4:
-            return "辞�1�7�1�7";
+            return "辞退";
         }
         return null;
     }

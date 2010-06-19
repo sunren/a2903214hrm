@@ -91,7 +91,7 @@ public class PositionManageAction extends BaseAction {
     public String delPosition(String posId) {
         String auth = DWRUtil.checkAuth("PositionManageAction", "positionInfo");
         if (!"ADM".equals(auth)) {
-            return "没有权限＄1�7";
+            return "没有权限";
         }
 
         IPositionBo posBo = (IPositionBo) SpringBeanFactory.getBean("positionBo");
@@ -105,7 +105,7 @@ public class PositionManageAction extends BaseAction {
     public String changePosSup(String posId, String selectId) {
         String auth = DWRUtil.checkAuth("PositionManageAction", "positionInfo");
         if (!"ADM".equals(auth)) {
-            return "没有权限＄1�7";
+            return "没有权限";
         }
         Position targetPos = null;
         IPositionBo posBo = (IPositionBo) SpringBeanFactory.getBean("positionBo");
@@ -126,7 +126,7 @@ public class PositionManageAction extends BaseAction {
         List<String> supPbIds = pbBo.getSupPBsOfPB(targetPos.getId());
         for (String pbIdInSup : supPbIds) {
             if (pbIdInSup.equals(posId))
-                return "不能移动到该职位＄1�7";
+                return "不能移动到该职位";
         }
 
         Position pos = posBo.getPosById(posId, new String[] { Position.PROP_POSITION_PB_ID });

@@ -60,7 +60,7 @@ public class SearchRecruitplanForHR extends BaseAction {
             }
             List ls = recruitplanBo.update_closeRecruitplan(this.id, getCurrentEmpNo());
             if ((ls == null) || (ls.size() < 1)) {
-                addSuccessInfo("关闭招聘计划成功〄1�7");
+                addSuccessInfo("关闭招聘计划成功");
             } else {
                 return "error";
             }

@@ -27,9 +27,9 @@ public class IExaminShift extends ICheckAndInsert {
     String msgEmpNoShift;
 
     public IExaminShift() {
-        this.msgNotExist = "编号为{0}的员工不存在＄1�7";
-        this.msgShiftNotExist = "代码为{0}的班次未启用或不存在＄1�7";
-        this.msgEmpNoShift = "编号为{0}的员工为非排班人员，不能排班＄1�7";
+        this.msgNotExist = "编号为{0}的员工不存在";
+        this.msgShiftNotExist = "代码为{0}的班次未启用或不存在";
+        this.msgEmpNoShift = "编号为{0}的员工为非排班人员，不能排班";
     }
 
     public int[] insertTransmit(List insertList, CommonParameters commonParas) {

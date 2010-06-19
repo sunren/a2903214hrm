@@ -57,7 +57,7 @@ public class TrcpConfig extends BaseAction {
         if ((this.trcNo != null) && (this.trcNo.trim().length() > 0)) {
             Trcourse trcLoad = trcourseBO.loadTrc(this.trcNo);
             if (trcLoad.getTrcStatus().equals(Integer.valueOf(0))) {
-                addActionError("该课程为关闭状�1�7�，不能新增课程计划＄1�7");
+                addActionError("该课程为关闭状态，不能新增课程计划！");
 
                 getRequest().setAttribute("trcNo", this.trcp.getTrcpCourseNo().getTrcNo());
                 return "error";
@@ -90,7 +90,7 @@ public class TrcpConfig extends BaseAction {
         this.trcp.setTrcpLastChangeBy(getCurrentEmp());
 
         trcourseplanBO.save(this.trcp);
-        addActionMessage("新增课程计划成功〄1�7");
+        addActionMessage("新增课程计划成功。");
         setTrcNo(this.trcp.getTrcpCourseNo().getTrcNo());
         return "success";
     }
@@ -114,7 +114,7 @@ public class TrcpConfig extends BaseAction {
                 year = Integer.parseInt(this.trcp.getTrcpBudgetYear());
             } catch (NumberFormatException e) {
                 System.out.println(e);
-                addFieldError("trcp.trcpBudgetYear", "格式不对＄1�7");
+                addFieldError("trcp.trcpBudgetYear", "格式不对！");
             }
             int start = Integer.parseInt(this.trcp.getTrcpStartDate().toString()
                     .substring(this.trcp.getTrcpStartDate().toString().lastIndexOf(' ') + 1));
@@ -123,21 +123,21 @@ public class TrcpConfig extends BaseAction {
                     .substring(this.trcp.getTrcpEndDate().toString().lastIndexOf(' ') + 1));
 
             if ((start > year) || (year > end)) {
-                addFieldError("trcp.trcpBudgetYear", "预算年度应在培训弄1�7始和结束年度之间＄1�7");
+                addFieldError("trcp.trcpBudgetYear", "预算年度应在培训开始和结束年度之间！");
             }
         }
         if ((this.trcp.getTrcpStartDate() != null) && (this.trcp.getTrcpEndDate() != null)
                 && (this.trcp.getTrcpStartDate().after(this.trcp.getTrcpEndDate()))) {
-            addFieldError("trcp.trcpEndDate", "培训结束日期不能早于培训弄1�7始日期！");
+            addFieldError("trcp.trcpEndDate", "培训结束日期不能早于培训开始日期！");
         }
         if ((this.trcp.getTrcpEnrollStartDate() != null)
                 && (this.trcp.getTrcpEnrollEndDate() != null)
                 && (this.trcp.getTrcpEnrollStartDate().after(this.trcp.getTrcpEnrollEndDate()))) {
-            addFieldError("trcp.trcpEnrollEndDate", "报名结束日期不能早于报名弄1�7始日期！");
+            addFieldError("trcp.trcpEnrollEndDate", "报名结束日期不能早于报名开始日期！");
         }
         if ((this.trcp.getTrcpStartDate() != null) && (this.trcp.getTrcpEnrollEndDate() != null)
                 && (this.trcp.getTrcpEnrollEndDate().after(this.trcp.getTrcpStartDate()))) {
-            addFieldError("trcp.trcpEnrollEndDate", "报名结束日期不能晚于培训弄1�7始日＄1�7");
+            addFieldError("trcp.trcpEnrollEndDate", "报名结束日期不能晚于培训开始日！");
         }
         if ((this.trcp.getTrcpComments() != null) && (this.trcp.getTrcpComments().length() > 255))
             addFieldError("trcp.trcpComments", "备注长度不能超过255个字符！");
@@ -154,7 +154,7 @@ public class TrcpConfig extends BaseAction {
         ITrcourseplanBO trcourseplanBO = (ITrcourseplanBO) BaseAction.getBean("trcourseplanBO");
         this.trcp = trcourseplanBO.loadById(this.trcpId);
         if (this.trcp == null) {
-            addActionError("该培训计划不存在＄1�7");
+            addActionError("该培训计划不存在！");
             return "error";
         }
 
@@ -187,19 +187,19 @@ public class TrcpConfig extends BaseAction {
             String localName = upload(this.fileFileName);
             try {
                 if (localName.equals("error")) {
-                    addActionError("上传文件失败，请重试＄1�7");
+                    addActionError("上传文件失败，请重试！");
                     return "error";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                addActionError("上传文件失败，请重试＄1�7");
+                addActionError("上传文件失败，请重试！");
                 return "error";
             }
             this.trcp.setTrcpFileName(localName);
         }
 
         trcourseplanBO.saveOrupdate(this.trcp);
-        addActionMessage("修改课程计划成功〄1�7");
+        addActionMessage("修改课程计划成功。");
 
         setTrcNo(this.trcp.getTrcpCourseNo().getTrcNo());
         return "success";
@@ -212,7 +212,7 @@ public class TrcpConfig extends BaseAction {
         }
         this.trcp = trcourseplanBO.loadById(this.trcpId);
         if (this.trcp == null) {
-            addActionError("该培训计划不存在＄1�7");
+            addActionError("该培训计划不存在！");
             return "error";
         }
         getRequest().setAttribute("trcNo", this.trcp.getTrcpCourseNo().getTrcNo());
@@ -258,13 +258,13 @@ public class TrcpConfig extends BaseAction {
 
     private String setTrcpStatus(Integer status) {
         if (this.trcpId == null) {
-            addActionError("请�1�7�定丄1�7个培训计划！");
+            addActionError("请选定一个培训计划！");
             return "error";
         }
         ITrcourseplanBO trcourseplanBO = (ITrcourseplanBO) BaseAction.getBean("trcourseplanBO");
         Trcourseplan trcp = trcourseplanBO.loadById(this.trcpId);
         if (trcp == null) {
-            addActionError("该培训计划不存在＄1�7");
+            addActionError("该培训计划不存在！");
             return "error";
         }
         trcp.setTrcpStatus(status);
@@ -354,8 +354,3 @@ public class TrcpConfig extends BaseAction {
         this.deptListValue = deptListValue;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrcpConfig JD-Core Version: 0.5.4
- */

@@ -25,13 +25,13 @@ public class DwrSyncAttdMachine {
 
     public String syncToMachine(String empIdStr, String machineIdStr) {
         if ("error".equals(DWRUtil.checkAuth("attdSyncRecordShow", "execute"))) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆！";
         }
         if ((empIdStr == null) || (empIdStr.equals(""))) {
-            return "请你选择要同步的用户＄1�7";
+            return "请你选择要同步的用户！";
         }
         if ((machineIdStr == null) || (machineIdStr.equals(""))) {
-            return "请�1�7�择考勤机！";
+            return "请选择考勤机！";
         }
         String[] empNoArray = empIdStr.split(";");
 
@@ -71,10 +71,10 @@ public class DwrSyncAttdMachine {
 
     public String syncToProject(String empIdStr, String machineIdStr) {
         if ("error".equals(DWRUtil.checkAuth("attdSyncRecordShow", "execute"))) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆！";
         }
         if ((machineIdStr == null) || (machineIdStr.equals(""))) {
-            return "请�1�7�择考勤机！";
+            return "请选择考勤机！";
         }
         String[] empNoArray = null;
         if ((empIdStr != null) && (!empIdStr.equalsIgnoreCase(""))) {
@@ -98,9 +98,9 @@ public class DwrSyncAttdMachine {
             this.machineBO = new MachineBOImpl(machine);
             if (this.machineBO.connectNet()) {
                 compareTo(employeeList, attdMachine);
-                result = result + "考勤朄1�7" + attdMachine.getMacNo() + "同步成功";
+                result = result + "考勤机" + attdMachine.getMacNo() + "同步成功";
             } else {
-                result = result + "考勤朄1�7" + attdMachine.getMacNo() + "连接失败";
+                result = result + "考勤机" + attdMachine.getMacNo() + "连接失败";
             }
         }
 
@@ -110,10 +110,10 @@ public class DwrSyncAttdMachine {
     public String batchRead(String empIdStr, String machineIdStr, String dateFrom, String dateTo,
             String readAll, String onlyRead) {
         if ("error".equals(DWRUtil.checkAuth("attdSyncRecordShow", "execute"))) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆！";
         }
         if ((machineIdStr == null) || (machineIdStr.equals(""))) {
-            return "请�1�7�择考勤机！";
+            return "请选择考勤机！";
         }
 
         IEmployeeBo employeeBo = (IEmployeeBo) SpringBeanFactory.getBean("empBo");
@@ -140,9 +140,9 @@ public class DwrSyncAttdMachine {
                         .getBean("attdoriginaldataBO");
 
                 insertAttdoriginalData(employeeList, resultList, attdorigianldataBO, attdMachine);
-                result = result + "考勤朄1�7" + attdMachine.getMacNo() + "成功读取数据";
+                result = result + "考勤机" + attdMachine.getMacNo() + "成功读取数据";
             } else {
-                result = result + "考勤朄1�7" + attdMachine.getMacNo() + "连接失败";
+                result = result + "考勤机" + attdMachine.getMacNo() + "连接失败";
             }
         }
         return result;
@@ -150,13 +150,13 @@ public class DwrSyncAttdMachine {
 
     public String batchDelete(String empIdStr, String machineIdStr) {
         if ("error".equals(DWRUtil.checkAuth("attdSyncRecordShow", "execute"))) {
-            return "您无权执行此操作，请重新登陆＄1�7";
+            return "您无权执行此操作，请重新登陆！";
         }
         if ((empIdStr == null) || (empIdStr.equalsIgnoreCase(""))) {
             return "请你选择要在考勤机中删除的用户！";
         }
         if ((machineIdStr == null) || (machineIdStr.equals(""))) {
-            return "请�1�7�择考勤机！";
+            return "请选择考勤机！";
         }
         String[] empNoArray = null;
         empNoArray = empIdStr.split(";");
@@ -187,7 +187,7 @@ public class DwrSyncAttdMachine {
                 attdSyncRecordBO.deleteAttdSyncRecord(employeeList, attdMachine);
                 returnStr = returnStr + dealResult(employeeList, attdMachine.getMacNo());
             } else {
-                returnStr = returnStr + "考勤朄1�7" + attdMachine.getMacNo() + "连接失败";
+                returnStr = returnStr + "考勤机" + attdMachine.getMacNo() + "连接失败";
             }
         }
 
@@ -201,10 +201,10 @@ public class DwrSyncAttdMachine {
         for (Employee emp : resultList) {
             if (emp.getSyncResult().intValue() == 1) {
                 if (errorMessage.equals("")) {
-                    errorMessage = "在同步时操作成功的员工为＄1�7";
+                    errorMessage = "在同步时操作成功的员工为：";
                 }
                 errorMessage = errorMessage + "(" + emp.getEmpDistinctNo() + "|" + emp.getEmpName()
-                        + "|考勤朄1�7" + machineNo + ") ";
+                        + "|考勤机:" + machineNo + ") ";
             }
         }
         result.append(errorMessage);
@@ -213,10 +213,10 @@ public class DwrSyncAttdMachine {
         for (Employee emp : resultList) {
             if (emp.getSyncResult().intValue() == 2) {
                 if (errorMessage.equals("")) {
-                    errorMessage = "在同步时出错的员工为＄1�7";
+                    errorMessage = "在同步时出错的员工为：";
                 }
                 errorMessage = errorMessage + "(" + emp.getEmpDistinctNo() + "|" + emp.getEmpName()
-                        + "|考勤朄1�7" + machineNo + ") ";
+                        + "|考勤机:" + machineNo + ") ";
             }
         }
         if (!result.toString().equals("")) {
@@ -228,10 +228,10 @@ public class DwrSyncAttdMachine {
         for (Employee emp : resultList) {
             if (emp.getSyncResult().intValue() == 0) {
                 if (errorMessage.equals("")) {
-                    errorMessage = "在同步时未操作员工为＄1�7";
+                    errorMessage = "在同步时未操作员工为：";
                 }
                 errorMessage = errorMessage + "(" + emp.getEmpDistinctNo() + "|" + emp.getEmpName()
-                        + "|考勤朄1�7" + machineNo + ") ";
+                        + "|考勤机:" + machineNo + ") ";
             }
         }
         if (!result.toString().equals("")) {
@@ -336,8 +336,3 @@ public class DwrSyncAttdMachine {
         return map;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.examin.action.DwrSyncAttdMachine JD-Core Version: 0.5.4
- */

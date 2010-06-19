@@ -26,7 +26,7 @@ public class AddRecruitplan extends BaseAction implements Constants, Status {
 
         if ((this.recruitplan.getRecpEndDate() != null)
                 && (this.recruitplan.getRecpStartDate().after(this.recruitplan.getRecpEndDate()))) {
-            addErrorInfo("职位发布日期要在职位关闭日期之前＄1�7");
+            addErrorInfo("职位发布日期要在职位关闭日期之前");
             return "input";
         }
 
@@ -50,7 +50,7 @@ public class AddRecruitplan extends BaseAction implements Constants, Status {
 
         this.errors = recruitplanBo.insertRecruitplan(this.recruitplan, getCurrentEmpNo());
         if (this.errors.size() < 1) {
-            addSuccessInfo("添加招聘计划(" + this.recruitplan.getRecpNo() + ")成功〄1�7");
+            addSuccessInfo("添加招聘计划(" + this.recruitplan.getRecpNo() + ")成功");
 
             if (this.recruitplan.getRecpStatus().intValue() != 1) {
                 try {

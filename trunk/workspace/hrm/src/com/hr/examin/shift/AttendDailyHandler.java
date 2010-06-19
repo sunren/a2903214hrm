@@ -471,9 +471,9 @@ public class AttendDailyHandler {
             bean.setOffDutyTime(((Attdoriginaldata) origDataList.get(0)).getAodCardTime());
 
             if (bean.getShift() == null)
-                bean.setComments("无班次，有一次刷卄1�7");
+                bean.setComments("无班次，有一次刷卡");
             else {
-                bean.setComments("只有丄1�7次刷卡，缺勤");
+                bean.setComments("只有一次刷卡，缺勤");
             }
             bean.setDisplayColor(this.unnomalColor);
             return null;
@@ -653,7 +653,7 @@ public class AttendDailyHandler {
             bean.setEarlyMinutes(earlyMinutes);
             bean
                     .setComments(((bean.getComments() != null) && (bean.getComments().trim()
-                            .length() > 0)) ? bean.getComments() + ",早�1�7�1�7" : "早�1�7�1�7");
+                            .length() > 0)) ? bean.getComments() + ",早退" : "早退");
             bean.setDisplayColor(this.unnomalColor);
         }
 

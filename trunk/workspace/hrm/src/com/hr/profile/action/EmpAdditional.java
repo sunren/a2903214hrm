@@ -80,11 +80,11 @@ public class EmpAdditional extends BaseAction {
 
         String resume = this.employee.getEmpResume1();
         if (resume != null) {
-            this.resume1DownLoadName = ("中文箄1�7厄1�7" + resume.substring(resume.lastIndexOf('.')));
+            this.resume1DownLoadName = ("中文简历" + resume.substring(resume.lastIndexOf('.')));
         }
         resume = this.employee.getEmpResume2();
         if (resume != null) {
-            this.resume2DownLoadName = ("英文箄1�7厄1�7" + resume.substring(resume.lastIndexOf('.')));
+            this.resume2DownLoadName = ("英文简历" + resume.substring(resume.lastIndexOf('.')));
         }
 
         int size = this.empaddconfList.size();
@@ -104,7 +104,7 @@ public class EmpAdditional extends BaseAction {
     public String resumeUpload() throws Exception {
         if ((!this.empNo.equals(getCurrentEmpNo())) && ("SUB".equals(this.authorityCondition))
                 && (!checkAuth(this.empNo))) {
-            addActionError("您没有新增权限执行本操作＄1�7");
+            addActionError("您没有新增权限执行本操作！");
             return "error";
         }
 
@@ -125,11 +125,11 @@ public class EmpAdditional extends BaseAction {
                                                             this.filecFileName, typeConfig,
                                                             lengthConfig);
                 if ("property".equals(UploadResult)) {
-                    addActionError("中文箄1�7历的上传错误＄1�7");
+                    addActionError("中文简历的上传错误！");
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("中文箄1�7历的后缀名不合法＄1�7");
+                    addActionError("中文简历的后缀名不合法！");
                     return "error";
                 }
                 resume1 = this.filecFileName;
@@ -141,11 +141,11 @@ public class EmpAdditional extends BaseAction {
                                                             this.fileeFileName, typeConfig,
                                                             lengthConfig);
                 if ("property".equals(UploadResult)) {
-                    addActionError("英文箄1�7历的上传错误＄1�7");
+                    addActionError("英文简历的上传错误！");
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("英文箄1�7历的后缀名不合法＄1�7");
+                    addActionError("英文简历的后缀名不合法！");
                     return "error";
                 }
                 resume2 = this.fileeFileName;
@@ -157,13 +157,13 @@ public class EmpAdditional extends BaseAction {
 
         IEmpAdditionalBo empAddtionalBo = (IEmpAdditionalBo) getBean("empAdditionalBo");
         empAddtionalBo.saveResume(resume1, resume2, this.empNo);
-        addActionMessage("箄1�7历文件上传成劄1�7");
+        addActionMessage("简历文件上传成功");
         return "success";
     }
 
     public String resumeDelete() throws Exception {
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(this.empNo))) {
-            addActionError("您没有新增权限执行本操作＄1�7");
+            addActionError("您没有新增权限执行本操作！");
             return "error";
         }
 
@@ -182,7 +182,7 @@ public class EmpAdditional extends BaseAction {
             FileOperate.deleteFile("sys.profile.file.path", this.fileeFileName);
             empAdditionalBo.deleteResume(this.empNo, 2);
         }
-        addActionMessage("箄1�7历删除成功�1�7�1�7");
+        addActionMessage("简历删除成功。");
         return "success";
     }
 
@@ -199,7 +199,7 @@ public class EmpAdditional extends BaseAction {
         String auth = DWRUtil.checkAuth("empAdditionaldwr", "");
 
         if (("SUB".equals(auth)) && (!checkAuth(empNo))) {
-            addActionError("您没有增加权限执行本操作＄1�7");
+            addActionError("您没有增加权限执行本操作！");
             return "error";
         }
 
@@ -228,7 +228,7 @@ public class EmpAdditional extends BaseAction {
         String result = "";
         if (joinYear.floatValue() >= 1.0F) {
             value = Integer.parseInt(joinYear.intValue() + "");
-            result = result + value + "幄1�7";
+            result = result + value + "年";
         } else {
             joinYear = Float.valueOf(joinYear.floatValue() * 100.0F);
             value = Integer.parseInt(joinYear.intValue() + "");
@@ -366,8 +366,3 @@ public class EmpAdditional extends BaseAction {
         this.fileeContentType = fileeContentType;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.action.EmpAdditional JD-Core Version: 0.5.4
- */

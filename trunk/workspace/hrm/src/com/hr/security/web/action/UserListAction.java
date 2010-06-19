@@ -77,13 +77,13 @@ public class UserListAction extends BaseAction {
         Userinfo oldUserinfo = getUserBo().getUserById(this.user.getId());
         if ((getUserBo().checkAuthModule(oldUserinfo, "911"))
                 && (getUserBo().getAdminCount("911") < 2)) {
-            addErrorInfo("删除失败，此用户为唯丄1�7的系统管理员，删除后会导致系统无人能管理＄1�7");
+            addErrorInfo("删除失败，此用户为唯一的系统管理员，删除后会导致系统无人能管理");
             this.user = null;
             return "error";
         }
         String name = EmpDistinctNo.getEmpName(this.userDelId);
         if (getUserBo().delUser(this.user.getId())) {
-            addSuccessInfo("删除用户(" + name + ")成功〄1�7");
+            addSuccessInfo("删除用户(" + name + ")成功");
         } else {
             addErrorInfo("删除用户(" + name + ")失败!");
         }

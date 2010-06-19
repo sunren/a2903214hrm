@@ -59,7 +59,7 @@ public class PasswordUpdateAction extends BaseAction {
         if (!user0.getUiPasswordDecrypt().equals(
                                                  StringUtil.encodePassword(this.user
                                                          .getUiPassword()))) {
-            addFieldError("user.uiPassword", "原密码不正确＄1�7");
+            addFieldError("user.uiPassword", "原密码不正确");
             return "input";
         }
         this.user.setId(user0.getId());
@@ -69,10 +69,10 @@ public class PasswordUpdateAction extends BaseAction {
             return "input";
         }
         if (userService.updatePassword(this.user.getId(), this.newpassword)) {
-            addSuccessInfo("密码修改成功〄1�7");
+            addSuccessInfo("密码修改成功");
             return "success";
         }
-        addErrorInfo("密码修改失败＄1�7");
+        addErrorInfo("密码修改失败");
         return "input";
     }
 

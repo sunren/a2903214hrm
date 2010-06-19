@@ -70,7 +70,7 @@ public class ImportHomeAction extends BaseAction {
         }
 
         if (!hasMultipleAuth(this.iodef.getIoAuthority())) {
-            addErrorInfo("对不资1�7,您不具有操作权限!");
+            addErrorInfo("对不起,您不具有操作权限!");
             return "success";
         }
 
@@ -85,7 +85,7 @@ public class ImportHomeAction extends BaseAction {
         IIomatchBo iomatchBo = (IIomatchBo) SpringBeanFactory.getBean("iomatchbo");
 
         Iomatch iomatch = new Iomatch();
-        iomatch.setIomatchFieldDesc("请�1�7�择");
+        iomatch.setIomatchFieldDesc("请选择");
         iomatch.setIomatchRequired(Integer.valueOf(0));
         iomatch.setIomatchValidType("String");
 
@@ -123,7 +123,7 @@ public class ImportHomeAction extends BaseAction {
                     && (this.iodef.getIoFileHasTitle().intValue() == 1)) {
                 String[][] tempStringArray = transmitBo.getContent(0, readFile, 4);
                 if ((tempStringArray == null) || (tempStringArray.length < 1)) {
-                    addErrorInfo("导入文件为空或�1�7�不可读，请重新上传导入文件＄1�7");
+                    addErrorInfo("导入文件为空或者不可读，请重新上传导入文件！");
                     return "success";
                 }
 
@@ -146,7 +146,7 @@ public class ImportHomeAction extends BaseAction {
                     .intValue(), readFile, this.iodef.getIoFileHasTitle().intValue() + 3);
 
             if ((tempStringArray == null) || (tempStringArray.length < 1)) {
-                addErrorInfo("导入文件为空或�1�7�不可读，请重新上传导入文件＄1�7");
+                addErrorInfo("导入文件为空或者不可读，请重新上传导入文件！");
                 return "success";
             }
 
@@ -300,8 +300,3 @@ public class ImportHomeAction extends BaseAction {
         this.year = year;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.importfile.action.ImportHomeAction JD-Core Version: 0.5.4
- */

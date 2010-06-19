@@ -29,7 +29,7 @@ public class EmpEduHisDWR extends BaseAction {
 
         if (("SUB".equals(this.authorityCondition))
                 && (!checkAuth(this.emphistoryedu.getEmployee().getId()))) {
-            addActionError("您没有增加权限执行本操作＄1�7");
+            addActionError("您没有增加权限执行本操作！");
             return "error";
         }
         this.empEduHisBo = ((IEmpEduHisBo) SpringBeanFactory.getBean("empEduHisBo"));
@@ -49,7 +49,7 @@ public class EmpEduHisDWR extends BaseAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 this.emphistoryedu.setEheAttachment(this.fileFileName);
@@ -65,7 +65,7 @@ public class EmpEduHisDWR extends BaseAction {
 
         this.empEduHisBo.insert(this.emphistoryedu);
 
-        addActionMessage("教育背景增加成功〄1�7");
+        addActionMessage("教育背景增加成功。");
         return "success";
     }
 
@@ -100,7 +100,7 @@ public class EmpEduHisDWR extends BaseAction {
         Emphistoryedu empOldHE = (Emphistoryedu) list.get(0);
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(empOldHE.getEmployee().getId()))) {
-            addActionError("您没有修改权限执行本操作＄1�7");
+            addActionError("您没有修改权限执行本操作！");
             return "error";
         }
 
@@ -120,7 +120,7 @@ public class EmpEduHisDWR extends BaseAction {
                     return "error";
                 }
                 if ("fileExtendNameError".equals(UploadResult)) {
-                    addActionError("文件的后缄1�7名不合法＄1�7");
+                    addActionError("文件的后缀名不合法！");
                     return "error";
                 }
                 empOldHE.setEheAttachment(this.fileFileName);
@@ -138,14 +138,14 @@ public class EmpEduHisDWR extends BaseAction {
         this.emphistoryedu.setEheLastChangeTime(new Date());
 
         this.empEduHisBo.update(empOldHE);
-        addSuccessInfo("修改员工教育背景成功〄1�7");
+        addSuccessInfo("修改员工教育背景成功。");
         return "success";
     }
 
     public String attachDelete() throws Exception {
         if ((this.eheId == null) || (this.eheId.equals("")) || (this.fileFileName == null)
                 || ("".equals(this.fileFileName))) {
-            addActionError("参数传�1�7�错误！");
+            addActionError("参数传递错误！");
             return "error";
         }
 
@@ -154,15 +154,15 @@ public class EmpEduHisDWR extends BaseAction {
         Emphistoryedu empOldHE = this.empEduHisBo.load(this.eheId, fetches);
 
         if (("SUB".equals(this.authorityCondition)) && (!checkAuth(empOldHE.getEmployee().getId()))) {
-            addActionError("您没有删除权限执行本操作＄1�7");
+            addActionError("您没有删除权限执行本操作！");
             return "error";
         }
 
         if (!this.empEduHisBo.deleteAttach(this.eheId, this.fileFileName)) {
-            addActionError("附件删除失败＄1�7");
+            addActionError("附件删除失败！");
             return "error";
         }
-        addActionMessage("附件删除成功〄1�7");
+        addActionMessage("附件删除成功。");
         return "success";
     }
 
@@ -216,8 +216,3 @@ public class EmpEduHisDWR extends BaseAction {
         this.empNo = empNo;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.profile.action.EmpEduHisDWR JD-Core Version: 0.5.4
- */

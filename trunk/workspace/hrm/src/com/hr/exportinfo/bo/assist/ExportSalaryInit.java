@@ -17,7 +17,7 @@ public class ExportSalaryInit implements IIExportList {
     private Hashtable<String, String> escJobgradeTable = null;
 
     public ExportSalaryInit() {
-        this.salaryInitList.add(new Container("员工叄1�7", "id", "id", true));
+        this.salaryInitList.add(new Container("员工号", "id", "id", true));
         this.salaryInitList.add(new Container("薪资级别", "escJobgrade", "EscJobgrade", true));
         this.salaryInitList.add(new Container("上次加薪生效日期", "escLastEffDate", "Date", false));
         this.salaryInitList.add(new Container("上次加薪幅度", "escLastIncrRate", "BigDecimal", false));

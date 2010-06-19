@@ -68,7 +68,7 @@ public class TrepList extends BaseAction {
         ITremployeeplanBO tremployeeplanBO = (ITremployeeplanBO) getBean("tremployeeplanBO");
         Tremployeeplan trep = tremployeeplanBO.loadById(this.trepId.toString());
         if (trep == null) {
-            addActionError("该培训计划不存在＄1�7");
+            addActionError("该培训计划不存在！");
             return "error";
         }
 
@@ -79,7 +79,7 @@ public class TrepList extends BaseAction {
         trep.setTrpLastChangeBy(getCurrentEmp());
         trep.setTrpLastChangeTime(new Date());
         tremployeeplanBO.saveOrupdate(trep);
-        addActionMessage("操作成功〄1�7");
+        addActionMessage("操作成功。");
         try {
             ISysLogBO logBO = (ISysLogBO) BaseAction.getBean("logBO");
             logBO.addToSyslog("tremployeeplan", getCurrentEmpNo(), trep.getTrpTraineeNo().getId(),
@@ -128,7 +128,7 @@ public class TrepList extends BaseAction {
 
         if ((((this.comments == null) || (this.comments.trim().equals(""))))
                 && (((this.fileFileName == null) || (this.fileFileName.trim().length() == 0)))) {
-            addActionError("备注或附件必须填写其中之丄1�7");
+            addActionError("备注或附件必须填写其中之一");
             return "error";
         }
 
@@ -136,12 +136,12 @@ public class TrepList extends BaseAction {
             String newFileName = upload(this.fileFileName);
             try {
                 if (newFileName.equals("error")) {
-                    addActionError("上传文件失败，请重试＄1�7");
+                    addActionError("上传文件失败，请重试！");
                     return "error";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                addActionError("上传文件失败，请重试＄1�7");
+                addActionError("上传文件失败，请重试！");
                 return "error";
             }
             trep.setTrpFileName(newFileName);
@@ -155,7 +155,7 @@ public class TrepList extends BaseAction {
                 .getTrpId().toString(), 0, "反馈", this.comments);
 
         this.comments = null;
-        addActionMessage("添加反馈成功〄1�7");
+        addActionMessage("添加反馈成功。");
         return "success";
     }
 
@@ -265,8 +265,3 @@ public class TrepList extends BaseAction {
         this.trepId = trepId;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrepList JD-Core Version: 0.5.4
- */

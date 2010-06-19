@@ -136,7 +136,7 @@ public class Interpreter {
             } catch (InterpreterException ex) {
                 errorList.add(ex.getMessage());
             } catch (Exception e) {
-                errorList.add("公式＄1�7" + item.getEsaiDataCalc() + "配置错误，所在行数：" + (j + 1));
+                errorList.add("公式：" + item.getEsaiDataCalc() + "配置错误，所在行数：" + (j + 1));
             }
         }
 
@@ -169,7 +169,7 @@ public class Interpreter {
             try {
                 result = Double.parseDouble(formula);
             } catch (Exception e) {
-                throw new InterpreterException("数�1�7�1�7" + formula + "解析错误＄1�7");
+                throw new InterpreterException("数值" + formula + "解析错误！");
             }
         } else {
             if ((formula.startsWith("IF")) || (formula.startsWith("?"))) {
@@ -326,7 +326,7 @@ public class Interpreter {
                     return result;
                 }
 
-                throw new InterpreterException("扄1�7得税$公式" + formula + "语法不正确！");
+                throw new InterpreterException("所得税$公式" + formula + "语法不正确！");
             }
 
             if (formula.startsWith("L$")) {
@@ -377,7 +377,7 @@ public class Interpreter {
                     String[] subformula = splitFormula(formula.substring(1, formula.length() - 1),
                                                        ',');
                     if (subformula.length != 3) {
-                        throw new InterpreterException("上下附1�7#公式" + formula + "参数个数不正确！");
+                        throw new InterpreterException("上下限#公式" + formula + "参数个数不正确！");
                     }
                     result = calculateFormula(subformula[0]);
                     double limithigh = calculateFormula(subformula[1]);
@@ -394,7 +394,7 @@ public class Interpreter {
                     return result;
                 }
 
-                throw new InterpreterException("上下附1�7#公式" + formula + "语法不正确！");
+                throw new InterpreterException("上下限#公式" + formula + "语法不正确！");
             }
 
             if (formula.startsWith("INT")) {
@@ -443,7 +443,7 @@ public class Interpreter {
                 throw new InterpreterException("MOD公式" + formula + "语法不正确！");
             }
 
-            throw new InterpreterException("公式字符丄1�7" + formula + "解析错误＄1�7");
+            throw new InterpreterException("公式字符串" + formula + "解析错误！");
         }
         return result;
     }
@@ -464,13 +464,13 @@ public class Interpreter {
                 return 0.0D;
             return result / result1;
         }
-        throw new InterpreterException("算术运算笄1�7" + oper + "错误＄1�7");
+        throw new InterpreterException("算术运算符" + oper + "错误！");
     }
 
     private Boolean calculateBool090409(String formula) throws InterpreterException {
         formula = removeBrackets(formula);
         boolean BoolResult = false;
-        String symbol;
+
         if (formula.indexOf('*') != -1) {
             String[] subformula = splitFormula(formula, '*');
             BoolResult = calculateBool090409(subformula[0]).booleanValue();
@@ -496,7 +496,7 @@ public class Interpreter {
 
         int symbolLength = 1;
         int symbolIndex = 0;
-        
+        String symbol;
         if (formula.indexOf("<=") > 0) {
             symbol = "<=";
             symbolLength = 2;
@@ -522,7 +522,6 @@ public class Interpreter {
         } else {
             throw new InterpreterException("IF逻辑表达式" + formula + "语法不正确！");
         }
-        
         double left = calculateFormula(formula.substring(0, symbolIndex));
         double right = calculateFormula(formula.substring(symbolIndex + symbolLength));
 
@@ -557,7 +556,7 @@ public class Interpreter {
                 subString = new StringBuffer();
                 if (subindex < 8)
                     continue;
-                throw new InterpreterException("公式参数朄1�7多不能超迄1�7�！");
+                throw new InterpreterException("公式参数最多不能超过8个！");
             }
 
             subString = subString.append(charone);
@@ -588,9 +587,9 @@ public class Interpreter {
                     continue;
                 }
                 if (subindex == 0)
-                    throw new InterpreterException("子公弄1�7" + formula + "缺少第一个参数！");
+                    throw new InterpreterException("子公式" + formula + "缺少第一个参数！");
                 if (subindex == formula.length() - 1)
-                    throw new InterpreterException("子公弄1�7" + formula + "缺少第二个参数！");
+                    throw new InterpreterException("子公式" + formula + "缺少第二个参数！");
                 if (blankets != 0) {
                     continue;
                 }
@@ -606,9 +605,9 @@ public class Interpreter {
             }
         }
         if (blankets > 0)
-            throw new InterpreterException("子公弄1�7" + formula + "缺少右括叄1�7')'＄1�7");
+            throw new InterpreterException("子公式" + formula + "缺少右括号')'！");
         if (blankets < 0)
-            throw new InterpreterException("子公弄1�7" + formula + "缺少左括叄1�7'('＄1�7");
+            throw new InterpreterException("子公式" + formula + "缺少左括号'('！");
 
         if (subindexAS > 0)
             return subindexAS;
@@ -779,8 +778,3 @@ public class Interpreter {
         this.leaveBalance = leaveBalance;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.util.Interpreter JD-Core Version: 0.5.4
- */

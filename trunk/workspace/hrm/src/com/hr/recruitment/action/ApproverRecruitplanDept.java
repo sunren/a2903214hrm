@@ -55,13 +55,13 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
             String empNo = sessionEmp.getId();
             Recruitplan temPlan = recruitplanBo.loadRecruitplan(approve_recordId, null);
             if (temPlan.getRecpStatus().intValue() != 2) {
-                return "友情提示：招聘计刄1�7 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
-                        + ") 已不在已提交状�1�7�，现在您无权拒绝了＄1�7";
+                return "友情提示：招聘计划 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
+                        + ") 已不在已提交状态，现在您无权拒绝了！";
             }
 
             if (("DEPT".equals(result))
                     && (!checkDeptInCharge(getCurrentEmp(), temPlan.getRecpDepartmentNo()))) {
-                return "权限不够＄1�7";
+                return "权限不够！";
             }
             if (recruitplanBo.updateRecruitplan(Integer.valueOf(21), approve_recordId, null, empNo)) {
                 try {
@@ -95,7 +95,7 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
                 }
                 return "id" + temPlan.getId() + "re";
             }
-            return "错误提示：由于系统问题，拒绝没有成功，请重试＄1�7";
+            return "错误提示：由于系统问题，拒绝没有成功，请重试！";
         }
 
         return null;
@@ -119,12 +119,12 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
             ISysLogBO logBO = (ISysLogBO) BaseAction.getBean("logBO");
             Recruitplan temPlan = recruitplanBo.loadRecruitplan(approve_recordId, null);
             if (temPlan.getRecpStatus().intValue() != 2) {
-                return "友情提示：招聘计刄1�7 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
-                        + ")  已不在已提交状�1�7�，现在您无权审批！";
+                return "友情提示：招聘计划 " + temPlan.getRecpJobTitle() + "(" + temPlan.getRecpNo()
+                        + ")  已不在已提交状态，现在您无权审批！";
             }
             if (("DEPT".equals(result))
                     && (!checkDeptInCharge(getCurrentEmp(), temPlan.getRecpDepartmentNo()))) {
-                return "权限不够＄1�7";
+                return "权限不够！";
             }
             if (recruitplanBo.updateRecruitplan(Integer.valueOf(11), approve_recordId, null, empNo)) {
                 try {
@@ -153,7 +153,7 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
                 }
                 return "id" + temPlan.getId() + "ag";
             }
-            return "错误提示：由于系统问题，审批没有成功，请重试＄1�7";
+            return "错误提示：由于系统问题，审批没有成功，请重试！";
         }
 
         return null;
@@ -216,11 +216,11 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
                 }
             }
             if (sb.length() > 0) {
-                return "友情提示＄1�7" + sb.toString().substring(0, sb.length() - 1)
-                        + "的招聘计划由于状态已经不在已提交状�1�7�，没有审批通过";
+                return "友情提示：" + sb.toString().substring(0, sb.length() - 1)
+                        + "的招聘计划由于状态已经不在已提交状态，没有审批通过";
             }
 
-            return "友情提示：所选招聘计划已经全部审批�1�7�过";
+            return "友情提示：所选招聘计划已经全部审批通过";
         }
 
         return null;
@@ -317,8 +317,3 @@ public class ApproverRecruitplanDept extends BaseAction implements Status {
         this.jobTitles = jobTitles;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.recruitment.action.ApproverRecruitplanDept JD-Core Version: 0.5.4
- */

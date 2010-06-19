@@ -66,18 +66,18 @@ public class ClientManage extends BaseAction {
 //                    + this.client.getClientEmail() + "#" + this.client.getClientContactName() + "#"
 //                    + formatStr(this.client.getClientRemarks()) + "#";
 
-//            System.out.println("客户端发送的注册信息昄1�7=" + registMessage);
+//            System.out.println("客户端发送的注册信息为：" + registMessage);
 //            String testMessage = "";//new RegistClient(host, port).registConnection(registMessage);
-//            System.out.println("注册的时候返回的数据是：=" + testMessage + "==他的长度是：" + testMessage.length());
+//            System.out.println("注册的时候返回的数据是：" + testMessage + "==他的长度是：" + testMessage.length());
 
 //            if (":R301".equals(testMessage)) {
-//                addErrorInfo("公司注册失败＄1�7");
+//                addErrorInfo("公司注册失败");
 //                return "input";
 //            }
 //            if (testMessage.length() > 7) {
 //                int index = testMessage.indexOf("#");
 //                if (index == -1) {
-//                    addErrorInfo("公司注册失败＄1�7");
+//                    addErrorInfo("公司注册失败");
 //                    return "input";
 //                }
 //                String id = testMessage.substring(0, index);
@@ -85,7 +85,7 @@ public class ClientManage extends BaseAction {
 //                testMessage = testMessage.substring(index + 1);
 //                index = testMessage.indexOf("#");
 //                if (index == -1) {
-//                    addErrorInfo("公司注册失败＄1�7");
+//                    addErrorInfo("公司注册失败");
 //                    return "input";
 //                }
 //                String uuid = testMessage.substring(0, index);

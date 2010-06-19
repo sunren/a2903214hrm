@@ -27,7 +27,7 @@ public class ConfigSalary extends BaseAction {
 
     public String showConfigSalary() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "noauth";
         }
         Map dbMap = this.dbConfigManager.getProperties();
@@ -60,7 +60,7 @@ public class ConfigSalary extends BaseAction {
 
     public String executeSalary() throws Exception {
         if (!hasAuth(961)) {
-            addErrorInfo("对不起，您无权进入该页面＄1�7");
+            addErrorInfo("对不起，您无权进入该页面");
             return "noauth";
         }
         try {
@@ -93,7 +93,7 @@ public class ConfigSalary extends BaseAction {
             System.err.println("Visit  for updating  value error");
             return "input";
         }
-        addSuccessInfo("薪资模块参数调整成功＄1�7");
+        addSuccessInfo("薪资模块参数调整成功");
         return "success";
     }
 

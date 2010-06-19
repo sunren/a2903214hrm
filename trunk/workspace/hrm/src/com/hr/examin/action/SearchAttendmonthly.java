@@ -210,16 +210,16 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         if (this.month.length() == 1) {
             this.month = ("0" + this.month);
         }
-        String msg = this.year + "幄1�7" + this.month + "朄1�7";
+        String msg = this.year + "年" + this.month + "月";
         Attendperiod period = this.attendmothlyBO.loadAttendperiod(this.year, this.month);
         if (period == null) {
-            addErrorInfo(msg + "的�1�7�勤数据不是封帐状�1�7�，不能解封＄1�7");
+            addErrorInfo(msg + "的考勤数据不是封帐状态，不能解封！");
         } else if (period.getAttpStatus().intValue() == 2) {
             period.setAttpStatus(Integer.valueOf(0));
             this.attendmothlyBO.updateObject(period);
-            addSuccessInfo(msg + "的�1�7�勤数据解封成功＄1�7");
+            addSuccessInfo(msg + "的考勤数据解封成功！");
         } else {
-            addErrorInfo(msg + "的�1�7�勤数据不是封帐状�1�7�，不能解封＄1�7");
+            addErrorInfo(msg + "的考勤数据不是封帐状态，不能解封！");
         }
 
         return "success";
@@ -232,18 +232,18 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         if (this.month.length() == 1) {
             this.month = ("0" + this.month);
         }
-        String msg = this.year + "幄1�7" + this.month + "朄1�7";
+        String msg = this.year + "年" + this.month + "月";
         ExaminBoFactory factory = ExaminBoFactory.getInstance();
         IAttendmonthlyBO attendmothlyBO = factory.createAttendmonthlyBo();
         Attendperiod period = attendmothlyBO.loadAttendperiod(this.year, this.month);
         if (period == null) {
-            addErrorInfo(msg + "的�1�7�勤数据为初始化状�1�7�，不能进行封帐＄1�7");
+            addErrorInfo(msg + "的考勤数据为初始化状态，不能进行封帐！");
         } else if (period.getAttpStatus().intValue() == 1) {
             period.setAttpStatus(Integer.valueOf(2));
             attendmothlyBO.updateObject(period);
-            addSuccessInfo(msg + "的�1�7�勤数据封帐成功＄1�7");
+            addSuccessInfo(msg + "的考勤数据封帐成功！");
         } else {
-            addErrorInfo(msg + "的�1�7�勤数据不是初始化状态，不能封帐＄1�7");
+            addErrorInfo(msg + "的考勤数据不是初始化状态，不能封帐！");
         }
 
         return "success";
@@ -256,18 +256,18 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         if (this.month.length() == 1) {
             this.month = ("0" + this.month);
         }
-        String msg = this.year + "幄1�7" + this.month + "朄1�7";
+        String msg = this.year + "年" + this.month + "月";
         ExaminBoFactory factory = ExaminBoFactory.getInstance();
         IAttendmonthlyBO attendmothlyBO = factory.createAttendmonthlyBo();
         Attendperiod period = attendmothlyBO.loadAttendperiod(this.year, this.month);
         if (period == null) {
-            addErrorInfo(msg + "的�1�7�勤数据不是初始化状态，不能进行封帐申请操作＄1�7");
+            addErrorInfo(msg + "的考勤数据不是初始化状态，不能进行封帐申请操作！");
         } else if (period.getAttpStatus().intValue() == 0) {
             period.setAttpStatus(Integer.valueOf(1));
             attendmothlyBO.updateObject(period);
-            addSuccessInfo(msg + "的�1�7�勤数据封帐申请成功＄1�7");
+            addSuccessInfo(msg + "的考勤数据封帐申请成功！");
         } else {
-            addErrorInfo(msg + "的�1�7�勤数据不是初始化状态，不能进行封帐申请操作＄1�7");
+            addErrorInfo(msg + "的考勤数据不是初始化状态，不能进行封帐申请操作！");
         }
 
         return "success";
@@ -281,10 +281,10 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         ExaminBoFactory factory = ExaminBoFactory.getInstance();
         IAttendmonthlyBO attendmothlyBO = factory.createAttendmonthlyBo();
         if (attendmothlyBO.deleteAttendmonthly(this.delAttendId)) {
-            addSuccessInfo("删除成功〄1�7");
+            addSuccessInfo("删除成功。");
             return "success";
         }
-        addErrorInfo("删除失败，请重试＄1�7");
+        addErrorInfo("删除失败，请重试！");
         return "error";
     }
 
@@ -292,10 +292,10 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         ExaminBoFactory factory = ExaminBoFactory.getInstance();
         IAttendmonthlyBO attendmothlyBO = factory.createAttendmonthlyBo();
         if (attendmothlyBO.deleteAttendmonthlyByDate(this.year, this.month)) {
-            addSuccessInfo("删除考勤数据成功〄1�7");
+            addSuccessInfo("删除考勤数据成功。");
             return "success";
         }
-        addErrorInfo("删除失败，请重试＄1�7");
+        addErrorInfo("删除失败，请重试！");
         return "error";
     }
 
@@ -303,11 +303,11 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         ExaminBoFactory factory = ExaminBoFactory.getInstance();
         IAttendmonthlyBO attendmothlyBO = factory.createAttendmonthlyBo();
         if ((StringUtils.isEmpty(this.year)) || (StringUtils.isEmpty(this.month))) {
-            addSuccessInfo("要初始化的年月不能为空！请�1�7�择年月〄1�7");
+            addSuccessInfo("要初始化的年月不能为空！请选择年月。");
             return "success";
         }
         if (attendmothlyBO.exeMonthlySummary(this.year, this.month)) {
-            addSuccessInfo("初始化�1�7�勤数据成功〄1�7");
+            addSuccessInfo("初始化考勤数据成功。");
             return "success";
         }
         addErrorInfo("初始化失败，请重试！");
@@ -542,8 +542,3 @@ public class SearchAttendmonthly extends BaseDownloadAction {
         this.displayByDay = displayByDay;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.examin.action.SearchAttendmonthly JD-Core Version: 0.5.4
- */

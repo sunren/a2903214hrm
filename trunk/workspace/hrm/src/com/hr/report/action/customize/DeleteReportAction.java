@@ -19,7 +19,7 @@ public class DeleteReportAction extends BaseAction {
                 .getBean("customizeReportBo");
         ServletContext context = ServletActionContext.getServletContext();
         customizeReportBo.deleteReport(this.reportId);
-        addSuccessInfo("删除报表记录成功＄1�7");
+        addSuccessInfo("删除报表记录成功");
         return "success";
     }
 

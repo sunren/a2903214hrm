@@ -46,7 +46,7 @@ public class RecruitapplierBoImpl implements IRecruitapplierBo, Status {
             return errors;
         } catch (Exception e) {
             e.printStackTrace();
-            errors.add("更新申请者失贄1�7!");
+            errors.add("更新申请者失败!");
         }
         return errors;
     }
@@ -74,7 +74,7 @@ public class RecruitapplierBoImpl implements IRecruitapplierBo, Status {
             }
             this.applierDAO.deleteObject(applier);
         } catch (Exception e) {
-            errors.add("删除失败＄1�7");
+            errors.add("删除失败");
         }
         return errors;
     }

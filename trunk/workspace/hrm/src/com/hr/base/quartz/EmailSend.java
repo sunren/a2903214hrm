@@ -13,9 +13,9 @@ public class EmailSend implements Job {
 
     public void execute() throws JobExecutionException {
         IEmailsendBO es_BO = (IEmailsendBO) SpringBeanFactory.getBean("emailsendBO");
-        logger.info("弄1�7始发送邮仄1�7");
+        logger.info("开始发送邮件");
         es_BO.updateSendEmailOut();
-        logger.info("发�1�7�邮件结杄1�7!");
+        logger.info("发送邮件结束");
     }
 
     public void execute(JobExecutionContext arg0) throws JobExecutionException {

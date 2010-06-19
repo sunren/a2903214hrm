@@ -39,16 +39,16 @@ public class IEmpSalaryBenefitUpd extends ICheckAndInsert {
     String msgStartDateLessDB;
 
     public IEmpSalaryBenefitUpd() {
-        this.msgDbInsertError = "数据库插入失贄1�7";
+        this.msgDbInsertError = "数据库插入失败";
         this.msgNotExist = "编号为{0}的员工不存在";
         this.msgNotInited = "编号为{0}的员工社保尚未初始化";
         this.msgCardIDNotExist = "身份证号为{0}的员工不存在";
         this.msgCardIDNotInited = "身份证号为{0}的员工社保尚未初始化";
-        this.msgPensionNoNotInited = "养�1�7�保险号为{0}的员工社保数据尚未初始化";
+        this.msgPensionNoNotInited = "养老保险号为{0}的员工社保数据尚未初始化";
         this.msgHousingNoNotInited = "公积金号为{0}的员工社保数据尚未初始化";
         this.msgMedicalNoNotInited = "医疗保险号为{0}的员工社保数据尚未初始化";
-        this.msgNoneOf5 = "员工编号|身份证号码|养�1�7�保险号|公积金号|医疗保险号请至少填写丄1�7顄1�7";
-        this.msgNoAmount = "至少填写丄1�7项基敄1�7";
+        this.msgNoneOf5 = "员工编号|身份证号码|养老保险号|公积金号|医疗保险号请至少填写一项";
+        this.msgNoAmount = "至少填写一项基数";
         this.msgNotExistBeneType = "名称为{0}的社保种类不存在";
         this.msgDateValidFormat = "生效年月为空或格式不正确";
         this.msgStartDateLessDB = "基数调整生效日期不能早于{0}";

@@ -17,11 +17,11 @@ public abstract interface Status {
     public static final int ECP_STATUS_DEPT_APPROVE = 21;
     public static final String ECP_STATUS_DEPT_APPROVE_LOG = "部门批准";
     public static final int ECP_STATUS_GM_APPROVE = 22;
-    public static final String ECP_STATUS_GM_APPROVE_LOG = "总经理批凄1�7";
+    public static final String ECP_STATUS_GM_APPROVE_LOG = "总经理批准";
     public static final int ECP_STATUS_HR_APPROVE = 31;
     public static final String ECP_STATUS_HR_APPROVE_LOG = "HR备案";
     public static final int ECP_STATUS_ADJUSTED = 41;
-    public static final String ECP_STATUS_QUICK_ADJUSTED_LOG = "快�1�7�调敄1�7";
+    public static final String ECP_STATUS_QUICK_ADJUSTED_LOG = "快速调整";
     public static final String ECP_STATUS_MAN_ADJUSTED_LOG = "手工调整";
     public static final String ECP_STATUS_SYS_ADJUSTED_LOG = "系统调整";
     public static final int ECP_STATUS_CANCELLED = 42;
@@ -52,11 +52,11 @@ public abstract interface Status {
     public static final int LR_STATUS_IN_PROCESS = 5;
     public static final String LR_STATUS_IN_PROCESS_LOG = "正在审批";
     public static final int LR_STATUS_GM_APPROVE = 14;
-    public static final String LR_STATUS_GM_APPROVE_LOG = "总经理批凄1�7";
+    public static final String LR_STATUS_GM_APPROVE_LOG = "总经理批准";
     public static final int LR_STATUS_HR_APPROVE = 15;
     public static final String LR_STATUS_HR_APPROVE_LOG = "HR备案";
     public static final int LR_STATUS_CONFIRM = 16;
-    public static final String LR_STATUS_CONFIRM_LOG = "锄1�7偄1�7";
+    public static final String LR_STATUS_CONFIRM_LOG = "销假";
     public static final int LR_STATUS_REJECT = 21;
     public static final String LR_STATUS_DEPT_REJECT_LOG = "部门拒绝";
     public static final String LR_STATUS_HR_REJECT_LOG = "HR拒绝";
@@ -68,7 +68,7 @@ public abstract interface Status {
     public static final int OTR_STATUS_IN_PROCESS = 5;
     public static final String OTR_STATUS_IN_PROCESS_LOG = "正在审批";
     public static final int OTR_STATUS_GM_APPROVE = 14;
-    public static final String OTR_STATUS_GM_APPROVE_LOG = "总经理批凄1�7";
+    public static final String OTR_STATUS_GM_APPROVE_LOG = "总经理批准";
     public static final int OTR_STATUS_HR_APPROVE = 15;
     public static final String OTR_STATUS_HR_APPROVE_LOG = "HR备案";
     public static final int OTR_STATUS_CONFIRM = 16;
@@ -79,7 +79,7 @@ public abstract interface Status {
     public static final int OTR_STATUS_CANCELLED = 22;
     public static final String OTR_STATUS_CANCELLED_LOG = "作废";
     public static final int RA_STATUS_PROPOSE = 1;
-    public static final String RA_STATUS_PROPOSE_LOG = "初�1�7��1�7�过";
+    public static final String RA_STATUS_PROPOSE_LOG = "初选通过";
     public static final int RA_STATUS_PAPERTEST = 2;
     public static final String RA_STATUS_PAPERTEST_LOG = "笔试";
     public static final int RA_STATUS_INTERVIEW = 3;
@@ -87,9 +87,9 @@ public abstract interface Status {
     public static final int RA_STATUS_PHONE_INTERVIEW = 4;
     public static final String RA_STATUS_PHONE_INTERVIEW_LOG = "电话面试";
     public static final int RA_STATUS_REJECT = 9;
-    public static final String RA_STATUS_REJECT_LOG = "不合栄1�7";
+    public static final String RA_STATUS_REJECT_LOG = "不合格";
     public static final int RA_STATUS_FINAL = 11;
-    public static final String RA_STATUS_FINAL_LOG = "待定候�1�7�人";
+    public static final String RA_STATUS_FINAL_LOG = "待定候选人";
     public static final int RA_STATUS_OFFER_SEND = 12;
     public static final String RA_STATUS_OFFER_SEND_LOG = "已发录取通知";
     public static final int RA_STATUS_OFFER_ACCEPT = 13;
@@ -97,7 +97,7 @@ public abstract interface Status {
     public static final int RA_STATUS_OFFER_REJECT = 19;
     public static final String RA_STATUS_OFFER_REJECT_LOG = "拒绝录取通知";
     public static final int RA_STATUS_BLACK_LIST = 21;
-    public static final String RA_STATUS_BLACK_LIST_LOG = "黑名卄1�7";
+    public static final String RA_STATUS_BLACK_LIST_LOG = "黑名单";
     public static final int RP_STATUS_DRAFT = 1;
     public static final int RP_STATUS_SUBMIT = 2;
     public static final String RP_STATUS_SUBMIT_LOG = "提交计划";
@@ -137,8 +137,3 @@ public abstract interface Status {
     public static final int DEPT_DEPT = 2;
     public static final int DEPT_POSITION = 3;
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name: com.hr.base.Status
- * JD-Core Version: 0.5.4
- */

@@ -39,7 +39,7 @@ public class SalaryHistoryReport extends BaseAction {
         Empsalarydatadef dataDef = (Empsalarydatadef) salaryReportBo
                 .loadObject(Empsalarydatadef.class, this.bean.getItemId(), null);
         if (dataDef == null) {
-            addErrorInfo("不存在的帐套项目＄1�7");
+            addErrorInfo("不存在的帐套项目");
             return "input";
         }
         String title = dataDef.getEsddName();

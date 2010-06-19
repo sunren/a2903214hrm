@@ -82,14 +82,14 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
                 int isInShift = ExaminDateUtil.isTimeInShift(or.getOrStartDate(), es
                         .getEmpshiftDate(), es.getEmpshiftShiftNo().getAttsSession());
                 if ((isInShift == 1) || (isInShift == 2) || (isInShift == 4)) {
-                    return "弄1�7始时间与您的" + isNightShift + "班次 "
+                    return "开始时间与您的" + isNightShift + "班次 "
                             + es.getEmpshiftShiftNo().getAttsSession() + " 有冲突！";
                 }
 
                 isInShift = ExaminDateUtil.isTimeInShift(or.getOrEndDate(), es.getEmpshiftDate(),
                                                          es.getEmpshiftShiftNo().getAttsSession());
                 if ((isInShift == 2) || (isInShift == 3) || (isInShift == 4)) {
-                    return "结束时间与您的1�7" + isNightShift + "班次 "
+                    return "结束时间与您的" + isNightShift + "班次 "
                             + es.getEmpshiftShiftNo().getAttsSession() + " 有冲突！";
                 }
 
@@ -97,7 +97,7 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
                         .getOrEndDate(), es.getEmpshiftDate(), es.getEmpshiftShiftNo()
                         .getAttsSession());
                 if (timeInShift > 0)
-                    return "加班时间与您的1�7" + isNightShift + "班次 "
+                    return "加班时间与您的" + isNightShift + "班次 "
                             + es.getEmpshiftShiftNo().getAttsSession() + " 有冲突！";
             }
         } else {
@@ -115,26 +115,26 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
             int isInShift = ExaminDateUtil.isTimeInShift(or.getOrStartDate(), otDate, as
                     .getAttsSession());
             if ((isInShift == 1) || (isInShift == 2)) {
-                return "弄1�7始时间与您的班次 " + as.getAttsSession() + " 有冲突！";
+                return "开始时间与您的班次 " + as.getAttsSession() + " 有冲突！";
             }
 
             isInShift = ExaminDateUtil
                     .isTimeInShift(or.getOrEndDate(), otDate, as.getAttsSession());
             if ((isInShift == 2) || (isInShift == 3)) {
-                return "加班时间与您的班欄1�7 " + as.getAttsSession() + " 有冲突！";
+                return "加班时间与您的班次 " + as.getAttsSession() + " 有冲突！";
             }
 
             int timeInShift = ExaminDateUtil.minutesInShift(or.getOrStartDate(), or.getOrEndDate(),
                                                             otDate, as.getAttsSession());
             if (timeInShift > 0) {
-                return "加班时间与您的班欄1�7 " + as.getAttsSession() + " 有冲突！";
+                return "加班时间与您的班次 " + as.getAttsSession() + " 有冲突！";
             }
         }
         return "SUCC";
     }
 
     public String orCheckTime(Overtimerequest or) {
-        String msgConflict = "与编号为{0}的加班单存在时间冲突＄1�7";
+        String msgConflict = "与编号为{0}的加班单存在时间冲突！";
 
         DetachedCriteria dc = DetachedCriteria.forClass(Overtimerequest.class);
 
@@ -299,7 +299,7 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
     }
 
     public String checkMonthLimit(Overtimerequest or) {
-        String msgConflict = "{0}当月加班朄1�7多为{1}小时，您的申请已超过上限＄1�7";
+        String msgConflict = "{0}当月加班最多为{1}小时，您的申请已超过上限！";
 
         Overtimetype overtimetype = this.or_Bo.searchByID(or.getOrOtNo().getOtNo());
         if (overtimetype.getOtOverLimit() == null)
@@ -674,7 +674,7 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
         totalOvertime += monthTotal;
         totalToAppOvertime += monthToAppTotal;
 
-        result[13][list.size()] = "月度汇�1�7�1�7";
+        result[13][list.size()] = "月度汇总";
         String totalToAppTotalTmp = (totalToAppOvertime > 0.0D) ? "(" + totalToAppOvertime
                 + "小时待审)" : "";
 
@@ -727,8 +727,3 @@ public class OvertimerequestBoImpl extends ExaminBoImpl implements IOvertimerequ
         this.workFlowBO = workFlowBO;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.examin.bo.OvertimerequestBoImpl JD-Core Version: 0.5.4
- */

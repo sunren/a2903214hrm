@@ -205,15 +205,11 @@ public class EmpshiftBOImpl implements IEmpshiftBo {
                     int todayLrTotal = ExaminDateUtil.minutesInShift(lr.getLrStartDate(), lr
                             .getLrEndDate(), shiftDate, oldShift.getAttsSession());
                     if (todayLrTotal > 0) {
-                        errorList
-                                .add(lr.getLrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate)
-                                        + oldShift.getAttsName() + "有请偄1�7(编号丄1�7" + lr.getLrNo()
-                                        + ")＄1�7");
+                        errorList.add(lr.getLrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate) + oldShift.getAttsName() + "有请假(编号为" + lr.getLrNo() + ")！");
                     }
                 } else if ((shiftDate.compareTo(lr.getLrStartDate()) >= 0)
                         && (shiftDate.compareTo(lr.getLrEndDate()) <= 0)) {
-                    errorList.add(lr.getLrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate)
-                            + newShift.getAttsName() + "有请偄1�7(编号丄1�7" + lr.getLrNo() + ")＄1�7");
+                    errorList.add(lr.getLrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate) + newShift.getAttsName() + "有请假(编号为" + lr.getLrNo() + ")！");
                 }
 
             }
@@ -229,8 +225,7 @@ public class EmpshiftBOImpl implements IEmpshiftBo {
                 int todayOrTotal = ExaminDateUtil.minutesInShift(or.getOrStartDate(), or
                         .getOrEndDate(), shiftDate, newShift.getAttsSession());
                 if (todayOrTotal > 0) {
-                    errorList.add(or.getOrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate)
-                            + newShift.getAttsName() + "与加班冲窄1�7(编号丄1�7" + or.getOrNo() + ")＄1�7");
+                    errorList.add(or.getOrEmpNo().getEmpName() + DateUtil.formatDate(shiftDate) + newShift.getAttsName() + "与加班冲突(编号为" + or.getOrNo() + ")！");
                 }
 
                 if (newShift.getAttsNightShift().intValue() == 1) {
@@ -238,9 +233,7 @@ public class EmpshiftBOImpl implements IEmpshiftBo {
                     int nextDayTotal = ExaminDateUtil.minutesInShift(or.getOrStartDate(), or
                             .getOrEndDate(), nextDay, newShift.getAttsSession());
                     if (nextDayTotal > 0)
-                        errorList.add(or.getOrEmpNo().getEmpName() + DateUtil.formatDate(nextDay)
-                                + newShift.getAttsName() + "与加班冲窄1�7(编号丄1�7" + or.getOrNo()
-                                + ")＄1�7");
+                        errorList.add(or.getOrEmpNo().getEmpName() + DateUtil.formatDate(nextDay) + newShift.getAttsName() + "与加班冲突(编号为" + or.getOrNo() + ")！");
                 }
             }
         }

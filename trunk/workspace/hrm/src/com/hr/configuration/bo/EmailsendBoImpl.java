@@ -251,17 +251,16 @@ public class EmailsendBoImpl implements IEmailsendBO, Constants {
                         send.setEsStatus(Integer.valueOf(2));
                     }
                     mailMap.remove(me);
-                    String error = "仄1�7" + send.getEsFrom() + "径1�7" + send.getEsTo()
-                            + "发�1�7�邮件失贄1�7.";
+                    String error = "从" + send.getEsFrom() + "往" + send.getEsTo() + "发送邮件失败.";
                     logger.info(error);
                 }
             } else {
-                String error = "服务器连接异帄1�7";
+                String error = "服务器连接异常";
                 logger.info(error);
                 connectError = true;
             }
         } catch (MailException ex) {
-            String error = "服务器连接异帄1�7邮箱服务器用户名或密码错误！";
+            String error = "服务器连接异常邮箱服务器用户名或密码错误！";
             logger.info(error);
             connectError = true;
         }
@@ -318,19 +317,18 @@ public class EmailsendBoImpl implements IEmailsendBO, Constants {
                         this.dao.saveOrupdate(send);
                     }
                     mailMap.remove(me);
-                    String error = "仄1�7" + send.getEsFrom() + "径1�7" + send.getEsTo()
-                            + "发�1�7�邮件失贄1�7.";
+                    String error = "从" + send.getEsFrom() + "往" + send.getEsTo() + "发送邮件失败.";
                     logger.info(error);
                     errorList.add(error);
                 }
             } else {
-                String error = "服务器连接异帄1�7";
+                String error = "服务器连接异常";
                 logger.info(error);
                 errorList.add(error);
                 connectError = true;
             }
         } catch (MailException ex) {
-            String error = "服务器连接异帄1�7邮箱服务器用户名或密码错误！";
+            String error = "服务器连接异常邮箱服务器用户名或密码错误！";
             logger.info(error);
             errorList.add(error);
             connectError = true;
@@ -455,7 +453,7 @@ public class EmailsendBoImpl implements IEmailsendBO, Constants {
     public String addEmailSend(Emailtemplate template, List<Emailsend> emailList,
             List<Map<String, Object>> paramUserEmailList) {
         if (template.getEtStatus().intValue() == 0) {
-            return "模板" + template.getEtTitleNo() + "已停甄1�7!";
+            return "模板" + template.getEtTitleNo() + "已停用!";
         }
 
         StringBuffer sendError = new StringBuffer();
@@ -468,7 +466,7 @@ public class EmailsendBoImpl implements IEmailsendBO, Constants {
             Map emailContent = getEmailContent(template.getEtTitleNo(), (Map) paramUserEmailList
                     .get(i));
             if (emailContent.isEmpty()) {
-                sendError.append("模板" + template.getEtTitleNo() + "设置错误，请联系管理呄1�7!");
+                sendError.append("模板" + template.getEtTitleNo() + "设置错误，请联系管理员!");
             } else {
                 send.setEsTitle(emailContent.get("email_title").toString());
                 send.setEsContent(emailContent.get("email_content").toString());

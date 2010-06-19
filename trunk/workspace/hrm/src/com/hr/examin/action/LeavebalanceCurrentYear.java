@@ -68,15 +68,15 @@ public class LeavebalanceCurrentYear extends EmpExaminAction {
 
     public String initLeaveBalance() {
         if (StringUtils.isEmpty(this.updateIDs)) {
-            addActionError("请�1�7�择要进行初始化的员工记彄1�7!");
+            addActionError("请选择要进行初始化的员工记录!");
             return "success";
         }
         if (StringUtils.isEmpty(this.specialIds)) {
-            addActionError("请�1�7�择要初始化的假期种籄1�7!");
+            addActionError("请选择要初始化的假期种类!");
             return "success";
         }
         if ((this.leaveBalance == null) || (StringUtils.isEmpty(this.leaveBalance.getLbYear()))) {
-            addActionError("请�1�7�择要进行初始化的年仄1�7");
+            addActionError("请选择要进行初始化的年份");
             return "success";
         }
 
@@ -105,7 +105,7 @@ public class LeavebalanceCurrentYear extends EmpExaminAction {
 
     public String doSubmitLeaveBalance() {
         if (StringUtils.isEmpty(this.updateIDs)) {
-            addActionError("请�1�7�择要进行提交的休假记录!");
+            addActionError("请选择要进行提交的休假记录!");
             return "success";
         }
         String[] recordIds = this.updateIDs.split(",");
@@ -122,7 +122,7 @@ public class LeavebalanceCurrentYear extends EmpExaminAction {
 
     public String doDeleteLeaveBalance() {
         if (StringUtils.isEmpty(this.updateIDs)) {
-            addActionError("请�1�7�择要进行审核的休假记录!");
+            addActionError("请选择要进行审核的休假记录!");
             return "success";
         }
 
@@ -288,8 +288,3 @@ public class LeavebalanceCurrentYear extends EmpExaminAction {
         this.searchType = searchType;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.examin.action.LeavebalanceCurrentYear JD-Core Version: 0.5.4
- */

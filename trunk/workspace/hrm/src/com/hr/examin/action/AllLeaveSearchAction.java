@@ -60,12 +60,12 @@ public class AllLeaveSearchAction extends EmpExaminAction {
     public String cancelled(String lrID, String logMsg, HttpSession session) {
         if ((session == null) || (WebContextFactory.get() == null)
                 || (WebContextFactory.get().getSession() == null)) {
-            return "权限过期，请重新登录＄1�7";
+            return "权限过期，请重新登录";
         }
 
         String auth = DWRUtil.checkAuth("allLeaveSearch", "execute");
         if (("error".equals(auth)) || (!"HR".equals(auth))) {
-            return "您无权执行此操作＄1�7";
+            return "您无权执行此操作";
         }
 
         if ((logMsg == null) || (logMsg.trim().equals(""))) {
@@ -73,7 +73,7 @@ public class AllLeaveSearchAction extends EmpExaminAction {
         }
 
         if (logMsg.trim().length() > 255) {
-            return "备注朄1�7长为255个字符！";
+            return "备注最长为255个字符！";
         }
 
         ILeaverequestBO lr_BO = (ILeaverequestBO) getBean("leaverequestBO");
@@ -92,7 +92,7 @@ public class AllLeaveSearchAction extends EmpExaminAction {
         }
         String auth = checkActionAuth("allLeaveSearch", "execute");
         if (!"HR".equals(auth)) {
-            addErrorInfo("您无权执行此操作＄1�7");
+            addErrorInfo("您无权执行此操作");
             return "noauth";
         }
 

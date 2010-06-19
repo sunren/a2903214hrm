@@ -23,9 +23,9 @@ public class CheckContent {
 
                     if ((iomatch.getIomatchRequired().intValue() == 1)
                             && (((checkContent == null) || (checkContent.length() < 1)))) {
-                        ErrorMessage message = new ErrorMessage("笄1�7 " + (row + titleOffset)
-                                + " 衄1�7", checkContent, "必填项缺少数据！", "笄1�7 " + (row + titleOffset)
-                                + " 行，笄1�7 " + (column + 1) + " 列数据为必填内容，文件数据为空！");
+                        ErrorMessage message = new ErrorMessage("第 " + (row + titleOffset) + " 行",
+                                checkContent, "必填项缺少数据！", "第 " + (row + titleOffset) + " 行，第 "
+                                        + (column + 1) + " 列数据为必填内容，文件数据为空！");
 
                         matchList.add(message);
                     } else {
@@ -38,18 +38,18 @@ public class CheckContent {
 
                         if (!checkLength(iomatch.getIomatchLength().intValue(), checkContent,
                                          iomatch.getIomatchValidType().toLowerCase())) {
-                            ErrorMessage message = new ErrorMessage("笄1�7 " + (row + titleOffset)
-                                    + " 衄1�7", checkContent, "数据长度超过限制＄1�7", "笄1�7 "
-                                    + (row + titleOffset) + " 行，笄1�7 " + (column + 1)
-                                    + " 列数据长度超过限制，要求长度朄1�7大为" + iomatch.getIomatchLength() + "＄1�7");
+                            ErrorMessage message = new ErrorMessage("第 " + (row + titleOffset)
+                                    + " 行", checkContent, "数据长度超过限制！", "第 " + (row + titleOffset)
+                                    + " 行，第 " + (column + 1) + " 列数据长度超过限制，要求长度最大为"
+                                    + iomatch.getIomatchLength() + "！");
 
                             matchList.add(message);
                         } else if (!checkDetail(iomatch.getIomatchValidType().toLowerCase(),
                                                 checkContent)) {
-                            ErrorMessage message = new ErrorMessage("笄1�7 " + (row + titleOffset)
-                                    + " 衄1�7", checkContent, "数据类型匹配出错", "笄1�7 "
-                                    + (row + titleOffset) + " 行，笄1�7 " + (column + 1) + " 列数据要求类型为"
-                                    + iomatch.getIomatchValidType() + "，文件内容无法匹配该类型＄1�7");
+                            ErrorMessage message = new ErrorMessage("第 " + (row + titleOffset)
+                                    + " 行", checkContent, "数据类型匹配出错", "第 " + (row + titleOffset)
+                                    + " 行，第 " + (column + 1) + " 列数据要求类型为"
+                                    + iomatch.getIomatchValidType() + "，文件内容无法匹配该类型！");
 
                             matchList.add(message);
                         }
@@ -156,7 +156,7 @@ public class CheckContent {
     }
 
     private boolean isGender(String value) {
-        return ("甄1�7".equals(value)) || ("奄1�7".equals(value));
+        return ("男".equals(value)) || ("女".equals(value));
     }
 
     private boolean isBoold(String value) {
@@ -193,8 +193,3 @@ public class CheckContent {
         return true;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.importfile.bo.CheckContent JD-Core Version: 0.5.4
- */

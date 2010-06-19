@@ -35,7 +35,7 @@ public class AddEmpsalaryacct extends BaseAction {
         this.empsalaryacctversion = new Empsalaryacctversion();
 
         this.msgNoName = "请设置帐套名称！";
-        this.msgDupliName = "帐套名称重复＄1�7";
+        this.msgDupliName = "帐套名称重复";
         this.msgNotComplete = "项目种类不完整，帐套必须包含“{0}”！";
         this.msgIllegalForm = "您输入的 A{0}公式不合法：{1}";
         this.msgSucc = "{0}已创建成功！";
@@ -116,7 +116,7 @@ public class AddEmpsalaryacct extends BaseAction {
         if (hasIncomeBfTax.booleanValue() != true)
             return StringUtil.message(this.msgNotComplete, new Object[] { "税前收入" });
         if (hasTax.booleanValue() != true)
-            return StringUtil.message(this.msgNotComplete, new Object[] { "扄1�7得税" });
+            return StringUtil.message(this.msgNotComplete, new Object[] { "所得税" });
         if (hasIncomeAfTax.booleanValue() != true)
             return StringUtil.message(this.msgNotComplete, new Object[] { "税后收入" });
 

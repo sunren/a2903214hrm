@@ -17,7 +17,7 @@ public class UpdateRecruitplanADM extends BaseAction implements Status, Constant
         IRecruitplanBo recruitplanBo = (IRecruitplanBo) getBean("recruitplanBO");
         if ((this.recruitplan.getRecpEndDate() != null)
                 && (this.recruitplan.getRecpStartDate().after(this.recruitplan.getRecpEndDate()))) {
-            addErrorInfo("职位发布日期要在职位关闭日期之前＄1�7");
+            addErrorInfo("职位发布日期要在职位关闭日期之前");
             return "input";
         }
 
@@ -25,7 +25,7 @@ public class UpdateRecruitplanADM extends BaseAction implements Status, Constant
                 .getJobtitleNo().trim()));
         this.error = recruitplanBo.updateRecruitplan(this.recruitplan, getCurrentEmpNo());
         if (this.error.size() < 1) {
-            addSuccessInfo("更新编号丄1�7" + this.recruitplan.getRecpNo() + "的招聘计划成功�1�7�1�7");
+            addSuccessInfo("更新编号为" + this.recruitplan.getRecpNo() + "的招聘计划成功");
             return "success";
         }
         addErrorInfo(this.error);

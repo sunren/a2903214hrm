@@ -678,7 +678,7 @@ public class ExaminScheduleAction extends BaseDownloadAction implements Status {
 
     public String checkAttsSession(String sessionStr) {
         if ((sessionStr == null) || (sessionStr.trim().length() == 0)) {
-            return "班次时间段为空，格式形如＄1�7:00-12:00,13:00-17:00";
+            return "班次时间段为空，格式形如：17:00-12:00,13:00-17:00";
         }
         String[] str = sessionStr.split(",");
         String[] hour = null;

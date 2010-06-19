@@ -138,7 +138,7 @@ public class DWRforSearchBatchCompaplan extends BaseAction implements Status, Co
             if (yearMonthArr[1].charAt(0) == '0') {
                 yearMonthArr[1] = yearMonthArr[1].substring(1);
             }
-            addErrorInfo(yearMonthArr[0] + "幄1�7" + yearMonthArr[1] + "月薪资发放已封帐，不允许调整＄1�7");
+            addErrorInfo(yearMonthArr[0] + "年" + yearMonthArr[1] + "月薪资发放已封帐，不允许调整");
             return "success";
         }
 
@@ -149,8 +149,8 @@ public class DWRforSearchBatchCompaplan extends BaseAction implements Status, Co
         Empsalaryadj ajs = compaplanBo.loadCompaplanInfoByEmpNo(empId, date);
         if (ajs != null) {
             String[] dateArr = DateUtil.formatDateToS(ajs.getEsaCurEffDate(), "yyyy-MM").split("-");
-            addErrorInfo("员工" + empName + dateArr[0] + "幄1�7" + dateArr[1]
-                    + "月已经有丄1�7条生效的调薪计划，操作失败！");
+            addErrorInfo("员工" + empName + dateArr[0] + "年" + dateArr[1]
+                    + "月已经有一条生效的调薪计划，操作失败！");
             return "success";
         }
 

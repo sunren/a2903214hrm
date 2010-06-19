@@ -118,7 +118,7 @@ public class OriginalDataImportShowAction extends BaseAction {
         IAttdoriginaldataBO originaldataBo = (IAttdoriginaldataBO) SpringBeanFactory
                 .getBean("attdoriginaldataBO");
         originaldataBo.deleteDataInDateDomain(this.attdDateFrom, this.attdDateTo);
-        addSuccessInfo("考勤机刷卡数据清理成功�1�7�1�7");
+        addSuccessInfo("考勤机刷卡数据清理成功");
         return "success";
     }
 
@@ -126,7 +126,7 @@ public class OriginalDataImportShowAction extends BaseAction {
         IAttdoriginaldataBO originaldataBo = (IAttdoriginaldataBO) SpringBeanFactory
                 .getBean("attdoriginaldataBO");
         originaldataBo.deleteAttdoriginaldata(this.aodId);
-        addSuccessInfo("考勤机刷卡数据删除成功�1�7�1�7");
+        addSuccessInfo("考勤机刷卡数据删除成功");
         return "success";
     }
 

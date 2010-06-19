@@ -65,7 +65,7 @@ public class MySalaryPaid extends BaseAction {
         IEmployeeBo empBo = (IEmployeeBo) getBean("empBo");
         Employee employee = empBo.loadEmp(this.empId, null);
         if (employee == null) {
-            addErrorInfo("不存在此员工＄1�7");
+            addErrorInfo("不存在此员工");
             return "error";
         }
 
@@ -115,7 +115,7 @@ public class MySalaryPaid extends BaseAction {
                 clearErrorsAndMessages();
                 return "download";
             } catch (Exception e) {
-                addActionError("数据导出失败＄1�7");
+                addActionError("数据导出失败");
                 e.printStackTrace();
                 return "success";
             }
@@ -171,9 +171,9 @@ public class MySalaryPaid extends BaseAction {
 
         result[0] = salaryPaidBo.getGivenMonthAvgPay(empId, dateArr);
         result[2] = (DateUtil.formatDateToS(DateUtil.parseDateByFormat(dateArr[11], "yyyyMM"),
-                                            "yyyy年MM朄1�7")
+                                            "yyyy年MM月")
                 + "-" + DateUtil.formatDateToS(DateUtil.parseDateByFormat(dateArr[0], "yyyyMM"),
-                                               "yyyy年MM朄1�7"));
+                                               "yyyy年MM月"));
 
         temp = new Date();
         cal.setTime(temp);
@@ -186,9 +186,9 @@ public class MySalaryPaid extends BaseAction {
 
         result[1] = salaryPaidBo.getGivenMonthAvgPay(empId, dateArr);
         result[3] = (DateUtil.formatDateToS(DateUtil.parseDateByFormat(dateArr[0], "yyyyMM"),
-                                            "yyyy年MM朄1�7")
+                                            "yyyy年MM月")
                 + "-" + DateUtil.formatDateToS(DateUtil.parseDateByFormat(dateArr[11], "yyyyMM"),
-                                               "yyyy年MM朄1�7"));
+                                               "yyyy年MM月"));
 
         return result;
     }

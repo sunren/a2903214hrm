@@ -10,6 +10,7 @@ import com.hr.homepage.dao.IIFindTipDao;
 import com.hr.profile.domain.Empaddconf;
 import com.hr.profile.domain.Employee;
 import com.hr.profile.domain.Emprelations;
+import com.hr.profile.domain.base.BaseEmpaddconf;
 import com.hr.recruitment.domain.Recruitchannel;
 import com.hr.recruitment.domain.Recruitplan;
 import com.hr.security.domain.Userinfo;
@@ -82,7 +83,7 @@ public class FindTipImpl implements IIFindTip {
                         .append("../profile/myInfo.action?empNo=").append(emp.getId())
                         .append("&empName=").append(emp.getEmpName()).append("&tab=1").toString(),
                                          emp.getEmpName())
-                        + "〄1�7");
+                        + "、");
             }
         }
 
@@ -98,7 +99,7 @@ public class FindTipImpl implements IIFindTip {
                         .append("&tab=2").toString(), new StringBuilder()
                         .append(erel.getEmployee().getEmpName()).append("(")
                         .append(erel.getErelRelationship()).append(")").toString())
-                        + "〄1�7");
+                        + "、");
             }
 
         }
@@ -111,7 +112,7 @@ public class FindTipImpl implements IIFindTip {
                         .append("../profile/myInfo.action?empNo=").append(emp.getId())
                         .append("&empName=").append(emp.getEmpName()).append("&tab=1").toString(),
                                         emp.getEmpName())
-                        + "〄1�7");
+                        + "、");
             }
 
         }
@@ -131,7 +132,7 @@ public class FindTipImpl implements IIFindTip {
                         .append("../profile/myInfo.action?empNo=").append(emp.getId())
                         .append("&empName=").append(emp.getEmpName()).append("&tab=1").toString(),
                                            emp.getEmpName())
-                        + "〄1�7");
+                        + "、");
             }
 
         }
@@ -145,7 +146,7 @@ public class FindTipImpl implements IIFindTip {
                         .append("../profile/myInfo.action?empNo=").append(emp.getId())
                         .append("&empName=").append(emp.getEmpName()).append("&tab=1").toString(),
                                        emp.getEmpName())
-                        + "〄1�7");
+                        + "、");
             }
         }
 
@@ -154,8 +155,8 @@ public class FindTipImpl implements IIFindTip {
             tipArrayList.add(confirmTip + "天内试用期结束的员工: <br>"
                     + confirm.substring(0, confirm.length() - 1));
         if (birth.length() > 0)
-            tipArrayList.add(birtydayTip + "天内过生日的员工＄1�7br>"
-                    + birth.substring(0, birth.length() - 1));
+            tipArrayList
+                    .add(birtydayTip + "天内过生日的员工：<br>" + birth.substring(0, birth.length() - 1));
         if (join.length() > 0)
             tipArrayList.add("本月入职的员工：<br>" + join.substring(0, join.length() - 1));
         if (out.length() > 0)
@@ -227,7 +228,7 @@ public class FindTipImpl implements IIFindTip {
                 profile.append(getJSString(new StringBuilder()
                         .append("../profile/myInfo.action?empNo=").append(id).append("&empName=")
                         .append(name).append("&tab=3").toString(), name)
-                        + "〄1�7");
+                        + "、");
             }
         }
 
@@ -274,12 +275,12 @@ public class FindTipImpl implements IIFindTip {
                 profile.append(getJSString(new StringBuilder()
                         .append("../profile/myInfo.action?empNo=").append(id).append("&empName=")
                         .append(name).append("&tab=3").toString(), name)
-                        + "〄1�7");
+                        + "、");
             }
         }
 
         if (profile.length() > 0)
-            tipArrayList.add("合同过期及合同未签的员工＄1�7br>" + profile.substring(0, profile.length() - 1));
+            tipArrayList.add("合同过期及合同未签的员工：<br>" + profile.substring(0, profile.length() - 1));
         return tipArrayList;
     }
 
@@ -296,7 +297,7 @@ public class FindTipImpl implements IIFindTip {
         int info = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (info > 0) {
             infoS.append(getJSString("../profile/myInfo.action?tab=1", "查看"));
-            tipArrayList.add("您的员工基本资料已被修改，请注意" + infoS + "〄1�7br>");
+            tipArrayList.add("您的员工基本资料已被修改，请注意" + infoS + "。<br>");
         }
         DetachedCriteria detachedCriteria3 = DetachedCriteria.forClass(Empsalaryconfig.class);
         detachedCriteria3.add(Restrictions.eq("id", id));
@@ -305,7 +306,7 @@ public class FindTipImpl implements IIFindTip {
         int salary = this.findTipDao.findRowCountByCriteria(detachedCriteria3);
         if (salary > 0) {
             salaryS.append(getJSString("../profile/myInfo.action?tab=4", "查看"));
-            tipArrayList.add("您的薪资本月已调整，请注愄1�7" + salaryS + "〄1�7br>");
+            tipArrayList.add("您的薪资本月已调整，请注意" + salaryS + "。<br>");
         }
         return tipArrayList;
     }
@@ -316,7 +317,7 @@ public class FindTipImpl implements IIFindTip {
         int trtypeList = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (trtypeList == 0) {
             String list = getJSString("../training/trtConfig.action", "设置");
-            tipArrayList.add("系统中尚未设置培训种类，请予仄1�7" + list + "〄1�7br>");
+            tipArrayList.add("系统中尚未设置培训种类，请予以" + list + "。<br>");
         }
         return tipArrayList;
     }
@@ -327,7 +328,7 @@ public class FindTipImpl implements IIFindTip {
         int recruitList = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (recruitList == 0) {
             String list = getJSString("../recruitment/recruitchannellist.action", "设置");
-            tipArrayList.add("系统中尚无招聘渠道，请予仄1�7" + list + "〄1�7br>");
+            tipArrayList.add("系统中尚无招聘渠道，请予以" + list + "。<br>");
         }
         return tipArrayList;
     }
@@ -345,7 +346,7 @@ public class FindTipImpl implements IIFindTip {
             String tempS = getJSString(
                                        "../compensation/searchCompaplan.action?compaplan.ecpStatus=31",
                                        "调整");
-            tipArrayList.add("本月朄1�7" + number + "个员工需覄1�7" + tempS + "薪资〄1�7br>");
+            tipArrayList.add("本月有" + number + "个员工需要" + tempS + "薪资。<br>");
         }
         return tipArrayList;
     }
@@ -364,7 +365,7 @@ public class FindTipImpl implements IIFindTip {
 
         if (this.findTipDao.findRowCountByCriteria(detachedCriteria) == 0) {
             clanderS.append(getJSString("../examin/leavecalendarManage.action", "设置"));
-            tipArrayList.add("本年度公共假日未作调整，请予仄1�7" + clanderS + "〄1�7br>");
+            tipArrayList.add("本年度公共假日未作调整，请予以" + clanderS + "。<br>");
         }
 
         DetachedCriteria detachedCriteria2 = DetachedCriteria.forClass(Leavebalance.class);
@@ -395,7 +396,7 @@ public class FindTipImpl implements IIFindTip {
         }
         if (balanceCount > 0) {
             balanceS.append(getJSString("../examin/leavebalanceManage.action?tab=1", "设置"));
-            tipArrayList.add("有员工未设置本年度年假额度，请予仄1�7" + balanceS + "〄1�7br>");
+            tipArrayList.add("有员工未设置本年度年假额度，请予以" + balanceS + "。<br>");
         }
         tipArrayList.addAll(getTip4012());
         return tipArrayList;
@@ -409,7 +410,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(dc);
         if (number != 0) {
             String tempS = getJSString("../examin/hrExaminSearch.action?tab=1", "备案");
-            tipArrayList.add("朄1�7" + number + "个请假申请等待HR" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个请假申请等待HR" + tempS + "。<br>");
         }
 
         DetachedCriteria dc2 = DetachedCriteria.forClass(Overtimerequest.class);
@@ -418,7 +419,7 @@ public class FindTipImpl implements IIFindTip {
         int number2 = this.findTipDao.findRowCountByCriteria(dc2);
         if (number2 != 0) {
             String tempS = getJSString("../examin/hrExaminSearch.action?tab=2", "备案");
-            tipArrayList.add("朄1�7" + number2 + "个加班申请等待HR" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number2 + "个加班申请等待HR" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -430,7 +431,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../examin/deptExaminSearch.action?tab=1", "批准");
-            tipArrayList.add("朄1�7" + number + "个请假申请等待您的1�7" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个请假申请等待您的" + tempS + "。<br>");
         }
 
         DetachedCriteria detachedCriteria2 = DetachedCriteria.forClass(Overtimerequest.class);
@@ -438,7 +439,7 @@ public class FindTipImpl implements IIFindTip {
         int number2 = this.findTipDao.findRowCountByCriteria(detachedCriteria2);
         if (number2 != 0) {
             String tempS = getJSString("../examin/deptExaminSearch.action?tab=2", "批准");
-            tipArrayList.add("朄1�7" + number2 + "个加班申请等待您的1�7" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number2 + "个加班申请等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -451,7 +452,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String temp = getJSString("../examin/myExamins.action?tab=1", "查看");
-            tipArrayList.add("您有请假申请被拒绝，请注愄1�7" + temp + "〄1�7br>");
+            tipArrayList.add("您有请假申请被拒绝，请注意" + temp + "。<br>");
         }
         DetachedCriteria detachedCriteria2 = DetachedCriteria.forClass(Overtimerequest.class);
         detachedCriteria2.add(Restrictions.eq("orStatus", Integer.valueOf(21)));
@@ -459,7 +460,7 @@ public class FindTipImpl implements IIFindTip {
         int number2 = this.findTipDao.findRowCountByCriteria(detachedCriteria2);
         if (number2 != 0) {
             String temp = getJSString("../examin/myExamins.action?tab=2", "查看");
-            tipArrayList.add("您有加班申请被拒绝，请注愄1�7" + temp + "〄1�7br>");
+            tipArrayList.add("您有加班申请被拒绝，请注意" + temp + "。<br>");
         }
         return tipArrayList;
     }
@@ -471,7 +472,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../training/trepHrApprove.action", "审批");
-            tipArrayList.add("朄1�7" + number + "个部门已审的员工培训计划等待您的" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个部门已审的员工培训计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -484,7 +485,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../training/trepDeptApprove.action", "审批");
-            tipArrayList.add("朄1�7" + number + "个已提交的员工培训计划等待您的1�7" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个已提交的员工培训计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -500,7 +501,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String temp = getJSString("../training/myTrainingList.action", "查看");
-            tipArrayList.add("您有培训计划被拒绝，请注愄1�7" + temp + "〄1�7br>");
+            tipArrayList.add("您有培训计划被拒绝，请注意" + temp + "。<br>");
         }
         return tipArrayList;
     }
@@ -512,7 +513,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../recruitment/ApproverRecruitplanHR.action", "审批");
-            tipArrayList.add("朄1�7" + number + "个部门已审的员工招聘计划等待您的" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个部门已审的员工招聘计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -525,7 +526,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../recruitment/ApproverRecruitplanDept.action", "审批");
-            tipArrayList.add("朄1�7" + number + "个已提交的员工招聘计划等待您的1�7" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个已提交的员工招聘计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -541,7 +542,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String temp = getJSString("../recruitment/SearchRecruitplan.action", "查看");
-            tipArrayList.add("您有招聘计划被拒绝，请注愄1�7" + temp + "〄1�7br>");
+            tipArrayList.add("您有招聘计划被拒绝，请注意" + temp + "。<br>");
         }
         return tipArrayList;
     }
@@ -554,7 +555,7 @@ public class FindTipImpl implements IIFindTip {
         if (number != 0) {
             String tempS = getJSString("../compensation/searchApproveCompaplan.action?month=all",
                                        "审批");
-            tipArrayList.add("朄1�7" + number + "个部门已审的调薪计划等待您的" + tempS + "〄1�7br>");
+            tipArrayList.add("有" + number + "个部门已审的调薪计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -567,7 +568,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String tempS = getJSString("../compensation/searchBatchCompaplan.action", "审批");
-            tipArrayList.add("有已提交的调薪计划等待您的1�7" + tempS + "〄1�7br>");
+            tipArrayList.add("有已提交的调薪计划等待您的" + tempS + "。<br>");
         }
         return tipArrayList;
     }
@@ -585,7 +586,7 @@ public class FindTipImpl implements IIFindTip {
         int number = this.findTipDao.findRowCountByCriteria(detachedCriteria);
         if (number != 0) {
             String temp = getJSString("../compensation/searchBatchCompaplan.action", "查看");
-            tipArrayList.add("您有" + number + "调薪计划被拒绝，请注愄1�7" + temp + "〄1�7br>");
+            tipArrayList.add("您有" + number + "调薪计划被拒绝，请注意" + temp + "。<br>");
         }
         return tipArrayList;
     }
@@ -707,9 +708,9 @@ public class FindTipImpl implements IIFindTip {
         List<Employee> additionalList = this.findTipDao.findByCriteria(additionalDetachedCriteria);
         StringBuffer additionalTip = new StringBuffer();
         int additionalTipSize = 0;
-        Map tipMap = new HashMap();
+        Map<String, String> tipMap = new HashMap<String, String>();
         for (Iterator i$ = additionalDateTipList.iterator(); i$.hasNext();) {
-            Empaddconf conf = (Empaddconf) i$.next();
+            BaseEmpaddconf conf = (Empaddconf) i$.next();
             Integer tipDays = getIntegerValue(conf.getEadcFieldValue());
             if (tipDays == null) {
                 continue;
@@ -726,7 +727,7 @@ public class FindTipImpl implements IIFindTip {
                             .append("../profile/myInfo.action?empNo=").append(add.getId())
                             .append("&empName=").append(add.getEmpName()).append("&tab=2")
                             .toString(), add.getEmpName())
-                            + "〄1�7";
+                            + "、";
 
                     if (tip == null)
                         tipMap.put(conf.getEadcFieldName(), tipDays + "天内"
@@ -742,7 +743,7 @@ public class FindTipImpl implements IIFindTip {
         Empaddconf conf;
         Integer tipDays;
         List resultSet = new ArrayList();
-        for (Object key : tipMap.keySet()) {
+        for (String key : tipMap.keySet()) {
             String tmpValue = ((String) tipMap.get(key)).substring(0, ((String) tipMap.get(key))
                     .length() - 1);
             resultSet.add(tmpValue);
@@ -772,8 +773,3 @@ public class FindTipImpl implements IIFindTip {
         return null;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.homepage.bo.FindTipImpl JD-Core Version: 0.5.4
- */

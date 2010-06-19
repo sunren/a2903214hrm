@@ -75,7 +75,7 @@ public class SalaryConfigAction extends CompAction implements Status, Constants 
                 && (this.authorityCondition.equalsIgnoreCase("HR"))) {
             Map map = salaryConfBo.findSalaryConfigByNoPage(dc, this.page, this.emp);
             if (map == null) {
-                addActionError("本次查询没有数据可以导出＄1�7");
+                addActionError("本次查询没有数据可以导出");
                 return "success";
             }
             try {
@@ -99,7 +99,7 @@ public class SalaryConfigAction extends CompAction implements Status, Constants 
                 clearErrorsAndMessages();
                 return "download";
             } catch (Exception e) {
-                addActionError("数据导出失败＄1�7");
+                addActionError("数据导出失败");
                 e.printStackTrace();
                 return "success";
             }
@@ -315,12 +315,12 @@ public class SalaryConfigAction extends CompAction implements Status, Constants 
 
         ISalaryPaidBo salaryPaidBo = (ISalaryPaidBo) getBean("salaryPaidBo");
         if (salaryPaidBo.isSalaryPayRecordsExist(this.id)) {
-            errorMsg = errorMsg + "存在薪资发放记录＄1�7";
+            errorMsg = errorMsg + "存在薪资发放记录";
         }
 
         ICompaplanBo compaplanBo = (ICompaplanBo) getBean("compaplanBo");
         if (compaplanBo.loadCompaplanInfoByEmpNo(this.id) != null) {
-            errorMsg = errorMsg + "存在调薪计划＄1�7";
+            errorMsg = errorMsg + "存在调薪计划";
         }
 
         if (!StringUtils.isEmpty(errorMsg)) {

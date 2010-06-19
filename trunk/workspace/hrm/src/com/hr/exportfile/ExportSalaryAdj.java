@@ -163,9 +163,9 @@ public class ExportSalaryAdj extends MutipleSheetExportHandler implements Consta
         case 2:
             return "停薪留职";
         case 3:
-            return "逄1�7伄1�7";
+            return "退休";
         case 4:
-            return "辞�1�7�1�7";
+            return "辞退";
         }
         return null;
     }

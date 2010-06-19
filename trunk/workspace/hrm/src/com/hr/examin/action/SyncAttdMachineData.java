@@ -23,7 +23,7 @@ public class SyncAttdMachineData extends BaseAction {
     }
 
     public List<Employee> syncToMachine(List<Employee> employeeList) {
-        logger.info(getCurrentEmp().getEmpName() + "|" + "向�1�7�勤机中同步员工信息");
+        logger.info(getCurrentEmp().getEmpName() + "|" + "向考勤机中同步员工信息");
 
         List<User> userList = empToUser(employeeList);
         try {
@@ -44,7 +44,7 @@ public class SyncAttdMachineData extends BaseAction {
     }
 
     public List<Employee> syncToProject(List<Employee> employeeList) {
-        logger.info(getCurrentEmp().getEmpName() + "|" + "同步考勤机中的员工信恄1�7");
+        logger.info(getCurrentEmp().getEmpName() + "|" + "同步考勤机中的员工信息");
 
         List returnList = new ArrayList();
 

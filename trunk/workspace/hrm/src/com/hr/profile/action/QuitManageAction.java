@@ -25,7 +25,7 @@ public class QuitManageAction extends BaseAction {
 
     public String execute() throws Exception {
         if ((null == this.qemp) || (StringUtils.isEmpty(this.qemp.getIds()))) {
-            addErrorInfo("请求的参数错评1�7,请�1�7�择要复职的员工＄1�7");
+            addErrorInfo("请求的参数错误,请选择要复职的员工");
             return "success";
         }
         String[] ids = this.qemp.getIds().split(",");
@@ -60,7 +60,7 @@ public class QuitManageAction extends BaseAction {
         }
 
         if (errors.isEmpty())
-            addSuccessInfo("批量复职员工成功＄1�7");
+            addSuccessInfo("批量复职员工成功");
         else {
             addErrorInfo(errors);
         }
@@ -69,7 +69,7 @@ public class QuitManageAction extends BaseAction {
 
     public String batchQuit() throws Exception {
         if ((null == this.qemp) || (StringUtils.isEmpty(this.qemp.getIds()))) {
-            addErrorInfo("请求的参数错评1�7,请�1�7�择要离职的员工＄1�7");
+            addErrorInfo("请求的参数错误,请选择要离职的员工");
             return "success";
         }
         String currentEmpNo = getCurrentEmpNo();
@@ -82,14 +82,14 @@ public class QuitManageAction extends BaseAction {
         UserBo userBo = (UserBo) getBean("userService");
         for (int i = 0; i < ids.length; ++i) {
             if (ids[i].equals(currentEmpNo)) {
-                errors.add(getCurrentEmp().getEmpName() + "是您本人，状态不能改为\"离职\"＄1�7");
+                errors.add(getCurrentEmp().getEmpName() + "是您本人，状态不能改为\"离职\"");
             } else {
                 tmp = empBo.loadEmp(ids[i].trim(), null);
                 if ((null == tmp) || (tmp.getEmpStatus().intValue() != 1))
                     continue;
                 Userinfo oldUserinfo = userBo.getUserById(tmp.getId());
                 if (userBo.checkAuthModule(oldUserinfo, "911")) {
-                    errors.add("员工" + tmp.getEmpName() + "为系统管理员，请到系统模块取消次该用户的管理员权限后离职＄1�7");
+                    errors.add("员工" + tmp.getEmpName() + "为系统管理员，请到系统模块取消次该用户的管理员权限后离职");
                 } else {
                     this.empquit.setEmployee(tmp);
                     this.empquit.setEqCreateBy(currentEmpNo);
@@ -105,7 +105,7 @@ public class QuitManageAction extends BaseAction {
             }
         }
         if (errors.isEmpty())
-            addSuccessInfo("批量离职成功＄1�7");
+            addSuccessInfo("批量离职成功");
         else {
             addErrorInfo(errors);
         }
@@ -121,7 +121,7 @@ public class QuitManageAction extends BaseAction {
         if ((errors != null) && (errors.size() > 0))
             addErrorInfo(errors);
         else {
-            addSuccessInfo("批量删除员工成功＄1�7");
+            addSuccessInfo("批量删除员工成功");
         }
         this.qemp.setEmpStatus(Integer.valueOf(1));
         return "success";

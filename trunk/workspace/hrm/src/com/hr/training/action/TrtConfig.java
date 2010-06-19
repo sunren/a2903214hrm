@@ -56,7 +56,7 @@ public class TrtConfig extends BaseAction {
         ITrTypeBO trTypeBO = (ITrTypeBO) BaseAction.getBean("trTypeBO");
         Trtype trtLoad = trTypeBO.load(this.trtNo);
         if (trtLoad == null) {
-            addActionError("该课程培训类型不存在＄1�7");
+            addActionError("该课程培训类型不存在！");
             return "error";
         }
         Trcourse trc = new Trcourse();
@@ -65,11 +65,11 @@ public class TrtConfig extends BaseAction {
         Pager page = new Pager();
         List trcourses = trcourseBO.search(trc, page);
         if ((trcourses != null) && (trcourses.size() > 0)) {
-            addActionError("有课程关联到该课程培训类型，不能删除＄1�7");
+            addActionError("有课程关联到该课程培训类型，不能删除！");
             return "error";
         }
         trTypeBO.delete(this.trtNo);
-        addActionMessage("删除课程培训类型成功〄1�7");
+        addActionMessage("删除课程培训类型成功。");
         return "success";
     }
 
@@ -78,7 +78,7 @@ public class TrtConfig extends BaseAction {
             addFieldError("trt.trtNo", "必填项！");
         if ((this.trt.getTrtNo() != null) && (this.trt.getTrtNo().trim().length() > 0)
                 && (!this.trt.getTrtNo().matches("^([a-zA-Z0-9]|[-_]){0,16}$"))) {
-            addFieldError("trt.trtNo", "格式错误！（类型编号只允许字母�1�7�数字�1�7�\"-\"、\"_\"＄1�7");
+            addFieldError("trt.trtNo", "格式错误！（类型编号只允许字母、数字、\"-\"、\"_\"）");
         }
         if ((this.trt.getTrtName() == null) || (this.trt.getTrtName().trim().length() <= 0))
             addFieldError("trt.trtName", "必填项！");
@@ -110,8 +110,3 @@ public class TrtConfig extends BaseAction {
         this.trtNo = trtNo;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.training.action.TrtConfig JD-Core Version: 0.5.4
- */

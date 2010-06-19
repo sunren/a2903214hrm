@@ -72,7 +72,7 @@ public class InformationBoImpl implements IInformationBo {
             Employee employee = empBo.loadEmp(user.getId(), fetch);
             detachedCriteria.add(Restrictions.or(Restrictions.like("infoTag", "%,"
                     + employee.getEmpDeptNo().getDepartmentName() + ",%"), Restrictions
-                    .like("infoTag", "%扄1�7有部闄1�7%")));
+                    .like("infoTag", "%所有部门%")));
         }
 
         detachedCriteria.createCriteria("infoClass").add(Restrictions.eq("id", infoid));
@@ -107,7 +107,7 @@ public class InformationBoImpl implements IInformationBo {
             Employee employee = empBo.loadEmp(user.getId(), fetch);
             detachedCriteria.add(Restrictions.or(Restrictions.like("infoTag", "%,"
                     + employee.getEmpDeptNo().getDepartmentName() + ",%"), Restrictions
-                    .like("infoTag", "%扄1�7有部闄1�7%")));
+                    .like("infoTag", "%所有部门%")));
         }
 
         detachedCriteria.addOrder(Order.desc("infoLastChangeTime"));
@@ -230,8 +230,3 @@ public class InformationBoImpl implements IInformationBo {
         return list;
     }
 }
-
-/*
- * Location: D:\Program Files\365HRM\web\WEB-INF\lib\365hrm.jar Qualified Name:
- * com.hr.information.bo.InformationBoImpl JD-Core Version: 0.5.4
- */

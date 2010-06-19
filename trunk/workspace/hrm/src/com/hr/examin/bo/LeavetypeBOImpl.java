@@ -98,7 +98,7 @@ public class LeavetypeBOImpl implements ILeavetypeBO {
             else
                 this.lt_DAO.deleteObject(Leavetype.class, id);
         } catch (Exception e) {
-            buffer.append("系统异常＄1�7" + e.getMessage());
+            buffer.append("系统异常" + e.getMessage());
         }
         return buffer.toString();
     }
