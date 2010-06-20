@@ -48,7 +48,7 @@ public class TrepDeptApprove extends BaseAction implements Status {
             }
             if (("DEPT".equals(result)) && (!getCurrentEmp().equals(trep.getTrpTraineeNo()))
                     && (!checkDeptInCharge(getCurrentEmp(), trep.getTrpTraineeDept()))) {
-                return "noauth";
+                return "对不起，您没有该员工的培训计划审批权限";
             }
             trep.setTrpStatus(new Integer(11));
             trep.setTrpLastChangeBy(((Userinfo) session.getAttribute("userinfo")).getEmployee());
