@@ -41,9 +41,9 @@
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="5">
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <propertyhr"odaURL">jdbc:mysql://localhost:3306/365hrm</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/hr</property>
             <property name="odaUser">root</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">MTExMTEx</encrypted-property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
         <script-data-source name="scriptDataSource" id="38"/>
     </data-sources>
